@@ -1,0 +1,12 @@
+/* 1. 去除 .bg-cover:before (暗色遮罩) */
+.bg-cover::before {
+    background-image: none !important;
+    background-color: transparent !important;
+}
+
+/* 2. 去除 .bg-cover:after (彩虹变色动画) */
+.bg-cover::after {
+    background-image: none !important;
+    background-color: transparent !important;
+    animation: none !important; /* 关掉 rainbow 动画 */
+}
