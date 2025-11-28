@@ -1,1 +1,78 @@
 /* Here is your custom css styles. */
+/* ==============================================
+   Hexo Matery 强制美化代码块 (Mac深色风格)
+   ============================================== */
+
+/* 1. 强制重置代码容器样式 */
+figure.highlight, pre[class*="language-"] {
+    background: #282c34 !important;    /* 深色背景 */
+    color: #abb2bf !important;         /* 浅灰文字 */
+    border-radius: 10px !important;    /* 圆角 */
+    margin: 20px 0 !important;
+    padding-top: 35px !important;      /* 顶部留出给圆点的空间 */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4) !important; /* 明显的阴影 */
+    overflow: hidden !important;       /* 隐藏多余滚动条 */
+    position: relative !important;
+    border: none !important;
+}
+
+/* 2. 绘制 Mac 红黄绿三个圆点 */
+figure.highlight::before, pre[class*="language-"]::before {
+    content: ' ' !important;
+    position: absolute !important;
+    top: 13px !important;
+    left: 15px !important;
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    background: #fc625d !important;    /* 红色点 */
+    box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b !important; /* 黄绿点 */
+    z-index: 100 !important;
+    pointer-events: none !important;
+}
+
+/* 3. 修复内部代码文字的样式 */
+figure.highlight pre, figure.highlight td, figure.highlight tr, code {
+    background: transparent !important; /* 去掉内部背景 */
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: "JetBrains Mono", "Consolas", monospace !important; /* 编程字体 */
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+}
+
+/* 4. 修复行号区域 (Gutter) */
+figure.highlight .gutter {
+    background: #21252b !important;    /* 行号背景更深一点 */
+    padding: 0 15px !important;
+    border-right: 1px solid #3d424b !important;
+    text-align: right !important;
+    color: #5c6370 !important;
+    user-select: none !important;
+}
+
+/* 5. 修复代码正文区域 */
+figure.highlight .code {
+    padding: 5px 15px !important;
+    width: 100% !important;
+}
+
+/* 6. 代码高亮配色 (One Dark 风格) */
+.token.comment, .token.quote { color: #5c6370 !important; font-style: italic !important; }
+.token.keyword, .token.selector, .token.tag { color: #c678dd !important; } /* 紫色 */
+.token.string, .token.attr-value { color: #98c379 !important; } /* 绿色 */
+.token.function, .token.class-name { color: #61afef !important; } /* 蓝色 */
+.token.number, .token.boolean { color: #d19a66 !important; } /* 橙色 */
+.token.operator, .token.punctuation { color: #abb2bf !important; } /* 灰色 */
+.token.variable { color: #e06c75 !important; } /* 红色 */
+
+/* 7. 隐藏不需要的滚动条样式 */
+figure.highlight::-webkit-scrollbar {
+    height: 6px !important;
+    background-color: #282c34 !important;
+}
+figure.highlight::-webkit-scrollbar-thumb {
+    background-color: #4b5263 !important;
+    border-radius: 3px !important;
+}
