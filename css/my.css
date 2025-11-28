@@ -11,7 +11,9 @@
     animation: none !important; /* 关掉 rainbow 动画 */
 }
 
-/* 隐藏文章中图片下方的文字标题 */
-.img-caption {
+/* 隐藏图片下方自动生成的文字标题 */
+.caption, 
+.img-caption, 
+figcaption {
     display: none !important;
 }
