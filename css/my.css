@@ -10,3 +10,8 @@
     background-color: transparent !important;
     animation: none !important; /* 关掉 rainbow 动画 */
 }
+
+/* 隐藏文章中图片下方的文字标题 */
+.img-caption {
+    display: none !important;
+}
