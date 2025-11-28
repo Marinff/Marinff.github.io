@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="XXE 漏洞学习, Hexo">
-    <meta name="description" content="xxeXXE 全称 XML External Entity Injection 外部实体注入漏洞
+    <meta name="description" content="XXEXXE 全称 XML External Entity Injection 外部实体注入漏洞
 XXE 会发生在语言程序解析 XML 时，没有禁止外部实体的加载，导致的漏洞漏洞触发点一般是可以上传 XML 文件的位置，没有就行过滤，导致可">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -382,7 +382,7 @@ XXE 会发生在语言程序解析 XML 时，没有禁止外部实体的加载�
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="xxe"><a href="#xxe" class="headerlink" title="xxe"></a>xxe</h1><p><strong>XXE</strong> 全称 <code>XML External Entity Injection</code> 外部实体注入漏洞</p>
+                <h1 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h1><p><strong>XXE</strong> 全称 <code>XML External Entity Injection</code> 外部实体注入漏洞</p>
 <p>XXE 会发生在语言程序解析 XML 时，没有禁止<strong>外部实体</strong>的加载，导致的漏洞<br>漏洞触发点一般是可以上传 XML 文件的位置，没有就行过滤，导致可以加载恶意外部文件和代码，造成任意文件读取、命令执行等漏洞</p>
 <h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a><strong>XML</strong></h3><p>XML 是用于标记文件使其具有结构性的标记语言，可以用来标记数据、定义数据结构</p>
 <p>XML 文档结构包括</p>
@@ -479,7 +479,7 @@ XXE 会发生在语言程序解析 XML 时，没有禁止外部实体的加载�
 </ul>
 </li>
 </ol>
-<h3 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h3><h4 id="支持的协议"><a href="#支持的协议" class="headerlink" title="支持的协议"></a>支持的协议</h4><p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251128155925-xxl1g5u.png" alt="image"></p>
+<h3 id="XXE-1"><a href="#XXE-1" class="headerlink" title="XXE"></a>XXE</h3><h4 id="支持的协议"><a href="#支持的协议" class="headerlink" title="支持的协议"></a>支持的协议</h4><p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251128155925-xxl1g5u.png" alt="image"></p>
 <p>‍</p>
 <h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p><strong>读取文档文件</strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">foo</span> [</span></span><br><span class="line"><span class="meta">  <span class="meta">&lt;!ENTITY <span class="keyword">marin</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///etc/passwd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">show</span>&gt;</span><span class="symbol">&amp;marin;</span><span class="tag">&lt;/<span class="name">show</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -532,7 +532,7 @@ XXE 会发生在语言程序解析 XML 时，没有禁止外部实体的加载�
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Marinff.github.io/2025/11/28/xxe/">http://Marinff.github.io/2025/11/28/xxe/</a>
+                    <a href="http://Marinff.github.io/xxe">http://Marinff.github.io/xxe</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -655,7 +655,7 @@ XXE 会发生在语言程序解析 XML 时，没有禁止外部实体的加载�
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2025/11/28/xxe/">
+                <a href="/xxe">
                     <div class="card-image">
                         
                         <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20240312_123907.jpg" class="responsive-img" alt="XXE 漏洞学习">
@@ -700,7 +700,7 @@ XXE 会发生在语言程序解析 XML 时，没有禁止外部实体的加载�
                 本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2025/11/28/xxe/">
+                <a href="/xxe">
                     <div class="card-image">
                         
                         <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20240312_123907.jpg" class="responsive-img" alt="XXE 漏洞学习">
