@@ -1,18 +1,25 @@
 /* Tomorrow Night Eighties Theme - 颜色纯净版 */
 /* 只负责颜色，不负责画框，完美兼容 Matery 主题 */
 
+/* 核心代码块样式 */
 code[class*="language-"],
 pre[class*="language-"] {
     color: #ccc;
-    background: #2d2d2d; /* 背景色 */
+    background: #2d2d2d;
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     font-size: 14px;
     text-align: left;
-    white-space: pre;
+    white-space: pre; /* 保持不换行，保护代码缩进 */
     word-spacing: normal;
     word-break: normal;
     word-wrap: normal;
     line-height: 1.6;
+    
+    /* --- 新增/修改以下几行来修复溢出问题 --- */
+    overflow-x: auto !important;  /* 重点：内容超出宽度时，底部显示滚动条 */
+    max-width: 100%;              /* 限制最大宽度不能超过父容器 */
+    box-sizing: border-box;       /* 确保内边距不会撑大盒子 */
+    
     -moz-tab-size: 4;
     -o-tab-size: 4;
     tab-size: 4;
