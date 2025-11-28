@@ -52,7 +52,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 8.1.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <body>
@@ -385,8 +385,6 @@
 <p>这个漏洞的成因就是因为服务器端接收到了用户的恶意输入后，没有任何处理就将其作为 web 模板的一部分，模板引擎在渲染目标时，执行了用户插入的恶意语句，导致了信息泄露、代码执行等问题</p>
 <p>模板注入一般都会使用 <code>&#123;&#123;&#125;&#125;</code>​ 包裹恶意代码，因为在渲染函数中，不会对变量进行渲染， <code>&#123;&#123;&#125;&#125;</code> 中的内容会被当作变量解析，所以可以实现模板注入</p>
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/1344396-20200911174631687-758048107-20250728155600-k9i3jco.png" alt="1344396-20200911174631687-758048107"></p>
-<p>‍</p>
-<p>‍</p>
 <h4 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h4><p>模板是一种将数据转化为实际的视觉表现（HTML）的一种手段<br>模板的好处是数据放到模板中，直接渲染成 html 文本，返回给浏览器，展示快</p>
 <p>这里有两种渲染方式</p>
 <p>后端渲染：数据传输到服务器或者数据直接存储在服务器中，后端使用模板解析这些数据并渲染成 HTML 返回给浏览器</p>
