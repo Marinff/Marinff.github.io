@@ -284,92 +284,152 @@
 </div>
 <style>
     .friends-container {
-        margin-top: -100px;
+        margin-top: -60px;
         margin-bottom: 30px;
     }
 
     .friends-container .tag-title {
-        margin-bottom: 10px;
+        margin-bottom: 25px;
         color: #3C4858;
         font-size: 1.75rem;
         font-weight: 400;
     }
 
-    .frind-ship img {
-        border-radius: 50%;
+    .friend-all {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        padding: 10px 0;
     }
 
-    /* 一下是按钮样式 */
-
-    .frind-ship {
-        padding: 10px 20px;
-    }
-
-    .frind-ship .title {
+    .friend-card {
+        position: relative;
         display: flex;
         align-items: center;
-    }
-
-    .frind-ship .title div {
-        color: #fff;
-        padding-left: 10px;
-    }
-
-    .frind-ship .title img {
-        width: 100px;
-        height: 100px;
-        flex-shrink: 0;
-    }
-
-    .frind-ship .title h1 {
-        padding-bottom: 5px;
-        border-bottom: 2px solid #fff;
-        position: relative;
-        top:-15px;
-        left: 3px;
-    }
-
-    .friend-button {
-        display: flex;
-        justify-content: center;
-        margin-bottom: -27px;
-    }
-
-    .friend-button a {
-        border-radius: 40px;
-    }
-
-    .friend-all .tag-post {
-        margin-bottom: 30px;
-    }
-
-    .button-caution {
-        background-color: #FF4351;
-        border-color: #FF4351;
-        color: #FFF;
-    }
-
-    .button {
-        font-weight: 300;
-        font-size: 16px;
-        font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        padding: 16px 20px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
         text-decoration: none;
-        text-align: center;
-        line-height: 40px;
-        height: 40px;
-        padding: 0 40px;
+        overflow: hidden;
+    }
+
+    .friend-card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #B0B5FA 0%, #8B92E8 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .friend-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(176, 181, 250, 0.25);
+    }
+
+    .friend-card:hover::before {
+        opacity: 1;
+    }
+
+    .friend-card:hover .friend-avatar {
+        transform: rotate(360deg);
+    }
+
+    .friend-avatar {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 2px solid #f0f0f0;
+        transition: transform 0.6s ease;
+    }
+
+    .friend-info {
+        margin-left: 15px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .friend-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333;
+        margin: 0 0 6px 0;
+        line-height: 1.3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .friend-desc {
+        font-size: 0.85rem;
+        color: #888;
         margin: 0;
-        display: inline-block;
-        appearance: none;
-        cursor: pointer;
-        border: none;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        -webkit-transition-property: all;
-        transition-property: all;
-        -webkit-transition-duration: .3s;
-        transition-duration: .3s;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .friend-arrow {
+        color: #ccc;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        margin-left: 10px;
+    }
+
+    .friend-card:hover .friend-arrow {
+        color: #B0B5FA;
+        transform: translateX(4px);
+    }
+
+    .friend-card:hover .friend-name {
+        color: #B0B5FA;
+    }
+
+    /* 暗色模式适配 */
+    body.DarkMode .friend-card {
+        background: #2a2a2a;
+    }
+
+    body.DarkMode .friend-name {
+        color: #e0e0e0;
+    }
+
+    body.DarkMode .friend-desc {
+        color: #999;
+    }
+
+    body.DarkMode .friend-avatar {
+        border-color: #444;
+    }
+
+    body.DarkMode .friend-card:hover {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 响应式调整 */
+    @media only screen and (max-width: 600px) {
+        .friend-all {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .friend-card {
+            padding: 14px 16px;
+        }
+
+        .friend-avatar {
+            width: 48px;
+            height: 48px;
+        }
     }
 
     .title {
@@ -377,93 +437,7 @@
     }
 
     .card {
-        margin: 3rem 0 1rem 0 !important;
-    }
-
-    .button-glow.button-caution {
-        -webkit-animation-name: glowing-caution;
-        animation-name: glowing-caution;
-    }
-
-    @-webkit-keyframes glowing-caution {
-        from {
-            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-        }
-
-        50% {
-            -webkit-box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
-            box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
-        }
-
-        to {
-            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-        }
-    }
-
-    @keyframes glowing-caution {
-        from {
-            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-        }
-
-        50% {
-            -webkit-box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
-            box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
-        }
-
-        to {
-            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-        }
-    }
-
-    .button-caution:hover {
-        background-color: #ff7680;
-        border-color: #ff7680;
-        color: #FFF;
-        text-decoration: none;
-    }
-
-    .frind-card1 {
-        background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    }
-
-    .frind-card2 {
-        background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-
-    .frind-card3 {
-        background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
-    }
-
-    .frind-card4 {
-        background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-    }
-
-    .frind-card5 {
-        background-image: linear-gradient(to top, #c471f5 0%, #fa71cd 100%);
-    }
-
-    .frind-card6 {
-        background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
-    }
-
-    .frind-card7 {
-        background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
-    }
-
-    .frind-card8 {
-        background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);
-    }
-
-    .frind-card9 {
-        background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
-    }
-
-    .frind-card10 {
-        background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+        margin: 2rem 0 1rem 0 !important;
     }
 
     article .card {
@@ -481,49 +455,27 @@
                 <article id="friends-link">
                     
                     
-                    <div class="row tags-posts friend-all">
+                    <div class="friend-all">
                         
                         
-                        <div class="col s12 m6 l4 friend-div" data-aos="zoom-in-up">
-                            <div class="card frind-card1">
-                                <div class="frind-ship">
-                                    <div class="title">
-                                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/android-chrome-144x144.png" alt="img">
-                                        <div>
-                                            <h1 class="friend-name">qsdz</h1>
-                                            <p style="position: relative;top: -35px;">伟大的 q爹，啥都会</p>
-                                        </div>
-                                    </div>
-                                    <div class="friend-button">
-                                        <a href="https://hasegawaazusa.github.io/" target="_blank"
-                                            class="button button-glow button-rounded button-caution">
-                                            学习
-                                        </a>
-                                    </div>
-                                </div>
+                        <a href="https://hasegawaazusa.github.io/" target="_blank" class="friend-card" data-aos="fade-up" data-aos-delay="0">
+                            <img class="friend-avatar" src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/android-chrome-144x144.png" alt="qsdz">
+                            <div class="friend-info">
+                                <h3 class="friend-name">qsdz</h3>
+                                <p class="friend-desc">伟大的 q爹，啥都会</p>
                             </div>
-                        </div>
+                            <i class="fas fa-chevron-right friend-arrow"></i>
+                        </a>
                         
                         
-                        <div class="col s12 m6 l4 friend-div" data-aos="zoom-in-up">
-                            <div class="card frind-card2">
-                                <div class="frind-ship">
-                                    <div class="title">
-                                        <img src="https://cauliweak9.github.io/img/head.jpg" alt="img">
-                                        <div>
-                                            <h1 class="friend-name">9C±Void</h1>
-                                            <p style="position: relative;top: -35px;">9c神，你A的misc&amp;bc大神</p>
-                                        </div>
-                                    </div>
-                                    <div class="friend-button">
-                                        <a href="https://cauliweak9.github.io/" target="_blank"
-                                            class="button button-glow button-rounded button-caution">
-                                            学习
-                                        </a>
-                                    </div>
-                                </div>
+                        <a href="https://cauliweak9.github.io/" target="_blank" class="friend-card" data-aos="fade-up" data-aos-delay="50">
+                            <img class="friend-avatar" src="https://cauliweak9.github.io/img/head.jpg" alt="9C±Void">
+                            <div class="friend-info">
+                                <h3 class="friend-name">9C±Void</h3>
+                                <p class="friend-desc">9c神，你A的misc&amp;bc大神</p>
                             </div>
-                        </div>
+                            <i class="fas fa-chevron-right friend-arrow"></i>
+                        </a>
                         
                     </div>
                     
@@ -552,14 +504,6 @@
         </div>
     </div>
 </main>
-
-<script>
-    $(function () {
-        $('#friends-link').masonry({
-            itemSelector: '.friend-div'
-        });
-    });
-</script>
 
 
     <footer class="page-footer bg-color">
