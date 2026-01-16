@@ -7,7 +7,7 @@
 }
 
 .gitment-container {
-    color: #34495e !important;
+    color: #8fa1b3 !important;
 }
 
 .gitment-container .gitment-header-like-btn {
@@ -115,7 +115,7 @@ a.gitment-header-issue-link:visited {
 }
 
 .gitment-footer-container {
-    color: #34495e !important;
+    color: #8fa1b3 !important;
 }
 
 .gitment-comments-pagination .gitment-comments-page-item {
@@ -137,7 +137,7 @@ a.gitment-header-issue-link:visited {
 }
 
 .gitment-comment-main .gitment-markdown p {
-    color: #34495e;
+    color: #8fa1b3;
 }
 
 .gitment-markdown p {
