@@ -36,7 +36,7 @@
 body {
     background-color: #eaeaea;
     margin: 0;
-    color: #8fa1b3;
+    color: #34495e;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -94,7 +94,7 @@ hr {
 }
 
 blockquote {
-    border-left: 5px solid #b0b5fa;
+    border-left: 5px solid #42b983;
     padding: 1rem 0.8rem 0.2rem 0.8rem;
     color: #666;
     background-color: rgba(66, 185, 131, .1);
@@ -198,7 +198,7 @@ kbd {
     font-size: 0.9rem;
     font-weight: 600;
     background-color: #f8f8f8;
-    color: #8fa1b3;
+    color: #34495e;
     line-height: 1.8rem;
     white-space: nowrap;
 }
@@ -341,13 +341,13 @@ header .side-nav .menu-list li {
 header .side-nav .menu-list a {
     height: 50px;
     line-height: 50px;
-    color: #8fa1b3 !important;
+    color: #34495e !important;
 }
 
 .mobile-menu-list a i {
     margin-left: 8px !important;
     font-size: 1.16rem;
-    color: #8fa1b3 !important;
+    color: #34495e !important;
 }
 
 header .side-nav .fa-fw {
@@ -875,7 +875,7 @@ article a {
 
 article a:hover {
     font-weight: bold;
-    color: #b0b5fa;
+    color: #42b983;
     text-decoration: underline;
 }
 
@@ -1058,7 +1058,7 @@ article .article-tags .chip {
     border-radius: 15px;
     margin-right: 5px;
     margin-bottom: 2px;
-    color: #b0b5fa;
+    color: #42b983;
     background: #fff;
     border: 1px solid;
     transition: all 0.6s ease-in-out;
@@ -1066,17 +1066,17 @@ article .article-tags .chip {
 
 #artDetail .tag_share .article-tag .chip:hover {
     color: #fff;
-    background: #b0b5fa;
+    background: #42b983;
 }
 
 #artDetail .post-cate {
     float: right;
-    color: #b0b5fa;
+    color: #42b983;
 }
 
 #artDetail .post-cate a {
     padding-right: 5px;
-    color: #b0b5fa;
+    color: #42b983;
     font-weight: 500;
 }
 
@@ -1095,7 +1095,7 @@ article .article-tags .chip {
 
 #artDetail .post-info .post-category:hover {
     font-weight: bold;
-    color: #b0b5fa;
+    color: #42b983;
     text-decoration: underline;
 }
 
@@ -1158,7 +1158,7 @@ article .article-tags .chip {
 
 #artDetail .reprint a {
     font-size: 1.05rem;
-    color: #b0b5fa;
+    color: #42b983;
     font-weight: 500;
 }
 
@@ -1174,7 +1174,7 @@ article .article-tags .chip {
 
 #articleContent a {
     padding: 0 2px;
-    color: #b0b5fa;
+    color: #42b983;
     font-weight: 500;
     text-decoration: underline;
     word-wrap: break-word;
@@ -1293,7 +1293,7 @@ thead {
 }
 
 .chip-container .chip-default {
-    color: #8fa1b3;
+    color: #34495e;
 }
 
 .chip-container .chip-active {
@@ -1608,7 +1608,7 @@ thead {
 }
 
 .post-statis .statis .count a {
-    color: #b0b5fa;
+    color: #42b983;
 }
 
 .post-statis .statis .name {
@@ -1716,7 +1716,7 @@ thead {
 }
 
 .my-projects .info .info-title a {
-    color: #8fa1b3;
+    color: #34495e;
 }
 
 .my-projects .info .info-desc {
@@ -1878,7 +1878,7 @@ p.search-result-summary{
 
 .search-result-list .search-result-title {
     font-size: 1.4rem;
-    color: #b0b5fa;
+    color: #42b983;
 }
 
 .search-result-list li {

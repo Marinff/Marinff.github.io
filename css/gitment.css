@@ -7,7 +7,7 @@
 }
 
 .gitment-container {
-    color: #8fa1b3 !important;
+    color: #34495e !important;
 }
 
 .gitment-container .gitment-header-like-btn {
@@ -115,7 +115,7 @@ a.gitment-header-issue-link:visited {
 }
 
 .gitment-footer-container {
-    color: #8fa1b3 !important;
+    color: #34495e !important;
 }
 
 .gitment-comments-pagination .gitment-comments-page-item {
@@ -137,7 +137,7 @@ a.gitment-header-issue-link:visited {
 }
 
 .gitment-comment-main .gitment-markdown p {
-    color: #8fa1b3;
+    color: #34495e;
 }
 
 .gitment-markdown p {
@@ -152,7 +152,7 @@ a.gitment-header-issue-link:visited {
 
 .gitment-markdown a {
     padding: 0 2px;
-    color: #b0b5fa;
+    color: #42b983;
     font-weight: 500;
     text-decoration: underline;
 }
@@ -259,7 +259,7 @@ table tr:nth-child(2n), thead {
 
 .gitment-markdown blockquote {
     margin: 15px 0;
-    border-left: 5px solid #b0b5fa;
+    border-left: 5px solid #42b983;
     padding: 1rem 0.8rem 1rem 0.8rem;
     color: #666;
     background-color: rgba(66, 185, 131, .1);
