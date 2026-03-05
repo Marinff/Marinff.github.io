@@ -1,0 +1,1206 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="mimikatz 学习, marin的小窝">
+    <meta name="description" content="mimikatzmimikatz 是一个用来内网渗透的工具，之前一直只在取证的时候会拿来搞 windows 的密码，没怎么学，现在学一手这个工具是怎么使用的
+mimikatz 介绍项目地址：ParrotSec&amp;#x2F;mimikatz
+m">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>mimikatz 学习 | marin的小窝</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">marin的小窝</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>类型</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友链</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">marin的小窝</div>
+        <div class="logo-desc">
+            
+            一个学习网安的小菜鸡
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			类型
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友链
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/3030386_95467139_p0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">mimikatz 学习</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                                <span class="chip bg-color">工具</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%B8%97%E9%80%8F/">
+                                <span class="chip bg-color">渗透</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" class="post-category">
+                                内网渗透
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-03-20
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="mimikatz"><a href="#mimikatz" class="headerlink" title="mimikatz"></a>mimikatz</h1><p>mimikatz 是一个用来内网渗透的工具，之前一直只在取证的时候会拿来搞 windows 的密码，没怎么学，现在学一手这个工具是怎么使用的</p>
+<h2 id="mimikatz-介绍"><a href="#mimikatz-介绍" class="headerlink" title="mimikatz 介绍"></a>mimikatz 介绍</h2><p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/ParrotSec/mimikatz">ParrotSec&#x2F;mimikatz</a></p>
+<p>mimikatz 有 win32 和 x64 版本，直接复制文件夹就可以使用，可以用来提权、注入进程和读取进程内存</p>
+<p>mimikatz 主要是通过在 LSASS 中获取用户账户明文密码的，我们可以先了解这个基础知识</p>
+<h3 id="windows-认证机制"><a href="#windows-认证机制" class="headerlink" title="windows 认证机制"></a>windows 认证机制</h3><p>在 windows 中登录一个用户的时候，需要经过几个关键部分</p>
+<ol>
+<li>本地认证：当用户登录本地计算机的时候，系统会检查存储在本地的 SAM 数据库，位于 <code>%SystemRoot%\System32\config\SAM</code>​，并且由 <code>SYSTEM hive</code> 保护，这里就存储着本地用户的账户信息和密码哈希，取证中也是利用这个来获取密码的</li>
+<li>域认证：如果计算机是某个域（domain）的一部分，那么认证请求就会发送给域控制器（Domain Controller），这里和 SAM 一样，只不过存储的是域内所有用户的信息</li>
+<li>LSASS：无论是本地登录或是域登录，LSASS 都是核心，是一个关键的 windows 进程，负责强制执行系统的安全策略</li>
+</ol>
+<p>而在 windows 环境，尤其是域环境中，最常用的两种身份验证协议是 <code>kerberos</code>​ 和 <code>NTLM</code></p>
+<h4 id="NTLM"><a href="#NTLM" class="headerlink" title="NTLM"></a>NTLM</h4><p><strong>​<code>NTLM</code>​</strong>​  是比较老的认证协议，现在主要用于 <code>kerberos</code> 认证失败的备用机制</p>
+<p><strong>工作流程：</strong></p>
+<ul>
+<li>客户端尝试连接服务器，并发送用户名</li>
+<li>服务器发送一个随机生成的 challenge 给客户端</li>
+<li>客户端利用本地存储的用户密码哈希值加密这个 challenge ，生成一个 response，发送回服务端</li>
+<li>服务端将 challenge、response、用户名转发给域控制器（DC）</li>
+<li>DC 会用存储的密码哈希对 challenge 进行计算，然后客户端结果对比，匹配则认证成功</li>
+</ul>
+<p><strong>攻击方式：</strong></p>
+<p> <strong>Pass-the-Hash (PtH)：</strong> 这里的攻击方法是由于 <code>NTLM</code> 使用的是密码哈希值而不是明文，所以只要获取到哈希值就可以伪造 response</p>
+<h4 id="kerberos"><a href="#kerberos" class="headerlink" title="kerberos"></a>kerberos</h4><p><strong>​<code>kerberos</code>​</strong>  主要依赖时间同步和票据（Ticket）进行认证</p>
+<p>这里会有三个角色，除了客户端和服务器之外，还有一个 <code>KDC</code></p>
+<blockquote>
+<p><code>KDC</code>​ 是域控制器上的一个服务，负责分发 ticket，<code>KDC</code> 还有两个子服务</p>
+<p><code>AS</code>：认证服务</p>
+<p><code>TGS</code>：ticket 授予服务</p>
+</blockquote>
+<p><strong>工作流程：</strong></p>
+<ul>
+<li>客户端向 <code>KDC</code>​ 的 <code>AS</code>​ 服务发送包含用户身份和时间戳的请求，<code>AS</code>​ 验证用户身份后，发送一个 <code>TGT（Ticket Granting Ticket）</code> 票据，这里的时间戳是为了防止重放</li>
+<li>客户端使用 <code>TGT</code>​ 向 <code>TGS</code>​ 申请访问特定服务的 <code>Service Ticket</code></li>
+<li>客户端使用这个 <code>Service Ticket</code> 取访问服务，服务器验证后就授予访问权限</li>
+</ul>
+<p><strong>攻击方式：</strong></p>
+<p><strong>Kerberoasting</strong>：请求服务的 <code>TGS</code>，将返回可离线破解的票据，用于暴力破解服务账户密码</p>
+<p><strong>Golden Ticket</strong>：窃取或伪造 <code>krbtgt</code>​ 密钥，域内极高权限，可以签发任意 <code>TGT</code></p>
+<p><strong>Silver Ticket</strong>：伪造 <code>Service Ticket</code>​ 这个只需要服务账号密钥，用来绕过 <code>KDC</code></p>
+<p><strong>Pass-the-Ticket (PtT)</strong> ：窃取并重用 <code>Kerberos ticket</code>（TGT&#x2F;TGS）</p>
+<p>‍</p>
+<h3 id="LSASS"><a href="#LSASS" class="headerlink" title="LSASS"></a>LSASS</h3><p>mimikatz 的关键就在 LSASS 中，所以要理解这个有什么作用</p>
+<p>LSASS 的进程名都是 <code>lsass.exe</code> 始终都是以极高权限运行<br>LSASS 的主要职责围绕着用户和系统的安全验证、授权和管理</p>
+<p>LSASS 有以下一些功能</p>
+<ul>
+<li><p>执行认证：当用户登录时，LSASS 都会与安全提供程序（<code>kerberos</code>​ 或 <code>NTLM</code>）交互，验证密码或凭证是否正确</p>
+</li>
+<li><p>凭证缓存：这里是 mimikatz 关注的重点，为了实现 单点登录 （SSO）的功能，即用户登录一次后可以访问资源无需重复输入密码，LSASS 会在内存中缓存用户的凭证，包括以下几种</p>
+<ul>
+<li>明文密码</li>
+<li>密码哈希值</li>
+<li><code>Kerberos</code> 票据</li>
+</ul>
+</li>
+<li><p>访问控制：当用户访问资源试，LSASS 会检查用户的权限</p>
+</li>
+</ul>
+<p>mimikatz 攻击本质</p>
+<ol>
+<li>攻击者获取到管理员权限</li>
+<li>使用 <code>privilege::debug</code> 获取调试权限</li>
+<li>mimikatz 被授权读取 LSASS 进程的内存空间，查找 <code>kerberos</code>​、<code>NTLM</code> 等安全模块的数据结构</li>
+<li>从这些数据中，mimikatz 提取并解密出需要的数据</li>
+</ol>
+<p>‍</p>
+<h2 id="mimikatz-使用"><a href="#mimikatz-使用" class="headerlink" title="mimikatz 使用"></a>mimikatz 使用</h2><p>mimikatz 打开后是一个交互式的 shell，可以使用 <code>模块名::命令[参数]</code> 来使用各种命令</p>
+<ul>
+<li><p>每个模块都可以通过 <code>模块名::未知命令</code>​ 来获得详细讲解，比如 <code>privilege::help</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20251104151012-20260204002623-2uvl2dk.png" alt="image"></p>
+</li>
+</ul>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h4 id="privilege"><a href="#privilege" class="headerlink" title="privilege"></a><code>privilege</code></h4><p>权限管理模块，用来启动进程的调试权限，这个权限允许用来调试原本无权访问的进程</p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">​<code>debug</code></td>
+<td>请求调试权限</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>如果出现这种报错就是没有用管理员身份启动</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20251104150511-20260204002623-xqtfz79.png"></p>
+</li>
+</ul>
+<h4 id="sekurlsa"><a href="#sekurlsa" class="headerlink" title="sekurlsa"></a><code>sekurlsa</code></h4><p>本地安全凭证提取模块，用来从 LSASS 内存中抓取当前登录或最近登录用户的各种凭证</p>
+<p>要启用这个模块需要满足以下任意一个条件</p>
+<ul>
+<li>管理员，通过 <code>privilege::debug</code> 获取调试权限</li>
+<li><code>SYSTEM</code>​ 账户，通过后期利用工具，计划任务，<code>psexec -s</code></li>
+<li>使用 lsass 转储文件</li>
+</ul>
+<p>如果没有访问 lsass 进程的权限，那么这里的命令都会失败，就会出现如图的报错，这里是在 win11 下运行，可以发现哪怕有 debug也不行，就是访问不到 lsass 进程，除非使用 lsass 转储文件</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20251105114513-20260204002623-k2nvq1d.png" alt="image"></p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">​<code>logonpasswords</code></td>
+<td>提取所有登录会话的凭证</td>
+</tr>
+<tr>
+<td align="center">​<code>minidump</code></td>
+<td>载入转储的 <code>lsass.dmp</code> 文件</td>
+</tr>
+<tr>
+<td align="center">​<code>kerberos</code></td>
+<td>专门从 LSASS 内存中定位并显示 Kerberos 认证包所缓存的凭证信息</td>
+</tr>
+<tr>
+<td align="center">​<code>pth</code></td>
+<td>就是前面提到的 Pass-the-Hash</td>
+</tr>
+<tr>
+<td align="center">​<code>tickets</code></td>
+<td>查看进程中所有的票据</td>
+</tr>
+<tr>
+<td align="center">​<code>wdigest</code></td>
+<td>只提取明文密码</td>
+</tr>
+<tr>
+<td align="center">​<code>msv</code></td>
+<td>只提取 ntlm 哈希凭证</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>这里解析一下 <code>pth</code></p>
+<p>参数列表</p>
+<ul>
+<li><code>/user</code>：要冒充的用户名</li>
+<li><code>/domain</code>​：完全限定的域名，没有域或者在本地用户&#x2F;管理员的情况下，使用计算机或服务器名称、<code>workgroup</code> 等</li>
+<li><code>/htlm</code>：用户的 NTLM 密码哈希值</li>
+<li><code>/run</code>：可选，要运行的命令行</li>
+<li><code>/rc4</code>​、<code>/aes128</code>​、<code>/aes256</code>：这些都是可选的密钥</li>
+</ul>
+<p>这个在 windows 最新版本也有效，这里获取 hash 可以使用 <code>lsass.dmp</code>​ 转储或者使用 <code>SAM SYSTEM</code> 获取</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sekurlsa::pth &#x2F;user:marin &#x2F;domain:. &#x2F;ntlm:579110c49145015c47ecd267657d3174</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204104746-262hv0f.png" alt="image"></p>
+<p>这里获取了转储文件后就可以直接使用命令来读取了</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">minidump .&#x2F;lsass.dmp</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20251105135131-20260204002624-qni03d8.png" alt="image"></p>
+</blockquote>
+<p>使用这个命令就可以获取到所有的凭证了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20251105120505-20260204002624-l03gzkd.png" alt="image"></p>
+<p>‍</p>
+<h5 id="lsass-转储文件"><a href="#lsass-转储文件" class="headerlink" title="lsass 转储文件"></a>lsass 转储文件</h5><p>最简单的方法就是在任务管理器中找到进程，然后创建转储文件</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20251105134740-20260204002624-ur5qv29.png" alt="image"></p>
+<p>第二个方法是利用一个工具</p>
+<p>也得用管理员权限打开</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">procdump64.exe -accepteula -ma lsass.exe lsass.dmp</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260204104740-5ba8qfl.png" alt="image"></p>
+<h4 id="standard"><a href="#standard" class="headerlink" title="standard"></a><code>standard</code></h4><p>这个模块的命令可以直接使用，不需要指定模块名</p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">​<code>exit</code></td>
+<td>退出</td>
+</tr>
+<tr>
+<td align="center">​<code>cls</code></td>
+<td>清屏</td>
+</tr>
+<tr>
+<td align="center">​<code>log</code></td>
+<td>输出日志</td>
+</tr>
+<tr>
+<td align="center">​<code>base64</code></td>
+<td>切换输入输出为 base64 形式</td>
+</tr>
+<tr>
+<td align="center">​<code>version</code></td>
+<td>获取 mimikatz 和 windows 版本</td>
+</tr>
+<tr>
+<td align="center">​<code>cd</code></td>
+<td>切换工作目录</td>
+</tr>
+</tbody></table>
+<p>‍</p>
+<h4 id="lsadump"><a href="#lsadump" class="headerlink" title="lsadump"></a><code>lsadump</code></h4><p>lsadump 模块主要从存储在磁盘上的本地安全数据库（SAM）或域控制器上的安全数据库中提取账户信息或哈希值</p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">​<code>sam</code></td>
+<td>提取 SAM 中所有本地用户的 NTLM 哈希值</td>
+</tr>
+<tr>
+<td align="center">​<code>lsa</code></td>
+<td>提取 lsa secrets</td>
+</tr>
+<tr>
+<td align="center">​<code>dcsync</code></td>
+<td>从远程域控制器中请求指定用户的密码哈希</td>
+</tr>
+<tr>
+<td align="center">​<code>cache</code></td>
+<td>提取离线域登录缓存</td>
+</tr>
+</tbody></table>
+<p>‍</p>
+<ul>
+<li><p>这个模块有一个命令经常用于取证获取用户 NTLM 哈希，要获取这两个文件</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">lsadump::sam &#x2F;sam:SAM &#x2F;system:SYSTEM</code></pre></li>
+</ul>
+<p>‍</p>
+<p>‍</p>
+<p>‍</p>
+<p>‍</p>
+<p>‍</p>
+<p>‍</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sexintercourse/p/18608344">【内网渗透】mimikatz 基本使用 - 漫思 - 博客园</a></p>
+<p><a target="_blank" rel="noopener" href="https://hasegawaazusa.github.io/mimikatz-note.html">mimikatz使用笔记 | 独奏の小屋</a></p>
+<p>‍</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Marin</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://wwwmarin.xyz/2025/03/20/mimikatz/">https://wwwmarin.xyz/2025/03/20/mimikatz/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Marin</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                                    <span class="chip bg-color">工具</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%B8%97%E9%80%8F/">
+                                    <span class="chip bg-color">渗透</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/05/15/ctfshow-ming-ling-zhi-xing/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20240312_124030.jpg" class="responsive-img" alt="CTFSHOW-命令执行">
+                        
+                        <span class="card-title">CTFSHOW-命令执行</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-05-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTFSHOW/" class="post-category">
+                                    CTFSHOW
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%88%B7%E9%A2%98/">
+                        <span class="chip bg-color">刷题</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/03/20/mimikatz/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/3030386_95467139_p0.jpg" class="responsive-img" alt="mimikatz 学习">
+                        
+                        <span class="card-title">mimikatz 学习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-03-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" class="post-category">
+                                    内网渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                        <span class="chip bg-color">工具</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B8%97%E9%80%8F/">
+                        <span class="chip bg-color">渗透</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">Marin</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
